@@ -1,27 +1,28 @@
 {
   "schemaVersion": 1,
-  "id": "template_mod",
+  "id": "would",
   "version": "${version}",
-  "name": "Template Mod",
-  "description": "Template Mod Description",
+  "name": "Would",
+  "description": "I Would, Would you?",
   "authors": [
-    "Ordana"
+    "Ordana",
+    "Kayla_the_bee"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/template_mod",
-    "sources": "https://github.com/AstralOrdana/template_mod"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/would",
+    "sources": "https://github.com/AstralOrdana/would"
   },
   "license": "LGPLv3",
   "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.ordana.template_mod.fabric.TemplateModFabric"
+      "com.ordana.would.fabric.WouldFabric"
     ]
   },
   "mixins": [
-    "template_mod.mixins.json",
-    "template_mod-common.mixins.json"
+    "would.mixins.json",
+    "would-common.mixins.json"
   ],
   "depends": {
     "fabric": "*",

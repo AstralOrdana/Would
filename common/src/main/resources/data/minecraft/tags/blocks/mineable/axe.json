@@ -1,5 +1,29 @@
 {
   "replace": false,
   "values": [
+    "would:willow_log",
+    "would:baobab_log",
+    "would:ebony_log",
+    "would:fir_log",
+    "would:pine_log",
+    "would:cedar_log",
+    "would:mahogany_log",
+    "would:azalea_log",
+    "would:palm_log",
+    "would:maple_log",
+    "would:aspen_log",
+    "would:walnut_log",
+    "would:willow_planks",
+    "would:baobab_planks",
+    "would:ebony_planks",
+    "would:fir_planks",
+    "would:pine_planks",
+    "would:cedar_planks",
+    "would:mahogany_planks",
+    "would:azalea_planks",
+    "would:palm_planks",
+    "would:maple_planks",
+    "would:aspen_planks",
+    "would:walnut_planks"
   ]
 }

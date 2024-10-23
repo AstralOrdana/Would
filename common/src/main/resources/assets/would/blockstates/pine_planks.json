@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "would:block/pine_planks_0",
+        "weight": 10
+      },
+      {
+        "model": "would:block/pine_planks_1",
+        "weight": 1
+      },
+      {
+        "model": "would:block/pine_planks_2",
+        "weight": 1
+      }
+    ]
+  }
+}

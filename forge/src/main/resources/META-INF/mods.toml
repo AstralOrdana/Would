@@ -7,46 +7,39 @@ license="LGPLv3"
 
 [[mods]] #mandatory
 
-modId="template_mod" #mandatory
+modId="would" #mandatory
 
 version = "${version}"
 
-displayName="Template Mod" #mandatory
+displayName="Would" #mandatory
 
 logoFile="icon.png" #optional
 
 credits="Ordana" #optional
 
-authors="Ordana" #optional
+authors="Ordana, Kayla_the_bee" #optional
 
-itemIcon="template_mod:template" #catalogue icon
+itemIcon="would:template" #catalogue icon
 description='''
-Template Mod Description
+I Would, Would you?
 '''
 
-[[dependencies.template_mod]] #optional
-    # the modid of the dependency
-    modId="forge" #mandatory
+[[dependencies.would]]
+modId="forge"
+mandatory=true
+versionRange="[40,)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.would]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1]"
+ordering="NONE"
+side="BOTH"
 
-    mandatory=true #mandatory
-
-    versionRange="[40,)" #mandatory
-
-    ordering="NONE"
-    side="BOTH"
-# Here's another dependency
-[[dependencies.template_mod]]
-    modId="minecraft"
-    mandatory=true
-# This version range declares a minimum of the current minecraft version up to but not including the next major version
-    versionRange="[1.19.2,1.20)"
-    ordering="NONE"
-    side="BOTH"
-
-[[dependencies.template_mod]]
-
-    modId="moonlight"
-    mandatory=true
-    versionRange="[1.19.2-2.0.35,]"
-    ordering="AFTER"
-    side="BOTH"
+[[dependencies.would]]
+modId="moonlight"
+mandatory=true
+versionRange="[1.20-2.12.21,]"
+ordering="NONE"
+side="BOTH"
