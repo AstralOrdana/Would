@@ -1,5 +1,17 @@
 {
   "replace": false,
   "values": [
+    "would:willow_door",
+    "would:baobab_door",
+    "would:ebony_door",
+    "would:fir_door",
+    "would:pine_door",
+    "would:cedar_door",
+    "would:mahogany_door",
+    "would:azalea_door",
+    "would:palm_door",
+    "would:maple_door",
+    "would:aspen_door",
+    "would:walnut_door"
   ]
 }

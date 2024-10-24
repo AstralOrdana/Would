@@ -1,5 +1,17 @@
 {
   "replace": false,
   "values": [
+    "would:willow_pressure_plate",
+    "would:baobab_pressure_plate",
+    "would:ebony_pressure_plate",
+    "would:fir_pressure_plate",
+    "would:pine_pressure_plate",
+    "would:cedar_pressure_plate",
+    "would:mahogany_pressure_plate",
+    "would:azalea_pressure_plate",
+    "would:palm_pressure_plate",
+    "would:maple_pressure_plate",
+    "would:aspen_pressure_plate",
+    "would:walnut_pressure_plate"
   ]
 }

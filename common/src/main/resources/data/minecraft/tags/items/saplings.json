@@ -1,5 +1,17 @@
 {
   "replace": false,
   "values": [
+    "would:willow_sapling",
+    "would:baobab_sapling",
+    "would:ebony_sapling",
+    "would:fir_sapling",
+    "would:pine_sapling",
+    "would:cedar_sapling",
+    "would:mahogany_sapling",
+    "would:azalea_sapling",
+    "would:palm_sapling",
+    "would:maple_sapling",
+    "would:aspen_sapling",
+    "would:walnut_sapling"
   ]
 }

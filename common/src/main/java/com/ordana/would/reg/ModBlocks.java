@@ -2,6 +2,8 @@ package com.ordana.would.reg;
 
 import com.ordana.would.Blocks.ModButtonBlock;
 import com.ordana.would.Blocks.ModPressurePlateBlock;
+import com.ordana.would.Blocks.ModSaplingBlock;
+import com.ordana.would.Blocks.tree_growers.WillowTreeGrower;
 import com.ordana.would.Would;
 import net.mehvahdjukaar.moonlight.api.block.ModStairBlock;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
@@ -9,10 +11,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlag;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -57,16 +61,20 @@ public class ModBlocks {
     }
 
 
-    private static RotatedPillarBlock log(MapColor topMapColor, MapColor sideMapColor, SoundType soundType) {
+    private static Block log(MapColor topMapColor, MapColor sideMapColor, SoundType soundType) {
         return new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? topMapColor : sideMapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(soundType).ignitedByLava());
     }
 
-    private static RotatedPillarBlock wood(MapColor mapColor, SoundType soundType) {
+    private static Block wood(MapColor mapColor, SoundType soundType) {
         return new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(soundType).ignitedByLava());
     }
     
-    private static LeavesBlock leaves(SoundType type) {
+    private static Block leaves(SoundType type) {
         return new LeavesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).strength(0.2F).randomTicks().sound(type).noOcclusion().isValidSpawn(ModBlocks::ocelotOrParrot).isSuffocating(ModBlocks::never).isViewBlocking(ModBlocks::never).ignitedByLava().pushReaction(PushReaction.DESTROY).isRedstoneConductor(ModBlocks::never));
+    }
+
+    private static Block sapling(AbstractTreeGrower treeGrower) {
+        return new ModSaplingBlock(treeGrower, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
     }
 
     private static Block planks(MapColor mapColor, SoundType soundType) {
@@ -93,13 +101,29 @@ public class ModBlocks {
         return new ModPressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(0.5F).ignitedByLava().pushReaction(PushReaction.DESTROY), BlockSetType.ACACIA);
     }
 
-    private static ButtonBlock button(FeatureFlag... requiredFeatures) {
+    private static Block button(FeatureFlag... requiredFeatures) {
         BlockBehaviour.Properties properties = BlockBehaviour.Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY);
         if (requiredFeatures.length > 0) {
             properties = properties.requiredFeatures(requiredFeatures);
         }
 
         return new ModButtonBlock(properties, BlockSetType.ACACIA, 30, true);
+    }
+
+    private static Block standingSign(MapColor mapColor) {
+        return new StandingSignBlock(BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava(), WoodType.ACACIA);
+    }
+
+    private static Block wallSign(MapColor mapColor, Block block) {
+        return new WallSignBlock(BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).dropsLike(block).ignitedByLava(), WoodType.ACACIA);
+    }
+
+    private static Block hangingSign(MapColor mapColor) {
+        return new CeilingHangingSignBlock(BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava(), WoodType.ACACIA);
+    }
+
+    private static Block wallHangingSign(MapColor mapColor, Block block) {
+        return new WallHangingSignBlock(BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava().dropsLike(block), WoodType.ACACIA);
     }
 
     private static Block door(MapColor mapColor) {
@@ -252,6 +276,32 @@ public class ModBlocks {
             () -> leaves(SoundType.AZALEA_LEAVES));
     public static final Supplier<Block> WALNUT_LEAVES = regWithItem("walnut_leaves",
             () -> leaves(SoundType.AZALEA_LEAVES));
+
+    //saplings
+    public static final Supplier<Block> WILLOW_SAPLING = regWithItem("willow_sapling",
+            () -> sapling(new WillowTreeGrower()));
+    public static final Supplier<Block> BAOBAB_SAPLING = regWithItem("baobab_sapling",
+            () -> sapling(new WillowTreeGrower()));
+    public static final Supplier<Block> EBONY_SAPLING = regWithItem("ebony_sapling",
+            () -> sapling(new WillowTreeGrower()));
+    public static final Supplier<Block> FIR_SAPLING = regWithItem("fir_sapling",
+            () -> sapling(new WillowTreeGrower()));
+    public static final Supplier<Block> PINE_SAPLING = regWithItem("pine_sapling",
+            () -> sapling(new WillowTreeGrower()));
+    public static final Supplier<Block> CEDAR_SAPLING = regWithItem("cedar_sapling",
+            () -> sapling(new WillowTreeGrower()));
+    public static final Supplier<Block> MAHOGANY_SAPLING = regWithItem("mahogany_sapling",
+            () -> sapling(new WillowTreeGrower()));
+    public static final Supplier<Block> AZALEA_SAPLING = regWithItem("azalea_sapling",
+            () -> sapling(new WillowTreeGrower()));
+    public static final Supplier<Block> PALM_SAPLING = regWithItem("palm_sapling",
+            () -> sapling(new WillowTreeGrower()));
+    public static final Supplier<Block> MAPLE_SAPLING = regWithItem("maple_sapling",
+            () -> sapling(new WillowTreeGrower()));
+    public static final Supplier<Block> ASPEN_SAPLING = regWithItem("aspen_sapling",
+            () -> sapling(new WillowTreeGrower()));
+    public static final Supplier<Block> WALNUT_SAPLING = regWithItem("walnut_sapling",
+            () -> sapling(new WillowTreeGrower()));
     
     //planks
     public static final Supplier<Block> WILLOW_PLANKS = regWithItem("willow_planks",
@@ -422,6 +472,108 @@ public class ModBlocks {
             () -> pressurePlate(ASPEN_PLANKS.get().defaultMapColor()));
     public static final Supplier<Block> WALNUT_PRESSURE_PLATE = regWithItem("walnut_pressure_plate",
             () -> pressurePlate(WALNUT_PLANKS.get().defaultMapColor()));
+
+    //signs
+    public static final Supplier<Block> WILLOW_SIGN = regBlock("willow_sign",
+            () -> standingSign(MapColor.WOOD));
+    public static final Supplier<Block> BAOBAB_SIGN = regBlock("baobab_sign",
+            () -> standingSign(MapColor.WOOD));
+    public static final Supplier<Block> EBONY_SIGN = regBlock("ebony_sign",
+            () -> standingSign(MapColor.WOOD));
+    public static final Supplier<Block> FIR_SIGN = regBlock("fir_sign",
+            () -> standingSign(MapColor.WOOD));
+    public static final Supplier<Block> PINE_SIGN = regBlock("pine_sign",
+            () -> standingSign(MapColor.WOOD));
+    public static final Supplier<Block> CEDAR_SIGN = regBlock("cedar_sign",
+            () -> standingSign(MapColor.WOOD));
+    public static final Supplier<Block> MAHOGANY_SIGN = regBlock("mahogany_sign",
+            () -> standingSign(MapColor.WOOD));
+    public static final Supplier<Block> AZALEA_SIGN = regBlock("azalea_sign",
+            () -> standingSign(MapColor.WOOD));
+    public static final Supplier<Block> PALM_SIGN = regBlock("palm_sign",
+            () -> standingSign(MapColor.WOOD));
+    public static final Supplier<Block> MAPLE_SIGN = regBlock("maple_sign",
+            () -> standingSign(MapColor.WOOD));
+    public static final Supplier<Block> ASPEN_SIGN = regBlock("aspen_sign",
+            () -> standingSign(MapColor.WOOD));
+    public static final Supplier<Block> WALNUT_SIGN = regBlock("walnut_sign",
+            () -> standingSign(MapColor.WOOD));
+    
+    public static final Supplier<Block> WILLOW_WALL_SIGN = regBlock("willow_wall_sign",
+            () -> wallSign(MapColor.WOOD, WILLOW_SIGN.get()));
+    public static final Supplier<Block> BAOBAB_WALL_SIGN = regBlock("baobab_wall_sign",
+            () -> wallSign(MapColor.WOOD, BAOBAB_SIGN.get()));
+    public static final Supplier<Block> EBONY_WALL_SIGN = regBlock("ebony_wall_sign",
+            () -> wallSign(MapColor.WOOD, EBONY_SIGN.get()));
+    public static final Supplier<Block> FIR_WALL_SIGN = regBlock("fir_wall_sign",
+            () -> wallSign(MapColor.WOOD, FIR_SIGN.get()));
+    public static final Supplier<Block> PINE_WALL_SIGN = regBlock("pine_wall_sign",
+            () -> wallSign(MapColor.WOOD, PINE_SIGN.get()));
+    public static final Supplier<Block> CEDAR_WALL_SIGN = regBlock("cedar_wall_sign",
+            () -> wallSign(MapColor.WOOD, CEDAR_SIGN.get()));
+    public static final Supplier<Block> MAHOGANY_WALL_SIGN = regBlock("mahogany_wall_sign",
+            () -> wallSign(MapColor.WOOD, MAHOGANY_SIGN.get()));
+    public static final Supplier<Block> AZALEA_WALL_SIGN = regBlock("azalea_wall_sign",
+            () -> wallSign(MapColor.WOOD, AZALEA_SIGN.get()));
+    public static final Supplier<Block> PALM_WALL_SIGN = regBlock("palm_wall_sign",
+            () -> wallSign(MapColor.WOOD, PALM_SIGN.get()));
+    public static final Supplier<Block> MAPLE_WALL_SIGN = regBlock("maple_wall_sign",
+            () -> wallSign(MapColor.WOOD, MAPLE_SIGN.get()));
+    public static final Supplier<Block> ASPEN_WALL_SIGN = regBlock("aspen_wall_sign",
+            () -> wallSign(MapColor.WOOD, ASPEN_SIGN.get()));
+    public static final Supplier<Block> WALNUT_WALL_SIGN = regBlock("walnut_wall_sign",
+            () -> wallSign(MapColor.WOOD, WALNUT_SIGN.get()));
+    
+    //hanging signs
+    public static final Supplier<Block> WILLOW_HANGING_SIGN = regBlock("willow_hanging_sign",
+            () -> hangingSign(MapColor.WOOD));
+    public static final Supplier<Block> BAOBAB_HANGING_SIGN = regBlock("baobab_hanging_sign",
+            () -> hangingSign(MapColor.WOOD));
+    public static final Supplier<Block> EBONY_HANGING_SIGN = regBlock("ebony_hanging_sign",
+            () -> hangingSign(MapColor.WOOD));
+    public static final Supplier<Block> FIR_HANGING_SIGN = regBlock("fir_hanging_sign",
+            () -> hangingSign(MapColor.WOOD));
+    public static final Supplier<Block> PINE_HANGING_SIGN = regBlock("pine_hanging_sign",
+            () -> hangingSign(MapColor.WOOD));
+    public static final Supplier<Block> CEDAR_HANGING_SIGN = regBlock("cedar_hanging_sign",
+            () -> hangingSign(MapColor.WOOD));
+    public static final Supplier<Block> MAHOGANY_HANGING_SIGN = regBlock("mahogany_hanging_sign",
+            () -> hangingSign(MapColor.WOOD));
+    public static final Supplier<Block> AZALEA_HANGING_SIGN = regBlock("azalea_hanging_sign",
+            () -> hangingSign(MapColor.WOOD));
+    public static final Supplier<Block> PALM_HANGING_SIGN = regBlock("palm_hanging_sign",
+            () -> hangingSign(MapColor.WOOD));
+    public static final Supplier<Block> MAPLE_HANGING_SIGN = regBlock("maple_hanging_sign",
+            () -> hangingSign(MapColor.WOOD));
+    public static final Supplier<Block> ASPEN_HANGING_SIGN = regBlock("aspen_hanging_sign",
+            () -> hangingSign(MapColor.WOOD));
+    public static final Supplier<Block> WALNUT_HANGING_SIGN = regBlock("walnut_hanging_sign",
+            () -> hangingSign(MapColor.WOOD));
+
+    public static final Supplier<Block> WILLOW_WALL_HANGING_SIGN = regBlock("willow_wall_hanging_sign",
+            () -> wallHangingSign(MapColor.WOOD, WILLOW_SIGN.get()));
+    public static final Supplier<Block> BAOBAB_WALL_HANGING_SIGN = regBlock("baobab_wall_hanging_sign",
+            () -> wallHangingSign(MapColor.WOOD, BAOBAB_SIGN.get()));
+    public static final Supplier<Block> EBONY_WALL_HANGING_SIGN = regBlock("ebony_wall_hanging_sign",
+            () -> wallHangingSign(MapColor.WOOD, EBONY_SIGN.get()));
+    public static final Supplier<Block> FIR_WALL_HANGING_SIGN = regBlock("fir_wall_hanging_sign",
+            () -> wallHangingSign(MapColor.WOOD, FIR_SIGN.get()));
+    public static final Supplier<Block> PINE_WALL_HANGING_SIGN = regBlock("pine_wall_hanging_sign",
+            () -> wallHangingSign(MapColor.WOOD, PINE_SIGN.get()));
+    public static final Supplier<Block> CEDAR_WALL_HANGING_SIGN = regBlock("cedar_wall_hanging_sign",
+            () -> wallHangingSign(MapColor.WOOD, CEDAR_SIGN.get()));
+    public static final Supplier<Block> MAHOGANY_WALL_HANGING_SIGN = regBlock("mahogany_wall_hanging_sign",
+            () -> wallHangingSign(MapColor.WOOD, MAHOGANY_SIGN.get()));
+    public static final Supplier<Block> AZALEA_WALL_HANGING_SIGN = regBlock("azalea_wall_hanging_sign",
+            () -> wallHangingSign(MapColor.WOOD, AZALEA_SIGN.get()));
+    public static final Supplier<Block> PALM_WALL_HANGING_SIGN = regBlock("palm_wall_hanging_sign",
+            () -> wallHangingSign(MapColor.WOOD, PALM_SIGN.get()));
+    public static final Supplier<Block> MAPLE_WALL_HANGING_SIGN = regBlock("maple_wall_hanging_sign",
+            () -> wallHangingSign(MapColor.WOOD, MAPLE_SIGN.get()));
+    public static final Supplier<Block> ASPEN_WALL_HANGING_SIGN = regBlock("aspen_wall_hanging_sign",
+            () -> wallHangingSign(MapColor.WOOD, ASPEN_SIGN.get()));
+    public static final Supplier<Block> WALNUT_WALL_HANGING_SIGN = regBlock("walnut_wall_hanging_sign",
+            () -> wallHangingSign(MapColor.WOOD, WALNUT_SIGN.get()));
     
     //doors
     public static final Supplier<Block> WILLOW_DOOR = regWithItem("willow_door",
