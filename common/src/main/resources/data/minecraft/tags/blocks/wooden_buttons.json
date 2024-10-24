@@ -1,5 +1,17 @@
 {
   "replace": false,
   "values": [
+    "would:willow_button",
+    "would:baobab_button",
+    "would:ebony_button",
+    "would:fir_button",
+    "would:pine_button",
+    "would:cedar_button",
+    "would:mahogany_button",
+    "would:azalea_button",
+    "would:palm_button",
+    "would:maple_button",
+    "would:aspen_button",
+    "would:walnut_button"
   ]
 }

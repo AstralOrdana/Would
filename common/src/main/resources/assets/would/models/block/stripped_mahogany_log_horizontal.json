@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "would:block/stripped_mahogany_log_top",
+    "side": "would:block/stripped_mahogany_log"
+  }
+}

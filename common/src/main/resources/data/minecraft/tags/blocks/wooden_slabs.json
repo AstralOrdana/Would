@@ -1,5 +1,17 @@
 {
   "replace": false,
   "values": [
+    "would:willow_slab",
+    "would:baobab_slab",
+    "would:ebony_slab",
+    "would:fir_slab",
+    "would:pine_slab",
+    "would:cedar_slab",
+    "would:mahogany_slab",
+    "would:azalea_slab",
+    "would:palm_slab",
+    "would:maple_slab",
+    "would:aspen_slab",
+    "would:walnut_slab"
   ]
 }

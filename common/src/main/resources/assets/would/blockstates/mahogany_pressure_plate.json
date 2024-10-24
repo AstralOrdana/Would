@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "would:block/mahogany_pressure_plate"
+    },
+    "powered=true": {
+      "model": "would:block/mahogany_pressure_plate_down"
+    }
+  }
+}

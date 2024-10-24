@@ -1,0 +1,32 @@
+{
+  "variants": {
+    "powered=false": [
+      {
+        "model": "would:block/pine_pressure_plate_0",
+        "weight": 10
+      },
+      {
+        "model": "would:block/pine_pressure_plate_1",
+        "weight": 1
+      },
+      {
+        "model": "would:block/pine_pressure_plate_2",
+        "weight": 1
+      }
+    ],
+    "powered=true": [
+      {
+        "model": "would:block/pine_pressure_plate_down_0",
+        "weight": 10
+      },
+      {
+        "model": "would:block/pine_pressure_plate_down_1",
+        "weight": 1
+      },
+      {
+        "model": "would:block/pine_pressure_plate_down_2",
+        "weight": 1
+      }
+    ]
+  }
+}

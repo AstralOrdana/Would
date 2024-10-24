@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "would:block/aspen_wood_gazing",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "would:block/aspen_wood_gazing"
+    },
+    "axis=z": {
+      "model": "would:block/aspen_wood_gazing",
+      "x": 90
+    }
+  }
+}

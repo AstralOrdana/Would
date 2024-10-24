@@ -1,5 +1,17 @@
 {
   "replace": false,
   "values": [
+    "would:willow_fence_gate",
+    "would:baobab_fence_gate",
+    "would:ebony_fence_gate",
+    "would:fir_fence_gate",
+    "would:pine_fence_gate",
+    "would:cedar_fence_gate",
+    "would:mahogany_fence_gate",
+    "would:azalea_fence_gate",
+    "would:palm_fence_gate",
+    "would:maple_fence_gate",
+    "would:aspen_fence_gate",
+    "would:walnut_fence_gate"
   ]
 }

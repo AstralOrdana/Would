@@ -1,0 +1,46 @@
+{
+  "variants": {
+    "type=bottom": [
+      {
+        "model": "would:block/pine_slab_0",
+        "weight": 10
+      },
+      {
+        "model": "would:block/pine_slab_1",
+        "weight": 1
+      },
+      {
+        "model": "would:block/pine_slab_2",
+        "weight": 1
+      }
+    ],
+    "type=double": [
+      {
+        "model": "would:block/pine_planks_0",
+        "weight": 10
+      },
+      {
+        "model": "would:block/pine_planks_1",
+        "weight": 1
+      },
+      {
+        "model": "would:block/pine_planks_2",
+        "weight": 1
+      }
+    ],
+    "type=top": [
+      {
+        "model": "would:block/pine_slab_top_0",
+        "weight": 10
+      },
+      {
+        "model": "would:block/pine_slab_top_1",
+        "weight": 1
+      },
+      {
+        "model": "would:block/pine_slab_top_2",
+        "weight": 1
+      }
+    ]
+  }
+}
