@@ -1,5 +1,17 @@
 {
   "replace": false,
   "values": [
+    "would:willow_hanging_sign",
+    "would:baobab_hanging_sign",
+    "would:ebony_hanging_sign",
+    "would:fir_hanging_sign",
+    "would:pine_hanging_sign",
+    "would:cedar_hanging_sign",
+    "would:mahogany_hanging_sign",
+    "would:azalea_hanging_sign",
+    "would:palm_hanging_sign",
+    "would:maple_hanging_sign",
+    "would:aspen_hanging_sign",
+    "would:walnut_hanging_sign"
   ]
 }

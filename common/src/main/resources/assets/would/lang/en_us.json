@@ -226,5 +226,31 @@
   "block.would.palm_trapdoor": "Palm Trapdoor",
   "block.would.maple_trapdoor": "Maple Trapdoor",
   "block.would.aspen_trapdoor": "Aspen Trapdoor",
-  "block.would.walnut_trapdoor": "Walnut Trapdoor"
+  "block.would.walnut_trapdoor": "Walnut Trapdoor",
+
+  "item.would.willow_boat": "Willow Boat",
+  "item.would.baobab_boat": "Baobab Boat",
+  "item.would.ebony_boat": "Ebony Boat",
+  "item.would.fir_boat": "Fir Boat",
+  "item.would.pine_boat": "Pine Boat",
+  "item.would.cedar_boat": "Cedar Boat",
+  "item.would.mahogany_boat": "Mahogany Boat",
+  "item.would.azalea_boat": "Azalea Boat",
+  "item.would.palm_boat": "Palm Boat",
+  "item.would.maple_boat": "Maple Boat",
+  "item.would.aspen_boat": "Aspen Boat",
+  "item.would.walnut_boat": "Walnut Boat",
+
+  "item.would.willow_chest_boat": "Willow Chest Boat",
+  "item.would.baobab_chest_boat": "Baobab Chest Boat",
+  "item.would.ebony_chest_boat": "Ebony Chest Boat",
+  "item.would.fir_chest_boat": "Fir Chest Boat",
+  "item.would.pine_chest_boat": "Pine Chest Boat",
+  "item.would.cedar_chest_boat": "Cedar Chest Boat",
+  "item.would.mahogany_chest_boat": "Mahogany Chest Boat",
+  "item.would.azalea_chest_boat": "Azalea Chest Boat",
+  "item.would.palm_chest_boat": "Palm Chest Boat",
+  "item.would.maple_chest_boat": "Maple Chest Boat",
+  "item.would.aspen_chest_boat": "Aspen Chest Boat",
+  "item.would.walnut_chest_boat": "Walnut Chest Boat"
 }

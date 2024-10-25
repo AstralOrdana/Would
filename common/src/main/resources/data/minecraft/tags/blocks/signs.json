@@ -1,5 +1,17 @@
 {
   "replace": false,
   "values": [
+    "would:willow_sign",
+    "would:baobab_sign",
+    "would:ebony_sign",
+    "would:fir_sign",
+    "would:pine_sign",
+    "would:cedar_sign",
+    "would:mahogany_sign",
+    "would:azalea_sign",
+    "would:palm_sign",
+    "would:maple_sign",
+    "would:aspen_sign",
+    "would:walnut_sign"
   ]
 }

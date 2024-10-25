@@ -1,9 +1,10 @@
 package com.ordana.would.reg;
 
+import com.google.common.collect.ImmutableMap;
 import com.ordana.would.Blocks.ModButtonBlock;
 import com.ordana.would.Blocks.ModPressurePlateBlock;
 import com.ordana.would.Blocks.ModSaplingBlock;
-import com.ordana.would.Blocks.tree_growers.WillowTreeGrower;
+import com.ordana.would.Blocks.tree_growers.*;
 import com.ordana.would.Would;
 import net.mehvahdjukaar.moonlight.api.block.ModStairBlock;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
@@ -75,6 +76,15 @@ public class ModBlocks {
 
     private static Block sapling(AbstractTreeGrower treeGrower) {
         return new ModSaplingBlock(treeGrower, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
+    }
+
+    private static FlowerPotBlock pottedSapling(Block content, FeatureFlag... requiredFeatures) {
+        BlockBehaviour.Properties properties = BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY);
+        if (requiredFeatures.length > 0) {
+            properties = properties.requiredFeatures(requiredFeatures);
+        }
+
+        return new FlowerPotBlock(content, properties);
     }
 
     private static Block planks(MapColor mapColor, SoundType soundType) {
@@ -266,8 +276,6 @@ public class ModBlocks {
             () -> leaves(SoundType.AZALEA_LEAVES));
     public static final Supplier<Block> MAHOGANY_LEAVES = regWithItem("mahogany_leaves",
             () -> leaves(SoundType.AZALEA_LEAVES));
-    public static final Supplier<Block> AZALEA_LEAVES = regWithItem("azalea_leaves",
-            () -> leaves(SoundType.AZALEA_LEAVES));
     public static final Supplier<Block> PALM_LEAVES = regWithItem("palm_leaves",
             () -> leaves(SoundType.AZALEA_LEAVES));
     public static final Supplier<Block> MAPLE_LEAVES = regWithItem("maple_leaves",
@@ -281,27 +289,48 @@ public class ModBlocks {
     public static final Supplier<Block> WILLOW_SAPLING = regWithItem("willow_sapling",
             () -> sapling(new WillowTreeGrower()));
     public static final Supplier<Block> BAOBAB_SAPLING = regWithItem("baobab_sapling",
-            () -> sapling(new WillowTreeGrower()));
+            () -> sapling(new BaobabTreeGrower()));
     public static final Supplier<Block> EBONY_SAPLING = regWithItem("ebony_sapling",
-            () -> sapling(new WillowTreeGrower()));
+            () -> sapling(new EbonyTreeGrower()));
     public static final Supplier<Block> FIR_SAPLING = regWithItem("fir_sapling",
-            () -> sapling(new WillowTreeGrower()));
+            () -> sapling(new FirTreeGrower()));
     public static final Supplier<Block> PINE_SAPLING = regWithItem("pine_sapling",
-            () -> sapling(new WillowTreeGrower()));
+            () -> sapling(new PineTreeGrower()));
     public static final Supplier<Block> CEDAR_SAPLING = regWithItem("cedar_sapling",
-            () -> sapling(new WillowTreeGrower()));
+            () -> sapling(new CedarTreeGrower()));
     public static final Supplier<Block> MAHOGANY_SAPLING = regWithItem("mahogany_sapling",
-            () -> sapling(new WillowTreeGrower()));
-    public static final Supplier<Block> AZALEA_SAPLING = regWithItem("azalea_sapling",
-            () -> sapling(new WillowTreeGrower()));
+            () -> sapling(new MahoganyTreeGrower()));
     public static final Supplier<Block> PALM_SAPLING = regWithItem("palm_sapling",
-            () -> sapling(new WillowTreeGrower()));
+            () -> sapling(new PalmTreeGrower()));
     public static final Supplier<Block> MAPLE_SAPLING = regWithItem("maple_sapling",
-            () -> sapling(new WillowTreeGrower()));
+            () -> sapling(new MapleTreeGrower()));
     public static final Supplier<Block> ASPEN_SAPLING = regWithItem("aspen_sapling",
-            () -> sapling(new WillowTreeGrower()));
+            () -> sapling(new AspenTreeGrower()));
     public static final Supplier<Block> WALNUT_SAPLING = regWithItem("walnut_sapling",
-            () -> sapling(new WillowTreeGrower()));
+            () -> sapling(new WalnutTreeGrower()));
+    
+    public static final Supplier<Block> POTTED_WILLOW_SAPLING = regBlock("potted_willow_sapling",
+            () -> pottedSapling(WILLOW_SAPLING.get()));
+    public static final Supplier<Block> POTTED_BAOBAB_SAPLING = regWithItem("potted_baobab_sapling",
+            () -> pottedSapling(BAOBAB_SAPLING.get()));
+    public static final Supplier<Block> POTTED_EBONY_SAPLING = regWithItem("potted_ebony_sapling",
+            () -> pottedSapling(EBONY_SAPLING.get()));
+    public static final Supplier<Block> POTTED_FIR_SAPLING = regWithItem("potted_fir_sapling",
+            () -> pottedSapling(FIR_SAPLING.get()));
+    public static final Supplier<Block> POTTED_PINE_SAPLING = regWithItem("potted_pine_sapling",
+            () -> pottedSapling(PINE_SAPLING.get()));
+    public static final Supplier<Block> POTTED_CEDAR_SAPLING = regWithItem("potted_cedar_sapling",
+            () -> pottedSapling(CEDAR_SAPLING.get()));
+    public static final Supplier<Block> POTTED_MAHOGANY_SAPLING = regWithItem("potted_mahogany_sapling",
+            () -> pottedSapling(MAHOGANY_SAPLING.get()));
+    public static final Supplier<Block> POTTED_PALM_SAPLING = regWithItem("potted_palm_sapling",
+            () -> pottedSapling(PALM_SAPLING.get()));
+    public static final Supplier<Block> POTTED_MAPLE_SAPLING = regWithItem("potted_maple_sapling",
+            () -> pottedSapling(MAPLE_SAPLING.get()));
+    public static final Supplier<Block> POTTED_ASPEN_SAPLING = regWithItem("potted_aspen_sapling",
+            () -> pottedSapling(ASPEN_SAPLING.get()));
+    public static final Supplier<Block> POTTED_WALNUT_SAPLING = regWithItem("potted_walnut_sapling",
+            () -> pottedSapling(WALNUT_SAPLING.get()));
     
     //planks
     public static final Supplier<Block> WILLOW_PLANKS = regWithItem("willow_planks",
@@ -626,5 +655,4 @@ public class ModBlocks {
             () -> trapdoor(MapColor.WOOD));
     public static final Supplier<Block> WALNUT_TRAPDOOR = regWithItem("walnut_trapdoor",
             () -> trapdoor(MapColor.WOOD));
-
 }
