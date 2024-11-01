@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "would:item/willow_sapling"
+    "layer0": "would:block/willow_sapling"
   }
 }

@@ -18,6 +18,9 @@
   "entrypoints": {
     "main": [
       "com.ordana.would.fabric.WouldFabric"
+    ],
+    "mm:early_risers": [
+      "com.ordana.would.mixins.earlyrisers.CustomBoatEarlyRiser"
     ]
   },
   "mixins": [

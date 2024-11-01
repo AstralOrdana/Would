@@ -27,6 +27,12 @@ dependencies {
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+
+    modImplementation("com.github.Chocohead:Fabric-ASM:v2.3") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
+
+    include("com.github.Chocohead:Fabric-ASM:v2.3")
 }
 
 processResources {
@@ -93,4 +99,25 @@ publishing {
 
 repositories {
     maven { url "https://maven.terraformersmc.com/releases" }
+    maven {
+        name = 'ParchmentMC'
+        url = 'https://maven.parchmentmc.org'
+    }
+    maven { url 'https://maven.wispforest.io/releases/' }
+    maven { url "https://jitpack.io/" }
+    maven {
+        name = "Terraformers"
+        url = "https://maven.terraformersmc.com/"
+    }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
 }

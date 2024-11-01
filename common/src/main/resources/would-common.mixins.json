@@ -6,6 +6,8 @@
   "client": [
   ],
   "mixins": [
+    "FoliagePlacerTypeInvoker",
+    "TrunkPlacerTypeInvoker"
   ],
   "injectors": {
     "defaultRequire": 1

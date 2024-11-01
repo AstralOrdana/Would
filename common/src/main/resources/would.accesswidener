@@ -1,4 +1,16 @@
 accessWidener   v2  named
 
 #strippable map
+mutable field net/minecraft/world/item/AxeItem STRIPPABLES Ljava/util/Map;
 accessible field net/minecraft/world/item/AxeItem STRIPPABLES Ljava/util/Map;
+
+mutable field net/minecraft/world/level/block/entity/BlockEntityType HANGING_SIGN Lnet/minecraft/world/level/block/entity/BlockEntityType;
+accessible field net/minecraft/world/level/block/entity/BlockEntityType HANGING_SIGN Lnet/minecraft/world/level/block/entity/BlockEntityType;
+mutable field net/minecraft/world/level/block/entity/BlockEntityType SIGN Lnet/minecraft/world/level/block/entity/BlockEntityType;
+accessible field net/minecraft/world/level/block/entity/BlockEntityType SIGN Lnet/minecraft/world/level/block/entity/BlockEntityType;
+
+mutable field net/minecraft/world/level/block/entity/BlockEntityType validBlocks Ljava/util/Set;
+accessible field net/minecraft/world/level/block/entity/BlockEntityType validBlocks Ljava/util/Set;
+
+mutable field net/minecraft/world/level/block/state/properties/WoodType VALUES Ljava/util/Set;
+accessible field net/minecraft/world/level/block/state/properties/WoodType VALUES Ljava/util/Set;

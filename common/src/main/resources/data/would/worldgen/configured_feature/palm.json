@@ -18,7 +18,7 @@
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "would:palm_log",
+        "Name": "would:palm_wood",
         "Properties": {
           "axis": "y"
         }
@@ -36,23 +36,17 @@
       }
     },
     "trunk_placer": {
-      "type": "minecraft:bending_trunk_placer",
-      "base_height": 7,
-      "height_rand_a": 1,
-      "height_rand_b": 0,
-      "bend_length": 2,
-      "min_height_for_leaves": 12
+      "type": "minecraft:palm_trunk_placer",
+      "base_height": 1,
+      "height_rand_a": 4,
+      "height_rand_b": 2
     },
     "foliage_placer": {
-      "type": "minecraft:acacia_foliage_placer",
-      "radius": 3,
-      "offset": 1
+      "type": "minecraft:palm_foliage_placer",
+      "radius": 2,
+      "offset": 1,
+      "height": 3
     },
-    "decorators": [
-      {
-        "type": "minecraft:beehive",
-        "probability": 0.25
-      }
-    ]
+    "decorators": []
   }
 }

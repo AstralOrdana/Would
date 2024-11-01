@@ -42,16 +42,10 @@
       "height_rand_b": 0
     },
     "foliage_placer": {
-      "type": "minecraft:pine_foliage_placer",
-      "radius": 1,
+      "type": "minecraft:cedar_foliage_placer",
+      "radius": 3,
       "offset": 1,
-      "height": {
-        "type": "minecraft:uniform",
-        "value": {
-          "min_inclusive": 5,
-          "max_inclusive": 6
-        }
-      }
+      "height": 7
     },
     "decorators": []
   }

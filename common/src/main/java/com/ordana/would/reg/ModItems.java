@@ -137,4 +137,28 @@ public class ModItems {
             boat(true, Boat.Type.ACACIA));
 
 
+
+/*
+    private static BoatSet addBoatItems(String woodId, String boatTypeId) {
+        String boatId = (Would.MOD_ID + "_" + woodId);
+
+        Boat.Type boatType = ClassTinkerers.getEnum(Boat.Type.class, boatTypeId);
+
+        BoatItem boat = add(woodId + "_boat", new BoatItem(false, boatType, new Settings().maxCount(1)), fuel(1200));
+        BoatItem chestBoat = add(woodId + "_chest_boat", new BoatItem(true, boatType, new Settings().maxCount(1)), fuel(1200));
+
+        return new BoatSet(boatType, boat, chestBoat);
+    }
+
+    public record BoatSet(
+            BoatEntity.Type type,
+            BoatItem boat,
+            BoatItem chestBoat
+    ) implements Iterable<Item> {
+        public @NotNull Iterator<Item> iterator() {
+            return Arrays.stream(new Item[]{boat, chestBoat}).iterator();
+        }
+    }
+
+ */
 }
