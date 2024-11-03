@@ -42,7 +42,7 @@
             },
             {
               "type": "minecraft:item",
-              "name": "would:palm_sapling",
+              "name": "would:coconut",
               "conditions": [
                 {
                   "condition": "minecraft:survives_explosion"

@@ -5,6 +5,7 @@ import net.mehvahdjukaar.moonlight.api.misc.EventCalled;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.RGBColor;
+import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Items;
@@ -42,7 +43,6 @@ public class WouldClient {
         ClientHelper.registerRenderType(ModBlocks.PINE_SAPLING.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.CEDAR_SAPLING.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.MAHOGANY_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.PALM_SAPLING.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.MAPLE_SAPLING.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.ASPEN_SAPLING.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.WALNUT_SAPLING.get(), RenderType.cutoutMipped());
@@ -54,7 +54,6 @@ public class WouldClient {
         ClientHelper.registerRenderType(ModBlocks.POTTED_PINE_SAPLING.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.POTTED_CEDAR_SAPLING.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.POTTED_MAHOGANY_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.POTTED_PALM_SAPLING.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.POTTED_MAPLE_SAPLING.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.POTTED_ASPEN_SAPLING.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.POTTED_WALNUT_SAPLING.get(), RenderType.cutoutMipped());
@@ -101,11 +100,11 @@ public class WouldClient {
                 ModBlocks.BAOBAB_LEAVES.get(),
                 ModBlocks.EBONY_LEAVES.get(),
                 ModBlocks.MAHOGANY_LEAVES.get(),
-                ModBlocks.PALM_LEAVES.get(),
                 ModBlocks.MAPLE_LEAVES.get(),
                 ModBlocks.WALNUT_LEAVES.get());
 
         event.register((blockState, level, blockPos, i) -> event.getColor(Blocks.BIRCH_LEAVES.defaultBlockState(), level, blockPos, i),
+                ModBlocks.PALM_LEAVES.get(),
                 ModBlocks.CEDAR_LEAVES.get());
 
         event.register((blockState, level, blockPos, i) -> event.getColor(Blocks.SPRUCE_LEAVES.defaultBlockState(), level, blockPos, i),
@@ -120,11 +119,11 @@ public class WouldClient {
                 ModBlocks.BAOBAB_LEAVES.get(),
                 ModBlocks.EBONY_LEAVES.get(),
                 ModBlocks.MAHOGANY_LEAVES.get(),
-                ModBlocks.PALM_LEAVES.get(),
                 ModBlocks.MAPLE_LEAVES.get(),
                 ModBlocks.WALNUT_LEAVES.get());
 
         event.register((itemStack, i) -> event.getColor(Items.BIRCH_LEAVES.getDefaultInstance(), i),
+                ModBlocks.PALM_LEAVES.get(),
                 ModBlocks.CEDAR_LEAVES.get());
 
         event.register((itemStack, i) -> event.getColor(Items.SPRUCE_LEAVES.getDefaultInstance(), i),

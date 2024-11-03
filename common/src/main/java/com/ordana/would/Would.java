@@ -1,11 +1,6 @@
 package com.ordana.would;
 
-import com.ordana.would.reg.ModBlocks;
-import com.ordana.would.reg.ModCreativeTab;
-import com.ordana.would.reg.ModItems;
-import com.ordana.would.reg.ModWoodSetup;
-import com.ordana.would.reg.ModTrees;
-import com.ordana.would.reg.ModTrunkPlacerTypes;
+import com.ordana.would.reg.*;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -34,6 +29,7 @@ public class Would {
         ModItems.init();
         ModBlocks.init();
         ModTrees.register();
+        ModWorldgenFeatures.init();
         PlatHelper.addCommonSetup(Would::setup);
     }
 

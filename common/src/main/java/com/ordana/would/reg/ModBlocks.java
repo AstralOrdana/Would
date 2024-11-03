@@ -1,13 +1,13 @@
 package com.ordana.would.reg;
 
-import com.ordana.would.Blocks.ModButtonBlock;
-import com.ordana.would.Blocks.ModPressurePlateBlock;
-import com.ordana.would.Blocks.ModSaplingBlock;
-import com.ordana.would.Blocks.tree_growers.*;
+import com.ordana.would.blocks.ModButtonBlock;
+import com.ordana.would.blocks.ModPressurePlateBlock;
+import com.ordana.would.blocks.ModSaplingBlock;
+import com.ordana.would.blocks.PalmLeavesBlock;
+import com.ordana.would.blocks.tree_growers.*;
 import com.ordana.would.Would;
 import net.mehvahdjukaar.moonlight.api.block.ModStairBlock;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
-import net.minecraft.client.renderer.Sheets;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.EntityType;
@@ -44,7 +44,6 @@ public class ModBlocks {
     private static Boolean ocelotOrParrot(BlockState state, BlockGetter blockGetter, BlockPos pos, EntityType<?> entity) {
         return entity == EntityType.OCELOT || entity == EntityType.PARROT;
     }
-
 
     public static <T extends Block> Supplier<T> regBlock(String name, Supplier<T> block) {
         return RegHelper.registerBlock(Would.res(name), block);
@@ -277,7 +276,7 @@ public class ModBlocks {
     public static final Supplier<Block> MAHOGANY_LEAVES = regWithItem("mahogany_leaves",
             () -> leaves(SoundType.AZALEA_LEAVES));
     public static final Supplier<Block> PALM_LEAVES = regWithItem("palm_leaves",
-            () -> leaves(SoundType.AZALEA_LEAVES));
+            () -> new PalmLeavesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).strength(0.2F).randomTicks().sound(SoundType.AZALEA_LEAVES).noOcclusion().isValidSpawn(ModBlocks::ocelotOrParrot).isSuffocating(ModBlocks::never).isViewBlocking(ModBlocks::never).ignitedByLava().pushReaction(PushReaction.DESTROY).isRedstoneConductor(ModBlocks::never)));
     public static final Supplier<Block> MAPLE_LEAVES = regWithItem("maple_leaves",
             () -> leaves(SoundType.AZALEA_LEAVES));
     public static final Supplier<Block> ASPEN_LEAVES = regWithItem("aspen_leaves",
@@ -300,7 +299,7 @@ public class ModBlocks {
             () -> sapling(new CedarTreeGrower()));
     public static final Supplier<Block> MAHOGANY_SAPLING = regWithItem("mahogany_sapling",
             () -> sapling(new MahoganyTreeGrower()));
-    public static final Supplier<Block> PALM_SAPLING = regWithItem("palm_sapling",
+    public static final Supplier<Block> COCONUT = regWithItem("coconut",
             () -> sapling(new PalmTreeGrower()));
     public static final Supplier<Block> MAPLE_SAPLING = regWithItem("maple_sapling",
             () -> sapling(new MapleTreeGrower()));
@@ -323,8 +322,8 @@ public class ModBlocks {
             () -> pottedSapling(CEDAR_SAPLING.get()));
     public static final Supplier<Block> POTTED_MAHOGANY_SAPLING = regWithItem("potted_mahogany_sapling",
             () -> pottedSapling(MAHOGANY_SAPLING.get()));
-    public static final Supplier<Block> POTTED_PALM_SAPLING = regWithItem("potted_palm_sapling",
-            () -> pottedSapling(PALM_SAPLING.get()));
+    public static final Supplier<Block> POTTED_COCONUT = regWithItem("potted_coconut",
+            () -> pottedSapling(COCONUT.get()));
     public static final Supplier<Block> POTTED_MAPLE_SAPLING = regWithItem("potted_maple_sapling",
             () -> pottedSapling(MAPLE_SAPLING.get()));
     public static final Supplier<Block> POTTED_ASPEN_SAPLING = regWithItem("potted_aspen_sapling",

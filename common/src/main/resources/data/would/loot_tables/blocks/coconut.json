@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "would:palm_sapling"
+          "name": "would:coconut"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "would:blocks/palm_sapling"
+  "random_sequence": "would:blocks/coconut"
 }

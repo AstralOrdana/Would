@@ -13,9 +13,9 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 public class PalmFoliagePlacer extends FoliagePlacer {
-    public static final Codec<PalmFoliagePlacer> CODEC = RecordCodecBuilder.create(chestnutFoliagePlacerInstance ->
-            foliagePlacerParts(chestnutFoliagePlacerInstance).and(Codec.intRange(0, 12).fieldOf("height")
-                    .forGetter(instance -> instance.height)).apply(chestnutFoliagePlacerInstance, PalmFoliagePlacer::new));
+    public static final Codec<PalmFoliagePlacer> CODEC = RecordCodecBuilder.create(foliagePlacerInstance ->
+            foliagePlacerParts(foliagePlacerInstance).and(Codec.intRange(0, 12).fieldOf("height")
+                    .forGetter(instance -> instance.height)).apply(foliagePlacerInstance, PalmFoliagePlacer::new));
     private final int height;
 
     public PalmFoliagePlacer(IntProvider radius, IntProvider offset, int height) {

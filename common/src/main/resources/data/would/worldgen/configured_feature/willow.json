@@ -18,7 +18,7 @@
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "would:willow_log",
+        "Name": "would:willow_wood",
         "Properties": {
           "axis": "y"
         }
@@ -36,16 +36,16 @@
       }
     },
     "trunk_placer": {
-      "type": "minecraft:straight_trunk_placer",
-      "base_height": 5,
+      "type": "minecraft:willow_trunk_placer",
+      "base_height": 4,
       "height_rand_a": 3,
       "height_rand_b": 0
     },
     "foliage_placer": {
-      "type": "minecraft:blob_foliage_placer",
-      "radius": 3,
+      "type": "minecraft:willow_foliage_placer",
+      "radius": 1,
       "offset": 0,
-      "height": 3
+      "height": 1
     },
     "decorators": [
       {

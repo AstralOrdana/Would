@@ -1,0 +1,8 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:has_structure/ruined_portal_desert",
+  "features": [
+    "would:beach_palm"
+  ],
+  "step": "raw_generation"
+}

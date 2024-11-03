@@ -13,9 +13,9 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 public class CedarFoliagePlacer extends FoliagePlacer {
-    public static final Codec<CedarFoliagePlacer> CODEC = RecordCodecBuilder.create(chestnutFoliagePlacerInstance ->
-            foliagePlacerParts(chestnutFoliagePlacerInstance).and(Codec.intRange(0, 12).fieldOf("height")
-                    .forGetter(instance -> instance.height)).apply(chestnutFoliagePlacerInstance, CedarFoliagePlacer::new));
+    public static final Codec<CedarFoliagePlacer> CODEC = RecordCodecBuilder.create(foliagePlacerInstance ->
+            foliagePlacerParts(foliagePlacerInstance).and(Codec.intRange(0, 12).fieldOf("height")
+                    .forGetter(instance -> instance.height)).apply(foliagePlacerInstance, CedarFoliagePlacer::new));
     private final int height;
 
     public CedarFoliagePlacer(IntProvider radius, IntProvider offset, int height) {
