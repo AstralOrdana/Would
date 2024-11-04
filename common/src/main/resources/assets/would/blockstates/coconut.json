@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "hanging=false": {
       "model": "would:block/coconut"
+    },
+    "hanging=true": {
+      "model": "would:block/green_coconut"
     }
   }
 }

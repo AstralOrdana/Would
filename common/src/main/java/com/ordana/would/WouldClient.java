@@ -1,6 +1,8 @@
 package com.ordana.would;
 
 import com.ordana.would.reg.ModBlocks;
+import com.ordana.would.reg.ModEntities;
+import net.mehvahdjukaar.moonlight.api.client.renderer.FallingBlockRendererGeneric;
 import net.mehvahdjukaar.moonlight.api.misc.EventCalled;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
@@ -19,6 +21,7 @@ public class WouldClient {
         ClientHelper.addClientSetup(WouldClient::setup);
         ClientHelper.addBlockColorsRegistration(WouldClient::registerBlockColors);
         ClientHelper.addItemColorsRegistration(WouldClient::registerItemColors);
+        ClientHelper.addEntityRenderersRegistration(WouldClient::registerEntityRenderers);
     }
 
     private static boolean finishedSetup = false;
@@ -138,5 +141,9 @@ public class WouldClient {
         float percentage = /*state.getValue(LeafPileBlock.AGE) /*/ 10f;
         int brown = 0x7D5212;
         return new RGBColor(original).asLAB().mixWith(new RGBColor(brown).asLAB(), percentage).asRGB().toInt();
+    }
+
+    private static void registerEntityRenderers(ClientHelper.EntityRendererEvent event) {
+        event.register(ModEntities.FALLING_COCONUT.get(), FallingBlockRendererGeneric::new);
     }
 }

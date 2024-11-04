@@ -30,6 +30,7 @@ public class Would {
         ModBlocks.init();
         ModTrees.register();
         ModWorldgenFeatures.init();
+        ModEntities.init();
         PlatHelper.addCommonSetup(Would::setup);
     }
 

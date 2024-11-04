@@ -1,9 +1,6 @@
 package com.ordana.would.reg;
 
-import com.ordana.would.blocks.ModButtonBlock;
-import com.ordana.would.blocks.ModPressurePlateBlock;
-import com.ordana.would.blocks.ModSaplingBlock;
-import com.ordana.would.blocks.PalmLeavesBlock;
+import com.ordana.would.blocks.*;
 import com.ordana.would.blocks.tree_growers.*;
 import com.ordana.would.Would;
 import net.mehvahdjukaar.moonlight.api.block.ModStairBlock;
@@ -300,7 +297,7 @@ public class ModBlocks {
     public static final Supplier<Block> MAHOGANY_SAPLING = regWithItem("mahogany_sapling",
             () -> sapling(new MahoganyTreeGrower()));
     public static final Supplier<Block> COCONUT = regWithItem("coconut",
-            () -> sapling(new PalmTreeGrower()));
+            () -> new CoconutBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
     public static final Supplier<Block> MAPLE_SAPLING = regWithItem("maple_sapling",
             () -> sapling(new MapleTreeGrower()));
     public static final Supplier<Block> ASPEN_SAPLING = regWithItem("aspen_sapling",
