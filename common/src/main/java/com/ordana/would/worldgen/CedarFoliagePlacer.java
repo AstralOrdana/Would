@@ -33,10 +33,12 @@ public class CedarFoliagePlacer extends FoliagePlacer {
         boolean bl = attachment.doubleTrunk();
         BlockPos basePos = attachment.pos();
         BlockPos.MutableBlockPos pos = basePos.mutable();
-        pos.move(Direction.UP);
+        //pos.move(Direction.UP);
 
 
         if (random.nextBoolean()) {
+            tryPlaceLeaf(level, blockSetter, random, config, pos);
+            pos.move(Direction.UP);
             tryPlaceLeaf(level, blockSetter, random, config, pos);
             pos.move(Direction.UP);
             tryPlaceLeaf(level, blockSetter, random, config, pos);
@@ -58,6 +60,8 @@ public class CedarFoliagePlacer extends FoliagePlacer {
             }
         }
         else {
+            tryPlaceLeaf(level, blockSetter, random, config, pos);
+            pos.move(Direction.UP);
             tryPlaceLeaf(level, blockSetter, random, config, pos);
             pos.move(Direction.UP);
             tryPlaceLeaf(level, blockSetter, random, config, pos);

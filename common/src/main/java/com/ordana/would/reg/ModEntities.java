@@ -14,6 +14,6 @@ public class ModEntities {
     }
 
     public static Supplier<EntityType<FallingCoconutEntity>> FALLING_COCONUT = RegHelper.registerEntityType(
-            Would.res("falling_propagule"),
+            Would.res("falling_coconut"),
             FallingCoconutEntity::new, MobCategory.MISC, 0.28F, 0.98F, 10, 20);
 }

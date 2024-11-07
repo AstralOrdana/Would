@@ -35,7 +35,7 @@ public class FallingCoconutEntity extends ImprovedFallingBlockEntity {
         boolean r = super.causeFallDamage(height, amount, source);
         if (this.getDeltaMovement().lengthSqr() > 0.5 * 0.5) {
             this.discard();
-            this.causeFallDamage(0.5, 2.0, level.damageSources().anvil(this));
+            this.causeFallDamage(0.5f, 2.0f, this.damageSources().anvil(this));
         } else {
             if (!this.isSilent()) {
                 level().levelEvent(LevelEvent.SOUND_POINTED_DRIPSTONE_LAND, this.blockPosition(), 0);

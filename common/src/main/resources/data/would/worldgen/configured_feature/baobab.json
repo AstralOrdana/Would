@@ -36,15 +36,15 @@
       }
     },
     "trunk_placer": {
-      "type": "minecraft:mega_jungle_trunk_placer",
-      "base_height": 8,
-      "height_rand_a": 2,
-      "height_rand_b": 19
+      "type": "minecraft:baobab_trunk_placer",
+      "base_height": 15,
+      "height_rand_a": 4,
+      "height_rand_b": 6
     },
     "foliage_placer": {
-      "type": "minecraft:blob_foliage_placer",
-      "radius": 1,
-      "offset": 0,
+      "type": "minecraft:acacia_foliage_placer",
+      "radius": 2,
+      "offset": 1,
       "height": 2
     },
     "decorators": []

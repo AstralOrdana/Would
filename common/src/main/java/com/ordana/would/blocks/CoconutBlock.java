@@ -14,6 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Fallable;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -35,13 +36,20 @@ public class CoconutBlock extends SaplingBlock implements Fallable {
         this.registerDefaultState(this.stateDefinition.any().setValue(GREEN, false));
     }
 
+    protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
+        return state.is(BlockTags.DIRT) || state.is(Blocks.FARMLAND) || state.is(BlockTags.SAND) || state.is(BlockTags.LOGS) || state.is(BlockTags.LEAVES);
+    }
+
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return state.getValue(GREEN) ? GREEN_SHAPE : BROWN_SHAPE;
     }
 
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (state.getValue(GREEN)) {
-            if (random.nextInt(10) == 7) level.scheduleTick(pos, this, this.getFallDelay());
+            if (random.nextInt(10) == 7) {
+                state.setValue(GREEN, false);
+                level.scheduleTick(pos, this, this.getFallDelay());
+            }
         }
 
         else if (level.getMaxLocalRawBrightness(pos.above()) >= 9 && random.nextInt(7) == 0) {
@@ -67,17 +75,16 @@ public class CoconutBlock extends SaplingBlock implements Fallable {
 
     @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
-        if ((!state.getValue(GREEN)) && !state.canSurvive(level, pos)) {
-            level.removeBlock(pos, true);
+        if (!state.canSurvive(level, pos)) {
+            level.destroyBlock(pos, false);
         }
-        level.scheduleTick(pos, this, this.getFallDelay());
         return state;
     }
 
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (canFallThrough(level.getBlockState(pos.below())) && pos.getY() >= level.getMinBuildHeight() && state.getValue(GREEN)) {
-            FallingBlockEntity entity = FallingCoconutEntity.fall(level, pos, state.setValue(GREEN, true));
+        if (canFallThrough(level.getBlockState(pos.below())) && pos.getY() >= level.getMinBuildHeight()) {
+            FallingBlockEntity entity = FallingCoconutEntity.fall(level, pos, state.setValue(GREEN, false));
             this.configureFallingBlockEntity(entity);
         }
     }

@@ -100,14 +100,13 @@ public class WouldClient {
     private static void registerBlockColors(ClientHelper.BlockColorEvent event) {
         event.register((blockState, level, blockPos, i) -> event.getColor(Blocks.OAK_LEAVES.defaultBlockState(), level, blockPos, i),
                 ModBlocks.WILLOW_LEAVES.get(),
-                ModBlocks.BAOBAB_LEAVES.get(),
                 ModBlocks.EBONY_LEAVES.get(),
                 ModBlocks.MAHOGANY_LEAVES.get(),
-                ModBlocks.MAPLE_LEAVES.get(),
                 ModBlocks.WALNUT_LEAVES.get());
 
         event.register((blockState, level, blockPos, i) -> event.getColor(Blocks.BIRCH_LEAVES.defaultBlockState(), level, blockPos, i),
                 ModBlocks.PALM_LEAVES.get(),
+                ModBlocks.BAOBAB_LEAVES.get(),
                 ModBlocks.CEDAR_LEAVES.get());
 
         event.register((blockState, level, blockPos, i) -> event.getColor(Blocks.SPRUCE_LEAVES.defaultBlockState(), level, blockPos, i),
@@ -119,14 +118,13 @@ public class WouldClient {
     private static void registerItemColors(ClientHelper.ItemColorEvent event) {
         event.register((itemStack, i) -> event.getColor(Items.OAK_LEAVES.getDefaultInstance(), i),
                 ModBlocks.WILLOW_LEAVES.get(),
-                ModBlocks.BAOBAB_LEAVES.get(),
                 ModBlocks.EBONY_LEAVES.get(),
                 ModBlocks.MAHOGANY_LEAVES.get(),
-                ModBlocks.MAPLE_LEAVES.get(),
                 ModBlocks.WALNUT_LEAVES.get());
 
         event.register((itemStack, i) -> event.getColor(Items.BIRCH_LEAVES.getDefaultInstance(), i),
                 ModBlocks.PALM_LEAVES.get(),
+                ModBlocks.BAOBAB_LEAVES.get(),
                 ModBlocks.CEDAR_LEAVES.get());
 
         event.register((itemStack, i) -> event.getColor(Items.SPRUCE_LEAVES.getDefaultInstance(), i),

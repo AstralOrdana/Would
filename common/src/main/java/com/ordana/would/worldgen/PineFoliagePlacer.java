@@ -33,10 +33,9 @@ public class PineFoliagePlacer extends FoliagePlacer {
         boolean bl = attachment.doubleTrunk();
         BlockPos basePos = attachment.pos();
         BlockPos.MutableBlockPos pos = basePos.mutable();
-        pos.move(Direction.UP);
-
 
         tryPlaceLeaf(level, blockSetter, random, config, pos.above());
+        tryPlaceLeaf(level, blockSetter, random, config, pos);
         for (Direction dir : Direction.Plane.HORIZONTAL.shuffledCopy(random)) {
             pos.move(dir);
             tryPlaceLeaf(level, blockSetter, random, config, pos);

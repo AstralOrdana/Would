@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.block.state.properties.RedstoneSide;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.redstone.NeighborUpdater;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -26,36 +27,39 @@ public class PalmLeavesBlock extends LeavesBlock {
         super(properties);
     }
 
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        level.scheduleTick(pos, this, 1);
-        if (this.decaying(state)) {
-            dropResources(state, level, pos);
+    public void updateIndirectNeighbourShapes(BlockState state, LevelAccessor level, BlockPos pos, int flags, int recursionLeft) {
+        BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
 
-            level.updateNeighborsAt(pos.above(), this);
-            level.updateNeighborsAt(pos.below(), this);
-            for (Direction dir : Direction.Plane.HORIZONTAL) {
-                level.updateNeighborsAt(pos.relative(dir), this);
-                level.updateNeighborsAt(pos.relative(dir.getClockWise()), this);
-                level.updateNeighborsAt(pos.relative(dir).above(), this);
-                level.updateNeighborsAt(pos.relative(dir.getClockWise()).above(), this);
-                level.updateNeighborsAt(pos.relative(dir).below(), this);
-                level.updateNeighborsAt(pos.relative(dir.getClockWise()).below(), this);
-            }
+        for (Direction dir : Direction.Plane.HORIZONTAL.shuffledCopy(level.getRandom())) {
+            mutableBlockPos.move(dir);
+            mutableBlockPos.move(dir.getClockWise());
+            level.neighborShapeChanged(dir.getClockWise().getOpposite(), level.getBlockState(mutableBlockPos), mutableBlockPos, pos, flags, recursionLeft);
+            mutableBlockPos.set(pos.relative(dir));
 
-            level.removeBlock(pos, false);
+            mutableBlockPos.move(dir.getClockWise());
+            mutableBlockPos.move(Direction.DOWN);
+            level.neighborShapeChanged(Direction.UP, level.getBlockState(mutableBlockPos), mutableBlockPos, pos, flags, recursionLeft);
+            mutableBlockPos.set(pos.relative(dir));
+
+            mutableBlockPos.move(dir.getClockWise());
+            mutableBlockPos.move(Direction.UP);
+            level.neighborShapeChanged(Direction.DOWN, level.getBlockState(mutableBlockPos), mutableBlockPos, pos, flags, recursionLeft);
+            mutableBlockPos.set(pos.relative(dir));
+
+            mutableBlockPos.move(Direction.DOWN);
+            level.neighborShapeChanged(Direction.UP, level.getBlockState(mutableBlockPos), mutableBlockPos, pos, flags, recursionLeft);
+            mutableBlockPos.set(pos.relative(dir));
+
+            mutableBlockPos.move(Direction.UP);
+            level.neighborShapeChanged(Direction.DOWN, level.getBlockState(mutableBlockPos), mutableBlockPos, pos, flags, recursionLeft);
+            mutableBlockPos.set(pos);
+
         }
     }
 
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         level.setBlock(pos, updateDistance(state, level, pos), 3);
     }
-
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-        FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
-        BlockState blockState = this.defaultBlockState().setValue(PERSISTENT, true).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
-        return updateDistance(blockState, context.getLevel(), context.getClickedPos());
-    }
-
 
     private static BlockState updateDistance(BlockState state, LevelAccessor level, BlockPos pos) {
         int i = 7;

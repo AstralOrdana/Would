@@ -14,13 +14,10 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerTy
 
 public class PalmFoliagePlacer extends FoliagePlacer {
     public static final Codec<PalmFoliagePlacer> CODEC = RecordCodecBuilder.create(foliagePlacerInstance ->
-            foliagePlacerParts(foliagePlacerInstance).and(Codec.intRange(0, 12).fieldOf("height")
-                    .forGetter(instance -> instance.height)).apply(foliagePlacerInstance, PalmFoliagePlacer::new));
-    private final int height;
+            foliagePlacerParts(foliagePlacerInstance).apply(foliagePlacerInstance, PalmFoliagePlacer::new));
 
-    public PalmFoliagePlacer(IntProvider radius, IntProvider offset, int height) {
+    public PalmFoliagePlacer(IntProvider radius, IntProvider offset) {
         super(radius, offset);
-        this.height = height;
     }
 
     @Override
@@ -113,7 +110,7 @@ public class PalmFoliagePlacer extends FoliagePlacer {
 
     @Override
     public int foliageHeight(RandomSource random, int height, TreeConfiguration config) {
-        return this.height;
+        return 1;
     }
 
     @Override

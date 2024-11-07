@@ -18,7 +18,7 @@
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "would:palm_wood",
+        "Name": "would:palm_log",
         "Properties": {
           "axis": "y"
         }
@@ -44,9 +44,28 @@
     "foliage_placer": {
       "type": "minecraft:palm_foliage_placer",
       "radius": 2,
-      "offset": 1,
-      "height": 3
+      "offset": 1
     },
-    "decorators": []
+    "decorators": [
+      {
+        "type": "minecraft:attached_to_leaves",
+        "probability": 0.1,
+        "exclusion_radius_xz": 0,
+        "exclusion_radius_y": 0,
+        "required_empty_blocks": 1,
+        "block_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "would:coconut",
+            "Properties": {
+              "hanging": "true"
+            }
+          }
+        },
+        "directions": [
+          "down"
+        ]
+      }
+    ]
   }
 }
