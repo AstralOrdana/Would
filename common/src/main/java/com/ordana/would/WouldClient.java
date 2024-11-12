@@ -30,6 +30,7 @@ public class WouldClient {
         ClientHelper.registerRenderType(ModBlocks.WILLOW_LEAVES.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.BAOBAB_LEAVES.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.EBONY_LEAVES.get(), RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.EBONY_LEAVES_FRUITING.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.FIR_LEAVES.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.PINE_LEAVES.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.CEDAR_LEAVES.get(), RenderType.cutoutMipped());
@@ -100,7 +101,6 @@ public class WouldClient {
     private static void registerBlockColors(ClientHelper.BlockColorEvent event) {
         event.register((blockState, level, blockPos, i) -> event.getColor(Blocks.OAK_LEAVES.defaultBlockState(), level, blockPos, i),
                 ModBlocks.WILLOW_LEAVES.get(),
-                ModBlocks.EBONY_LEAVES.get(),
                 ModBlocks.MAHOGANY_LEAVES.get(),
                 ModBlocks.WALNUT_LEAVES.get());
 
@@ -118,7 +118,6 @@ public class WouldClient {
     private static void registerItemColors(ClientHelper.ItemColorEvent event) {
         event.register((itemStack, i) -> event.getColor(Items.OAK_LEAVES.getDefaultInstance(), i),
                 ModBlocks.WILLOW_LEAVES.get(),
-                ModBlocks.EBONY_LEAVES.get(),
                 ModBlocks.MAHOGANY_LEAVES.get(),
                 ModBlocks.WALNUT_LEAVES.get());
 

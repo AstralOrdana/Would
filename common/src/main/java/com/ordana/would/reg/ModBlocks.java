@@ -264,6 +264,8 @@ public class ModBlocks {
             () -> leaves(SoundType.AZALEA_LEAVES));
     public static final Supplier<Block> EBONY_LEAVES = regWithItem("ebony_leaves",
             () -> leaves(SoundType.AZALEA_LEAVES));
+    public static final Supplier<Block> EBONY_LEAVES_FRUITING = regWithItem("ebony_leaves_fruiting",
+            () -> leaves(SoundType.AZALEA_LEAVES));
     public static final Supplier<Block> FIR_LEAVES = regWithItem("fir_leaves",
             () -> leaves(SoundType.AZALEA_LEAVES));
     public static final Supplier<Block> PINE_LEAVES = regWithItem("pine_leaves",

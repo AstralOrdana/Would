@@ -8,7 +8,7 @@
       },
       {
         "chance": 0.01,
-        "feature": "would:ebony"
+        "feature": "would:ebony_fruiting"
       }
     ],
     "default": "minecraft:jungle_tree"
