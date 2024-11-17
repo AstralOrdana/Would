@@ -1,12 +1,12 @@
 package com.ordana.would.reg;
 
 import com.ordana.would.Would;
+import com.ordana.would.entities.ModBoatEntity;
+import com.ordana.would.items.ModBoatItem;
+import com.ordana.would.items.SyrupBottleItem;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
-import net.minecraft.world.entity.vehicle.Boat;
-import net.minecraft.world.item.BoatItem;
-import net.minecraft.world.item.HangingSignItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SignItem;
+import net.minecraft.world.food.Foods;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 
 import java.util.function.Supplier;
@@ -28,8 +28,8 @@ public class ModItems {
         return new HangingSignItem(sign, wallSign, (new Item.Properties()).stacksTo(16));
     }
 
-    private static Item boat(boolean chest, Boat.Type type) {
-        return new BoatItem(chest, type, (new Item.Properties()).stacksTo(1));
+    private static Item boat(boolean chest, ModBoatEntity.Type type) {
+        return new ModBoatItem(chest, type, (new Item.Properties()).stacksTo(1));
     }
     
     
@@ -87,78 +87,56 @@ public class ModItems {
 
     //boats
     public static final Supplier<Item> ASPEN_BOAT = regItem("aspen_boat", () ->
-            boat(false, Boat.Type.ACACIA));
+            boat(false, ModBoatEntity.Type.ASPEN));
     public static final Supplier<Item> AZALEA_BOAT = regItem("azalea_boat", () ->
-            boat(false, Boat.Type.ACACIA));
+            boat(false, ModBoatEntity.Type.AZALEA));
     public static final Supplier<Item> BAOBAB_BOAT = regItem("baobab_boat", () ->
-            boat(false, Boat.Type.ACACIA));
+            boat(false, ModBoatEntity.Type.BAOBAB));
     public static final Supplier<Item> CEDAR_BOAT = regItem("cedar_boat", () ->
-            boat(false, Boat.Type.ACACIA));
+            boat(false, ModBoatEntity.Type.CEDAR));
     public static final Supplier<Item> EBONY_BOAT = regItem("ebony_boat", () ->
-            boat(false, Boat.Type.ACACIA));
+            boat(false, ModBoatEntity.Type.EBONY));
     public static final Supplier<Item> FIR_BOAT = regItem("fir_boat", () ->
-            boat(false, Boat.Type.ACACIA));
+            boat(false, ModBoatEntity.Type.FIR));
     public static final Supplier<Item> MAHOGANY_BOAT = regItem("mahogany_boat", () ->
-            boat(false, Boat.Type.ACACIA));
+            boat(false, ModBoatEntity.Type.MAHOGANY));
     public static final Supplier<Item> MAPLE_BOAT = regItem("maple_boat", () ->
-            boat(false, Boat.Type.ACACIA));
+            boat(false, ModBoatEntity.Type.MAPLE));
     public static final Supplier<Item> PALM_BOAT = regItem("palm_boat", () ->
-            boat(false, Boat.Type.ACACIA));
+            boat(false, ModBoatEntity.Type.PALM));
     public static final Supplier<Item> PINE_BOAT = regItem("pine_boat", () ->
-            boat(false, Boat.Type.ACACIA));
+            boat(false, ModBoatEntity.Type.PINE));
     public static final Supplier<Item> WALNUT_BOAT = regItem("walnut_boat", () ->
-            boat(false, Boat.Type.ACACIA));
+            boat(false, ModBoatEntity.Type.WALNUT));
     public static final Supplier<Item> WILLOW_BOAT = regItem("willow_boat", () ->
-            boat(false, Boat.Type.ACACIA));
+            boat(false, ModBoatEntity.Type.WILLOW));
     
     public static final Supplier<Item> ASPEN_CHEST_BOAT = regItem("aspen_chest_boat", () ->
-            boat(true, Boat.Type.ACACIA));
+            boat(true, ModBoatEntity.Type.ASPEN));
     public static final Supplier<Item> AZALEA_CHEST_BOAT = regItem("azalea_chest_boat", () ->
-            boat(true, Boat.Type.ACACIA));
+            boat(true, ModBoatEntity.Type.AZALEA));
     public static final Supplier<Item> BAOBAB_CHEST_BOAT = regItem("baobab_chest_boat", () ->
-            boat(true, Boat.Type.ACACIA));
+            boat(true, ModBoatEntity.Type.BAOBAB));
     public static final Supplier<Item> CEDAR_CHEST_BOAT = regItem("cedar_chest_boat", () ->
-            boat(true, Boat.Type.ACACIA));
+            boat(true, ModBoatEntity.Type.CEDAR));
     public static final Supplier<Item> EBONY_CHEST_BOAT = regItem("ebony_chest_boat", () ->
-            boat(true, Boat.Type.ACACIA));
+            boat(true, ModBoatEntity.Type.EBONY));
     public static final Supplier<Item> FIR_CHEST_BOAT = regItem("fir_chest_boat", () ->
-            boat(true, Boat.Type.ACACIA));
+            boat(true, ModBoatEntity.Type.FIR));
     public static final Supplier<Item> MAHOGANY_CHEST_BOAT = regItem("mahogany_chest_boat", () ->
-            boat(true, Boat.Type.ACACIA));
+            boat(true, ModBoatEntity.Type.MAHOGANY));
     public static final Supplier<Item> MAPLE_CHEST_BOAT = regItem("maple_chest_boat", () ->
-            boat(true, Boat.Type.ACACIA));
+            boat(true, ModBoatEntity.Type.MAPLE));
     public static final Supplier<Item> PALM_CHEST_BOAT = regItem("palm_chest_boat", () ->
-            boat(true, Boat.Type.ACACIA));
+            boat(true, ModBoatEntity.Type.PALM));
     public static final Supplier<Item> PINE_CHEST_BOAT = regItem("pine_chest_boat", () ->
-            boat(true, Boat.Type.ACACIA));
+            boat(true, ModBoatEntity.Type.PINE));
     public static final Supplier<Item> WALNUT_CHEST_BOAT = regItem("walnut_chest_boat", () ->
-            boat(true, Boat.Type.ACACIA));
+            boat(true, ModBoatEntity.Type.WALNUT));
     public static final Supplier<Item> WILLOW_CHEST_BOAT = regItem("willow_chest_boat", () ->
-            boat(true, Boat.Type.ACACIA));
+            boat(true, ModBoatEntity.Type.WILLOW));
 
+    public static final Supplier<Item> SYRUP_BOTTLE = regItem("syrup_bottle", () ->
+            new SyrupBottleItem((new Item.Properties()).craftRemainder(Items.GLASS_BOTTLE).food(Foods.HONEY_BOTTLE).stacksTo(16)));
 
-
-/*
-    private static BoatSet addBoatItems(String woodId, String boatTypeId) {
-        String boatId = (Would.MOD_ID + "_" + woodId);
-
-        Boat.Type boatType = ClassTinkerers.getEnum(Boat.Type.class, boatTypeId);
-
-        BoatItem boat = add(woodId + "_boat", new BoatItem(false, boatType, new Settings().maxCount(1)), fuel(1200));
-        BoatItem chestBoat = add(woodId + "_chest_boat", new BoatItem(true, boatType, new Settings().maxCount(1)), fuel(1200));
-
-        return new BoatSet(boatType, boat, chestBoat);
-    }
-
-    public record BoatSet(
-            BoatEntity.Type type,
-            BoatItem boat,
-            BoatItem chestBoat
-    ) implements Iterable<Item> {
-        public @NotNull Iterator<Item> iterator() {
-            return Arrays.stream(new Item[]{boat, chestBoat}).iterator();
-        }
-    }
-
- */
 }

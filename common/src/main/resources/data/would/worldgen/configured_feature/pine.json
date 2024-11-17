@@ -42,7 +42,7 @@
       "height_rand_b": 0
     },
     "foliage_placer": {
-      "type": "minecraft:mod_pine_foliage_placer",
+      "type": "would:pine_foliage_placer",
       "radius": 1,
       "offset": 1,
       "height": 2

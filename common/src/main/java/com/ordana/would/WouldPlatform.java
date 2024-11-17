@@ -14,4 +14,10 @@ public class WouldPlatform {
     public static void addFeatureToBiome(GenerationStep.Decoration step, TagKey<Biome> tagKey, ResourceKey<PlacedFeature> feature) {
         throw new AssertionError();
     }
+
+    @Contract
+    @ExpectPlatform
+    public static void registerTree(GenerationStep.Decoration step, TagKey<Biome> tagKey, ResourceKey<PlacedFeature> feature) {
+        throw new AssertionError();
+    }
 }

@@ -36,7 +36,7 @@
       }
     },
     "trunk_placer": {
-      "type": "minecraft:baobab_trunk_placer",
+      "type": "would:baobab_trunk_placer",
       "base_height": 15,
       "height_rand_a": 4,
       "height_rand_b": 6

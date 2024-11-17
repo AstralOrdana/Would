@@ -12,6 +12,7 @@
   "block.would.azalea_log": "Azalea Log",
   "block.would.palm_log": "Palm Log",
   "block.would.maple_log": "Maple Log",
+  "block.would.maple_log_sappy": "Sappy Maple Log",
   "block.would.aspen_log": "Aspen Log",
   "block.would.aspen_log_gazing": "Gazing Aspen Log",
   "block.would.walnut_log": "Walnut Log",
@@ -253,5 +254,10 @@
   "item.would.palm_chest_boat": "Palm Chest Boat",
   "item.would.maple_chest_boat": "Maple Chest Boat",
   "item.would.aspen_chest_boat": "Aspen Chest Boat",
-  "item.would.walnut_chest_boat": "Walnut Chest Boat"
+  "item.would.walnut_chest_boat": "Walnut Chest Boat",
+
+  "item.would.syrup_bottle": "Bottle of Syrup",
+
+  "entity.would.falling_coconut": "Falling Coconut",
+  "entity.would.mod_chest_boat": "Boat with Chest"
 }

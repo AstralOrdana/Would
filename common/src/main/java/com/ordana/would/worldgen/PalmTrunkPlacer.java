@@ -30,7 +30,7 @@ public class PalmTrunkPlacer extends TrunkPlacer {
 
     @Override
     protected @NotNull TrunkPlacerType<?> type() {
-        return ModTrees.PALM_TRUNK_PLACER;
+        return ModTrees.PALM_TRUNK_PLACER.get();
     }
 
     @Override

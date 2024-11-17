@@ -42,7 +42,7 @@
       "height_rand_b": 0
     },
     "foliage_placer": {
-      "type": "minecraft:cedar_foliage_placer",
+      "type": "would:cedar_foliage_placer",
       "radius": 3,
       "offset": 1,
       "height": 7

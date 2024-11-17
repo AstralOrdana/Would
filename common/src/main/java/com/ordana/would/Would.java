@@ -28,7 +28,7 @@ public class Would {
 
         ModItems.init();
         ModBlocks.init();
-        ModTrees.register();
+        ModTrees.init();
         ModWorldgenFeatures.init();
         ModEntities.init();
         PlatHelper.addCommonSetup(Would::setup);

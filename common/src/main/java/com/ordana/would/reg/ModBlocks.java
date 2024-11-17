@@ -1,8 +1,8 @@
 package com.ordana.would.reg;
 
+import com.ordana.would.Would;
 import com.ordana.would.blocks.*;
 import com.ordana.would.blocks.tree_growers.*;
-import com.ordana.would.Would;
 import net.mehvahdjukaar.moonlight.api.block.ModStairBlock;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.core.BlockPos;
@@ -161,6 +161,8 @@ public class ModBlocks {
     public static final Supplier<Block> PALM_LOG = regWithItem("palm_log",
             () -> log(MapColor.WOOD, MapColor.PODZOL, SoundType.WOOD));
     public static final Supplier<Block> MAPLE_LOG = regWithItem("maple_log",
+            () -> log(MapColor.WOOD, MapColor.PODZOL, SoundType.WOOD));
+    public static final Supplier<Block> MAPLE_LOG_SAPPY = regWithItem("maple_log_sappy",
             () -> log(MapColor.WOOD, MapColor.PODZOL, SoundType.WOOD));
     public static final Supplier<Block> ASPEN_LOG = regWithItem("aspen_log",
             () -> log(MapColor.WOOD, MapColor.PODZOL, SoundType.WOOD));

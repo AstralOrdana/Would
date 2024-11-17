@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "chest_boat",
+  "ingredients": [
+    {
+      "item": "minecraft:chest"
+    },
+    {
+      "item": "would:ebony_boat"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "would:ebony_chest_boat"
+  }
+}

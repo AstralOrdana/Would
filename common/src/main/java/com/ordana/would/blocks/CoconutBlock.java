@@ -1,6 +1,7 @@
 package com.ordana.would.blocks;
 
 import com.ordana.would.blocks.tree_growers.PalmTreeGrower;
+import com.ordana.would.entities.FallingCoconutEntity;
 import com.ordana.would.reg.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,7 +15,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Fallable;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,20 +24,19 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import javax.swing.text.html.BlockView;
-
 public class CoconutBlock extends SaplingBlock implements Fallable {
     protected static final VoxelShape GREEN_SHAPE;
     protected static final VoxelShape BROWN_SHAPE;
     public static final BooleanProperty GREEN = BlockStateProperties.HANGING;
+    public static final BooleanProperty GROWABLE = BlockStateProperties.ENABLED;
 
     public CoconutBlock(Properties properties) {
         super(new PalmTreeGrower(), properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(GREEN, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(GREEN, false).setValue(GROWABLE, true));
     }
 
     protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
-        return state.is(BlockTags.DIRT) || state.is(Blocks.FARMLAND) || state.is(BlockTags.SAND) || state.is(BlockTags.LOGS) || state.is(BlockTags.LEAVES);
+        return state.is(BlockTags.DIRT) || state.is(BlockTags.SAND);
     }
 
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
@@ -52,7 +51,7 @@ public class CoconutBlock extends SaplingBlock implements Fallable {
             }
         }
 
-        else if (level.getMaxLocalRawBrightness(pos.above()) >= 9 && random.nextInt(7) == 0) {
+        else if (state.getValue(GROWABLE) && level.getMaxLocalRawBrightness(pos.above()) >= 9 && random.nextInt(7) == 0) {
             this.advanceTree(level, pos, state, random);
         }
 
@@ -70,7 +69,7 @@ public class CoconutBlock extends SaplingBlock implements Fallable {
     }
 
     public void onLand(Level level, BlockPos pos, BlockState state, BlockState replaceableState, FallingBlockEntity fallingBlock) {
-        level.setBlockAndUpdate(pos, state.setValue(GREEN, false));
+        level.setBlockAndUpdate(pos, state.setValue(GREEN, false).setValue(GROWABLE, false));
     }
 
     @Override
@@ -102,7 +101,7 @@ public class CoconutBlock extends SaplingBlock implements Fallable {
 
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(STAGE, GREEN);
+        builder.add(STAGE, GREEN, GROWABLE);
     }
 
     static {

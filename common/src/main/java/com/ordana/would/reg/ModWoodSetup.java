@@ -1,15 +1,7 @@
 package com.ordana.would.reg;
 
 import com.google.common.collect.ImmutableMap;
-import com.mojang.datafixers.types.Type;
-import com.ordana.would.WouldPlatform;
-import net.minecraft.Util;
-import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.util.datafix.fixes.References;
 import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;

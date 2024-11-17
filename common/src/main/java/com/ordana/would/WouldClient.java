@@ -1,5 +1,7 @@
 package com.ordana.would;
 
+import com.ordana.would.entities.ModBoatEntity;
+import com.ordana.would.entities.ModBoatRenderer;
 import com.ordana.would.reg.ModBlocks;
 import com.ordana.would.reg.ModEntities;
 import net.mehvahdjukaar.moonlight.api.client.renderer.FallingBlockRendererGeneric;
@@ -7,9 +9,12 @@ import net.mehvahdjukaar.moonlight.api.misc.EventCalled;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.RGBColor;
-import net.minecraft.client.color.block.BlockColor;
+import net.minecraft.client.model.BoatModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.Blocks;
@@ -22,6 +27,7 @@ public class WouldClient {
         ClientHelper.addBlockColorsRegistration(WouldClient::registerBlockColors);
         ClientHelper.addItemColorsRegistration(WouldClient::registerItemColors);
         ClientHelper.addEntityRenderersRegistration(WouldClient::registerEntityRenderers);
+        ClientHelper.addModelLayerRegistration(WouldClient::registerLayers);
     }
 
     private static boolean finishedSetup = false;
@@ -102,11 +108,11 @@ public class WouldClient {
         event.register((blockState, level, blockPos, i) -> event.getColor(Blocks.OAK_LEAVES.defaultBlockState(), level, blockPos, i),
                 ModBlocks.WILLOW_LEAVES.get(),
                 ModBlocks.MAHOGANY_LEAVES.get(),
+                ModBlocks.BAOBAB_LEAVES.get(),
                 ModBlocks.WALNUT_LEAVES.get());
 
         event.register((blockState, level, blockPos, i) -> event.getColor(Blocks.BIRCH_LEAVES.defaultBlockState(), level, blockPos, i),
                 ModBlocks.PALM_LEAVES.get(),
-                ModBlocks.BAOBAB_LEAVES.get(),
                 ModBlocks.CEDAR_LEAVES.get());
 
         event.register((blockState, level, blockPos, i) -> event.getColor(Blocks.SPRUCE_LEAVES.defaultBlockState(), level, blockPos, i),
@@ -119,11 +125,11 @@ public class WouldClient {
         event.register((itemStack, i) -> event.getColor(Items.OAK_LEAVES.getDefaultInstance(), i),
                 ModBlocks.WILLOW_LEAVES.get(),
                 ModBlocks.MAHOGANY_LEAVES.get(),
+                ModBlocks.BAOBAB_LEAVES.get(),
                 ModBlocks.WALNUT_LEAVES.get());
 
         event.register((itemStack, i) -> event.getColor(Items.BIRCH_LEAVES.getDefaultInstance(), i),
                 ModBlocks.PALM_LEAVES.get(),
-                ModBlocks.BAOBAB_LEAVES.get(),
                 ModBlocks.CEDAR_LEAVES.get());
 
         event.register((itemStack, i) -> event.getColor(Items.SPRUCE_LEAVES.getDefaultInstance(), i),
@@ -142,5 +148,42 @@ public class WouldClient {
 
     private static void registerEntityRenderers(ClientHelper.EntityRendererEvent event) {
         event.register(ModEntities.FALLING_COCONUT.get(), FallingBlockRendererGeneric::new);
+        event.register(ModEntities.MOD_BOAT.get(), pContext -> new ModBoatRenderer(pContext, false));
+        event.register(ModEntities.MOD_CHEST_BOAT.get(), pContext -> new ModBoatRenderer(pContext, false));
+
     }
+
+    private static void registerLayers(ClientHelper.ModelLayerEvent event) {
+        event.register(loc("boat/aspen"), BoatModel::createBodyModel);
+        event.register(loc("boat/azalea"), BoatModel::createBodyModel);
+        event.register(loc("boat/baobab"), BoatModel::createBodyModel);
+        event.register(loc("boat/cedar"), BoatModel::createBodyModel);
+        event.register(loc("boat/ebony"), BoatModel::createBodyModel);
+        event.register(loc("boat/fir"), BoatModel::createBodyModel);
+        event.register(loc("boat/mahogany"), BoatModel::createBodyModel);
+        event.register(loc("boat/maple"), BoatModel::createBodyModel);
+        event.register(loc("boat/pine"), BoatModel::createBodyModel);
+        event.register(loc("boat/palm"), BoatModel::createBodyModel);
+        event.register(loc("boat/walnut"), BoatModel::createBodyModel);
+        event.register(loc("boat/willow"), BoatModel::createBodyModel);
+
+        event.register(loc("chest_boat/aspen"), BoatModel::createBodyModel);
+        event.register(loc("chest_boat/azalea"), BoatModel::createBodyModel);
+        event.register(loc("chest_boat/baobab"), BoatModel::createBodyModel);
+        event.register(loc("chest_boat/cedar"), BoatModel::createBodyModel);
+        event.register(loc("chest_boat/ebony"), BoatModel::createBodyModel);
+        event.register(loc("chest_boat/fir"), BoatModel::createBodyModel);
+        event.register(loc("chest_boat/mahogany"), BoatModel::createBodyModel);
+        event.register(loc("chest_boat/maple"), BoatModel::createBodyModel);
+        event.register(loc("chest_boat/pine"), BoatModel::createBodyModel);
+        event.register(loc("chest_boat/palm"), BoatModel::createBodyModel);
+        event.register(loc("chest_boat/walnut"), BoatModel::createBodyModel);
+        event.register(loc("chest_boat/willow"), BoatModel::createBodyModel);
+
+    }
+
+    private static ModelLayerLocation loc(String name) {
+        return new ModelLayerLocation(Would.res(name), "main");
+    }
+
 }

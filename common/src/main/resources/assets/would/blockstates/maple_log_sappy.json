@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "would:block/maple_log_sappy_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "would:block/maple_log_sappy"
+    },
+    "axis=z": {
+      "model": "would:block/maple_log_sappy_horizontal",
+      "x": 90
+    }
+  }
+}

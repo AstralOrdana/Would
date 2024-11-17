@@ -1,26 +1,35 @@
 package com.ordana.would.reg;
 
+import com.mojang.serialization.Codec;
 import com.ordana.would.Would;
-import com.ordana.would.mixins.FoliagePlacerTypeInvoker;
-import com.ordana.would.mixins.TrunkPlacerTypeInvoker;
 import com.ordana.would.worldgen.*;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 
+import java.util.function.Supplier;
+
 public class ModTrees {
+    public static void init() {
+    }
+
     //foliage
-    public static final FoliagePlacerType<?> ASPEN_FOLIAGE_PLACER = FoliagePlacerTypeInvoker.callRegister("aspen_foliage_placer", AspenFoliagePlacer.CODEC);
-    public static final FoliagePlacerType<?> PALM_FOLIAGE_PLACER = FoliagePlacerTypeInvoker.callRegister("palm_foliage_placer", PalmFoliagePlacer.CODEC);
-    public static final FoliagePlacerType<?> CEDAR_FOLIAGE_PLACER = FoliagePlacerTypeInvoker.callRegister("cedar_foliage_placer", CedarFoliagePlacer.CODEC);
-    public static final FoliagePlacerType<?> WILLOW_FOLIAGE_PLACER = FoliagePlacerTypeInvoker.callRegister("willow_foliage_placer", WillowFoliagePlacer.CODEC);
-    public static final FoliagePlacerType<?> MOD_PINE_FOLIAGE_PLACER = FoliagePlacerTypeInvoker.callRegister("mod_pine_foliage_placer", PineFoliagePlacer.CODEC);
+    public static final Supplier<FoliagePlacerType> ASPEN_FOLIAGE_PLACER = registerFoliage("aspen", AspenFoliagePlacer.CODEC);
+    public static final Supplier<FoliagePlacerType> PALM_FOLIAGE_PLACER = registerFoliage("palm", PalmFoliagePlacer.CODEC);
+    public static final Supplier<FoliagePlacerType> CEDAR_FOLIAGE_PLACER = registerFoliage("cedar", CedarFoliagePlacer.CODEC);
+    public static final Supplier<FoliagePlacerType> WILLOW_FOLIAGE_PLACER = registerFoliage("willow", WillowFoliagePlacer.CODEC);
+    public static final Supplier<FoliagePlacerType> PINE_FOLIAGE_PLACER = registerFoliage("pine", PineFoliagePlacer.CODEC);
 
-    //trunks
-    public static final TrunkPlacerType<?> PALM_TRUNK_PLACER = TrunkPlacerTypeInvoker.callRegister("palm_trunk_placer", PalmTrunkPlacer.CODEC);
-    public static final TrunkPlacerType<?> WILLOW_TRUNK_PLACER = TrunkPlacerTypeInvoker.callRegister("willow_trunk_placer", WillowTrunkPlacer.CODEC);
-    public static final TrunkPlacerType<?> BAOBAB_TRUNK_PLACER = TrunkPlacerTypeInvoker.callRegister("baobab_trunk_placer", BaobabTrunkPlacer.CODEC);
+    public static final Supplier<TrunkPlacerType> PALM_TRUNK_PLACER = registerTrunk("palm", PalmTrunkPlacer.CODEC);
+    public static final Supplier<TrunkPlacerType> WILLOW_TRUNK_PLACER = registerTrunk("willow", WillowTrunkPlacer.CODEC);
+    public static final Supplier<TrunkPlacerType> BAOBAB_TRUNK_PLACER = registerTrunk("baobab", BaobabTrunkPlacer.CODEC);
 
-    public static void register() {
-        Would.LOGGER.info("Registering Foliage & Trunk Placers for " + Would.MOD_ID);
+
+    public static Supplier<FoliagePlacerType> registerFoliage(String name, Codec codec) {
+        return RegHelper.register(Would.res(name + "_foliage_placer"), () -> new FoliagePlacerType(codec), Registries.FOLIAGE_PLACER_TYPE);
+    }
+    public static Supplier<TrunkPlacerType> registerTrunk(String name, Codec codec) {
+        return RegHelper.register(Would.res(name + "_trunk_placer"), () -> new TrunkPlacerType(codec), Registries.TRUNK_PLACER_TYPE);
     }
 }

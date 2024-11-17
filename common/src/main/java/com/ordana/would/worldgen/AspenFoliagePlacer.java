@@ -25,7 +25,7 @@ public class AspenFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected FoliagePlacerType<?> type() {
-        return ModTrees.ASPEN_FOLIAGE_PLACER;
+        return ModTrees.ASPEN_FOLIAGE_PLACER.get();
     }
 
     @Override

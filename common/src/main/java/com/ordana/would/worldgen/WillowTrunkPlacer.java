@@ -3,7 +3,6 @@ package com.ordana.would.worldgen;
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.ordana.would.reg.ModBlocks;
 import com.ordana.would.reg.ModTrees;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -32,7 +31,7 @@ public class WillowTrunkPlacer extends TrunkPlacer {
 
     @Override
     protected TrunkPlacerType<?> type() {
-        return ModTrees.WILLOW_TRUNK_PLACER;
+        return ModTrees.WILLOW_TRUNK_PLACER.get();
     }
 
     @Override
