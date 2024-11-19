@@ -70,7 +70,7 @@ public class ModBlocks {
     }
 
     private static Block sapling(AbstractTreeGrower treeGrower) {
-        return new ModSaplingBlock(treeGrower, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
+        return new ModSaplingBlock(treeGrower, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
     }
 
     private static FlowerPotBlock pottedSapling(Block content, FeatureFlag... requiredFeatures) {
@@ -300,7 +300,7 @@ public class ModBlocks {
             () -> sapling(new CedarTreeGrower()));
     public static final Supplier<Block> MAHOGANY_SAPLING = regWithItem("mahogany_sapling",
             () -> sapling(new MahoganyTreeGrower()));
-    public static final Supplier<Block> COCONUT = regWithItem("coconut",
+    public static final Supplier<Block> COCONUT = regBlock("coconut",
             () -> new CoconutBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
     public static final Supplier<Block> MAPLE_SAPLING = regWithItem("maple_sapling",
             () -> sapling(new MapleTreeGrower()));
@@ -311,25 +311,25 @@ public class ModBlocks {
     
     public static final Supplier<Block> POTTED_WILLOW_SAPLING = regBlock("potted_willow_sapling",
             () -> pottedSapling(WILLOW_SAPLING.get()));
-    public static final Supplier<Block> POTTED_BAOBAB_SAPLING = regWithItem("potted_baobab_sapling",
+    public static final Supplier<Block> POTTED_BAOBAB_SAPLING = regBlock("potted_baobab_sapling",
             () -> pottedSapling(BAOBAB_SAPLING.get()));
-    public static final Supplier<Block> POTTED_EBONY_SAPLING = regWithItem("potted_ebony_sapling",
+    public static final Supplier<Block> POTTED_EBONY_SAPLING = regBlock("potted_ebony_sapling",
             () -> pottedSapling(EBONY_SAPLING.get()));
-    public static final Supplier<Block> POTTED_FIR_SAPLING = regWithItem("potted_fir_sapling",
+    public static final Supplier<Block> POTTED_FIR_SAPLING = regBlock("potted_fir_sapling",
             () -> pottedSapling(FIR_SAPLING.get()));
-    public static final Supplier<Block> POTTED_PINE_SAPLING = regWithItem("potted_pine_sapling",
+    public static final Supplier<Block> POTTED_PINE_SAPLING = regBlock("potted_pine_sapling",
             () -> pottedSapling(PINE_SAPLING.get()));
-    public static final Supplier<Block> POTTED_CEDAR_SAPLING = regWithItem("potted_cedar_sapling",
+    public static final Supplier<Block> POTTED_CEDAR_SAPLING = regBlock("potted_cedar_sapling",
             () -> pottedSapling(CEDAR_SAPLING.get()));
-    public static final Supplier<Block> POTTED_MAHOGANY_SAPLING = regWithItem("potted_mahogany_sapling",
+    public static final Supplier<Block> POTTED_MAHOGANY_SAPLING = regBlock("potted_mahogany_sapling",
             () -> pottedSapling(MAHOGANY_SAPLING.get()));
-    public static final Supplier<Block> POTTED_COCONUT = regWithItem("potted_coconut",
+    public static final Supplier<Block> POTTED_COCONUT = regBlock("potted_coconut",
             () -> pottedSapling(COCONUT.get()));
-    public static final Supplier<Block> POTTED_MAPLE_SAPLING = regWithItem("potted_maple_sapling",
+    public static final Supplier<Block> POTTED_MAPLE_SAPLING = regBlock("potted_maple_sapling",
             () -> pottedSapling(MAPLE_SAPLING.get()));
-    public static final Supplier<Block> POTTED_ASPEN_SAPLING = regWithItem("potted_aspen_sapling",
+    public static final Supplier<Block> POTTED_ASPEN_SAPLING = regBlock("potted_aspen_sapling",
             () -> pottedSapling(ASPEN_SAPLING.get()));
-    public static final Supplier<Block> POTTED_WALNUT_SAPLING = regWithItem("potted_walnut_sapling",
+    public static final Supplier<Block> POTTED_WALNUT_SAPLING = regBlock("potted_walnut_sapling",
             () -> pottedSapling(WALNUT_SAPLING.get()));
     
     //planks

@@ -29,7 +29,7 @@ public class ModChestBoatEntity extends ChestBoat {
 
     @Override
     public Item getDropItem() {
-        switch (getModVariant()) {
+        return switch (getModVariant()) {
             case ASPEN -> ModItems.ASPEN_CHEST_BOAT.get();
             case AZALEA -> ModItems.AZALEA_CHEST_BOAT.get();
             case BAOBAB -> ModItems.BAOBAB_CHEST_BOAT.get();
@@ -42,8 +42,7 @@ public class ModChestBoatEntity extends ChestBoat {
             case PINE -> ModItems.PINE_CHEST_BOAT.get();
             case WALNUT -> ModItems.WALNUT_CHEST_BOAT.get();
             case WILLOW -> ModItems.WILLOW_CHEST_BOAT.get();
-        }
-        return super.getDropItem();
+        };
     }
 
     public void setVariant(ModBoatEntity.Type pVariant) {

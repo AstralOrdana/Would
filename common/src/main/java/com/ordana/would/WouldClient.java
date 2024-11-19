@@ -1,6 +1,5 @@
 package com.ordana.would;
 
-import com.ordana.would.entities.ModBoatEntity;
 import com.ordana.would.entities.ModBoatRenderer;
 import com.ordana.would.reg.ModBlocks;
 import com.ordana.would.reg.ModEntities;
@@ -10,11 +9,10 @@ import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.RGBColor;
 import net.minecraft.client.model.BoatModel;
+import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.Blocks;
@@ -149,7 +147,7 @@ public class WouldClient {
     private static void registerEntityRenderers(ClientHelper.EntityRendererEvent event) {
         event.register(ModEntities.FALLING_COCONUT.get(), FallingBlockRendererGeneric::new);
         event.register(ModEntities.MOD_BOAT.get(), pContext -> new ModBoatRenderer(pContext, false));
-        event.register(ModEntities.MOD_CHEST_BOAT.get(), pContext -> new ModBoatRenderer(pContext, false));
+        event.register(ModEntities.MOD_CHEST_BOAT.get(), pContext -> new ModBoatRenderer(pContext, true));
 
     }
 
@@ -167,18 +165,18 @@ public class WouldClient {
         event.register(loc("boat/walnut"), BoatModel::createBodyModel);
         event.register(loc("boat/willow"), BoatModel::createBodyModel);
 
-        event.register(loc("chest_boat/aspen"), BoatModel::createBodyModel);
-        event.register(loc("chest_boat/azalea"), BoatModel::createBodyModel);
-        event.register(loc("chest_boat/baobab"), BoatModel::createBodyModel);
-        event.register(loc("chest_boat/cedar"), BoatModel::createBodyModel);
-        event.register(loc("chest_boat/ebony"), BoatModel::createBodyModel);
-        event.register(loc("chest_boat/fir"), BoatModel::createBodyModel);
-        event.register(loc("chest_boat/mahogany"), BoatModel::createBodyModel);
-        event.register(loc("chest_boat/maple"), BoatModel::createBodyModel);
-        event.register(loc("chest_boat/pine"), BoatModel::createBodyModel);
-        event.register(loc("chest_boat/palm"), BoatModel::createBodyModel);
-        event.register(loc("chest_boat/walnut"), BoatModel::createBodyModel);
-        event.register(loc("chest_boat/willow"), BoatModel::createBodyModel);
+        event.register(loc("chest_boat/aspen"), ChestBoatModel::createBodyModel);
+        event.register(loc("chest_boat/azalea"), ChestBoatModel::createBodyModel);
+        event.register(loc("chest_boat/baobab"), ChestBoatModel::createBodyModel);
+        event.register(loc("chest_boat/cedar"), ChestBoatModel::createBodyModel);
+        event.register(loc("chest_boat/ebony"), ChestBoatModel::createBodyModel);
+        event.register(loc("chest_boat/fir"), ChestBoatModel::createBodyModel);
+        event.register(loc("chest_boat/mahogany"), ChestBoatModel::createBodyModel);
+        event.register(loc("chest_boat/maple"), ChestBoatModel::createBodyModel);
+        event.register(loc("chest_boat/pine"), ChestBoatModel::createBodyModel);
+        event.register(loc("chest_boat/palm"), ChestBoatModel::createBodyModel);
+        event.register(loc("chest_boat/walnut"), ChestBoatModel::createBodyModel);
+        event.register(loc("chest_boat/willow"), ChestBoatModel::createBodyModel);
 
     }
 

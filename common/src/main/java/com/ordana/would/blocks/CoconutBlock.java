@@ -74,9 +74,9 @@ public class CoconutBlock extends SaplingBlock implements Fallable {
 
     @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
-        if (!state.canSurvive(level, pos)) {
-            level.destroyBlock(pos, false);
-        }
+        if (!state.getValue(GREEN)) level.scheduleTick(pos, this, this.getFallDelay());
+        else if (!state.canSurvive(level, pos)) level.destroyBlock(pos, false);
+
         return state;
     }
 

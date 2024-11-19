@@ -2,11 +2,15 @@ package com.ordana.would.reg;
 
 import com.ordana.would.Would;
 import com.ordana.would.entities.ModBoatEntity;
+import com.ordana.would.items.CoconutItem;
 import com.ordana.would.items.ModBoatItem;
 import com.ordana.would.items.SyrupBottleItem;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.world.food.Foods;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.HangingSignItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SignItem;
 import net.minecraft.world.level.block.Block;
 
 import java.util.function.Supplier;
@@ -138,5 +142,10 @@ public class ModItems {
 
     public static final Supplier<Item> SYRUP_BOTTLE = regItem("syrup_bottle", () ->
             new SyrupBottleItem((new Item.Properties()).craftRemainder(Items.GLASS_BOTTLE).food(Foods.HONEY_BOTTLE).stacksTo(16)));
+
+    public static final Supplier<CoconutItem> COCONUT = regItem("coconut", () ->
+            new CoconutItem(ModBlocks.COCONUT.get(), (new Item.Properties()).food(CoconutItem.COCONUT_FOOD)));
+
+
 
 }
