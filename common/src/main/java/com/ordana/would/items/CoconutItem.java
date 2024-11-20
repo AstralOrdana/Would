@@ -2,15 +2,13 @@ package com.ordana.would.items;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
@@ -46,7 +44,7 @@ public class CoconutItem extends BlockItem {
         }
     }
 
-    public static final FoodProperties COCONUT_FOOD = (new FoodProperties.Builder())
+    public static final FoodProperties COCONUT = (new FoodProperties.Builder())
             .nutrition(2).saturationMod(0.2F).fast().alwaysEat()
             .build();
 }

@@ -5,6 +5,7 @@ import com.ordana.would.entities.ModBoatEntity;
 import com.ordana.would.items.CoconutItem;
 import com.ordana.would.items.ModBoatItem;
 import com.ordana.would.items.SyrupBottleItem;
+import com.ordana.would.items.WalnutItem;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.HangingSignItem;
@@ -144,7 +145,9 @@ public class ModItems {
             new SyrupBottleItem((new Item.Properties()).craftRemainder(Items.GLASS_BOTTLE).food(Foods.HONEY_BOTTLE).stacksTo(16)));
 
     public static final Supplier<CoconutItem> COCONUT = regItem("coconut", () ->
-            new CoconutItem(ModBlocks.COCONUT.get(), (new Item.Properties()).food(CoconutItem.COCONUT_FOOD)));
+            new CoconutItem(ModBlocks.COCONUT.get(), (new Item.Properties()).food(CoconutItem.COCONUT)));
+    public static final Supplier<Item> WALNUT = regItem("walnut", () ->
+            new WalnutItem((new Item.Properties())));
 
 
 

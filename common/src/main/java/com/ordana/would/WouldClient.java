@@ -12,6 +12,7 @@ import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockAndTintGetter;
@@ -146,8 +147,9 @@ public class WouldClient {
 
     private static void registerEntityRenderers(ClientHelper.EntityRendererEvent event) {
         event.register(ModEntities.FALLING_COCONUT.get(), FallingBlockRendererGeneric::new);
-        event.register(ModEntities.MOD_BOAT.get(), pContext -> new ModBoatRenderer(pContext, false));
-        event.register(ModEntities.MOD_CHEST_BOAT.get(), pContext -> new ModBoatRenderer(pContext, true));
+        event.register(ModEntities.THROWN_WALNUT.get(), context -> new ThrownItemRenderer<>(context, 1, false));
+        event.register(ModEntities.MOD_BOAT.get(), context -> new ModBoatRenderer(context, false));
+        event.register(ModEntities.MOD_CHEST_BOAT.get(), context -> new ModBoatRenderer(context, true));
 
     }
 

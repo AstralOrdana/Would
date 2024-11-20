@@ -70,7 +70,7 @@ public class ModBlocks {
     }
 
     private static Block sapling(AbstractTreeGrower treeGrower) {
-        return new ModSaplingBlock(treeGrower, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
+        return new ModSaplingBlock(treeGrower, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
     }
 
     private static FlowerPotBlock pottedSapling(Block content, FeatureFlag... requiredFeatures) {
@@ -301,7 +301,7 @@ public class ModBlocks {
     public static final Supplier<Block> MAHOGANY_SAPLING = regWithItem("mahogany_sapling",
             () -> sapling(new MahoganyTreeGrower()));
     public static final Supplier<Block> COCONUT = regBlock("coconut",
-            () -> new CoconutBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
+            () -> new CoconutBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
     public static final Supplier<Block> MAPLE_SAPLING = regWithItem("maple_sapling",
             () -> sapling(new MapleTreeGrower()));
     public static final Supplier<Block> ASPEN_SAPLING = regWithItem("aspen_sapling",

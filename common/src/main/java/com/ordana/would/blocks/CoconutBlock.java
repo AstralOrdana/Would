@@ -99,6 +99,9 @@ public class CoconutBlock extends SaplingBlock implements Fallable {
         return state.isAir() || state.is(BlockTags.FIRE) || state.canBeReplaced();
     }
 
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
+        return (!state.getValue(GREEN));
+    }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(STAGE, GREEN, GROWABLE);

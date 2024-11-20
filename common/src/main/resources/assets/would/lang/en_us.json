@@ -257,7 +257,9 @@
   "item.would.walnut_chest_boat": "Walnut Chest Boat",
 
   "item.would.syrup_bottle": "Bottle of Syrup",
+  "item.would.walnut": "Walnut",
 
   "entity.would.falling_coconut": "Falling Coconut",
-  "entity.would.mod_chest_boat": "Boat with Chest"
+  "entity.would.mod_chest_boat": "Boat with Chest",
+  "entity.would.thrown_walnut": "Thrown Walnut"
 }
