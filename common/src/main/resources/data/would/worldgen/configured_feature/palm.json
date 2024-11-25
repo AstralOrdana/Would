@@ -58,7 +58,8 @@
           "state": {
             "Name": "would:coconut",
             "Properties": {
-              "hanging": "true"
+              "hanging": "true",
+              "growable": "false"
             }
           }
         },

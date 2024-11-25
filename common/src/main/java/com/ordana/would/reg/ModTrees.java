@@ -24,6 +24,7 @@ public class ModTrees {
     public static final Supplier<TrunkPlacerType> PALM_TRUNK_PLACER = registerTrunk("palm", PalmTrunkPlacer.CODEC);
     public static final Supplier<TrunkPlacerType> WILLOW_TRUNK_PLACER = registerTrunk("willow", WillowTrunkPlacer.CODEC);
     public static final Supplier<TrunkPlacerType> BAOBAB_TRUNK_PLACER = registerTrunk("baobab", BaobabTrunkPlacer.CODEC);
+    public static final Supplier<TrunkPlacerType> MAPLE_TRUNK_PLACER = registerTrunk("maple", MapleTrunkPlacer.CODEC);
 
 
     public static Supplier<FoliagePlacerType> registerFoliage(String name, Codec codec) {

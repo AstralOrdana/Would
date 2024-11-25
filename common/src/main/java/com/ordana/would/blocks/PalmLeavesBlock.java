@@ -1,18 +1,23 @@
 package com.ordana.would.blocks;
 
+import com.ordana.would.reg.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.MangrovePropaguleBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PalmLeavesBlock extends LeavesBlock {
+public class PalmLeavesBlock extends LeavesBlock implements BonemealableBlock {
     public PalmLeavesBlock(Properties properties) {
         super(properties);
     }
@@ -23,25 +28,25 @@ public class PalmLeavesBlock extends LeavesBlock {
         for (Direction dir : Direction.Plane.HORIZONTAL.shuffledCopy(level.getRandom())) {
             mutableBlockPos.move(dir);
             mutableBlockPos.move(dir.getClockWise());
-            level.neighborShapeChanged(dir.getClockWise().getOpposite(), level.getBlockState(mutableBlockPos), mutableBlockPos, pos, flags, recursionLeft);
+            if(level.getBlockState(mutableBlockPos).is(this)) level.neighborShapeChanged(dir.getClockWise().getOpposite(), level.getBlockState(mutableBlockPos), mutableBlockPos, pos, flags, recursionLeft);
             mutableBlockPos.set(pos.relative(dir));
 
             mutableBlockPos.move(dir.getClockWise());
             mutableBlockPos.move(Direction.DOWN);
-            level.neighborShapeChanged(Direction.UP, level.getBlockState(mutableBlockPos), mutableBlockPos, pos, flags, recursionLeft);
+            if(level.getBlockState(mutableBlockPos).is(this)) level.neighborShapeChanged(Direction.UP, level.getBlockState(mutableBlockPos), mutableBlockPos, pos, flags, recursionLeft);
             mutableBlockPos.set(pos.relative(dir));
 
             mutableBlockPos.move(dir.getClockWise());
             mutableBlockPos.move(Direction.UP);
-            level.neighborShapeChanged(Direction.DOWN, level.getBlockState(mutableBlockPos), mutableBlockPos, pos, flags, recursionLeft);
+            if(level.getBlockState(mutableBlockPos).is(this)) level.neighborShapeChanged(Direction.DOWN, level.getBlockState(mutableBlockPos), mutableBlockPos, pos, flags, recursionLeft);
             mutableBlockPos.set(pos.relative(dir));
 
             mutableBlockPos.move(Direction.DOWN);
-            level.neighborShapeChanged(Direction.UP, level.getBlockState(mutableBlockPos), mutableBlockPos, pos, flags, recursionLeft);
+            if(level.getBlockState(mutableBlockPos).is(this)) level.neighborShapeChanged(Direction.UP, level.getBlockState(mutableBlockPos), mutableBlockPos, pos, flags, recursionLeft);
             mutableBlockPos.set(pos.relative(dir));
 
             mutableBlockPos.move(Direction.UP);
-            level.neighborShapeChanged(Direction.DOWN, level.getBlockState(mutableBlockPos), mutableBlockPos, pos, flags, recursionLeft);
+            if(level.getBlockState(mutableBlockPos).is(this)) level.neighborShapeChanged(Direction.DOWN, level.getBlockState(mutableBlockPos), mutableBlockPos, pos, flags, recursionLeft);
             mutableBlockPos.set(pos);
 
         }
@@ -102,4 +107,16 @@ public class PalmLeavesBlock extends LeavesBlock {
         return getOptionalDistanceAt(neighbor).orElse(7);
     }
 
+
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
+        return level.getBlockState(pos.below()).isAir();
+    }
+
+    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
+        return true;
+    }
+
+    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+        level.setBlock(pos.below(), ModBlocks.COCONUT.get().defaultBlockState().setValue(CoconutBlock.GREEN, true).setValue(CoconutBlock.GROWABLE, true), 2);
+    }
 }

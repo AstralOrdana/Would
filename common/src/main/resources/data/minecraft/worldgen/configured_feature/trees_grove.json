@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "features": [
+      {
+        "chance": 0.33333334,
+        "feature": "minecraft:pine_on_snow"
+      },
+      {
+        "chance": 0.33333334,
+        "feature": "would:fir_on_snow"
+      }
+    ],
+    "default": "minecraft:spruce_on_snow"
+  }
+}

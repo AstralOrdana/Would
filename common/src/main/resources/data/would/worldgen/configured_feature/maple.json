@@ -45,14 +45,14 @@
       }
     },
     "trunk_placer": {
-      "type": "minecraft:straight_trunk_placer",
-      "base_height": 5,
-      "height_rand_a": 2,
-      "height_rand_b": 3
+      "type": "would:maple_trunk_placer",
+      "base_height": 2,
+      "height_rand_a": 3,
+      "height_rand_b": 4
     },
     "foliage_placer": {
       "type": "minecraft:fancy_foliage_placer",
-      "radius": 2,
+      "radius": 3,
       "offset": 0,
       "height": 4
     },

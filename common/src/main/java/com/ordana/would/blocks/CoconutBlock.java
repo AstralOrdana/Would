@@ -44,17 +44,16 @@ public class CoconutBlock extends SaplingBlock implements Fallable {
     }
 
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (state.getValue(GREEN)) {
-            if (random.nextInt(10) == 7) {
-                state.setValue(GREEN, false);
-                level.scheduleTick(pos, this, this.getFallDelay());
+        if (!state.getValue(GREEN)) {
+            if (state.getValue(GROWABLE) && level.getMaxLocalRawBrightness(pos.above()) >= 9 && random.nextInt(7) == 0) {
+                this.advanceTree(level, pos, state, random);
             }
         }
 
-        else if (state.getValue(GROWABLE) && level.getMaxLocalRawBrightness(pos.above()) >= 9 && random.nextInt(7) == 0) {
-            this.advanceTree(level, pos, state, random);
+        else if (random.nextInt(10) == 7) {
+            state.setValue(GREEN, false);
+            level.scheduleTick(pos, this, this.getFallDelay());
         }
-
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext context) {
