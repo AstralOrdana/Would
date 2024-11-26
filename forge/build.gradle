@@ -115,6 +115,6 @@ dependencies {
 
     implementation 'org.jetbrains:annotations:22.0.0'
 
-    modImplementation("curse.maven:selene-499980:5890838")
+    modImplementation("curse.maven:selene-499980:5928998")
 
 }
