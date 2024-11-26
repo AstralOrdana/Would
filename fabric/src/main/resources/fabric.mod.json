@@ -13,7 +13,7 @@
     "sources": "https://github.com/AstralOrdana/would"
   },
   "license": "LGPLv3",
-  "icon": "icon.png",
+  "icon": "icon.gif",
   "environment": "*",
   "entrypoints": {
     "main": [

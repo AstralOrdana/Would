@@ -13,7 +13,7 @@ version = "${version}"
 
 displayName="Would" #mandatory
 
-logoFile="icon.png" #optional
+logoFile="icon.gif" #optional
 
 credits="Ordana" #optional
 
@@ -30,6 +30,7 @@ mandatory=true
 versionRange="[40,)"
 ordering="NONE"
 side="BOTH"
+
 [[dependencies.would]]
 modId="minecraft"
 mandatory=true
@@ -40,6 +41,6 @@ side="BOTH"
 [[dependencies.would]]
 modId="moonlight"
 mandatory=true
-versionRange="[1.20-2.12.21,]"
+versionRange="[1.20-2.13.30,]"
 ordering="NONE"
 side="BOTH"
