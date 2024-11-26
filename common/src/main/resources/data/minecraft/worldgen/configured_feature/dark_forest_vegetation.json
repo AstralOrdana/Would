@@ -22,13 +22,13 @@
       },
       {
         "chance": 0.2,
-        "feature": "minecraft:birch_checked"
+        "feature": "would:maple"
       },
       {
         "chance": 0.1,
         "feature": "would:walnut"
       }
     ],
-    "default": "minecraft:oak_checked"
+    "default": "minecraft:dark_oak_checked"
   }
 }
