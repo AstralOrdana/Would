@@ -25,22 +25,22 @@ I Would, Would you?
 '''
 
 [[dependencies.would]]
-modId="forge"
-mandatory=true
-versionRange="[40,)"
-ordering="NONE"
-side="BOTH"
+    modId="forge"
+    mandatory=true
+    versionRange="[40,)"
+    ordering="NONE"
+    side="BOTH"
 
 [[dependencies.would]]
-modId="minecraft"
-mandatory=true
-versionRange="[1.20.1]"
-ordering="NONE"
-side="BOTH"
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1]"
+    ordering="NONE"
+    side="BOTH"
 
 [[dependencies.would]]
-modId="moonlight"
-mandatory=true
-versionRange="[1.20-2.13.30,]"
-ordering="NONE"
-side="BOTH"
+    modId="moonlight"
+    mandatory=true
+    versionRange="[1.20-2.13.30,]"
+    ordering="NONE"
+    side="BOTH"
