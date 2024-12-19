@@ -1,12 +1,12 @@
 {
   "type": "minecraft:tree",
   "config": {
-    "ignore_vines": true,
+    "ignore_vines": false,
     "force_dirt": false,
     "minimum_size": {
       "type": "minecraft:two_layers_feature_size",
-      "limit": 2,
-      "lower_size": 0,
+      "limit": 1,
+      "lower_size": 1,
       "upper_size": 2
     },
     "dirt_provider": {
@@ -18,7 +18,7 @@
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "would:palm_log",
+        "Name": "would:pine_log",
         "Properties": {
           "axis": "y"
         }
@@ -27,45 +27,44 @@
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "would:palm_leaves",
+        "Name": "would:pine_leaves",
         "Properties": {
-          "distance": "6",
+          "distance": "7",
           "persistent": "false",
           "waterlogged": "false"
         }
       }
     },
     "trunk_placer": {
-      "type": "would:palm_trunk_placer",
-      "base_height": 7,
-      "height_rand_a": 5,
-      "height_rand_b": 3
+      "type": "minecraft:giant_trunk_placer",
+      "base_height": 13,
+      "height_rand_a": 2,
+      "height_rand_b": 14
     },
     "foliage_placer": {
-      "type": "would:palm_foliage_placer",
-      "radius": 2,
-      "offset": 1
+      "type": "minecraft:mega_pine_foliage_placer",
+      "radius": 0,
+      "offset": 0,
+      "crown_height": {
+        "type": "minecraft:uniform",
+        "value": {
+          "min_inclusive": 3,
+          "max_inclusive": 7
+        }
+      }
     },
     "decorators": [
       {
-        "type": "minecraft:attached_to_leaves",
-        "probability": 0.1,
-        "exclusion_radius_xz": 0,
-        "exclusion_radius_y": 0,
-        "required_empty_blocks": 1,
-        "block_provider": {
+        "type": "minecraft:alter_ground",
+        "provider": {
           "type": "minecraft:simple_state_provider",
           "state": {
-            "Name": "would:coconut",
+            "Name": "minecraft:podzol",
             "Properties": {
-              "hanging": "true",
-              "enabled": "false"
+              "snowy": "false"
             }
           }
-        },
-        "directions": [
-          "down"
-        ]
+        }
       }
     ]
   }

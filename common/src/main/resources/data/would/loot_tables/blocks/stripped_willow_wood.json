@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "would:willow_wood"
+          "name": "would:stripped_willow_wood"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "would:blocks/willow_wood"
+  "random_sequence": "would:blocks/stripped_willow_wood"
 }

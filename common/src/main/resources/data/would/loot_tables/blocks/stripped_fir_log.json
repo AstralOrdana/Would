@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "would:fir_log"
+          "name": "would:stripped_fir_log"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "would:blocks/fir_log"
+  "random_sequence": "would:blocks/stripped_fir_log"
 }

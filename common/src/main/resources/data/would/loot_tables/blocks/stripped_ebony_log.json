@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "would:ebony_log"
+          "name": "would:stripped_ebony_log"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "would:blocks/ebony_log"
+  "random_sequence": "would:blocks/stripped_ebony_log"
 }

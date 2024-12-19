@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "would:aspen_log"
+          "name": "would:stripped_aspen_log"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "would:blocks/aspen_log"
+  "random_sequence": "would:blocks/stripped_aspen_log"
 }

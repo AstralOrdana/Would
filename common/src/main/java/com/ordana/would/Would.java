@@ -36,6 +36,7 @@ public class Would {
 
     public static void setup() {
         ModWoodSetup.init();
+        ModCompostable.register();
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> createKey(String name) {

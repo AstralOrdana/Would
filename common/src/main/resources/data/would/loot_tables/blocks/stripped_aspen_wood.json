@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "would:aspen_wood"
+          "name": "would:stripped_aspen_wood"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "would:blocks/aspen_wood"
+  "random_sequence": "would:blocks/stripped_aspen_wood"
 }

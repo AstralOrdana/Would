@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "would:stripped_willow_log"
+          "name": "would:aspen_wood_gazing"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "would:blocks/stripped_willow_log"
+  "random_sequence": "would:blocks/aspen_wood_gazing"
 }

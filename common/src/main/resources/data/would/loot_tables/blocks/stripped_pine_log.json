@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "would:pine_log"
+          "name": "would:stripped_pine_log"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "would:blocks/pine_log"
+  "random_sequence": "would:blocks/stripped_pine_log"
 }

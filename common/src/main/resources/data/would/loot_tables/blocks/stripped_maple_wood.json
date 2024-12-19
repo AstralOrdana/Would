@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "would:maple_wood"
+          "name": "would:stripped_maple_wood"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "would:blocks/maple_wood"
+  "random_sequence": "would:blocks/stripped_maple_wood"
 }

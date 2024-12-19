@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "would:azalea_wood"
+          "name": "would:stripped_azalea_wood"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "would:blocks/azalea_wood"
+  "random_sequence": "would:blocks/stripped_azalea_wood"
 }

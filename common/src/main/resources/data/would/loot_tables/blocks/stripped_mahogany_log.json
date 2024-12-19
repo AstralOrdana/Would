@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "would:mahogany_log"
+          "name": "would:stripped_mahogany_log"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "would:blocks/mahogany_log"
+  "random_sequence": "would:blocks/stripped_mahogany_log"
 }

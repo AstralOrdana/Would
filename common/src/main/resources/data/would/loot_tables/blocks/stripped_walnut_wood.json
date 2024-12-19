@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "would:walnut_wood"
+          "name": "would:stripped_walnut_wood"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "would:blocks/walnut_wood"
+  "random_sequence": "would:blocks/stripped_walnut_wood"
 }

@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "would:ebony_wood"
+          "name": "would:stripped_ebony_wood"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "would:blocks/ebony_wood"
+  "random_sequence": "would:blocks/stripped_ebony_wood"
 }

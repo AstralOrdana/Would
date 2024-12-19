@@ -6,6 +6,7 @@
   "client": [
   ],
   "mixins": [
+    "SpruceTreeGrowerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

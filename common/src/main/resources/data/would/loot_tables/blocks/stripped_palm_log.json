@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "would:palm_log"
+          "name": "would:stripped_palm_log"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "would:blocks/palm_log"
+  "random_sequence": "would:blocks/stripped_palm_log"
 }

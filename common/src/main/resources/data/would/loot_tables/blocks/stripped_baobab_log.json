@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "would:baobab_log"
+          "name": "would:stripped_baobab_log"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "would:blocks/baobab_log"
+  "random_sequence": "would:blocks/stripped_baobab_log"
 }

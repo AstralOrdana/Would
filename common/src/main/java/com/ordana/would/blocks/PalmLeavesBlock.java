@@ -11,7 +11,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.block.MangrovePropaguleBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
@@ -117,6 +116,6 @@ public class PalmLeavesBlock extends LeavesBlock implements BonemealableBlock {
     }
 
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-        level.setBlock(pos.below(), ModBlocks.COCONUT.get().defaultBlockState().setValue(CoconutBlock.GREEN, true).setValue(CoconutBlock.GROWABLE, true), 2);
+        level.setBlock(pos.below(), ModBlocks.COCONUT.get().defaultBlockState().setValue(CoconutBlock.HANGING, true).setValue(CoconutBlock.ENABLED, true), 2);
     }
 }

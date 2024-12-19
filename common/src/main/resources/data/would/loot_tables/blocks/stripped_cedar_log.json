@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "would:cedar_log"
+          "name": "would:stripped_cedar_log"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "would:blocks/cedar_log"
+  "random_sequence": "would:blocks/stripped_cedar_log"
 }
