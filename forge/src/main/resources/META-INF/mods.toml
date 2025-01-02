@@ -44,3 +44,10 @@ I Would, Would you?
     versionRange="[1.20-2.13.30,]"
     ordering="NONE"
     side="BOTH"
+
+[[dependencies.would]]
+    modId="wetland_whimsy"
+    mandatory=false
+    versionRange="[1.0,)"
+    ordering="AFTER"
+    side="BOTH"
