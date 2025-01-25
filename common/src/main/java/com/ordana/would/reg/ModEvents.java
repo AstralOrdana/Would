@@ -60,7 +60,6 @@ public class ModEvents {
             level.playSound(player, pos, SoundEvents.HONEY_BLOCK_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
             ParticleUtils.spawnParticlesOnBlockFaces(level, pos, new BlockParticleOption(ParticleTypes.BLOCK, Blocks.HONEY_BLOCK.defaultBlockState()), UniformInt.of(3, 5));
             if (player instanceof ServerPlayer serverPlayer) {
-                if (!player.getAbilities().instabuild) stack.shrink(1);
                 ItemStack itemStack2 = ItemUtils.createFilledResult(stack, player, ModItems.SYRUP_BOTTLE.get().getDefaultInstance());
                 player.setItemInHand(hand, itemStack2);
                 level.setBlockAndUpdate(pos, ModBlocks.MAPLE_LOG.get().withPropertiesOf(state));

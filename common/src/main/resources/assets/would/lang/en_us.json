@@ -1,6 +1,19 @@
 {
   "itemGroup.would.would": "Would",
 
+  "tag.would.willow_logs": "Willow Logs",
+  "tag.would.baobab_logs": "Baobab Logs",
+  "tag.would.ebony_logs": "Ebony Logs",
+  "tag.would.fir_logs": "Fir Logs",
+  "tag.would.pine_logs": "Pine Logs",
+  "tag.would.cedar_logs": "Cedar Logs",
+  "tag.would.mahogany_logs": "Mahogany Logs",
+  "tag.would.azalea_logs": "Azalea Logs",
+  "tag.would.palm_logs": "Palm Logs",
+  "tag.would.maple_logs": "Maple Logs",
+  "tag.would.aspen_logs": "Aspen Logs",
+  "tag.would.walnut_logs": "Walnut Logs",
+
   "block.would.willow_log": "Willow Log",
   "block.would.baobab_log": "Baobab Log",
   "block.would.ebony_log": "Ebony Log",
