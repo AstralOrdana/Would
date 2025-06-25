@@ -26,7 +26,7 @@ processResources {
     inputs.property "version", project.version
     inputs.property "moonlight_version", rootProject.moonlight_version
 
-    filesMatching("META-INF/mods.toml") {
+    filesMatching("META-INF/neoforge.mods.toml") {
         expand "version": project.version, "moonlight_version": rootProject.moonlight_version
         expand "mod_name": project.getArchivesBaseName()
     }

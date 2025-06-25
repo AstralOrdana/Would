@@ -26,28 +26,28 @@ I Would, Would you?
 
 [[dependencies.would]]
     modId="neoforge"
-    mandatory=true
+    type = "required"
     versionRange="[21,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.would]]
     modId="minecraft"
-    mandatory=true
-    versionRange="[1.21.1]"
+    type = "required"
+    versionRange="[1.21.1,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.would]]
     modId="moonlight"
-    mandatory=true
-    versionRange="[1.20-2.13.30,]"
+    type = "required"
+    versionRange="[1.20-2.13.30,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.would]]
     modId="wetland_whimsy"
-    mandatory=false
+    type = "optional"
     versionRange="[1.0,)"
     ordering="AFTER"
     side="BOTH"
