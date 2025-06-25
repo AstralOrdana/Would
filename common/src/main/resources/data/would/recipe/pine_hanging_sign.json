@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "misc",
+ "group": "hanging_sign",
+ "key": {
+  "#": {
+   "item": "would:stripped_pine_log"
+  },
+  "X": {
+   "item": "minecraft:chain"
+  }
+ },
+ "pattern": [
+  "X X",
+  "###",
+  "###"
+ ],
+ "result": {
+  "id": "would:pine_hanging_sign",
+  "count": 1
+ }
+}

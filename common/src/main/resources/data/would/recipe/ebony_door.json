@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "redstone",
+ "group": "wooden_door",
+ "key": {
+  "#": {
+   "item": "would:ebony_planks"
+  }
+ },
+ "pattern": [
+  "##",
+  "##",
+  "##"
+ ],
+ "result": {
+  "id": "would:ebony_door",
+  "count": 1
+ }
+}

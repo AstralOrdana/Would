@@ -1,0 +1,18 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "redstone",
+ "group": "wooden_trapdoor",
+ "key": {
+  "#": {
+   "item": "would:walnut_planks"
+  }
+ },
+ "pattern": [
+  "###",
+  "###"
+ ],
+ "result": {
+  "id": "would:walnut_trapdoor",
+  "count": 1
+ }
+}

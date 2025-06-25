@@ -1,8 +1,8 @@
 package com.ordana.would;
 
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
-import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigSpec;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
+import net.mehvahdjukaar.moonlight.api.platform.configs.ModConfigHolder;
 
 import java.util.function.Supplier;
 
@@ -12,7 +12,7 @@ public class ClientConfigs {
 
     }
 
-    public static ConfigSpec CONFIG_SPEC;
+    public static ModConfigHolder CONFIG_SPEC;
 
     public static Supplier<Boolean> BOOLEAN_CONFIG;
     public static Supplier<Integer> INTEGER_CONFIG;
@@ -26,8 +26,8 @@ public class ClientConfigs {
         INTEGER_CONFIG = builder.comment("Integer Config Name").define("integer_config", 16, 8, 512);
         builder.pop();
 
-        CONFIG_SPEC = builder.buildAndRegister();
-        CONFIG_SPEC.loadFromFile();
+        CONFIG_SPEC = builder.build();
+        CONFIG_SPEC.forceLoad();
     }
 
 }

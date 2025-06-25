@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "misc",
+ "group": "wooden_sign",
+ "key": {
+  "#": {
+   "item": "would:azalea_planks"
+  },
+  "X": {
+   "item": "minecraft:stick"
+  }
+ },
+ "pattern": [
+  "###",
+  "###",
+  " X "
+ ],
+ "result": {
+  "id": "would:azalea_sign",
+  "count": 1
+ }
+}

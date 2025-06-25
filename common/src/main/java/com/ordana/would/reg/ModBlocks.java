@@ -2,7 +2,6 @@ package com.ordana.would.reg;
 
 import com.ordana.would.Would;
 import com.ordana.would.blocks.*;
-import com.ordana.would.blocks.tree_growers.*;
 import net.mehvahdjukaar.moonlight.api.block.ModStairBlock;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.core.BlockPos;
@@ -13,7 +12,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.grower.AbstractTreeGrower;
+import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -22,6 +21,7 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class ModBlocks {
@@ -69,7 +69,7 @@ public class ModBlocks {
         return new LeavesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).strength(0.2F).randomTicks().sound(type).noOcclusion().isValidSpawn(ModBlocks::ocelotOrParrot).isSuffocating(ModBlocks::never).isViewBlocking(ModBlocks::never).ignitedByLava().pushReaction(PushReaction.DESTROY).isRedstoneConductor(ModBlocks::never));
     }
 
-    private static Block sapling(AbstractTreeGrower treeGrower) {
+    private static Block sapling(TreeGrower treeGrower) {
         return new ModSaplingBlock(treeGrower, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
     }
 
@@ -99,11 +99,11 @@ public class ModBlocks {
     }
 
     private static Block fenceGate(MapColor mapColor, SoundType soundType, WoodType woodType) {
-        return new FenceGateBlock(BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).ignitedByLava().sound(soundType), woodType);
+        return new FenceGateBlock(woodType, BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).ignitedByLava().sound(soundType));
     }
 
     private static Block pressurePlate(MapColor mapColor) {
-        return new ModPressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(0.5F).ignitedByLava().pushReaction(PushReaction.DESTROY), BlockSetType.ACACIA);
+        return new ModPressurePlateBlock(BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(0.5F).ignitedByLava().pushReaction(PushReaction.DESTROY), BlockSetType.ACACIA);
     }
 
     private static Block button(FeatureFlag... requiredFeatures) {
@@ -116,28 +116,28 @@ public class ModBlocks {
     }
 
     private static Block standingSign(MapColor mapColor, WoodType woodType) {
-        return new StandingSignBlock(BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava(), woodType);
+        return new StandingSignBlock(woodType, BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
     }
 
 
     private static Block wallSign(MapColor mapColor, Block block, WoodType woodType) {
-        return new WallSignBlock(BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).dropsLike(block).ignitedByLava(), woodType);
+        return new WallSignBlock(woodType, BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).dropsLike(block).ignitedByLava());
     }
 
     private static Block hangingSign(MapColor mapColor, WoodType woodType) {
-        return new CeilingHangingSignBlock(BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava(), woodType);
+        return new CeilingHangingSignBlock(woodType, BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
     }
 
     private static Block wallHangingSign(MapColor mapColor, Block block, WoodType woodType) {
-        return new WallHangingSignBlock(BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava().dropsLike(block), woodType);
+        return new WallHangingSignBlock(woodType, BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava().dropsLike(block));
     }
 
     private static Block door(MapColor mapColor) {
-        return new DoorBlock(BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().ignitedByLava().pushReaction(PushReaction.DESTROY), BlockSetType.ACACIA);
+        return new DoorBlock(BlockSetType.ACACIA, BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().ignitedByLava().pushReaction(PushReaction.DESTROY));
     }
 
     private static Block trapdoor(MapColor mapColor) {
-        return new TrapDoorBlock(BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().isValidSpawn(ModBlocks::never).ignitedByLava(), BlockSetType.ACACIA);
+        return new TrapDoorBlock(BlockSetType.ACACIA, BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().isValidSpawn(ModBlocks::never).ignitedByLava());
     }
 
 
@@ -287,27 +287,27 @@ public class ModBlocks {
 
     //saplings
     public static final Supplier<Block> WILLOW_SAPLING = regWithItem("willow_sapling",
-            () -> sapling(new WillowTreeGrower()));
+            () -> sapling(ModTreeGrowers.BAOBAB));
     public static final Supplier<Block> BAOBAB_SAPLING = regWithItem("baobab_sapling",
-            () -> sapling(new BaobabTreeGrower()));
+            () -> sapling(ModTreeGrowers.BAOBAB));
     public static final Supplier<Block> EBONY_SAPLING = regWithItem("ebony_sapling",
-            () -> sapling(new EbonyTreeGrower()));
+            () -> sapling(ModTreeGrowers.EBONY));
     public static final Supplier<Block> FIR_SAPLING = regWithItem("fir_sapling",
-            () -> sapling(new FirTreeGrower()));
+            () -> sapling(ModTreeGrowers.FIR));
     public static final Supplier<Block> PINE_SAPLING = regWithItem("pine_sapling",
-            () -> sapling(new PineTreeGrower()));
+            () -> sapling(ModTreeGrowers.PINE));
     public static final Supplier<Block> CEDAR_SAPLING = regWithItem("cedar_sapling",
-            () -> sapling(new CedarTreeGrower()));
+            () -> sapling(ModTreeGrowers.CEDAR));
     public static final Supplier<Block> MAHOGANY_SAPLING = regWithItem("mahogany_sapling",
-            () -> sapling(new MahoganyTreeGrower()));
+            () -> sapling(ModTreeGrowers.MAHOGANY));
     public static final Supplier<Block> COCONUT = regBlock("coconut",
             () -> new CoconutBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
     public static final Supplier<Block> MAPLE_SAPLING = regWithItem("maple_sapling",
-            () -> sapling(new MapleTreeGrower()));
+            () -> sapling(ModTreeGrowers.MAPLE));
     public static final Supplier<Block> ASPEN_SAPLING = regWithItem("aspen_sapling",
-            () -> sapling(new AspenTreeGrower()));
+            () -> sapling(ModTreeGrowers.ASPEN));
     public static final Supplier<Block> WALNUT_SAPLING = regWithItem("walnut_sapling",
-            () -> sapling(new WalnutTreeGrower()));
+            () -> sapling(ModTreeGrowers.WALNUT));
     
     public static final Supplier<Block> POTTED_WILLOW_SAPLING = regBlock("potted_willow_sapling",
             () -> pottedSapling(WILLOW_SAPLING.get()));
@@ -386,29 +386,29 @@ public class ModBlocks {
     
     //planks
     public static final Supplier<Block> WILLOW_STAIRS = regWithItem("willow_stairs",
-            () -> stairs(WILLOW_PLANKS, BlockBehaviour.Properties.copy(WILLOW_PLANKS.get())));
+            () -> stairs(WILLOW_PLANKS, BlockBehaviour.Properties.ofFullCopy(WILLOW_PLANKS.get())));
     public static final Supplier<Block> BAOBAB_STAIRS = regWithItem("baobab_stairs",
-            () -> stairs(BAOBAB_PLANKS, BlockBehaviour.Properties.copy(BAOBAB_PLANKS.get())));
+            () -> stairs(BAOBAB_PLANKS, BlockBehaviour.Properties.ofFullCopy(BAOBAB_PLANKS.get())));
     public static final Supplier<Block> EBONY_STAIRS = regWithItem("ebony_stairs",
-            () -> stairs(EBONY_PLANKS, BlockBehaviour.Properties.copy(EBONY_PLANKS.get())));
+            () -> stairs(EBONY_PLANKS, BlockBehaviour.Properties.ofFullCopy(EBONY_PLANKS.get())));
     public static final Supplier<Block> FIR_STAIRS = regWithItem("fir_stairs",
-            () -> stairs(FIR_PLANKS, BlockBehaviour.Properties.copy(FIR_PLANKS.get())));
+            () -> stairs(FIR_PLANKS, BlockBehaviour.Properties.ofFullCopy(FIR_PLANKS.get())));
     public static final Supplier<Block> PINE_STAIRS = regWithItem("pine_stairs",
-            () -> stairs(PINE_PLANKS, BlockBehaviour.Properties.copy(PINE_PLANKS.get())));
+            () -> stairs(PINE_PLANKS, BlockBehaviour.Properties.ofFullCopy(PINE_PLANKS.get())));
     public static final Supplier<Block> CEDAR_STAIRS = regWithItem("cedar_stairs",
-            () -> stairs(CEDAR_PLANKS, BlockBehaviour.Properties.copy(CEDAR_PLANKS.get())));
+            () -> stairs(CEDAR_PLANKS, BlockBehaviour.Properties.ofFullCopy(CEDAR_PLANKS.get())));
     public static final Supplier<Block> MAHOGANY_STAIRS = regWithItem("mahogany_stairs",
-            () -> stairs(MAHOGANY_PLANKS, BlockBehaviour.Properties.copy(MAHOGANY_PLANKS.get())));
+            () -> stairs(MAHOGANY_PLANKS, BlockBehaviour.Properties.ofFullCopy(MAHOGANY_PLANKS.get())));
     public static final Supplier<Block> AZALEA_STAIRS = regWithItem("azalea_stairs",
-            () -> stairs(AZALEA_PLANKS, BlockBehaviour.Properties.copy(AZALEA_PLANKS.get())));
+            () -> stairs(AZALEA_PLANKS, BlockBehaviour.Properties.ofFullCopy(AZALEA_PLANKS.get())));
     public static final Supplier<Block> PALM_STAIRS = regWithItem("palm_stairs",
-            () -> stairs(PALM_PLANKS, BlockBehaviour.Properties.copy(PALM_PLANKS.get())));
+            () -> stairs(PALM_PLANKS, BlockBehaviour.Properties.ofFullCopy(PALM_PLANKS.get())));
     public static final Supplier<Block> MAPLE_STAIRS = regWithItem("maple_stairs",
-            () -> stairs(MAPLE_PLANKS, BlockBehaviour.Properties.copy(MAPLE_PLANKS.get())));
+            () -> stairs(MAPLE_PLANKS, BlockBehaviour.Properties.ofFullCopy(MAPLE_PLANKS.get())));
     public static final Supplier<Block> ASPEN_STAIRS = regWithItem("aspen_stairs",
-            () -> stairs(ASPEN_PLANKS, BlockBehaviour.Properties.copy(ASPEN_PLANKS.get())));
+            () -> stairs(ASPEN_PLANKS, BlockBehaviour.Properties.ofFullCopy(ASPEN_PLANKS.get())));
     public static final Supplier<Block> WALNUT_STAIRS = regWithItem("walnut_stairs",
-            () -> stairs(WALNUT_PLANKS, BlockBehaviour.Properties.copy(WALNUT_PLANKS.get())));
+            () -> stairs(WALNUT_PLANKS, BlockBehaviour.Properties.ofFullCopy(WALNUT_PLANKS.get())));
 
     //fences
     public static final Supplier<Block> WILLOW_FENCE = regWithItem("willow_fence",

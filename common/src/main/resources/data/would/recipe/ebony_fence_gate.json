@@ -1,0 +1,21 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "redstone",
+ "group": "wooden_fence_gate",
+ "key": {
+  "#": {
+   "item": "minecraft:stick"
+  },
+  "W": {
+   "item": "would:ebony_planks"
+  }
+ },
+ "pattern": [
+  "#W#",
+  "#W#"
+ ],
+ "result": {
+  "id": "would:ebony_fence_gate",
+  "count": 1
+ }
+}

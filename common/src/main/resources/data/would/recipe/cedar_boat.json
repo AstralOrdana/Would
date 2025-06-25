@@ -1,0 +1,18 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "misc",
+ "group": "boat",
+ "key": {
+  "#": {
+   "item": "would:cedar_planks"
+  }
+ },
+ "pattern": [
+  "# #",
+  "###"
+ ],
+ "result": {
+  "id": "would:cedar_boat",
+  "count": 1
+ }
+}

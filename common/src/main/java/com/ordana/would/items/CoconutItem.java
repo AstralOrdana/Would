@@ -45,6 +45,6 @@ public class CoconutItem extends BlockItem {
     }
 
     public static final FoodProperties COCONUT = (new FoodProperties.Builder())
-            .nutrition(2).saturationMod(0.2F).fast().alwaysEat()
+            .nutrition(2).saturationModifier(0.2F).fast().alwaysEdible()
             .build();
 }

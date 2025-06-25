@@ -26,18 +26,18 @@ public class ModWoodSetup {
 
     public static void init() {
 
-        WoodType.VALUES.add(ASPEN);
-        WoodType.VALUES.add(AZALEA);
-        WoodType.VALUES.add(BAOBAB);
-        WoodType.VALUES.add(CEDAR);
-        WoodType.VALUES.add(EBONY);
-        WoodType.VALUES.add(FIR);
-        WoodType.VALUES.add(MAHOGANY);
-        WoodType.VALUES.add(MAPLE);
-        WoodType.VALUES.add(PALM);
-        WoodType.VALUES.add(PINE);
-        WoodType.VALUES.add(WALNUT);
-        WoodType.VALUES.add(WILLOW);
+        WoodType.register(ASPEN);
+        WoodType.register(AZALEA);
+        WoodType.register(BAOBAB);
+        WoodType.register(CEDAR);
+        WoodType.register(EBONY);
+        WoodType.register(FIR);
+        WoodType.register(MAHOGANY);
+        WoodType.register(MAPLE);
+        WoodType.register(PALM);
+        WoodType.register(PINE);
+        WoodType.register(WALNUT);
+        WoodType.register(WILLOW);
 
         var validHangingSigns = new HashSet(BlockEntityType.HANGING_SIGN.validBlocks);
         validHangingSigns.add(ModBlocks.ASPEN_HANGING_SIGN.get());

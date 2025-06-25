@@ -1,0 +1,12 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "ingredients": [
+  {
+   "item": "would:walnut"
+  }
+ ],
+ "result": {
+  "id": "minecraft:brown_dye",
+  "count": 1
+ }
+}

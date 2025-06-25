@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "group": "wooden_stairs",
+ "key": {
+  "#": {
+   "item": "would:aspen_planks"
+  }
+ },
+ "pattern": [
+  "#  ",
+  "## ",
+  "###"
+ ],
+ "result": {
+  "id": "would:aspen_stairs",
+  "count": 1
+ }
+}
