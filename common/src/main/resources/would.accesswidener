@@ -13,9 +13,6 @@ accessible field net/minecraft/world/level/block/entity/BlockEntityType SIGN Lne
 mutable field net/minecraft/world/level/block/entity/BlockEntityType validBlocks Ljava/util/Set;
 accessible field net/minecraft/world/level/block/entity/BlockEntityType validBlocks Ljava/util/Set;
 
-mutable field net/minecraft/world/level/block/state/properties/WoodType VALUES Ljava/util/Set;
-accessible field net/minecraft/world/level/block/state/properties/WoodType VALUES Ljava/util/Set;
-
 #Entity Level
 accessible field net/minecraft/world/entity/Entity level Lnet/minecraft/world/level/Level;
 
