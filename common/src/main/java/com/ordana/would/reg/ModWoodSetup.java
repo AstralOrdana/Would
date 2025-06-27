@@ -1,6 +1,10 @@
 package com.ordana.would.reg;
 
 import com.google.common.collect.ImmutableMap;
+import com.ordana.would.Would;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -23,21 +27,26 @@ public class ModWoodSetup {
     public static final WoodType WALNUT = new WoodType("walnut", BlockSetType.ACACIA);
     public static final WoodType WILLOW = new WoodType("willow", BlockSetType.ACACIA);
 
-
+    private static void register(WoodType woodType) {
+        WoodType.register(woodType);
+        Sheets.SIGN_MATERIALS.put(woodType, new Material(Sheets.SIGN_SHEET, Would.res("entity/signs/" + woodType.name())));
+        Sheets.HANGING_SIGN_MATERIALS.put(woodType, new Material(Sheets.SIGN_SHEET, Would.res("entity/signs/hanging/" + woodType.name())));
+    }
+    
     public static void init() {
 
-        WoodType.register(ASPEN);
-        WoodType.register(AZALEA);
-        WoodType.register(BAOBAB);
-        WoodType.register(CEDAR);
-        WoodType.register(EBONY);
-        WoodType.register(FIR);
-        WoodType.register(MAHOGANY);
-        WoodType.register(MAPLE);
-        WoodType.register(PALM);
-        WoodType.register(PINE);
-        WoodType.register(WALNUT);
-        WoodType.register(WILLOW);
+        register(ASPEN);
+        register(AZALEA);
+        register(BAOBAB);
+        register(CEDAR);
+        register(EBONY);
+        register(FIR);
+        register(MAHOGANY);
+        register(MAPLE);
+        register(PALM);
+        register(PINE);
+        register(WALNUT);
+        register(WILLOW);
 
         var validHangingSigns = new HashSet(BlockEntityType.HANGING_SIGN.validBlocks);
         validHangingSigns.add(ModBlocks.ASPEN_HANGING_SIGN.get());
