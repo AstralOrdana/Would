@@ -2,9 +2,9 @@ package com.ordana.would.reg;
 
 import com.google.common.collect.ImmutableMap;
 import com.ordana.would.Would;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.resources.model.Material;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -29,9 +29,11 @@ public class ModWoodSetup {
 
     private static void register(WoodType woodType) {
         WoodType.register(woodType);
-        Sheets.SIGN_MATERIALS.put(woodType, new Material(Sheets.SIGN_SHEET, Would.res("entity/signs/" + woodType.name())));
-        Sheets.HANGING_SIGN_MATERIALS.put(woodType, new Material(Sheets.SIGN_SHEET, Would.res("entity/signs/hanging/" + woodType.name())));
-    }
+        if (PlatHelper.getPhysicalSide().isClient()) {
+            Sheets.SIGN_MATERIALS.put(woodType, new Material(Sheets.SIGN_SHEET, Would.res("entity/signs/" + woodType.name())));
+            Sheets.HANGING_SIGN_MATERIALS.put(woodType, new Material(Sheets.SIGN_SHEET, Would.res("entity/signs/hanging/" + woodType.name())));
+        }
+   }
     
     public static void init() {
 
