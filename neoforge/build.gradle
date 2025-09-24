@@ -44,6 +44,7 @@ remapJar {
     input.set shadowJar.archiveFile
     dependsOn shadowJar
     archiveClassifier = "neoforge"
+    atAccessWideners.add("would.accesswidener")
 }
 
 jar {
