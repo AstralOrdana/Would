@@ -1,6 +1,7 @@
 package com.ordana.would.worldgen;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.ordana.would.reg.ModTrees;
 import net.minecraft.core.BlockPos;
@@ -13,7 +14,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 public class AspenFoliagePlacer extends FoliagePlacer {
-    public static final Codec<AspenFoliagePlacer> CODEC = RecordCodecBuilder.create(foliagePlacerInstance ->
+    public static final MapCodec<AspenFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(foliagePlacerInstance ->
             foliagePlacerParts(foliagePlacerInstance).and(Codec.intRange(0, 12).fieldOf("height")
                     .forGetter(instance -> instance.height)).apply(foliagePlacerInstance, AspenFoliagePlacer::new));
     private final int height;

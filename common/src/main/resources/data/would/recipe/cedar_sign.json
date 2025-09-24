@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "misc",
+ "group": "wooden_sign",
+ "key": {
+  "#": {
+   "item": "would:cedar_planks"
+  },
+  "X": {
+   "item": "minecraft:stick"
+  }
+ },
+ "pattern": [
+  "###",
+  "###",
+  " X "
+ ],
+ "result": {
+  "id": "would:cedar_sign",
+  "count": 1
+ }
+}

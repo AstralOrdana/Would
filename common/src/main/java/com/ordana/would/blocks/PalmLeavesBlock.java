@@ -106,8 +106,8 @@ public class PalmLeavesBlock extends LeavesBlock implements BonemealableBlock {
         return getOptionalDistanceAt(neighbor).orElse(7);
     }
 
-
-    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
+    @Override
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
         return level.getBlockState(pos.below()).isAir();
     }
 

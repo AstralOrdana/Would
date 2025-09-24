@@ -9,13 +9,15 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Optional;
+
 public class Would {
 
     public static final String MOD_ID = "would";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     public static ResourceLocation res(String name) {
-        return new ResourceLocation(MOD_ID, name);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
     }
 
     public static void commonInit() {
@@ -39,7 +41,7 @@ public class Would {
         ModCompostable.register();
     }
 
-    public static ResourceKey<ConfiguredFeature<?, ?>> createKey(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, Would.res(name));
+    public static Optional<ResourceKey<ConfiguredFeature<?, ?>>> createKey(String name) {
+        return Optional.of(ResourceKey.create(Registries.CONFIGURED_FEATURE, Would.res(name)));
     }
 }

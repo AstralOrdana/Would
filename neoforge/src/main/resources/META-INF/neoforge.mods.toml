@@ -1,0 +1,53 @@
+
+modLoader="javafml" #mandatory
+
+loaderVersion="[4,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+
+license="LGPLv3"
+
+[[mods]] #mandatory
+
+modId="would" #mandatory
+
+version = "${version}"
+
+displayName="Would" #mandatory
+
+logoFile="icon.gif" #optional
+
+credits="Ordana" #optional
+
+authors="Ordana, Kayla_the_bee" #optional
+
+itemIcon="would:template" #catalogue icon
+description='''
+I Would, Would you?
+'''
+
+[[dependencies.would]]
+    modId="neoforge"
+    type = "required"
+    versionRange="[21,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.would]]
+    modId="minecraft"
+    type = "required"
+    versionRange="[1.21.1,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.would]]
+    modId="moonlight"
+    type = "required"
+    versionRange="[1.20-2.13.30,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.would]]
+    modId="wetland_whimsy"
+    type = "optional"
+    versionRange="[1.0,)"
+    ordering="AFTER"
+    side="BOTH"

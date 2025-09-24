@@ -1,0 +1,17 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "group": "wooden_slab",
+ "key": {
+  "#": {
+   "item": "would:fir_planks"
+  }
+ },
+ "pattern": [
+  "###"
+ ],
+ "result": {
+  "id": "would:fir_slab",
+  "count": 1
+ }
+}

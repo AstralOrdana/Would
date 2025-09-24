@@ -2,6 +2,7 @@ package com.ordana.would.worldgen;
 
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.ordana.would.reg.ModTrees;
 import net.minecraft.core.BlockPos;
@@ -19,7 +20,7 @@ import java.util.function.BiConsumer;
 
 public class BaobabTrunkPlacer extends TrunkPlacer {
 
-    public static final Codec<BaobabTrunkPlacer> CODEC = RecordCodecBuilder.create(objectInstance ->
+    public static final MapCodec<BaobabTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(objectInstance ->
             trunkPlacerParts(objectInstance).apply(objectInstance, BaobabTrunkPlacer::new));
 
     public BaobabTrunkPlacer(int baseHeight, int heightRandA, int heightRandB) {

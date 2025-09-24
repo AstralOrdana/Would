@@ -1,0 +1,17 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "group": "wooden_slab",
+ "key": {
+  "#": {
+   "item": "would:mahogany_planks"
+  }
+ },
+ "pattern": [
+  "###"
+ ],
+ "result": {
+  "id": "would:mahogany_slab",
+  "count": 1
+ }
+}

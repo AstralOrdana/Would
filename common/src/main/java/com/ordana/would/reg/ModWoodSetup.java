@@ -34,8 +34,8 @@ public class ModWoodSetup {
             Sheets.SIGN_MATERIALS.put(woodType, new Material(Sheets.SIGN_SHEET, Would.res("entity/signs/" + woodType.name())));
             Sheets.HANGING_SIGN_MATERIALS.put(woodType, new Material(Sheets.SIGN_SHEET, Would.res("entity/signs/hanging/" + woodType.name())));
         }
-    }
-
+   }
+    
     public static void init() {
 
         register(ASPEN);

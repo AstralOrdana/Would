@@ -1,0 +1,18 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "misc",
+ "group": "boat",
+ "key": {
+  "#": {
+   "item": "would:pine_planks"
+  }
+ },
+ "pattern": [
+  "# #",
+  "###"
+ ],
+ "result": {
+  "id": "would:pine_boat",
+  "count": 1
+ }
+}

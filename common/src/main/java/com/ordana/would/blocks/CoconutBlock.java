@@ -1,8 +1,8 @@
 package com.ordana.would.blocks;
 
-import com.ordana.would.blocks.tree_growers.PalmTreeGrower;
 import com.ordana.would.entities.FallingCoconutEntity;
 import com.ordana.would.reg.ModBlocks;
+import com.ordana.would.reg.ModTreeGrowers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -31,7 +31,7 @@ public class CoconutBlock extends SaplingBlock implements Fallable {
     public static final BooleanProperty ENABLED = BlockStateProperties.ENABLED;
 
     public CoconutBlock(Properties properties) {
-        super(new PalmTreeGrower(), properties);
+        super(ModTreeGrowers.COCONUT, properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(HANGING, false).setValue(ENABLED, true));
     }
 

@@ -32,7 +32,7 @@ public class ModBoatRenderer extends BoatRenderer {
     public ModBoatRenderer(EntityRendererProvider.Context pContext, boolean pChestBoat) {
         super(pContext, pChestBoat);
         this.boatResources = Stream.of(ModBoatEntity.Type.values()).collect(ImmutableMap.toImmutableMap(type -> type,
-                type -> Pair.of(new ResourceLocation(Would.MOD_ID, getTextureLocation(type, pChestBoat)), this.createBoatModel(pContext, type, pChestBoat))));
+                type -> Pair.of(Would.res(getTextureLocation(type, pChestBoat)), this.createBoatModel(pContext, type, pChestBoat))));
     }
 
     private static String getTextureLocation(ModBoatEntity.Type pType, boolean pChestBoat) {
@@ -54,7 +54,7 @@ public class ModBoatRenderer extends BoatRenderer {
     }
 
     private static ModelLayerLocation createLocation(String pPath, String pModel) {
-        return new ModelLayerLocation(new ResourceLocation(Would.MOD_ID, pPath), pModel);
+        return new ModelLayerLocation(Would.res(pPath), pModel);
     }
 
     @Override
@@ -107,7 +107,7 @@ public class ModBoatRenderer extends BoatRenderer {
         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
         listModel.setupAnim(entity, partialTicks, 0.0F, -0.1F, 0.0F, 0.0F);
         VertexConsumer vertexConsumer = buffer.getBuffer(listModel.renderType(resourceLocation));
-        listModel.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        listModel.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
         if (!entity.isUnderWater()) {
             VertexConsumer vertexConsumer2 = buffer.getBuffer(RenderType.waterMask());
             if (listModel instanceof WaterPatchModel) {
@@ -118,7 +118,7 @@ public class ModBoatRenderer extends BoatRenderer {
 
         poseStack.popPose();
         if (this.shouldShowName(entity)) {
-            this.renderNameTag(entity, entity.getDisplayName(), poseStack, buffer, packedLight);
+            this.renderNameTag(entity, entity.getDisplayName(), poseStack, buffer, packedLight, partialTicks);
         }
 
     }

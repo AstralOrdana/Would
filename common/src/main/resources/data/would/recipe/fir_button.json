@@ -1,0 +1,14 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "redstone",
+ "group": "wooden_button",
+ "ingredients": [
+  {
+   "item": "would:fir_planks"
+  }
+ ],
+ "result": {
+  "id": "would:fir_button",
+  "count": 1
+ }
+}

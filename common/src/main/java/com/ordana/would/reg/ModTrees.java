@@ -1,6 +1,7 @@
 package com.ordana.would.reg;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.ordana.would.Would;
 import com.ordana.would.worldgen.*;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
@@ -27,10 +28,10 @@ public class ModTrees {
     public static final Supplier<TrunkPlacerType> MAPLE_TRUNK_PLACER = registerTrunk("maple", MapleTrunkPlacer.CODEC);
 
 
-    public static Supplier<FoliagePlacerType> registerFoliage(String name, Codec codec) {
+    public static Supplier<FoliagePlacerType> registerFoliage(String name, MapCodec codec) {
         return RegHelper.register(Would.res(name + "_foliage_placer"), () -> new FoliagePlacerType(codec), Registries.FOLIAGE_PLACER_TYPE);
     }
-    public static Supplier<TrunkPlacerType> registerTrunk(String name, Codec codec) {
+    public static Supplier<TrunkPlacerType> registerTrunk(String name, MapCodec codec) {
         return RegHelper.register(Would.res(name + "_trunk_placer"), () -> new TrunkPlacerType(codec), Registries.TRUNK_PLACER_TYPE);
     }
 }
