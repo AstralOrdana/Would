@@ -1,21 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "group": "wooden_fence",
+  "category": "redstone",
+  "group": "wooden_door",
   "key": {
     "#": {
-      "item": "minecraft:stick"
-    },
-    "W": {
       "item": "would:blue_spruce_planks"
     }
   },
   "pattern": [
-    "W#W",
-    "W#W"
+    "##",
+    "##",
+    "##"
   ],
   "result": {
     "count": 3,
-    "item": "would:blue_spruce_fence"
+    "id": "would:blue_spruce_door"
   }
 }

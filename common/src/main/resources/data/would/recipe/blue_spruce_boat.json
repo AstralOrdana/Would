@@ -1,19 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "group": "wooden_stairs",
+  "category": "misc",
+  "group": "boat",
   "key": {
     "#": {
       "item": "would:blue_spruce_planks"
     }
   },
   "pattern": [
-    "#  ",
-    "## ",
+    "# #",
     "###"
   ],
   "result": {
-    "count": 4,
-    "item": "would:blue_spruce_stairs"
+    "count": 1,
+    "id": "would:blue_spruce_boat"
   }
 }

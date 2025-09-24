@@ -1,17 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
-  "group": "wooden_pressure_plate",
+  "group": "wooden_trapdoor",
   "key": {
     "#": {
       "item": "would:blue_spruce_planks"
     }
   },
   "pattern": [
-    "##"
+    "###",
+    "###"
   ],
   "result": {
-    "count": 1,
-    "item": "would:blue_spruce_pressure_plate"
+    "count": 2,
+    "id": "would:blue_spruce_trapdoor"
   }
 }

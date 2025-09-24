@@ -29,4 +29,6 @@ public class ModTreeGrowers {
 
     public static TreeGrower WALNUT = new TreeGrower("walnut", Optional.empty(), Would.createKey("walnut"), Optional.empty());
 
+    public static TreeGrower BLUE_SPRUCE = new TreeGrower("blue_spruce", Would.createKey("mega_blue_spruce"), Would.createKey("blue_spruce"), Optional.empty());
+
 }
