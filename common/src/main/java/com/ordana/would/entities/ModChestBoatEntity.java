@@ -33,6 +33,7 @@ public class ModChestBoatEntity extends ChestBoat {
             case ASPEN -> ModItems.ASPEN_CHEST_BOAT.get();
             case AZALEA -> ModItems.AZALEA_CHEST_BOAT.get();
             case BAOBAB -> ModItems.BAOBAB_CHEST_BOAT.get();
+            case BLUE_SPRUCE -> ModItems.BLUE_SPRUCE_CHEST_BOAT.get();
             case CEDAR -> ModItems.CEDAR_CHEST_BOAT.get();
             case EBONY -> ModItems.EBONY_CHEST_BOAT.get();
             case FIR -> ModItems.FIR_CHEST_BOAT.get();

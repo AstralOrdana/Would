@@ -63,6 +63,8 @@ public class ModItems {
             sign(ModBlocks.WALNUT_SIGN.get(), ModBlocks.WALNUT_WALL_SIGN.get()));
     public static final Supplier<Item> WILLOW_SIGN = regItem("willow_sign", () ->
             sign(ModBlocks.WILLOW_SIGN.get(), ModBlocks.WILLOW_WALL_SIGN.get()));
+    public static final Supplier<Item> BLUE_SPRUCE_SIGN = regItem("blue_spruce_sign", () ->
+            sign(ModBlocks.BLUE_SPRUCE_SIGN.get(), ModBlocks.BLUE_SPRUCE_WALL_SIGN.get()));
     
     public static final Supplier<Item> ASPEN_HANGING_SIGN = regItem("aspen_hanging_sign", () ->
             hangingSign(ModBlocks.ASPEN_HANGING_SIGN.get(), ModBlocks.ASPEN_WALL_HANGING_SIGN.get()));
@@ -88,6 +90,8 @@ public class ModItems {
             hangingSign(ModBlocks.WALNUT_HANGING_SIGN.get(), ModBlocks.WALNUT_WALL_HANGING_SIGN.get()));
     public static final Supplier<Item> WILLOW_HANGING_SIGN = regItem("willow_hanging_sign", () ->
             hangingSign(ModBlocks.WILLOW_HANGING_SIGN.get(), ModBlocks.WILLOW_WALL_HANGING_SIGN.get()));
+    public static final Supplier<Item> BLUE_SPRUCE_HANGING_SIGN = regItem("blue_spruce_hanging_sign", () ->
+            hangingSign(ModBlocks.BLUE_SPRUCE_HANGING_SIGN.get(), ModBlocks.BLUE_SPRUCE_WALL_HANGING_SIGN.get()));
 
 
     //boats
@@ -115,6 +119,8 @@ public class ModItems {
             boat(false, ModBoatEntity.Type.WALNUT));
     public static final Supplier<Item> WILLOW_BOAT = regItem("willow_boat", () ->
             boat(false, ModBoatEntity.Type.WILLOW));
+    public static final Supplier<Item> BLUE_SPRUCE_BOAT = regItem("blue_spruce_boat", () ->
+            boat(false, ModBoatEntity.Type.BLUE_SPRUCE));
     
     public static final Supplier<Item> ASPEN_CHEST_BOAT = regItem("aspen_chest_boat", () ->
             boat(true, ModBoatEntity.Type.ASPEN));
@@ -140,6 +146,8 @@ public class ModItems {
             boat(true, ModBoatEntity.Type.WALNUT));
     public static final Supplier<Item> WILLOW_CHEST_BOAT = regItem("willow_chest_boat", () ->
             boat(true, ModBoatEntity.Type.WILLOW));
+    public static final Supplier<Item> BLUE_SPRUCE_CHEST_BOAT = regItem("blue_spruce_chest_boat", () ->
+            boat(true, ModBoatEntity.Type.BLUE_SPRUCE));
 
     public static final Supplier<Item> SYRUP_BOTTLE = regItem("syrup_bottle", () ->
             new SyrupBottleItem((new Item.Properties()).craftRemainder(Items.GLASS_BOTTLE).food(Foods.HONEY_BOTTLE).stacksTo(16)));

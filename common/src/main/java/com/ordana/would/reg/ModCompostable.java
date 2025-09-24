@@ -16,6 +16,8 @@ public class ModCompostable {
         RegHelper.registerCompostable(ModBlocks.MAPLE_LEAVES.get().asItem(), 0.3f);
         RegHelper.registerCompostable(ModBlocks.WILLOW_LEAVES.get().asItem(), 0.3f);
         RegHelper.registerCompostable(ModBlocks.WALNUT_LEAVES.get().asItem(), 0.3f);
+        RegHelper.registerCompostable(ModBlocks.BLUE_SPRUCE_LEAVES.get().asItem(), 0.3f);
+
         RegHelper.registerCompostable(ModBlocks.ASPEN_SAPLING.get().asItem(), 0.3f);
         RegHelper.registerCompostable(ModBlocks.BAOBAB_SAPLING.get().asItem(), 0.3f);
         RegHelper.registerCompostable(ModBlocks.CEDAR_SAPLING.get().asItem(), 0.3f);
@@ -27,5 +29,6 @@ public class ModCompostable {
         RegHelper.registerCompostable(ModBlocks.MAPLE_SAPLING.get().asItem(), 0.3f);
         RegHelper.registerCompostable(ModBlocks.WILLOW_SAPLING.get().asItem(), 0.3f);
         RegHelper.registerCompostable(ModBlocks.WALNUT_SAPLING.get().asItem(), 0.3f);
+        RegHelper.registerCompostable(ModBlocks.BLUE_SPRUCE_SAPLING.get().asItem(), 0.3f);
     }
 }

@@ -38,6 +38,7 @@ public class ModBoatEntity extends Boat {
             case ASPEN -> ModItems.ASPEN_BOAT.get();
             case AZALEA -> ModItems.AZALEA_BOAT.get();
             case BAOBAB -> ModItems.BAOBAB_BOAT.get();
+            case BLUE_SPRUCE -> ModItems.BLUE_SPRUCE_BOAT.get();
             case CEDAR -> ModItems.CEDAR_BOAT.get();
             case EBONY -> ModItems.EBONY_BOAT.get();
             case FIR -> ModItems.FIR_BOAT.get();
@@ -77,6 +78,7 @@ public class ModBoatEntity extends Boat {
         ASPEN(ModBlocks.ASPEN_PLANKS.get(), "aspen"),
         AZALEA(ModBlocks.AZALEA_PLANKS.get(), "azalea"),
         BAOBAB(ModBlocks.BAOBAB_PLANKS.get(), "baobab"),
+        BLUE_SPRUCE(ModBlocks.BLUE_SPRUCE_PLANKS.get(), "blue_spruce"),
         CEDAR(ModBlocks.CEDAR_PLANKS.get(), "cedar"),
         EBONY(ModBlocks.EBONY_PLANKS.get(), "ebony"),
         FIR(ModBlocks.FIR_PLANKS.get(), "fir"),

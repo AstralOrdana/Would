@@ -4,7 +4,6 @@
     "would:willow_leaves",
     "would:baobab_leaves",
     "would:ebony_leaves",
-    "would:ebony_leaves_fruiting",
     "would:fir_leaves",
     "would:pine_leaves",
     "would:cedar_leaves",
@@ -12,6 +11,7 @@
     "would:palm_leaves",
     "would:maple_leaves",
     "would:aspen_leaves",
-    "would:walnut_leaves"
+    "would:walnut_leaves",
+    "would:blue_spruce_leaves"
   ]
 }

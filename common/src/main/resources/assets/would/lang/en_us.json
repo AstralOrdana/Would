@@ -13,6 +13,7 @@
   "tag.would.maple_logs": "Maple Logs",
   "tag.would.aspen_logs": "Aspen Logs",
   "tag.would.walnut_logs": "Walnut Logs",
+  "tag.would.blue_spruce_logs": "Blue Spruce Logs",
 
   "block.would.willow_log": "Willow Log",
   "block.would.baobab_log": "Baobab Log",
@@ -29,6 +30,7 @@
   "block.would.aspen_log": "Aspen Log",
   "block.would.aspen_log_gazing": "Gazing Aspen Log",
   "block.would.walnut_log": "Walnut Log",
+  "block.would.blue_spruce_log": "Blue Spruce Log",
 
   "block.would.willow_wood": "Willow Wood",
   "block.would.baobab_wood": "Baobab Wood",
@@ -44,6 +46,7 @@
   "block.would.aspen_wood": "Aspen Wood",
   "block.would.aspen_wood_gazing": "Gazing Aspen Wood",
   "block.would.walnut_wood": "Walnut Wood",
+  "block.would.blue_spruce_wood": "Blue Spruce Wood",
 
   "block.would.stripped_willow_log": "Stripped Willow Log",
   "block.would.stripped_baobab_log": "Stripped Baobab Log",
@@ -58,6 +61,7 @@
   "block.would.stripped_aspen_log": "Stripped Aspen Log",
   "block.would.stripped_aspen_log_gazing": "Stripped Gazing Aspen Log",
   "block.would.stripped_walnut_log": "Stripped Walnut Log",
+  "block.would.stripped_blue_spruce_log": "Stripped Blue Spruce Log",
 
   "block.would.stripped_willow_wood": "Stripped Willow Wood",
   "block.would.stripped_baobab_wood": "Stripped Baobab Wood",
@@ -72,6 +76,7 @@
   "block.would.stripped_aspen_wood": "Stripped Aspen Wood",
   "block.would.stripped_aspen_wood_gazing": "Stripped Gazing Aspen Wood",
   "block.would.stripped_walnut_wood": "Stripped Walnut Wood",
+  "block.would.stripped_blue_spruce_wood": "Stripped Blue Spruce Wood",
 
   "block.would.willow_leaves": "Willow Leaves",
   "block.would.baobab_leaves": "Baobab Leaves",
@@ -86,6 +91,7 @@
   "block.would.maple_leaves": "Maple Leaves",
   "block.would.aspen_leaves": "Aspen Leaves",
   "block.would.walnut_leaves": "Walnut Leaves",
+  "block.would.blue_spruce_leaves": "Blue Spruce Leaves",
 
   "block.would.willow_sapling": "Willow Sapling",
   "block.would.baobab_sapling": "Baobab Sapling",
@@ -99,6 +105,7 @@
   "block.would.maple_sapling": "Maple Sapling",
   "block.would.aspen_sapling": "Aspen Sapling",
   "block.would.walnut_sapling": "Walnut Sapling",
+  "block.would.blue_spruce_sapling": "Blue Spruce Sapling",
   
   "block.would.willow_planks": "Willow Planks",
   "block.would.baobab_planks": "Baobab Planks",
@@ -112,6 +119,7 @@
   "block.would.maple_planks": "Maple Planks",
   "block.would.aspen_planks": "Aspen Planks",
   "block.would.walnut_planks": "Walnut Planks",
+  "block.would.blue_spruce_planks": "Blue Spruce Planks",
 
   "block.would.willow_stairs": "Willow Stairs",
   "block.would.baobab_stairs": "Baobab Stairs",
@@ -125,6 +133,7 @@
   "block.would.maple_stairs": "Maple Stairs",
   "block.would.aspen_stairs": "Aspen Stairs",
   "block.would.walnut_stairs": "Walnut Stairs",
+  "block.would.blue_spruce_stairs": "Blue Spruce Stairs",
 
   "block.would.willow_slab": "Willow Slab",
   "block.would.baobab_slab": "Baobab Slab",
@@ -138,6 +147,7 @@
   "block.would.maple_slab": "Maple Slab",
   "block.would.aspen_slab": "Aspen Slab",
   "block.would.walnut_slab": "Walnut Slab",
+  "block.would.blue_spruce_slab": "Blue Spruce Slab",
 
   "block.would.willow_fence": "Willow Fence",
   "block.would.baobab_fence": "Baobab Fence",
@@ -151,6 +161,7 @@
   "block.would.maple_fence": "Maple Fence",
   "block.would.aspen_fence": "Aspen Fence",
   "block.would.walnut_fence": "Walnut Fence",
+  "block.would.blue_spruce_fence": "Blue Spruce Fence",
 
   "block.would.willow_fence_gate": "Willow Fence Gate",
   "block.would.baobab_fence_gate": "Baobab Fence Gate",
@@ -164,6 +175,7 @@
   "block.would.maple_fence_gate": "Maple Fence Gate",
   "block.would.aspen_fence_gate": "Aspen Fence Gate",
   "block.would.walnut_fence_gate": "Walnut Fence Gate",
+  "block.would.blue_spruce_fence_gate": "Blue Spruce Fence Gate",
 
   "block.would.willow_pressure_plate": "Willow Pressure Plate",
   "block.would.baobab_pressure_plate": "Baobab Pressure Plate",
@@ -177,6 +189,7 @@
   "block.would.maple_pressure_plate": "Maple Pressure Plate",
   "block.would.aspen_pressure_plate": "Aspen Pressure Plate",
   "block.would.walnut_pressure_plate": "Walnut Pressure Plate",
+  "block.would.blue_spruce_pressure_plate": "Blue Spruce Pressure Plate",
 
   "block.would.willow_button": "Willow Button",
   "block.would.baobab_button": "Baobab Button",
@@ -190,6 +203,7 @@
   "block.would.maple_button": "Maple Button",
   "block.would.aspen_button": "Aspen Button",
   "block.would.walnut_button": "Walnut Button",
+  "block.would.blue_spruce_button": "Blue Spruce Button",
 
   "block.would.willow_sign": "Willow Sign",
   "block.would.baobab_sign": "Baobab Sign",
@@ -203,6 +217,7 @@
   "block.would.maple_sign": "Maple Sign",
   "block.would.aspen_sign": "Aspen Sign",
   "block.would.walnut_sign": "Walnut Sign",
+  "block.would.blue_spruce_sign": "Blue Spruce Sign",
 
   "block.would.willow_hanging_sign": "Willow Hanging Sign",
   "block.would.baobab_hanging_sign": "Baobab Hanging Sign",
@@ -216,6 +231,7 @@
   "block.would.maple_hanging_sign": "Maple Hanging Sign",
   "block.would.aspen_hanging_sign": "Aspen Hanging Sign",
   "block.would.walnut_hanging_sign": "Walnut Hanging Sign",
+  "block.would.blue_spruce_hanging_sign": "Blue Spruce Hanging Sign",
 
   "block.would.willow_door": "Willow Door",
   "block.would.baobab_door": "Baobab Door",
@@ -229,6 +245,7 @@
   "block.would.maple_door": "Maple Door",
   "block.would.aspen_door": "Aspen Door",
   "block.would.walnut_door": "Walnut Door",
+  "block.would.blue_spruce_door": "Blue Spruce Door",
 
   "block.would.willow_trapdoor": "Willow Trapdoor",
   "block.would.baobab_trapdoor": "Baobab Trapdoor",
@@ -242,6 +259,7 @@
   "block.would.maple_trapdoor": "Maple Trapdoor",
   "block.would.aspen_trapdoor": "Aspen Trapdoor",
   "block.would.walnut_trapdoor": "Walnut Trapdoor",
+  "block.would.blue_spruce_trapdoor": "Blue Spruce Trapdoor",
 
   "item.would.willow_boat": "Willow Boat",
   "item.would.baobab_boat": "Baobab Boat",
@@ -255,6 +273,7 @@
   "item.would.maple_boat": "Maple Boat",
   "item.would.aspen_boat": "Aspen Boat",
   "item.would.walnut_boat": "Walnut Boat",
+  "item.would.blue_spruce_boat": "Blue Spruce Boat",
 
   "item.would.willow_chest_boat": "Willow Chest Boat",
   "item.would.baobab_chest_boat": "Baobab Chest Boat",
@@ -268,6 +287,7 @@
   "item.would.maple_chest_boat": "Maple Chest Boat",
   "item.would.aspen_chest_boat": "Aspen Chest Boat",
   "item.would.walnut_chest_boat": "Walnut Chest Boat",
+  "item.would.blue_spruce_chest_boat": "Blue Spruce Chest Boat",
 
   "item.would.syrup_bottle": "Bottle of Syrup",
   "item.would.walnut": "Walnut",

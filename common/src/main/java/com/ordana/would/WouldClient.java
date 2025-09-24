@@ -44,6 +44,7 @@ public class WouldClient {
         ClientHelper.registerRenderType(ModBlocks.MAPLE_LEAVES.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.ASPEN_LEAVES.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.WALNUT_LEAVES.get(), RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.BLUE_SPRUCE_LEAVES.get(), RenderType.cutoutMipped());
         
         ClientHelper.registerRenderType(ModBlocks.WILLOW_SAPLING.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.BAOBAB_SAPLING.get(), RenderType.cutoutMipped());
@@ -55,6 +56,7 @@ public class WouldClient {
         ClientHelper.registerRenderType(ModBlocks.MAPLE_SAPLING.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.ASPEN_SAPLING.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.WALNUT_SAPLING.get(), RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.BLUE_SPRUCE_SAPLING.get(), RenderType.cutoutMipped());
 
         ClientHelper.registerRenderType(ModBlocks.POTTED_WILLOW_SAPLING.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.POTTED_BAOBAB_SAPLING.get(), RenderType.cutoutMipped());
@@ -66,6 +68,7 @@ public class WouldClient {
         ClientHelper.registerRenderType(ModBlocks.POTTED_MAPLE_SAPLING.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.POTTED_ASPEN_SAPLING.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.POTTED_WALNUT_SAPLING.get(), RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.POTTED_BLUE_SPRUCE_SAPLING.get(), RenderType.cutoutMipped());
 
         ClientHelper.registerRenderType(ModBlocks.WILLOW_DOOR.get(), RenderType.cutout());
         ClientHelper.registerRenderType(ModBlocks.BAOBAB_DOOR.get(), RenderType.cutout());
@@ -79,6 +82,7 @@ public class WouldClient {
         ClientHelper.registerRenderType(ModBlocks.MAPLE_DOOR.get(), RenderType.cutout());
         ClientHelper.registerRenderType(ModBlocks.ASPEN_DOOR.get(), RenderType.cutout());
         ClientHelper.registerRenderType(ModBlocks.WALNUT_DOOR.get(), RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.BLUE_SPRUCE_DOOR.get(), RenderType.cutout());
 
         ClientHelper.registerRenderType(ModBlocks.WILLOW_TRAPDOOR.get(), RenderType.cutout());
         ClientHelper.registerRenderType(ModBlocks.BAOBAB_TRAPDOOR.get(), RenderType.cutout());
@@ -92,6 +96,7 @@ public class WouldClient {
         ClientHelper.registerRenderType(ModBlocks.MAPLE_TRAPDOOR.get(), RenderType.cutout());
         ClientHelper.registerRenderType(ModBlocks.ASPEN_TRAPDOOR.get(), RenderType.cutout());
         ClientHelper.registerRenderType(ModBlocks.WALNUT_TRAPDOOR.get(), RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.BLUE_SPRUCE_TRAPDOOR.get(), RenderType.cutout());
 
         finishedSetup = true;
     }
@@ -166,6 +171,7 @@ public class WouldClient {
         event.register(loc("boat/palm"), BoatModel::createBodyModel);
         event.register(loc("boat/walnut"), BoatModel::createBodyModel);
         event.register(loc("boat/willow"), BoatModel::createBodyModel);
+        event.register(loc("boat/blue_spruce"), BoatModel::createBodyModel);
 
         event.register(loc("chest_boat/aspen"), ChestBoatModel::createBodyModel);
         event.register(loc("chest_boat/azalea"), ChestBoatModel::createBodyModel);
@@ -179,6 +185,7 @@ public class WouldClient {
         event.register(loc("chest_boat/palm"), ChestBoatModel::createBodyModel);
         event.register(loc("chest_boat/walnut"), ChestBoatModel::createBodyModel);
         event.register(loc("chest_boat/willow"), ChestBoatModel::createBodyModel);
+        event.register(loc("chest_boat/blue_spruce"), ChestBoatModel::createBodyModel);
 
     }
 
