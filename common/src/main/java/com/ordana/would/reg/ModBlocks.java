@@ -300,7 +300,7 @@ public class ModBlocks {
 
     //saplings
     public static final Supplier<Block> WILLOW_SAPLING = regWithItem("willow_sapling",
-            () -> sapling(ModTreeGrowers.BAOBAB));
+            () -> sapling(ModTreeGrowers.WILLOW));
     public static final Supplier<Block> BAOBAB_SAPLING = regWithItem("baobab_sapling",
             () -> sapling(ModTreeGrowers.BAOBAB));
     public static final Supplier<Block> EBONY_SAPLING = regWithItem("ebony_sapling",
