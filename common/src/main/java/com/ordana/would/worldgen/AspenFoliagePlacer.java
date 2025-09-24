@@ -51,7 +51,12 @@ public class AspenFoliagePlacer extends FoliagePlacer {
             pos.move(Direction.DOWN);
         }
         pos.move(Direction.UP);
-        placeLeavesRow(level, blockSetter, random, config, pos, foliageRadius + 1, -2, bl);
+        for(int k = 0; k <= foliageHeight + 1; ++k) {
+            placeLeavesRow(level, blockSetter, random, config, pos, foliageRadius + 1, -2, bl);
+            pos.move(Direction.DOWN);
+        }
+        pos.move(Direction.UP);
+        placeLeavesRow(level, blockSetter, random, config, pos, foliageRadius, -1, bl);
     }
 
     @Override

@@ -11,7 +11,7 @@ public class ModTreeGrowers {
 
     public static TreeGrower WILLOW = new TreeGrower("willow", Optional.empty(), Would.createKey("willow"), Optional.empty());
 
-    public static TreeGrower BAOBAB = new TreeGrower("baobab", Optional.empty(), Would.createKey("baobab"), Optional.empty());
+    public static TreeGrower BAOBAB = new TreeGrower("baobab", Would.createKey("baobab"), Optional.empty(), Optional.empty());
 
     public static TreeGrower EBONY = new TreeGrower("ebony", Optional.empty(), Would.createKey("ebony"), Optional.empty());
 
