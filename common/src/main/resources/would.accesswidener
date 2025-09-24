@@ -18,3 +18,5 @@ accessible field net/minecraft/world/level/block/state/properties/WoodType VALUE
 
 #Entity Level
 accessible field net/minecraft/world/entity/Entity level Lnet/minecraft/world/level/Level;
+
+accessible method net/minecraft/world/level/block/state/properties/WoodType register (Lnet/minecraft/world/level/block/state/properties/WoodType;)Lnet/minecraft/world/level/block/state/properties/WoodType;

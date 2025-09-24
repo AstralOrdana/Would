@@ -14,6 +14,8 @@
     "would:aspen_log",
     "would:aspen_log_gazing",
     "would:walnut_log",
+    "would:blue_spruce_log",
+
     "would:willow_wood",
     "would:baobab_wood",
     "would:ebony_wood",
@@ -27,6 +29,8 @@
     "would:aspen_wood",
     "would:aspen_wood_gazing",
     "would:walnut_wood",
+    "would:blue_spruce_wood",
+
     "would:stripped_willow_log",
     "would:stripped_baobab_log",
     "would:stripped_ebony_log",
@@ -41,6 +45,8 @@
     "would:stripped_aspen_log",
     "would:stripped_aspen_log_gazing",
     "would:stripped_walnut_log",
+    "would:stripped_blue_spruce_log",
+
     "would:stripped_willow_wood",
     "would:stripped_baobab_wood",
     "would:stripped_ebony_wood",
@@ -54,6 +60,7 @@
     "would:stripped_maple_wood",
     "would:stripped_aspen_wood",
     "would:stripped_aspen_wood_gazing",
-    "would:stripped_walnut_wood"
+    "would:stripped_walnut_wood",
+    "would:stripped_blue_spruce_wood"
   ]
 }

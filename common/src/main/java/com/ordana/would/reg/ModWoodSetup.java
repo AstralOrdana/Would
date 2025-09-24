@@ -1,6 +1,10 @@
 package com.ordana.would.reg;
 
 import com.google.common.collect.ImmutableMap;
+import com.ordana.would.Would;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.resources.model.Material;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -22,22 +26,31 @@ public class ModWoodSetup {
     public static final WoodType PINE = new WoodType("pine", BlockSetType.ACACIA);
     public static final WoodType WALNUT = new WoodType("walnut", BlockSetType.ACACIA);
     public static final WoodType WILLOW = new WoodType("willow", BlockSetType.ACACIA);
+    public static final WoodType BLUE_SPRUCE = new WoodType("blue_spruce", BlockSetType.ACACIA);
 
+    private static void register(WoodType woodType) {
+        WoodType.register(woodType);
+        if (PlatHelper.getPhysicalSide().isClient()) {
+            Sheets.SIGN_MATERIALS.put(woodType, new Material(Sheets.SIGN_SHEET, Would.res("entity/signs/" + woodType.name())));
+            Sheets.HANGING_SIGN_MATERIALS.put(woodType, new Material(Sheets.SIGN_SHEET, Would.res("entity/signs/hanging/" + woodType.name())));
+        }
+    }
 
     public static void init() {
 
-        WoodType.VALUES.add(ASPEN);
-        WoodType.VALUES.add(AZALEA);
-        WoodType.VALUES.add(BAOBAB);
-        WoodType.VALUES.add(CEDAR);
-        WoodType.VALUES.add(EBONY);
-        WoodType.VALUES.add(FIR);
-        WoodType.VALUES.add(MAHOGANY);
-        WoodType.VALUES.add(MAPLE);
-        WoodType.VALUES.add(PALM);
-        WoodType.VALUES.add(PINE);
-        WoodType.VALUES.add(WALNUT);
-        WoodType.VALUES.add(WILLOW);
+        register(ASPEN);
+        register(AZALEA);
+        register(BAOBAB);
+        register(CEDAR);
+        register(EBONY);
+        register(FIR);
+        register(MAHOGANY);
+        register(MAPLE);
+        register(PALM);
+        register(PINE);
+        register(WALNUT);
+        register(WILLOW);
+        register(BLUE_SPRUCE);
 
         var validHangingSigns = new HashSet(BlockEntityType.HANGING_SIGN.validBlocks);
         validHangingSigns.add(ModBlocks.ASPEN_HANGING_SIGN.get());
@@ -52,6 +65,7 @@ public class ModWoodSetup {
         validHangingSigns.add(ModBlocks.PINE_HANGING_SIGN.get());
         validHangingSigns.add(ModBlocks.WALNUT_HANGING_SIGN.get());
         validHangingSigns.add(ModBlocks.WILLOW_HANGING_SIGN.get());
+        validHangingSigns.add(ModBlocks.BLUE_SPRUCE_HANGING_SIGN.get());
         validHangingSigns.add(ModBlocks.ASPEN_WALL_HANGING_SIGN.get());
         validHangingSigns.add(ModBlocks.AZALEA_WALL_HANGING_SIGN.get());
         validHangingSigns.add(ModBlocks.BAOBAB_WALL_HANGING_SIGN.get());
@@ -64,6 +78,7 @@ public class ModWoodSetup {
         validHangingSigns.add(ModBlocks.PINE_WALL_HANGING_SIGN.get());
         validHangingSigns.add(ModBlocks.WALNUT_WALL_HANGING_SIGN.get());
         validHangingSigns.add(ModBlocks.WILLOW_WALL_HANGING_SIGN.get());
+        validHangingSigns.add(ModBlocks.BLUE_SPRUCE_WALL_HANGING_SIGN.get());
         BlockEntityType.HANGING_SIGN.validBlocks = validHangingSigns;
 
         var validSigns = new HashSet(BlockEntityType.SIGN.validBlocks);
@@ -79,6 +94,7 @@ public class ModWoodSetup {
         validSigns.add(ModBlocks.PINE_SIGN.get());
         validSigns.add(ModBlocks.WALNUT_SIGN.get());
         validSigns.add(ModBlocks.WILLOW_SIGN.get());
+        validSigns.add(ModBlocks.BLUE_SPRUCE_SIGN.get());
         validSigns.add(ModBlocks.ASPEN_WALL_SIGN.get());
         validSigns.add(ModBlocks.AZALEA_WALL_SIGN.get());
         validSigns.add(ModBlocks.BAOBAB_WALL_SIGN.get());
@@ -91,6 +107,7 @@ public class ModWoodSetup {
         validSigns.add(ModBlocks.PINE_WALL_SIGN.get());
         validSigns.add(ModBlocks.WALNUT_WALL_SIGN.get());
         validSigns.add(ModBlocks.WILLOW_WALL_SIGN.get());
+        validSigns.add(ModBlocks.BLUE_SPRUCE_WALL_SIGN.get());
         BlockEntityType.SIGN.validBlocks = validSigns;
 
         var strippables = new ImmutableMap.Builder().putAll(AxeItem.STRIPPABLES);
@@ -108,6 +125,7 @@ public class ModWoodSetup {
         strippables.put(ModBlocks.PINE_LOG.get(), ModBlocks.STRIPPED_PINE_LOG.get());
         strippables.put(ModBlocks.WALNUT_LOG.get(), ModBlocks.STRIPPED_WALNUT_LOG.get());
         strippables.put(ModBlocks.WILLOW_LOG.get(), ModBlocks.STRIPPED_WILLOW_LOG.get());
+        strippables.put(ModBlocks.BLUE_SPRUCE_LOG.get(), ModBlocks.STRIPPED_BLUE_SPRUCE_LOG.get());
         strippables.put(ModBlocks.ASPEN_WOOD.get(), ModBlocks.STRIPPED_ASPEN_WOOD.get());
         strippables.put(ModBlocks.ASPEN_WOOD_GAZING.get(), ModBlocks.STRIPPED_ASPEN_WOOD_GAZING.get());
         strippables.put(ModBlocks.AZALEA_WOOD.get(), ModBlocks.STRIPPED_AZALEA_WOOD.get());
@@ -122,6 +140,7 @@ public class ModWoodSetup {
         strippables.put(ModBlocks.PINE_WOOD.get(), ModBlocks.STRIPPED_PINE_WOOD.get());
         strippables.put(ModBlocks.WALNUT_WOOD.get(), ModBlocks.STRIPPED_WALNUT_WOOD.get());
         strippables.put(ModBlocks.WILLOW_WOOD.get(), ModBlocks.STRIPPED_WILLOW_WOOD.get());
+        strippables.put(ModBlocks.BLUE_SPRUCE_WOOD.get(), ModBlocks.STRIPPED_BLUE_SPRUCE_WOOD.get());
         AxeItem.STRIPPABLES = strippables.build();
     }
 }

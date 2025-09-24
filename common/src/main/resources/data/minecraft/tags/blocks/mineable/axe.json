@@ -15,6 +15,8 @@
     "would:aspen_log",
     "would:aspen_log_gazing",
     "would:walnut_log",
+    "would:blue_spruce_log",
+
     "would:willow_wood",
     "would:baobab_wood",
     "would:ebony_wood",
@@ -28,6 +30,8 @@
     "would:aspen_wood",
     "would:aspen_wood_gazing",
     "would:walnut_wood",
+    "would:blue_spruce_wood",
+
     "would:stripped_willow_log",
     "would:stripped_baobab_log",
     "would:stripped_ebony_log",
@@ -42,6 +46,8 @@
     "would:stripped_aspen_log",
     "would:stripped_aspen_log_gazing",
     "would:stripped_walnut_log",
+    "would:stripped_blue_spruce_log",
+
     "would:stripped_willow_wood",
     "would:stripped_baobab_wood",
     "would:stripped_ebony_wood",
@@ -56,6 +62,8 @@
     "would:stripped_aspen_wood",
     "would:stripped_aspen_wood_gazing",
     "would:stripped_walnut_wood",
+    "would:stripped_blue_spruce_wood",
+
     "would:willow_planks",
     "would:baobab_planks",
     "would:ebony_planks",
@@ -68,6 +76,8 @@
     "would:maple_planks",
     "would:aspen_planks",
     "would:walnut_planks",
+    "would:blue_spruce_planks",
+
     "would:willow_stairs",
     "would:baobab_stairs",
     "would:ebony_stairs",
@@ -80,6 +90,8 @@
     "would:maple_stairs",
     "would:aspen_stairs",
     "would:walnut_stairs",
+    "would:blue_spruce_stairs",
+
     "would:willow_slab",
     "would:baobab_slab",
     "would:ebony_slab",
@@ -92,6 +104,8 @@
     "would:maple_slab",
     "would:aspen_slab",
     "would:walnut_slab",
+    "would:blue_spruce_slab",
+
     "would:willow_fence",
     "would:baobab_fence",
     "would:ebony_fence",
@@ -104,6 +118,8 @@
     "would:maple_fence",
     "would:aspen_fence",
     "would:walnut_fence",
+    "would:blue_spruce_fence",
+
     "would:willow_fence_gate",
     "would:baobab_fence_gate",
     "would:ebony_fence_gate",
@@ -116,6 +132,8 @@
     "would:maple_fence_gate",
     "would:aspen_fence_gate",
     "would:walnut_fence_gate",
+    "would:blue_spruce_fence_gate",
+
     "would:willow_pressure_plate",
     "would:baobab_pressure_plate",
     "would:ebony_pressure_plate",
@@ -128,6 +146,8 @@
     "would:maple_pressure_plate",
     "would:aspen_pressure_plate",
     "would:walnut_pressure_plate",
+    "would:blue_spruce_pressure_plate",
+
     "would:willow_button",
     "would:baobab_button",
     "would:ebony_button",
@@ -140,6 +160,8 @@
     "would:maple_button",
     "would:aspen_button",
     "would:walnut_button",
+    "would:blue_spruce_button",
+
     "would:willow_door",
     "would:baobab_door",
     "would:ebony_door",
@@ -152,6 +174,8 @@
     "would:maple_door",
     "would:aspen_door",
     "would:walnut_door",
+    "would:blue_spruce_door",
+
     "would:willow_trapdoor",
     "would:baobab_trapdoor",
     "would:ebony_trapdoor",
@@ -163,6 +187,8 @@
     "would:palm_trapdoor",
     "would:maple_trapdoor",
     "would:aspen_trapdoor",
-    "would:walnut_trapdoor"
+    "would:walnut_trapdoor",
+    "would:blue_spruce_trapdoor"
+
   ]
 }
