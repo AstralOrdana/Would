@@ -19,6 +19,7 @@ public class WouldFabric implements ModInitializer {
         Would.commonInit();
 
         UseBlockCallback.EVENT.register(WouldFabric::onRightClickBlock);
+        ModCompostable.register();
     }
 
     public static InteractionResult onRightClickBlock(Player player, Level level, InteractionHand hand, BlockHitResult hitResult) {
