@@ -4,7 +4,6 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import org.jetbrains.annotations.Contract;

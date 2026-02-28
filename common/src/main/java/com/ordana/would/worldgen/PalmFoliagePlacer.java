@@ -1,6 +1,5 @@
 package com.ordana.would.worldgen;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.ordana.would.reg.ModTrees;

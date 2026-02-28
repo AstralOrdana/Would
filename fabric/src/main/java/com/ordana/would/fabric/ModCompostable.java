@@ -2,7 +2,6 @@ package com.ordana.would.fabric;
 
 import com.ordana.would.reg.ModBlocks;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
-import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 
 public class ModCompostable {
     public static void register() {

@@ -20,6 +20,8 @@ accessible field net/minecraft/world/entity/Entity level Lnet/minecraft/world/le
 # 1.21
 accessible method net/minecraft/world/level/levelgen/feature/foliageplacers/FoliagePlacerType <init> (Lcom/mojang/serialization/MapCodec;)V
 accessible method net/minecraft/world/level/levelgen/feature/trunkplacers/TrunkPlacerType <init> (Lcom/mojang/serialization/MapCodec;)V
+accessible method net/minecraft/world/level/levelgen/feature/treedecorators/TreeDecoratorType <init> (Lcom/mojang/serialization/MapCodec;)V
+
 accessible method net/minecraft/world/level/block/DoorBlock <init> (Lnet/minecraft/world/level/block/state/properties/BlockSetType;Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
 accessible method net/minecraft/world/level/block/TrapDoorBlock <init> (Lnet/minecraft/world/level/block/state/properties/BlockSetType;Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
 accessible method net/minecraft/world/level/block/state/properties/WoodType register (Lnet/minecraft/world/level/block/state/properties/WoodType;)Lnet/minecraft/world/level/block/state/properties/WoodType;

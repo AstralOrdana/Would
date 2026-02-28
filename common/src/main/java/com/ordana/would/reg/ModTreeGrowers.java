@@ -1,13 +1,13 @@
 package com.ordana.would.reg;
 
+import com.mojang.serialization.Codec;
 import com.ordana.would.Would;
 import net.minecraft.world.level.block.grower.TreeGrower;
 
 import java.util.Optional;
 
 public class ModTreeGrowers {
-    public static TreeGrower COCONUT = new TreeGrower("coconut", Optional.empty(), Would.createKey("coconut"), Optional.empty());
-
+    public static TreeGrower COCONUT = new TreeGrower("palm", Optional.empty(), Would.createKey("palm"), Optional.empty());
 
     public static TreeGrower WILLOW = new TreeGrower("willow", Optional.empty(), Would.createKey("willow"), Optional.empty());
 
@@ -15,7 +15,7 @@ public class ModTreeGrowers {
 
     public static TreeGrower EBONY = new TreeGrower("ebony", Optional.empty(), Would.createKey("ebony"), Optional.empty());
 
-    public static TreeGrower FIR = new TreeGrower("fir", Would.createKey("fir"), Would.createKey("fir"), Optional.empty());
+    public static TreeGrower FIR = new TreeGrower("fir", Would.createKey("mega_fir"), Would.createKey("fir"), Optional.empty());
 
     public static TreeGrower PINE = new TreeGrower("pine", Would.createKey("mega_pine"), Would.createKey("pine"), Optional.empty());
 
@@ -30,5 +30,4 @@ public class ModTreeGrowers {
     public static TreeGrower WALNUT = new TreeGrower("walnut", Optional.empty(), Would.createKey("walnut"), Optional.empty());
 
     public static TreeGrower BLUE_SPRUCE = new TreeGrower("blue_spruce", Would.createKey("mega_blue_spruce"), Would.createKey("blue_spruce"), Optional.empty());
-
 }

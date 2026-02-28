@@ -1,7 +1,6 @@
 package com.ordana.would;
 
 import com.ordana.would.reg.*;
-import dev.architectury.injectables.annotations.PlatformOnly;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;

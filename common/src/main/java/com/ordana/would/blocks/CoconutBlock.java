@@ -1,5 +1,7 @@
 package com.ordana.would.blocks;
 
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.ordana.would.entities.FallingCoconutEntity;
 import com.ordana.would.reg.ModBlocks;
 import com.ordana.would.reg.ModTreeGrowers;
@@ -14,17 +16,18 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Fallable;
-import net.minecraft.world.level.block.SaplingBlock;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.grower.TreeGrower;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class CoconutBlock extends SaplingBlock implements Fallable {
+public class CoconutBlock extends SaplingBlock implements Fallable, BonemealableBlock {
     protected static final VoxelShape GREEN_SHAPE;
     protected static final VoxelShape BROWN_SHAPE;
     public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
@@ -45,7 +48,7 @@ public class CoconutBlock extends SaplingBlock implements Fallable {
 
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!state.getValue(HANGING)) {
-            if (state.getValue(ENABLED) && level.getMaxLocalRawBrightness(pos.above()) >= 9 && random.nextInt(7) == 0) {
+            if (state.getValue(ENABLED) && level.getMaxLocalRawBrightness(pos.above()) >= 9) {
                 this.advanceTree(level, pos, state, random);
             }
         }
@@ -54,6 +57,15 @@ public class CoconutBlock extends SaplingBlock implements Fallable {
             state.setValue(HANGING, false);
             level.scheduleTick(pos, this, this.getFallDelay());
         }
+    }
+
+    public void advanceTree(ServerLevel level, BlockPos pos, BlockState state, RandomSource random) {
+        if (state.getValue(STAGE) == 0) {
+            level.setBlock(pos, state.cycle(STAGE), 4);
+        } else {
+            ModTreeGrowers.COCONUT.growTree(level, level.getChunkSource().getGenerator(), pos, state, random);
+        }
+
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext context) {
@@ -100,6 +112,14 @@ public class CoconutBlock extends SaplingBlock implements Fallable {
 
     public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
         return (!state.getValue(HANGING));
+    }
+
+    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
+        return (double)level.random.nextFloat() < 0.45;
+    }
+
+    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+        this.advanceTree(level, pos, state, random);
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

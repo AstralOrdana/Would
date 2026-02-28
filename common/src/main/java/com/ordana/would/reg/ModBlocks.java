@@ -21,7 +21,6 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
-import java.util.Optional;
 import java.util.function.Supplier;
 
 public class ModBlocks {
@@ -143,6 +142,9 @@ public class ModBlocks {
     private static Block trapdoor(MapColor mapColor) {
         return new TrapDoorBlock(BlockSetType.ACACIA, BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().isValidSpawn(ModBlocks::never).ignitedByLava());
     }
+
+    public static final Supplier<Block> PALE_HANGING_MOSS = regWithItem("pale_hanging_moss",
+            () -> new HangingMossBlock(BlockBehaviour.Properties.of().ignitedByLava().mapColor(MapColor.COLOR_LIGHT_GRAY).noCollission().sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.DESTROY)));
 
     //logs
     public static final Supplier<Block> WILLOW_LOG = regWithItem("willow_log",

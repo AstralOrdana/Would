@@ -32,6 +32,8 @@ public class WouldClient {
     private static boolean finishedSetup = false;
 
     public static void setup() {
+        ClientHelper.registerRenderType(ModBlocks.PALE_HANGING_MOSS.get(), RenderType.cutoutMipped());
+
         ClientHelper.registerRenderType(ModBlocks.WILLOW_LEAVES.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.BAOBAB_LEAVES.get(), RenderType.cutoutMipped());
         ClientHelper.registerRenderType(ModBlocks.EBONY_LEAVES.get(), RenderType.cutoutMipped());

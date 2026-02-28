@@ -36,29 +36,22 @@
       }
     },
     "trunk_placer": {
-      "type": "minecraft:straight_trunk_placer",
-      "base_height": 4,
+      "type": "would:bald_cypress_trunk_placer",
+      "base_height": 8,
       "height_rand_a": 2,
       "height_rand_b": 1
     },
     "foliage_placer": {
-      "type": "minecraft:spruce_foliage_placer",
-      "radius": {
-        "type": "minecraft:uniform",
-        "min_inclusive": 2,
-        "max_inclusive": 3
-      },
-      "offset": {
-        "type": "minecraft:uniform",
-        "min_inclusive": 0,
-        "max_inclusive": 2
-      },
-      "trunk_height": {
-        "type": "minecraft:uniform",
-        "min_inclusive": 1,
-        "max_inclusive": 2
-      }
+      "type": "minecraft:blob_foliage_placer",
+      "radius": 2,
+      "offset": 1,
+      "height": 1
     },
-    "decorators": []
+    "decorators": [
+      {
+        "type": "would:pale_moss_decorator",
+        "leaves_probability": 0.7
+      }
+    ]
   }
 }

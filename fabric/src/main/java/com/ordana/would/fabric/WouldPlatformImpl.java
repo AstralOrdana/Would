@@ -2,13 +2,9 @@ package com.ordana.would.fabric;
 
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
-import net.fabricmc.fabric.api.object.builder.v1.block.type.WoodTypeBuilder;
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 

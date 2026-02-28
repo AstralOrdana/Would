@@ -1,11 +1,11 @@
 package com.ordana.would.worldgen;
 
 import com.google.common.collect.Lists;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.ordana.would.reg.ModTrees;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.state.BlockState;
@@ -35,91 +35,62 @@ public class BaobabTrunkPlacer extends TrunkPlacer {
     @Override
     public @NotNull List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, int freeTreeHeight, BlockPos pos, TreeConfiguration config) {
         BlockPos blockPos = pos.below();
-        BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
+        BlockPos.MutableBlockPos mPos = new BlockPos.MutableBlockPos();
         List<FoliagePlacer.FoliageAttachment> list = Lists.newArrayList();
         var j = freeTreeHeight / 2;
 
 
         if (random.nextBoolean()) {
+            int y = 0;
+
             //trunk
             for (int i = 0; i < freeTreeHeight; ++i) {
-                placeLogIfFreeWithOffset(level, blockSetter, random, mutableBlockPos, config, pos, 0, i, 0);
-                placeLogIfFreeWithOffset(level, blockSetter, random, mutableBlockPos, config, pos, 1, i, 0);
-                placeLogIfFreeWithOffset(level, blockSetter, random, mutableBlockPos, config, pos, 1, i, 1);
-                placeLogIfFreeWithOffset(level, blockSetter, random, mutableBlockPos, config, pos, 0, i, 1);
+                placeLogIfFreeWithOffset(level, blockSetter, random, mPos, config, pos, 0, i, 0);
+                placeLogIfFreeWithOffset(level, blockSetter, random, mPos, config, pos, 1, i, 0);
+                placeLogIfFreeWithOffset(level, blockSetter, random, mPos, config, pos, -1, i, 0);
+                placeLogIfFreeWithOffset(level, blockSetter, random, mPos, config, pos, 0, i, 1);
+                placeLogIfFreeWithOffset(level, blockSetter, random, mPos, config, pos, 0, i, -1);
+                //y = i;
             }
 
-            //center branch
-            var x = random.nextInt(0,2);
-            var z = random.nextInt(0,2);
-            for (int i = freeTreeHeight; i < freeTreeHeight + 4; ++i) {
-                placeLogIfFreeWithOffset(level, blockSetter, random, mutableBlockPos, config, pos, x, i, z);
-            }
-            list.add(new FoliagePlacer.FoliageAttachment(new BlockPos(pos.getX() + x, pos.getY() + freeTreeHeight + 4, pos.getZ() + z), 0, false));
-
-            //side branches
-
-            //fixed north
-            if (random.nextBoolean()) {
-                var p = random.nextInt(0,2);
-                var q = random.nextInt(0,2);
-                buildBranch(level, blockSetter, random, mutableBlockPos, config, pos, 0, -1, 0, -2, 0, -3, freeTreeHeight, p, q);
-                list.add(new FoliagePlacer.FoliageAttachment(new BlockPos(pos.getX() + 0, pos.getY() + freeTreeHeight + p + q, pos.getZ() + -3), 0, false));
-            }
-            else {
-                var p = random.nextInt(0,2);
-                var q = random.nextInt(0,2);
-                buildBranch(level, blockSetter, random, mutableBlockPos, config, pos, 1, -1, 1, -2, 1, -3, freeTreeHeight, p, q);
-                list.add(new FoliagePlacer.FoliageAttachment(new BlockPos(pos.getX() + 1, pos.getY() + freeTreeHeight + p + q, pos.getZ() + -3), 0, false));
-            }
-
-            //old west
-            if (random.nextBoolean()) {
-                var p = random.nextInt(0,2);
-                var q = random.nextInt(0,2);
-                buildBranch(level, blockSetter, random, mutableBlockPos, config, pos, -1, 0, -2, 0, -3, 0, freeTreeHeight, p, q);
-                list.add(new FoliagePlacer.FoliageAttachment(new BlockPos(pos.getX() + -3, pos.getY() + freeTreeHeight + p + q, pos.getZ() + 0), 0, false));
-            }
-            else {
-                var p = random.nextInt(0,2);
-                var q = random.nextInt(0,2);
-                buildBranch(level, blockSetter, random, mutableBlockPos, config, pos, -1, 1, -2, 1, -3, 1, freeTreeHeight, p, q);
-                list.add(new FoliagePlacer.FoliageAttachment(new BlockPos(pos.getX() + -3, pos.getY() + freeTreeHeight + p + q, pos.getZ() + 1), 0, false));
-            }
+            //vertical branch 1
 
 
-            //old east
-            if (random.nextBoolean()) {
-                var p = random.nextInt(0,2);
-                var q = random.nextInt(0,2);
-                buildBranch(level, blockSetter, random, mutableBlockPos, config, pos, 2, 0, 3, 0, 4, 0, freeTreeHeight, p, q);
-                list.add(new FoliagePlacer.FoliageAttachment(new BlockPos(pos.getX() + 4, pos.getY() + freeTreeHeight + p + q, pos.getZ() + 0), 0, false));
-            }
-            else {
-                var p = random.nextInt(0,2);
-                var q = random.nextInt(0,2);
-                buildBranch(level, blockSetter, random, mutableBlockPos, config, pos, 2, 1, 3, 1, 4, 1, freeTreeHeight, p, q);
-                list.add(new FoliagePlacer.FoliageAttachment(new BlockPos(pos.getX() + 4, pos.getY() + freeTreeHeight + p + q, pos.getZ() + 1), 0, false));
-            }
+            BlockPos homePos = new BlockPos(mPos.getX(), mPos.getY(), mPos.getZ());
+            mPos.set(new BlockPos(mPos.getX(), mPos.getY(), mPos.getZ()));
+            for (int k = 0; k < 2; ++k) {
+                Direction ranDir = Direction.Plane.HORIZONTAL.shuffledCopy(random).listIterator().next();
+                mPos.move(Direction.SOUTH);
+                mPos.move(ranDir);
 
-
-            //old south
-            if (random.nextBoolean()) {
-                var p = random.nextInt(0,2);
-                var q = random.nextInt(0,2);
-                buildBranch(level, blockSetter, random, mutableBlockPos, config, pos, 0, 2, 0, 3, 0, 4, freeTreeHeight, p, q);
-                list.add(new FoliagePlacer.FoliageAttachment(new BlockPos(pos.getX() + 0, pos.getY() + freeTreeHeight + p + q, pos.getZ() + 4), 0, false));
+                for (int i = 0; i < (random.nextBoolean() ? 2 : 3); ++i) {
+                    this.placeLog(level, blockSetter, random, mPos, config);
+                    mPos.move(ranDir);
+                    mPos.move(random.nextBoolean() ? ranDir.getClockWise() : ranDir.getCounterClockWise());
+                    this.placeLog(level, blockSetter, random, mPos, config);
+                    mPos.move(ranDir);
+                    if (random.nextBoolean()) mPos.move(Direction.UP);
+                }
+                list.add(new FoliagePlacer.FoliageAttachment(new BlockPos(mPos.getX(), mPos.getY(), mPos.getZ()), 0, false));
+                mPos.set(homePos);
+                for (int i = 0; i < (random.nextBoolean() ? 3 : 4); ++i) {
+                    this.placeLog(level, blockSetter, random, mPos, config);
+                    mPos.move(Direction.UP);
+                }
+                mPos.move(ranDir);
+                for (int i = 0; i < (random.nextBoolean() ? 2 : 3); ++i) {
+                    this.placeLog(level, blockSetter, random, mPos, config);
+                    mPos.move(Direction.UP);
+                }
+                mPos.move(ranDir);
+                this.placeLog(level, blockSetter, random, mPos, config);
+                list.add(new FoliagePlacer.FoliageAttachment(new BlockPos(mPos.getX(), mPos.getY(), mPos.getZ()), 0, false));
+                mPos.set(homePos);
             }
-            else {
-                var p = random.nextInt(0,2);
-                var q = random.nextInt(0,2);
-                buildBranch(level, blockSetter, random, mutableBlockPos, config, pos, 1, 2, 1, 3, 1, 4, freeTreeHeight, p, q);
-                list.add(new FoliagePlacer.FoliageAttachment(new BlockPos(pos.getX() + 1, pos.getY() + freeTreeHeight + p + q, pos.getZ() + 4), 0, false));
-            }
-
 
 
         }
+        /*
         else {
             setDirtAt(level, blockSetter, random, blockPos, config);
             setDirtAt(level, blockSetter, random, blockPos.south(), config);
@@ -266,6 +237,8 @@ public class BaobabTrunkPlacer extends TrunkPlacer {
                 list.add(new FoliagePlacer.FoliageAttachment(new BlockPos(pos.getX() + 2, pos.getY() + j + p + q, pos.getZ() + 5), 0, false));
             }
         }
+
+         */
         return list;
 
     }

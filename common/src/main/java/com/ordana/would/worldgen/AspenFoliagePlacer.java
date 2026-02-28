@@ -35,28 +35,45 @@ public class AspenFoliagePlacer extends FoliagePlacer {
         BlockPos basePos = attachment.pos();
         BlockPos.MutableBlockPos pos = basePos.mutable();
 
-        tryPlaceLeaf(level, blockSetter, random, config, pos);
-        pos.move(Direction.UP);
-        tryPlaceLeaf(level, blockSetter, random, config, pos);
-        pos.move(Direction.UP);
-        tryPlaceLeaf(level, blockSetter, random, config, pos);
-        pos.set(basePos);
-        for (Direction dir : Direction.Plane.HORIZONTAL.shuffledCopy(random)) {
-            pos.move(dir);
+
+        for(int k = 0; k <= 4; ++k) {
             tryPlaceLeaf(level, blockSetter, random, config, pos);
-            pos.move(dir.getOpposite());
+            pos.move(Direction.UP);
         }
+        pos.set(basePos);
+        pos.move(Direction.UP);
+        pos.move(Direction.UP);
+
         for(int k = 0; k <= foliageHeight; ++k) {
-            placeLeavesRow(level, blockSetter, random, config, pos, foliageRadius, -1, bl);
+            for (Direction dir : Direction.Plane.HORIZONTAL.shuffledCopy(random)) {
+                pos.move(dir);
+
+                if (k <= 2 || k >= 6) {
+                    if (random.nextBoolean() && random.nextBoolean()) tryPlaceLeaf(level, blockSetter, random, config, pos);
+                }
+
+                if (k > 2 && k < 8) {
+                    tryPlaceLeaf(level, blockSetter, random, config, pos);
+                }
+
+                if (k > 2 && k < 7) {
+                    pos.move(dir.getClockWise());
+                    if (random.nextInt(0, foliageHeight) < k+2) tryPlaceLeaf(level, blockSetter, random, config, pos);
+                    pos.move(dir.getClockWise().getOpposite());
+                }
+
+                /*
+                if (k > 4 && k < 7) {
+                    pos.move(dir);
+                    if (random.nextInt(0, foliageHeight) < k) tryPlaceLeaf(level, blockSetter, random, config, pos);
+                    pos.move(dir.getOpposite());
+                }
+                 */
+
+                pos.move(dir.getOpposite());
+            }
             pos.move(Direction.DOWN);
         }
-        pos.move(Direction.UP);
-        for(int k = 0; k <= foliageHeight + 1; ++k) {
-            placeLeavesRow(level, blockSetter, random, config, pos, foliageRadius + 1, -2, bl);
-            pos.move(Direction.DOWN);
-        }
-        pos.move(Direction.UP);
-        placeLeavesRow(level, blockSetter, random, config, pos, foliageRadius, -1, bl);
     }
 
     @Override
@@ -66,8 +83,8 @@ public class AspenFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected boolean shouldSkipLocation(RandomSource random, int localX, int localY, int localZ, int range, boolean large) {
-        if (localY == -1) return random.nextInt(3) == 1 && (localX > 0 && localZ > 0);
-        else if (localY == -2) return random.nextInt(3) == 1 && (localX > 1 || localZ > 1);
-        else return false;
+        return false;
     }
+
+    
 }
