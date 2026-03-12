@@ -146,6 +146,9 @@ public class ModBlocks {
     public static final Supplier<Block> PALE_HANGING_MOSS = regWithItem("pale_hanging_moss",
             () -> new HangingMossBlock(BlockBehaviour.Properties.of().ignitedByLava().mapColor(MapColor.COLOR_LIGHT_GRAY).noCollission().sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.DESTROY)));
 
+
+    
+    
     //logs
     public static final Supplier<Block> WILLOW_LOG = regWithItem("willow_log",
             () -> log(MapColor.WARPED_NYLIUM, MapColor.PODZOL, SoundType.WOOD));
