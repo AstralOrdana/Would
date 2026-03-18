@@ -26,7 +26,7 @@ public class WillowFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected FoliagePlacerType<?> type() {
-        return ModTrees.WILLOW_FOLIAGE_PLACER.get();
+        return ModTrees.WILLOW_FOLIAGE_PLACER;
     }
 
     @Override

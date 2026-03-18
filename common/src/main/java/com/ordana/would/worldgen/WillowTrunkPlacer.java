@@ -31,7 +31,7 @@ public class WillowTrunkPlacer extends TrunkPlacer {
 
     @Override
     protected TrunkPlacerType<?> type() {
-        return ModTrees.WILLOW_TRUNK_PLACER.get();
+        return ModTrees.WILLOW_TRUNK_PLACER;
     }
 
     @Override

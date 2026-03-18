@@ -69,13 +69,13 @@ public class CoconutBlock extends SaplingBlock implements Fallable, Bonemealable
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        if (context.getLevel().getBlockState(context.getClickedPos().above()).is(ModBlocks.PALM_LEAVES.get())) return this.defaultBlockState().setValue(HANGING, true);
+        if (context.getLevel().getBlockState(context.getClickedPos().above()).is(ModBlocks.PALM_LEAVES)) return this.defaultBlockState().setValue(HANGING, true);
         return this.defaultBlockState();
     }
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        return state.getValue(HANGING) ? (level.getBlockState(pos.above()).is(ModBlocks.PALM_LEAVES.get()) ||
+        return state.getValue(HANGING) ? (level.getBlockState(pos.above()).is(ModBlocks.PALM_LEAVES) ||
                 this.mayPlaceOn(level.getBlockState(pos.below()), level, pos)) : super.canSurvive(state, level, pos);
     }
 

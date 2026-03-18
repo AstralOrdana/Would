@@ -25,7 +25,7 @@ public class ModBoatEntity extends Boat {
     }
 
     public ModBoatEntity(Level level, double pX, double pY, double pZ) {
-        this(ModEntities.MOD_BOAT.get(), level);
+        this(ModEntities.MOD_BOAT, level);
         this.setPos(pX, pY, pZ);
         this.xo = pX;
         this.yo = pY;
@@ -35,19 +35,19 @@ public class ModBoatEntity extends Boat {
     @Override
     public Item getDropItem() {
         return switch (getModVariant()) {
-            case ASPEN -> ModItems.ASPEN_BOAT.get();
-            case AZALEA -> ModItems.AZALEA_BOAT.get();
-            case BAOBAB -> ModItems.BAOBAB_BOAT.get();
-            case BLUE_SPRUCE -> ModItems.BLUE_SPRUCE_BOAT.get();
-            case CEDAR -> ModItems.CEDAR_BOAT.get();
-            case EBONY -> ModItems.EBONY_BOAT.get();
-            case FIR -> ModItems.FIR_BOAT.get();
-            case MAHOGANY -> ModItems.MAHOGANY_BOAT.get();
-            case MAPLE -> ModItems.MAPLE_BOAT.get();
-            case PALM -> ModItems.PALM_BOAT.get();
-            case PINE -> ModItems.PINE_BOAT.get();
-            case WALNUT -> ModItems.WALNUT_BOAT.get();
-            case WILLOW -> ModItems.WILLOW_BOAT.get();
+            case ASPEN -> ModItems.ASPEN_BOAT;
+            case AZALEA -> ModItems.AZALEA_BOAT;
+            case BAOBAB -> ModItems.BAOBAB_BOAT;
+            case BLUE_SPRUCE -> ModItems.BLUE_SPRUCE_BOAT;
+            case CEDAR -> ModItems.CEDAR_BOAT;
+            case EBONY -> ModItems.EBONY_BOAT;
+            case FIR -> ModItems.FIR_BOAT;
+            case MAHOGANY -> ModItems.MAHOGANY_BOAT;
+            case MAPLE -> ModItems.MAPLE_BOAT;
+            case PALM -> ModItems.PALM_BOAT;
+            case PINE -> ModItems.PINE_BOAT;
+            case WALNUT -> ModItems.WALNUT_BOAT;
+            case WILLOW -> ModItems.WILLOW_BOAT;
         };
     }
 
@@ -75,19 +75,19 @@ public class ModBoatEntity extends Boat {
     }
 
     public static enum Type implements StringRepresentable {
-        ASPEN(ModBlocks.ASPEN_PLANKS.get(), "aspen"),
-        AZALEA(ModBlocks.AZALEA_PLANKS.get(), "azalea"),
-        BAOBAB(ModBlocks.BAOBAB_PLANKS.get(), "baobab"),
-        BLUE_SPRUCE(ModBlocks.BLUE_SPRUCE_PLANKS.get(), "blue_spruce"),
-        CEDAR(ModBlocks.CEDAR_PLANKS.get(), "cedar"),
-        EBONY(ModBlocks.EBONY_PLANKS.get(), "ebony"),
-        FIR(ModBlocks.FIR_PLANKS.get(), "fir"),
-        MAHOGANY(ModBlocks.MAHOGANY_PLANKS.get(), "mahogany"),
-        MAPLE(ModBlocks.MAPLE_PLANKS.get(), "maple"),
-        PALM(ModBlocks.PALM_PLANKS.get(), "palm"),
-        PINE(ModBlocks.PINE_PLANKS.get(), "pine"),
-        WALNUT(ModBlocks.WALNUT_PLANKS.get(), "walnut"),
-        WILLOW(ModBlocks.WILLOW_PLANKS.get(), "willow");
+        ASPEN(ModBlocks.ASPEN_PLANKS, "aspen"),
+        AZALEA(ModBlocks.AZALEA_PLANKS, "azalea"),
+        BAOBAB(ModBlocks.BAOBAB_PLANKS, "baobab"),
+        BLUE_SPRUCE(ModBlocks.BLUE_SPRUCE_PLANKS, "blue_spruce"),
+        CEDAR(ModBlocks.CEDAR_PLANKS, "cedar"),
+        EBONY(ModBlocks.EBONY_PLANKS, "ebony"),
+        FIR(ModBlocks.FIR_PLANKS, "fir"),
+        MAHOGANY(ModBlocks.MAHOGANY_PLANKS, "mahogany"),
+        MAPLE(ModBlocks.MAPLE_PLANKS, "maple"),
+        PALM(ModBlocks.PALM_PLANKS, "palm"),
+        PINE(ModBlocks.PINE_PLANKS, "pine"),
+        WALNUT(ModBlocks.WALNUT_PLANKS, "walnut"),
+        WILLOW(ModBlocks.WILLOW_PLANKS, "willow");
 
         private final String name;
         private final Block planks;

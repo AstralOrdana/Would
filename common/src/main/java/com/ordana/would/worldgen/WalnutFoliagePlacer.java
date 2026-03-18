@@ -25,7 +25,7 @@ public class WalnutFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected FoliagePlacerType<?> type() {
-        return ModTrees.WALNUT_FOLIAGE_PLACER.get();
+        return ModTrees.WALNUT_FOLIAGE_PLACER;
     }
 
     @Override

@@ -23,7 +23,7 @@ public class PaleMossDecorator extends TreeDecorator {
     private final float leavesProbability;
 
     protected TreeDecoratorType<?> type() {
-        return ModTrees.PALE_MOSS_DECORATOR.get();
+        return ModTrees.PALE_MOSS_DECORATOR;
     }
 
     public PaleMossDecorator(float f) {
@@ -55,10 +55,10 @@ public class PaleMossDecorator extends TreeDecorator {
 
     private static void addMossHanger(BlockPos blockPos, TreeDecorator.Context context) {
         while(context.isAir(blockPos.below()) && !((double)context.random().nextFloat() < 0.5)) {
-            context.setBlock(blockPos, ModBlocks.PALE_HANGING_MOSS.get().defaultBlockState().setValue(HangingMossBlock.TIP, false));
+            context.setBlock(blockPos, ModBlocks.PALE_HANGING_MOSS.defaultBlockState().setValue(HangingMossBlock.TIP, false));
             blockPos = blockPos.below();
         }
 
-        context.setBlock(blockPos, ModBlocks.PALE_HANGING_MOSS.get().defaultBlockState().setValue(HangingMossBlock.TIP, true));
+        context.setBlock(blockPos, ModBlocks.PALE_HANGING_MOSS.defaultBlockState().setValue(HangingMossBlock.TIP, true));
     }
 }

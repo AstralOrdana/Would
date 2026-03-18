@@ -28,11 +28,6 @@ public class Would {
             WouldClient.init();
         }
 
-        ModItems.init();
-        ModBlocks.init();
-        ModTrees.init();
-        ModWorldgenFeatures.init();
-        ModEntities.init();
         PlatHelper.addCommonSetup(Would::setup);
     }
 

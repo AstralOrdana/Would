@@ -31,7 +31,7 @@ public class WalnutTrunkPlacer extends TrunkPlacer {
 
     @Override
     protected @NotNull TrunkPlacerType<?> type() {
-        return ModTrees.WALNUT_TRUNK_PLACER.get();
+        return ModTrees.WALNUT_TRUNK_PLACER;
     }
 
     @Override

@@ -56,13 +56,13 @@ public class ModEvents {
 
     private static InteractionResult syrupBottling(Item item, ItemStack stack, BlockPos pos, BlockState state,
                                                     Player player, Level level, InteractionHand hand, BlockHitResult hitResult) {
-        if (stack.is(Items.GLASS_BOTTLE) && state.is(ModBlocks.MAPLE_LOG_SAPPY.get())) {
+        if (stack.is(Items.GLASS_BOTTLE) && state.is(ModBlocks.MAPLE_LOG_SAPPY)) {
             level.playSound(player, pos, SoundEvents.HONEY_BLOCK_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
             ParticleUtils.spawnParticlesOnBlockFaces(level, pos, new BlockParticleOption(ParticleTypes.BLOCK, Blocks.HONEY_BLOCK.defaultBlockState()), UniformInt.of(3, 5));
             if (player instanceof ServerPlayer serverPlayer) {
-                ItemStack itemStack2 = ItemUtils.createFilledResult(stack, player, ModItems.SYRUP_BOTTLE.get().getDefaultInstance());
+                ItemStack itemStack2 = ItemUtils.createFilledResult(stack, player, ModItems.SYRUP_BOTTLE.getDefaultInstance());
                 player.setItemInHand(hand, itemStack2);
-                level.setBlockAndUpdate(pos, ModBlocks.MAPLE_LOG.get().withPropertiesOf(state));
+                level.setBlockAndUpdate(pos, ModBlocks.MAPLE_LOG.withPropertiesOf(state));
                 CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
             }
             return InteractionResult.sidedSuccess(level.isClientSide);

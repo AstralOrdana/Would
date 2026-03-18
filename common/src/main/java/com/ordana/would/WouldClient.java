@@ -32,73 +32,73 @@ public class WouldClient {
     private static boolean finishedSetup = false;
 
     public static void setup() {
-        ClientHelper.registerRenderType(ModBlocks.PALE_HANGING_MOSS.get(), RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.PALE_HANGING_MOSS, RenderType.cutoutMipped());
 
-        ClientHelper.registerRenderType(ModBlocks.WILLOW_LEAVES.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.BAOBAB_LEAVES.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.EBONY_LEAVES.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.EBONY_LEAVES_FRUITING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.FIR_LEAVES.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.PINE_LEAVES.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.CEDAR_LEAVES.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.MAHOGANY_LEAVES.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.PALM_LEAVES.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.MAPLE_LEAVES.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.ASPEN_LEAVES.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.WALNUT_LEAVES.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.BLUE_SPRUCE_LEAVES.get(), RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.WILLOW_LEAVES, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.BAOBAB_LEAVES, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.EBONY_LEAVES, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.EBONY_LEAVES_FRUITING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.FIR_LEAVES, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.PINE_LEAVES, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.CEDAR_LEAVES, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.MAHOGANY_LEAVES, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.PALM_LEAVES, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.MAPLE_LEAVES, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.ASPEN_LEAVES, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.WALNUT_LEAVES, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.BLUE_SPRUCE_LEAVES, RenderType.cutoutMipped());
         
-        ClientHelper.registerRenderType(ModBlocks.WILLOW_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.BAOBAB_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.EBONY_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.FIR_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.PINE_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.CEDAR_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.MAHOGANY_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.MAPLE_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.ASPEN_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.WALNUT_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.BLUE_SPRUCE_SAPLING.get(), RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.WILLOW_SAPLING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.BAOBAB_SAPLING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.EBONY_SAPLING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.FIR_SAPLING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.PINE_SAPLING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.CEDAR_SAPLING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.MAHOGANY_SAPLING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.MAPLE_SAPLING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.ASPEN_SAPLING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.WALNUT_SAPLING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.BLUE_SPRUCE_SAPLING, RenderType.cutoutMipped());
 
-        ClientHelper.registerRenderType(ModBlocks.POTTED_WILLOW_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.POTTED_BAOBAB_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.POTTED_EBONY_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.POTTED_FIR_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.POTTED_PINE_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.POTTED_CEDAR_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.POTTED_MAHOGANY_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.POTTED_MAPLE_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.POTTED_ASPEN_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.POTTED_WALNUT_SAPLING.get(), RenderType.cutoutMipped());
-        ClientHelper.registerRenderType(ModBlocks.POTTED_BLUE_SPRUCE_SAPLING.get(), RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.POTTED_WILLOW_SAPLING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.POTTED_BAOBAB_SAPLING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.POTTED_EBONY_SAPLING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.POTTED_FIR_SAPLING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.POTTED_PINE_SAPLING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.POTTED_CEDAR_SAPLING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.POTTED_MAHOGANY_SAPLING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.POTTED_MAPLE_SAPLING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.POTTED_ASPEN_SAPLING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.POTTED_WALNUT_SAPLING, RenderType.cutoutMipped());
+        ClientHelper.registerRenderType(ModBlocks.POTTED_BLUE_SPRUCE_SAPLING, RenderType.cutoutMipped());
 
-        ClientHelper.registerRenderType(ModBlocks.WILLOW_DOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.BAOBAB_DOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.EBONY_DOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.FIR_DOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.PINE_DOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.CEDAR_DOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.MAHOGANY_DOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.AZALEA_DOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.PALM_DOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.MAPLE_DOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.ASPEN_DOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.WALNUT_DOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.BLUE_SPRUCE_DOOR.get(), RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.WILLOW_DOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.BAOBAB_DOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.EBONY_DOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.FIR_DOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.PINE_DOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.CEDAR_DOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.MAHOGANY_DOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.AZALEA_DOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.PALM_DOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.MAPLE_DOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.ASPEN_DOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.WALNUT_DOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.BLUE_SPRUCE_DOOR, RenderType.cutout());
 
-        ClientHelper.registerRenderType(ModBlocks.WILLOW_TRAPDOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.BAOBAB_TRAPDOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.EBONY_TRAPDOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.FIR_TRAPDOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.PINE_TRAPDOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.CEDAR_TRAPDOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.MAHOGANY_TRAPDOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.AZALEA_TRAPDOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.PALM_TRAPDOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.MAPLE_TRAPDOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.ASPEN_TRAPDOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.WALNUT_TRAPDOOR.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModBlocks.BLUE_SPRUCE_TRAPDOOR.get(), RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.WILLOW_TRAPDOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.BAOBAB_TRAPDOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.EBONY_TRAPDOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.FIR_TRAPDOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.PINE_TRAPDOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.CEDAR_TRAPDOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.MAHOGANY_TRAPDOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.AZALEA_TRAPDOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.PALM_TRAPDOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.MAPLE_TRAPDOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.ASPEN_TRAPDOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.WALNUT_TRAPDOOR, RenderType.cutout());
+        ClientHelper.registerRenderType(ModBlocks.BLUE_SPRUCE_TRAPDOOR, RenderType.cutout());
 
         finishedSetup = true;
     }
@@ -112,35 +112,35 @@ public class WouldClient {
     @EventCalled
     private static void registerBlockColors(ClientHelper.BlockColorEvent event) {
         event.register((blockState, level, blockPos, i) -> event.getColor(Blocks.OAK_LEAVES.defaultBlockState(), level, blockPos, i),
-                ModBlocks.WILLOW_LEAVES.get(),
-                ModBlocks.MAHOGANY_LEAVES.get(),
-                ModBlocks.BAOBAB_LEAVES.get(),
-                ModBlocks.WALNUT_LEAVES.get());
+                ModBlocks.WILLOW_LEAVES,
+                ModBlocks.MAHOGANY_LEAVES,
+                ModBlocks.BAOBAB_LEAVES,
+                ModBlocks.WALNUT_LEAVES);
 
         event.register((blockState, level, blockPos, i) -> event.getColor(Blocks.BIRCH_LEAVES.defaultBlockState(), level, blockPos, i),
-                ModBlocks.PALM_LEAVES.get(),
-                ModBlocks.CEDAR_LEAVES.get());
+                ModBlocks.PALM_LEAVES,
+                ModBlocks.CEDAR_LEAVES);
 
         event.register((blockState, level, blockPos, i) -> event.getColor(Blocks.SPRUCE_LEAVES.defaultBlockState(), level, blockPos, i),
-                ModBlocks.PINE_LEAVES.get(),
-                ModBlocks.FIR_LEAVES.get());
+                ModBlocks.PINE_LEAVES,
+                ModBlocks.FIR_LEAVES);
     }
 
 
     private static void registerItemColors(ClientHelper.ItemColorEvent event) {
         event.register((itemStack, i) -> event.getColor(Items.OAK_LEAVES.getDefaultInstance(), i),
-                ModBlocks.WILLOW_LEAVES.get(),
-                ModBlocks.MAHOGANY_LEAVES.get(),
-                ModBlocks.BAOBAB_LEAVES.get(),
-                ModBlocks.WALNUT_LEAVES.get());
+                ModBlocks.WILLOW_LEAVES,
+                ModBlocks.MAHOGANY_LEAVES,
+                ModBlocks.BAOBAB_LEAVES,
+                ModBlocks.WALNUT_LEAVES);
 
         event.register((itemStack, i) -> event.getColor(Items.BIRCH_LEAVES.getDefaultInstance(), i),
-                ModBlocks.PALM_LEAVES.get(),
-                ModBlocks.CEDAR_LEAVES.get());
+                ModBlocks.PALM_LEAVES,
+                ModBlocks.CEDAR_LEAVES);
 
         event.register((itemStack, i) -> event.getColor(Items.SPRUCE_LEAVES.getDefaultInstance(), i),
-                ModBlocks.PINE_LEAVES.get(),
-                ModBlocks.FIR_LEAVES.get());
+                ModBlocks.PINE_LEAVES,
+                ModBlocks.FIR_LEAVES);
     }
 
     private static int getLeafTypeColor(ClientHelper.BlockColorEvent event, LeavesType type, BlockState state, BlockAndTintGetter level, BlockPos pos, int i) {
@@ -153,10 +153,10 @@ public class WouldClient {
     }
 
     private static void registerEntityRenderers(ClientHelper.EntityRendererEvent event) {
-        event.register(ModEntities.FALLING_COCONUT.get(), FallingBlockRendererGeneric::new);
-        event.register(ModEntities.THROWN_WALNUT.get(), context -> new ThrownItemRenderer<>(context, 1, false));
-        event.register(ModEntities.MOD_BOAT.get(), context -> new ModBoatRenderer(context, false));
-        event.register(ModEntities.MOD_CHEST_BOAT.get(), context -> new ModBoatRenderer(context, true));
+        event.register(ModEntities.FALLING_COCONUT, FallingBlockRendererGeneric::new);
+        event.register(ModEntities.THROWN_WALNUT, context -> new ThrownItemRenderer<>(context, 1, false));
+        event.register(ModEntities.MOD_BOAT, context -> new ModBoatRenderer(context, false));
+        event.register(ModEntities.MOD_CHEST_BOAT, context -> new ModBoatRenderer(context, true));
 
     }
 

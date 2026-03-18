@@ -1,7 +1,7 @@
 package com.ordana.would.fabric;
 
 import com.ordana.would.Would;
-import com.ordana.would.reg.ModEvents;
+import com.ordana.would.reg.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
@@ -18,6 +18,11 @@ public class WouldFabric implements ModInitializer {
     public void onInitialize() {
 
         Would.commonInit();
+        ModItems.init();
+        ModBlocks.init();
+        ModTrees.init();
+        ModWorldgenFeatures.init();
+        ModEntities.init();
 
         UseBlockCallback.EVENT.register(WouldFabric::onRightClickBlock);
         PlatHelper.addCommonSetup(WouldFabric::compostSetup);

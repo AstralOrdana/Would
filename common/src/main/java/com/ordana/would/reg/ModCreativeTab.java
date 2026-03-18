@@ -18,7 +18,7 @@ public class ModCreativeTab {
     public static final RegSupplier<CreativeModeTab> MOD_TAB =
             RegHelper.registerCreativeModeTab(Would.res("would"),
                     (c) -> c.title(Component.translatable("itemGroup.would.would"))
-                            .icon(() -> ModBlocks.EBONY_LOG.get().asItem().getDefaultInstance()));
+                            .icon(() -> ModBlocks.EBONY_LOG.asItem().getDefaultInstance()));
 
     public static void init() {
         RegHelper.addItemsToTabsRegistration(ModCreativeTab::registerItemsToTabs);
@@ -34,7 +34,7 @@ public class ModCreativeTab {
                 ModBlocks.PINE_LOG, ModBlocks.PINE_WOOD, ModBlocks.STRIPPED_PINE_LOG, ModBlocks.STRIPPED_PINE_WOOD, ModBlocks.PINE_PLANKS, ModBlocks.PINE_STAIRS, ModBlocks.PINE_SLAB, ModBlocks.PINE_FENCE, ModBlocks.PINE_FENCE_GATE, ModBlocks.PINE_DOOR, ModBlocks.PINE_TRAPDOOR, ModBlocks.PINE_PRESSURE_PLATE, ModBlocks.PINE_BUTTON, ModBlocks.PINE_LEAVES, ModBlocks.PINE_SAPLING, ModBlocks.PINE_SIGN, ModBlocks.PINE_HANGING_SIGN, ModItems.PINE_BOAT, ModItems.PINE_CHEST_BOAT,
                 ModBlocks.CEDAR_LOG, ModBlocks.CEDAR_WOOD, ModBlocks.STRIPPED_CEDAR_LOG, ModBlocks.STRIPPED_CEDAR_WOOD, ModBlocks.CEDAR_PLANKS, ModBlocks.CEDAR_STAIRS, ModBlocks.CEDAR_SLAB, ModBlocks.CEDAR_FENCE, ModBlocks.CEDAR_FENCE_GATE, ModBlocks.CEDAR_DOOR, ModBlocks.CEDAR_TRAPDOOR, ModBlocks.CEDAR_PRESSURE_PLATE, ModBlocks.CEDAR_BUTTON, ModBlocks.CEDAR_LEAVES, ModBlocks.CEDAR_SAPLING, ModBlocks.CEDAR_SIGN, ModBlocks.CEDAR_HANGING_SIGN, ModItems.CEDAR_BOAT, ModItems.CEDAR_CHEST_BOAT,
                 ModBlocks.MAHOGANY_LOG, ModBlocks.MAHOGANY_WOOD, ModBlocks.STRIPPED_MAHOGANY_LOG, ModBlocks.STRIPPED_MAHOGANY_WOOD, ModBlocks.MAHOGANY_PLANKS, ModBlocks.MAHOGANY_STAIRS, ModBlocks.MAHOGANY_SLAB, ModBlocks.MAHOGANY_FENCE, ModBlocks.MAHOGANY_FENCE_GATE, ModBlocks.MAHOGANY_DOOR, ModBlocks.MAHOGANY_TRAPDOOR, ModBlocks.MAHOGANY_PRESSURE_PLATE, ModBlocks.MAHOGANY_BUTTON, ModBlocks.MAHOGANY_LEAVES, ModBlocks.MAHOGANY_SAPLING, ModBlocks.MAHOGANY_SIGN, ModBlocks.MAHOGANY_HANGING_SIGN, ModItems.MAHOGANY_BOAT, ModItems.MAHOGANY_CHEST_BOAT,
-                ModBlocks.AZALEA_LOG, ModBlocks.AZALEA_WOOD, ModBlocks.STRIPPED_AZALEA_LOG, ModBlocks.STRIPPED_AZALEA_WOOD, ModBlocks.AZALEA_PLANKS, ModBlocks.AZALEA_STAIRS, ModBlocks.AZALEA_SLAB, ModBlocks.AZALEA_FENCE, ModBlocks.AZALEA_FENCE_GATE, ModBlocks.AZALEA_DOOR, ModBlocks.AZALEA_TRAPDOOR, ModBlocks.AZALEA_PRESSURE_PLATE, ModBlocks.AZALEA_BUTTON, () -> Blocks.AZALEA_LEAVES, () -> Blocks.AZALEA, ModBlocks.AZALEA_SIGN, ModBlocks.AZALEA_HANGING_SIGN, ModItems.AZALEA_BOAT, ModItems.AZALEA_CHEST_BOAT,
+                ModBlocks.AZALEA_LOG, ModBlocks.AZALEA_WOOD, ModBlocks.STRIPPED_AZALEA_LOG, ModBlocks.STRIPPED_AZALEA_WOOD, ModBlocks.AZALEA_PLANKS, ModBlocks.AZALEA_STAIRS, ModBlocks.AZALEA_SLAB, ModBlocks.AZALEA_FENCE, ModBlocks.AZALEA_FENCE_GATE, ModBlocks.AZALEA_DOOR, ModBlocks.AZALEA_TRAPDOOR, ModBlocks.AZALEA_PRESSURE_PLATE, ModBlocks.AZALEA_BUTTON, Blocks.AZALEA_LEAVES, Blocks.AZALEA, ModBlocks.AZALEA_SIGN, ModBlocks.AZALEA_HANGING_SIGN, ModItems.AZALEA_BOAT, ModItems.AZALEA_CHEST_BOAT,
                 ModBlocks.PALM_LOG, ModBlocks.PALM_WOOD, ModBlocks.STRIPPED_PALM_LOG, ModBlocks.STRIPPED_PALM_WOOD, ModBlocks.PALM_PLANKS, ModBlocks.PALM_STAIRS, ModBlocks.PALM_SLAB, ModBlocks.PALM_FENCE, ModBlocks.PALM_FENCE_GATE, ModBlocks.PALM_DOOR, ModBlocks.PALM_TRAPDOOR, ModBlocks.PALM_PRESSURE_PLATE, ModBlocks.PALM_BUTTON, ModBlocks.PALM_LEAVES, ModItems.COCONUT, ModBlocks.PALM_SIGN, ModBlocks.PALM_HANGING_SIGN, ModItems.PALM_BOAT, ModItems.PALM_CHEST_BOAT,
                 ModBlocks.MAPLE_LOG, ModBlocks.MAPLE_LOG_SAPPY, ModItems.SYRUP_BOTTLE, ModBlocks.MAPLE_WOOD, ModBlocks.STRIPPED_MAPLE_LOG, ModBlocks.STRIPPED_MAPLE_WOOD, ModBlocks.MAPLE_PLANKS, ModBlocks.MAPLE_STAIRS, ModBlocks.MAPLE_SLAB, ModBlocks.MAPLE_FENCE, ModBlocks.MAPLE_FENCE_GATE, ModBlocks.MAPLE_DOOR, ModBlocks.MAPLE_TRAPDOOR, ModBlocks.MAPLE_PRESSURE_PLATE, ModBlocks.MAPLE_BUTTON, ModBlocks.MAPLE_LEAVES, ModBlocks.MAPLE_SAPLING, ModBlocks.MAPLE_SIGN, ModBlocks.MAPLE_HANGING_SIGN, ModItems.MAPLE_BOAT, ModItems.MAPLE_CHEST_BOAT,
                 ModBlocks.ASPEN_LOG, ModBlocks.ASPEN_WOOD, ModBlocks.ASPEN_LOG_GAZING, ModBlocks.ASPEN_WOOD_GAZING, ModBlocks.STRIPPED_ASPEN_LOG, ModBlocks.STRIPPED_ASPEN_WOOD, ModBlocks.STRIPPED_ASPEN_LOG_GAZING, ModBlocks.STRIPPED_ASPEN_WOOD_GAZING, ModBlocks.ASPEN_PLANKS, ModBlocks.ASPEN_STAIRS, ModBlocks.ASPEN_SLAB, ModBlocks.ASPEN_FENCE, ModBlocks.ASPEN_FENCE_GATE, ModBlocks.ASPEN_DOOR, ModBlocks.ASPEN_TRAPDOOR, ModBlocks.ASPEN_PRESSURE_PLATE, ModBlocks.ASPEN_BUTTON, ModBlocks.ASPEN_LEAVES, ModBlocks.ASPEN_SAPLING, ModBlocks.ASPEN_SIGN, ModBlocks.ASPEN_HANGING_SIGN, ModItems.ASPEN_BOAT, ModItems.ASPEN_CHEST_BOAT,
@@ -42,17 +42,13 @@ public class ModCreativeTab {
                 ModBlocks.BLUE_SPRUCE_LOG, ModBlocks.BLUE_SPRUCE_WOOD, ModBlocks.STRIPPED_BLUE_SPRUCE_LOG, ModBlocks.STRIPPED_BLUE_SPRUCE_WOOD, ModBlocks.BLUE_SPRUCE_PLANKS, ModBlocks.BLUE_SPRUCE_STAIRS, ModBlocks.BLUE_SPRUCE_SLAB, ModBlocks.BLUE_SPRUCE_FENCE, ModBlocks.BLUE_SPRUCE_FENCE_GATE, ModBlocks.BLUE_SPRUCE_DOOR, ModBlocks.BLUE_SPRUCE_TRAPDOOR, ModBlocks.BLUE_SPRUCE_PRESSURE_PLATE, ModBlocks.BLUE_SPRUCE_BUTTON, ModBlocks.BLUE_SPRUCE_LEAVES, ModBlocks.BLUE_SPRUCE_SAPLING, ModBlocks.BLUE_SPRUCE_SIGN, ModBlocks.BLUE_SPRUCE_HANGING_SIGN, ModItems.BLUE_SPRUCE_BOAT, ModItems.BLUE_SPRUCE_CHEST_BOAT);
     }
 
-    private static void after(RegHelper.ItemToTabEvent event, Item target, Supplier<?>... items) {
-
-        ItemLike[] entries = Arrays.stream(items).map((s -> (ItemLike) (s.get()))).toArray(ItemLike[]::new);
-        var tab = MOD_TAB.getHolder().unwrapKey().get();
-        event.addAfter(tab, i -> i.is(target), entries);
+    private static void after(RegHelper.ItemToTabEvent event, Item target, ItemLike... entries) {
+        var tab = MOD_TAB.getHolder().unwrapKey();
+        event.addAfter(tab.get(), i -> i.is(target), entries);
     }
 
-    private static void before(RegHelper.ItemToTabEvent event, Item target, Supplier<?>... items) {
-
-        ItemLike[] entries = Arrays.stream(items).map(s -> (ItemLike) s.get()).toArray(ItemLike[]::new);
-        var tab = MOD_TAB.getHolder().unwrapKey().get();
-        event.addBefore(tab, i -> i.is(target), entries);
+    private static void before(RegHelper.ItemToTabEvent event, Item target, ItemLike... entries) {
+        var tab = MOD_TAB.getHolder().unwrapKey();
+        event.addBefore(tab.get(), i -> i.is(target), entries);
     }
 }

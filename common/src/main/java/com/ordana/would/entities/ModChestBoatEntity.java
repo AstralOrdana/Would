@@ -19,7 +19,7 @@ public class ModChestBoatEntity extends ChestBoat {
     }
 
     public ModChestBoatEntity(Level pLevel, double pX, double pY, double pZ) {
-        this(ModEntities.MOD_CHEST_BOAT.get(), pLevel);
+        this(ModEntities.MOD_CHEST_BOAT, pLevel);
         this.setPos(pX, pY, pZ);
         this.xo = pX;
         this.yo = pY;
@@ -29,19 +29,19 @@ public class ModChestBoatEntity extends ChestBoat {
     @Override
     public Item getDropItem() {
         return switch (getModVariant()) {
-            case ASPEN -> ModItems.ASPEN_CHEST_BOAT.get();
-            case AZALEA -> ModItems.AZALEA_CHEST_BOAT.get();
-            case BAOBAB -> ModItems.BAOBAB_CHEST_BOAT.get();
-            case BLUE_SPRUCE -> ModItems.BLUE_SPRUCE_CHEST_BOAT.get();
-            case CEDAR -> ModItems.CEDAR_CHEST_BOAT.get();
-            case EBONY -> ModItems.EBONY_CHEST_BOAT.get();
-            case FIR -> ModItems.FIR_CHEST_BOAT.get();
-            case MAHOGANY -> ModItems.MAHOGANY_CHEST_BOAT.get();
-            case MAPLE -> ModItems.MAPLE_CHEST_BOAT.get();
-            case PALM -> ModItems.PALM_CHEST_BOAT.get();
-            case PINE -> ModItems.PINE_CHEST_BOAT.get();
-            case WALNUT -> ModItems.WALNUT_CHEST_BOAT.get();
-            case WILLOW -> ModItems.WILLOW_CHEST_BOAT.get();
+            case ASPEN -> ModItems.ASPEN_CHEST_BOAT;
+            case AZALEA -> ModItems.AZALEA_CHEST_BOAT;
+            case BAOBAB -> ModItems.BAOBAB_CHEST_BOAT;
+            case BLUE_SPRUCE -> ModItems.BLUE_SPRUCE_CHEST_BOAT;
+            case CEDAR -> ModItems.CEDAR_CHEST_BOAT;
+            case EBONY -> ModItems.EBONY_CHEST_BOAT;
+            case FIR -> ModItems.FIR_CHEST_BOAT;
+            case MAHOGANY -> ModItems.MAHOGANY_CHEST_BOAT;
+            case MAPLE -> ModItems.MAPLE_CHEST_BOAT;
+            case PALM -> ModItems.PALM_CHEST_BOAT;
+            case PINE -> ModItems.PINE_CHEST_BOAT;
+            case WALNUT -> ModItems.WALNUT_CHEST_BOAT;
+            case WILLOW -> ModItems.WILLOW_CHEST_BOAT;
         };
     }
 

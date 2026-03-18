@@ -32,7 +32,7 @@ public class BaldCypressTrunkPlacer extends TrunkPlacer {
 
     @Override
     protected @NotNull TrunkPlacerType<?> type() {
-        return ModTrees.BALD_CYPRESS_TRUNK_PLACER.get();
+        return ModTrees.BALD_CYPRESS_TRUNK_PLACER;
     }
 
     @Override

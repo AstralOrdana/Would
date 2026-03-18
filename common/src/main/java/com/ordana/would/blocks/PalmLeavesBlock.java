@@ -116,6 +116,6 @@ public class PalmLeavesBlock extends LeavesBlock implements BonemealableBlock {
     }
 
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-        level.setBlock(pos.below(), ModBlocks.COCONUT.get().defaultBlockState().setValue(CoconutBlock.HANGING, true).setValue(CoconutBlock.ENABLED, true), 2);
+        level.setBlock(pos.below(), ModBlocks.COCONUT.defaultBlockState().setValue(CoconutBlock.HANGING, true).setValue(CoconutBlock.ENABLED, true), 2);
     }
 }

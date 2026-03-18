@@ -50,7 +50,7 @@ public class HangingMossBlock extends Block implements BonemealableBlock {
     private boolean canStayAtPosition(BlockGetter blockGetter, BlockPos blockPos) {
         BlockPos blockPos2 = blockPos.relative(Direction.UP);
         BlockState blockState = blockGetter.getBlockState(blockPos2);
-        return MultifaceBlock.canAttachTo(blockGetter, Direction.UP, blockPos2, blockState) || blockState.is(ModBlocks.PALE_HANGING_MOSS.get());
+        return MultifaceBlock.canAttachTo(blockGetter, Direction.UP, blockPos2, blockState) || blockState.is(ModBlocks.PALE_HANGING_MOSS);
     }
 
     protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {

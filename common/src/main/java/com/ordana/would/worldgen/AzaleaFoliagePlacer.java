@@ -25,7 +25,7 @@ public class AzaleaFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected FoliagePlacerType<?> type() {
-        return ModTrees.AZALEA_FOLIAGE_PLACER.get();
+        return ModTrees.AZALEA_FOLIAGE_PLACER;
     }
 
     @Override

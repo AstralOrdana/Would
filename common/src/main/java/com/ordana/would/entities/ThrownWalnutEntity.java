@@ -27,18 +27,18 @@ public class ThrownWalnutEntity extends ImprovedProjectileEntity {
     }
 
     public ThrownWalnutEntity(Level level, LivingEntity thrower, ItemStack item) {
-        super(ModEntities.THROWN_WALNUT.get(), thrower, level);
+        super(ModEntities.THROWN_WALNUT, thrower, level);
         this.setItem(item);
     }
 
     public ThrownWalnutEntity(Level worldIn, double x, double y, double z) {
-        super(ModEntities.THROWN_WALNUT.get(), x, y, z, worldIn);
+        super(ModEntities.THROWN_WALNUT, x, y, z, worldIn);
     }
 
 
     @Override
     protected Item getDefaultItem() {
-        return ModItems.WALNUT.get();
+        return ModItems.WALNUT;
     }
 
     public void handleEntityEvent(byte id) {

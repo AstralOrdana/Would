@@ -31,7 +31,7 @@ public class AzaleaTrunkPlacer extends TrunkPlacer {
 
     @Override
     protected @NotNull TrunkPlacerType<?> type() {
-        return ModTrees.AZALEA_TRUNK_PLACER.get();
+        return ModTrees.AZALEA_TRUNK_PLACER;
     }
 
     @Override

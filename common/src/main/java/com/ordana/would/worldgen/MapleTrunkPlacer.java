@@ -31,7 +31,7 @@ public class MapleTrunkPlacer extends TrunkPlacer {
 
     @Override
     protected @NotNull TrunkPlacerType<?> type() {
-        return ModTrees.MAPLE_TRUNK_PLACER.get();
+        return ModTrees.MAPLE_TRUNK_PLACER;
     }
 
     @Override

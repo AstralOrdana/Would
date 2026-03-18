@@ -26,7 +26,7 @@ public class PineFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected FoliagePlacerType<?> type() {
-        return ModTrees.PINE_FOLIAGE_PLACER.get();
+        return ModTrees.PINE_FOLIAGE_PLACER;
     }
 
     @Override

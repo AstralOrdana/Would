@@ -26,7 +26,7 @@ public class CedarFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected FoliagePlacerType<?> type() {
-        return ModTrees.CEDAR_FOLIAGE_PLACER.get();
+        return ModTrees.CEDAR_FOLIAGE_PLACER;
     }
 
     @Override

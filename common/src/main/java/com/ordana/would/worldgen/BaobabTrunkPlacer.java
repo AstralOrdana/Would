@@ -29,7 +29,7 @@ public class BaobabTrunkPlacer extends TrunkPlacer {
 
     @Override
     protected @NotNull TrunkPlacerType<?> type() {
-        return ModTrees.BAOBAB_TRUNK_PLACER.get();
+        return ModTrees.BAOBAB_TRUNK_PLACER;
     }
 
     @Override
