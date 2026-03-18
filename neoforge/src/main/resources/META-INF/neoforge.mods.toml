@@ -39,13 +39,6 @@ I Would, Would you?
     side="BOTH"
 
 [[dependencies.would]]
-    modId="moonlight"
-    type = "required"
-    versionRange="[1.20-2.13.30,)"
-    ordering="NONE"
-    side="BOTH"
-
-[[dependencies.would]]
     modId="wetland_whimsy"
     type = "optional"
     versionRange="[1.0,)"

@@ -3,12 +3,12 @@ package com.ordana.would;
 import com.ordana.would.entities.ModBoatRenderer;
 import com.ordana.would.reg.ModBlocks;
 import com.ordana.would.reg.ModEntities;
-import net.mehvahdjukaar.moonlight.api.client.renderer.FallingBlockRendererGeneric;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.FallingBlockRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.level.FoliageColor;
 
@@ -128,7 +128,7 @@ public class WouldClient {
     }
 
     public static void registerEntityRenderers(WouldPlatform.EntityRendererEvent event) {
-        event.register(ModEntities.FALLING_COCONUT, FallingBlockRendererGeneric::new);
+        event.register(ModEntities.FALLING_COCONUT, FallingBlockRenderer::new);
         event.register(ModEntities.THROWN_WALNUT, context -> new ThrownItemRenderer<>(context, 1, false));
         event.register(ModEntities.MOD_BOAT, context -> new ModBoatRenderer(context, false));
         event.register(ModEntities.MOD_CHEST_BOAT, context -> new ModBoatRenderer(context, true));

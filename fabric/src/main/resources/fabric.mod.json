@@ -29,7 +29,6 @@
   ],
   "depends": {
     "fabric-api": "*",
-    "minecraft": "1.21.1",
-    "moonlight": ">=1.20-2.3.30"
+    "minecraft": "1.21.1"
   }
 }
