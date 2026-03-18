@@ -30,10 +30,9 @@ public class WouldPlatformImpl {
         return FabricLoader.getInstance().getEnvironmentType().equals(EnvType.CLIENT);
     }
 
-    public static Pair<CreativeModeTab, ResourceKey<CreativeModeTab>> registerCreativeModeTab(ResourceLocation name, MutableComponent title, Supplier<ItemStack> icon) {
-        ResourceKey<CreativeModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, name);
-        CreativeModeTab tab = FabricItemGroup.builder().title(title).icon(icon).build();
+    public static CreativeModeTab registerCreativeModeTab(ResourceLocation name, MutableComponent title, Supplier<ItemStack> icon, CreativeModeTab.DisplayItemsGenerator generator) {
+        CreativeModeTab tab = FabricItemGroup.builder().title(title).icon(icon).displayItems(generator).build();
         Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, name, tab);
-        return new Pair<>(tab, key);
+        return tab;
     }
 }

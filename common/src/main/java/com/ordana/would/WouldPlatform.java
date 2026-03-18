@@ -42,7 +42,7 @@ public class WouldPlatform {
 	}
 
 	@ExpectPlatform
-	public static Pair<CreativeModeTab, ResourceKey<CreativeModeTab>> registerCreativeModeTab(ResourceLocation name, MutableComponent title, Supplier<ItemStack> icon) {
+	public static CreativeModeTab registerCreativeModeTab(ResourceLocation name, MutableComponent title, Supplier<ItemStack> icon, CreativeModeTab.DisplayItemsGenerator generator) {
 		throw new AssertionError();
 	}
 

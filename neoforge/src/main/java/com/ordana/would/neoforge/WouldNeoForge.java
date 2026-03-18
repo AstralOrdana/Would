@@ -9,7 +9,7 @@ public class WouldNeoForge {
     public static final String MOD_ID = Would.MOD_ID;
 
     public WouldNeoForge(IEventBus eventBus) {
-        Would.commonInit();
+
     }
 }
 

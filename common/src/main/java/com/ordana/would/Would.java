@@ -19,9 +19,6 @@ public class Would {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
     }
 
-    public static void commonInit() {
-    }
-
     public static void setup() {
         ModWoodSetup.init();
     }
