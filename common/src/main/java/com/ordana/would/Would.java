@@ -20,11 +20,6 @@ public class Would {
     }
 
     public static void commonInit() {
-
-        if (WouldPlatform.isClient()) {
-            //ClientConfigs.init();
-            WouldClient.init();
-        }
     }
 
     public static void setup() {

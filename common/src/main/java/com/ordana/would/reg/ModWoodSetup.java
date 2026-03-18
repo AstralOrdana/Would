@@ -2,7 +2,7 @@ package com.ordana.would.reg;
 
 import com.google.common.collect.ImmutableMap;
 import com.ordana.would.Would;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import com.ordana.would.WouldPlatform;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.world.item.AxeItem;
@@ -30,7 +30,7 @@ public class ModWoodSetup {
 
     private static void register(WoodType woodType) {
         WoodType.register(woodType);
-        if (PlatHelper.getPhysicalSide().isClient()) {
+        if (WouldPlatform.isClient()) {
             Sheets.SIGN_MATERIALS.put(woodType, new Material(Sheets.SIGN_SHEET, Would.res("entity/signs/" + woodType.name())));
             Sheets.HANGING_SIGN_MATERIALS.put(woodType, new Material(Sheets.SIGN_SHEET, Would.res("entity/signs/hanging/" + woodType.name())));
         }

@@ -18,6 +18,9 @@
   "entrypoints": {
     "main": [
       "com.ordana.would.fabric.WouldFabric"
+    ],
+    "client": [
+      "com.ordana.would.fabric.WouldFabricClient"
     ]
   },
   "mixins": [
