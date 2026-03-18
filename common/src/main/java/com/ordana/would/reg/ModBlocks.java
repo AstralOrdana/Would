@@ -2,8 +2,6 @@ package com.ordana.would.reg;
 
 import com.ordana.would.Would;
 import com.ordana.would.blocks.*;
-import net.mehvahdjukaar.moonlight.api.block.ModStairBlock;
-import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
@@ -94,7 +92,7 @@ public class ModBlocks {
     }
 
     private static Block stairs(Block state, BlockBehaviour.Properties properties) {
-        return new ModStairBlock(()->state, properties);
+        return new ModStairBlock(state, properties);
     }
 
     private static Block fence(MapColor mapColor, SoundType soundType) {

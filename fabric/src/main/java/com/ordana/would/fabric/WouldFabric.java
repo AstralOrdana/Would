@@ -4,7 +4,6 @@ import com.ordana.would.Would;
 import com.ordana.would.reg.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -23,9 +22,11 @@ public class WouldFabric implements ModInitializer {
         ModTrees.init();
         ModWorldgenFeatures.init();
         ModEntities.init();
+        ModCreativeTab.init();
 
         UseBlockCallback.EVENT.register(WouldFabric::onRightClickBlock);
-        PlatHelper.addCommonSetup(WouldFabric::compostSetup);
+        WouldFabric.compostSetup();
+        Would.setup();
     }
 
     public static void compostSetup() {

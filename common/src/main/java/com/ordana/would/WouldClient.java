@@ -4,7 +4,6 @@ import com.ordana.would.entities.ModBoatRenderer;
 import com.ordana.would.reg.ModBlocks;
 import com.ordana.would.reg.ModEntities;
 import net.mehvahdjukaar.moonlight.api.client.renderer.FallingBlockRendererGeneric;
-import net.mehvahdjukaar.moonlight.api.misc.EventCalled;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.RGBColor;
@@ -109,7 +108,6 @@ public class WouldClient {
         }
     }
 
-    @EventCalled
     private static void registerBlockColors(ClientHelper.BlockColorEvent event) {
         event.register((blockState, level, blockPos, i) -> event.getColor(Blocks.OAK_LEAVES.defaultBlockState(), level, blockPos, i),
                 ModBlocks.WILLOW_LEAVES,

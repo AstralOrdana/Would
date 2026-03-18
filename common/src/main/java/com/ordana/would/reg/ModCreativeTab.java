@@ -1,24 +1,21 @@
 package com.ordana.would.reg;
 
 import com.ordana.would.Would;
-import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
+import com.ordana.would.WouldPlatform;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
-
-import java.util.Arrays;
-import java.util.function.Supplier;
+import oshi.util.tuples.Pair;
 
 public class ModCreativeTab {
 
-    public static final RegSupplier<CreativeModeTab> MOD_TAB =
-            RegHelper.registerCreativeModeTab(Would.res("would"),
-                    (c) -> c.title(Component.translatable("itemGroup.would.would"))
-                            .icon(() -> ModBlocks.EBONY_LOG.asItem().getDefaultInstance()));
+    public static final Pair<CreativeModeTab, ResourceKey<CreativeModeTab>> MOD_TAB =
+            WouldPlatform.registerCreativeModeTab(Would.res("would"), Component.translatable("itemGroup.would.would"), ()-> ModBlocks.EBONY_LOG.asItem().getDefaultInstance());
 
     public static void init() {
         RegHelper.addItemsToTabsRegistration(ModCreativeTab::registerItemsToTabs);
@@ -43,12 +40,10 @@ public class ModCreativeTab {
     }
 
     private static void after(RegHelper.ItemToTabEvent event, Item target, ItemLike... entries) {
-        var tab = MOD_TAB.getHolder().unwrapKey();
-        event.addAfter(tab.get(), i -> i.is(target), entries);
+        event.addAfter(MOD_TAB.getB(), i -> i.is(target), entries);
     }
 
     private static void before(RegHelper.ItemToTabEvent event, Item target, ItemLike... entries) {
-        var tab = MOD_TAB.getHolder().unwrapKey();
-        event.addBefore(tab.get(), i -> i.is(target), entries);
+        event.addBefore(MOD_TAB.getB(), i -> i.is(target), entries);
     }
 }

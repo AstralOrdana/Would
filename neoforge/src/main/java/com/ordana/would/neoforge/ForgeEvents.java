@@ -1,5 +1,6 @@
 package com.ordana.would.neoforge;
 
+import com.ordana.would.Would;
 import com.ordana.would.reg.*;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -9,6 +10,7 @@ import net.minecraft.world.InteractionResult;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
@@ -36,7 +38,14 @@ public class ForgeEvents {
         } else if (registryKey.equals(Registries.TREE_DECORATOR_TYPE)) {
             ModTrees.init();
             ModWorldgenFeatures.init();
+        } else if (registryKey.equals(Registries.CREATIVE_MODE_TAB)) {
+            ModCreativeTab.init();
         }
+    }
+
+    @SubscribeEvent
+    public static void register(FMLCommonSetupEvent event) {
+        Would.setup();
     }
 
 }

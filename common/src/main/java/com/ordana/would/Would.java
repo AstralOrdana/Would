@@ -1,7 +1,6 @@
 package com.ordana.would;
 
 import com.ordana.would.reg.*;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -22,13 +21,10 @@ public class Would {
 
     public static void commonInit() {
 
-        if (PlatHelper.getPhysicalSide().isClient()) {
+        if (WouldPlatform.isClient()) {
             //ClientConfigs.init();
-            ModCreativeTab.init();
             WouldClient.init();
         }
-
-        PlatHelper.addCommonSetup(Would::setup);
     }
 
     public static void setup() {

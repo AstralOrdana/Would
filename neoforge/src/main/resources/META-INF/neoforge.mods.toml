@@ -27,7 +27,7 @@ I Would, Would you?
 [[dependencies.would]]
     modId="neoforge"
     type = "required"
-    versionRange="[21,)"
+    versionRange="[21.1.181,)"
     ordering="NONE"
     side="BOTH"
 
