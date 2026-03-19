@@ -30,7 +30,9 @@ public class ModTrees {
     public static final Supplier<TrunkPlacerType> MAPLE_TRUNK_PLACER = registerTrunk("maple", MapleTrunkPlacer.CODEC);
     public static final Supplier<TrunkPlacerType> WALNUT_TRUNK_PLACER = registerTrunk("walnut", WalnutTrunkPlacer.CODEC);
     public static final Supplier<TrunkPlacerType> AZALEA_TRUNK_PLACER = registerTrunk("azalea", AzaleaTrunkPlacer.CODEC);
-    public static final Supplier<TrunkPlacerType> BALD_CYPRESS_TRUNK_PLACER = registerTrunk("bald_cypress", BaldCypressTrunkPlacer.CODEC);
+    public static final Supplier<TrunkPlacerType> PINE_TRUNK_PLACER = registerTrunk("pine", PineTrunkPlacer.CODEC);
+    public static final Supplier<TrunkPlacerType> MEGA_PINE_TRUNK_PLACER = registerTrunk("mega_pine", MegaPineTrunkPlacer.CODEC);
+    public static final Supplier<TrunkPlacerType> BALD_CYPRESS_TRUNK_PLACER = registerTrunk("bald_cypress", BaldCypressTrunkPlacer.CODEC);;
 
     public static final Supplier<TreeDecoratorType> PALE_MOSS_DECORATOR = registerDecorator("pale_moss", PaleMossDecorator.CODEC);
 
