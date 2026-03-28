@@ -14,6 +14,7 @@ import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.IntFunction;
 
@@ -33,8 +34,9 @@ public class ModBoatEntity extends Boat {
     }
 
     @Override
+    @NotNull
     public Item getDropItem() {
-        return switch (getModVariant()) {
+        return switch (this.getModVariant()) {
             case ASPEN -> ModItems.ASPEN_BOAT.get();
             case AZALEA -> ModItems.AZALEA_BOAT.get();
             case BAOBAB -> ModItems.BAOBAB_BOAT.get();
@@ -74,7 +76,7 @@ public class ModBoatEntity extends Boat {
         }
     }
 
-    public static enum Type implements StringRepresentable {
+    public enum Type implements StringRepresentable {
         ASPEN(ModBlocks.ASPEN_PLANKS.get(), "aspen"),
         AZALEA(ModBlocks.AZALEA_PLANKS.get(), "azalea"),
         BAOBAB(ModBlocks.BAOBAB_PLANKS.get(), "baobab"),
@@ -91,14 +93,16 @@ public class ModBoatEntity extends Boat {
 
         private final String name;
         private final Block planks;
-        public static final StringRepresentable.EnumCodec<ModBoatEntity.Type> CODEC = StringRepresentable.fromEnum(ModBoatEntity.Type::values);
+        @SuppressWarnings("deprecation")
+        public static final EnumCodec<Type> CODEC = StringRepresentable.fromEnum(ModBoatEntity.Type::values);
         private static final IntFunction<ModBoatEntity.Type> BY_ID = ByIdMap.continuous(Enum::ordinal, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
 
-        private Type(Block pPlanks, String pName) {
+        Type(Block pPlanks, String pName) {
             this.name = pName;
             this.planks = pPlanks;
         }
 
+        @NotNull
         public String getSerializedName() {
             return this.name;
         }

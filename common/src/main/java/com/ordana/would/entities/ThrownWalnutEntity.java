@@ -2,6 +2,7 @@ package com.ordana.would.entities;
 
 import com.ordana.would.reg.ModEntities;
 import com.ordana.would.reg.ModItems;
+import com.ordana.would.reg.ModSoundEvents;
 import net.mehvahdjukaar.moonlight.api.entity.ImprovedProjectileEntity;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -18,9 +19,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 public class ThrownWalnutEntity extends ImprovedProjectileEntity {
 
+    private static final int PARTICLE_COUNT = 8;
 
     public ThrownWalnutEntity(EntityType<? extends ThrownWalnutEntity> type, Level world) {
         super(type, world);
@@ -37,6 +40,7 @@ public class ThrownWalnutEntity extends ImprovedProjectileEntity {
 
 
     @Override
+    @NotNull
     protected Item getDefaultItem() {
         return ModItems.WALNUT.get();
     }
@@ -44,7 +48,7 @@ public class ThrownWalnutEntity extends ImprovedProjectileEntity {
     public void handleEntityEvent(byte id) {
         if (id == 3) {
 
-            for(int i = 0; i < 8; ++i) {
+            for(int i = 0; i < PARTICLE_COUNT; ++i) {
                 this.level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, this.getItem()), this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
@@ -74,7 +78,7 @@ public class ThrownWalnutEntity extends ImprovedProjectileEntity {
         super.onHit(result);
         if (!this.level.isClientSide) {
             this.level.broadcastEntityEvent(this, (byte)3);
-            level.playSound(null, getX(), getY(), getZ(), SoundEvents.BAMBOO_WOOD_BREAK, SoundSource.NEUTRAL, 0.75F, 2.5F + (random.nextFloat() / 2));
+            level.playSound(null, getX(), getY(), getZ(), ModSoundEvents.WALNUT_CRACK.get(), SoundSource.NEUTRAL, 0.75F, 2.5F + (random.nextFloat() / 2));
             level.addFreshEntity(new ItemEntity(level, result.getLocation().x, result.getLocation().y + 0.5, result.getLocation().z, new ItemStack(getDefaultItem())));
             this.discard();
         }

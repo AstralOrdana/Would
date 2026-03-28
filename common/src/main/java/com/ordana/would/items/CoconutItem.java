@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import org.jetbrains.annotations.NotNull;
 
 public class CoconutItem extends BlockItem {
 
@@ -18,6 +19,8 @@ public class CoconutItem extends BlockItem {
         super(block, properties);
     }
 
+    @Override
+    @NotNull
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
         super.finishUsingItem(stack, level, livingEntity);
         if (livingEntity instanceof ServerPlayer serverPlayer) {
@@ -31,17 +34,16 @@ public class CoconutItem extends BlockItem {
 
         if (stack.isEmpty()) {
             return new ItemStack(Items.BOWL, 2);
-        } else {
-            if (livingEntity instanceof Player && !((Player)livingEntity).getAbilities().instabuild) {
-                ItemStack itemStack = new ItemStack(Items.BOWL, 2);
-                Player player = (Player)livingEntity;
-                if (!player.getInventory().add(itemStack)) {
-                    player.drop(itemStack, false);
-                }
-            }
-
-            return stack;
         }
+
+        if (livingEntity instanceof Player player && !player.getAbilities().instabuild) {
+            ItemStack itemStack = new ItemStack(Items.BOWL, 2);
+            if (!player.getInventory().add(itemStack)) {
+                player.drop(itemStack, false);
+            }
+        }
+
+        return stack;
     }
 
     public static final FoodProperties COCONUT = (new FoodProperties.Builder())

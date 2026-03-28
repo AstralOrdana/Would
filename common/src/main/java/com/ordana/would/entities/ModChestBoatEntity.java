@@ -10,6 +10,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.ChestBoat;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 public class ModChestBoatEntity extends ChestBoat {
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE = SynchedEntityData.defineId(ModChestBoatEntity.class, EntityDataSerializers.INT);
@@ -27,8 +28,9 @@ public class ModChestBoatEntity extends ChestBoat {
     }
 
     @Override
+    @NotNull
     public Item getDropItem() {
-        return switch (getModVariant()) {
+        return switch (this.getModVariant()) {
             case ASPEN -> ModItems.ASPEN_CHEST_BOAT.get();
             case AZALEA -> ModItems.AZALEA_CHEST_BOAT.get();
             case BAOBAB -> ModItems.BAOBAB_CHEST_BOAT.get();

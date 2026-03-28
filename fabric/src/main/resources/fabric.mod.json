@@ -18,6 +18,9 @@
   "entrypoints": {
     "main": [
       "com.ordana.would.fabric.WouldFabric"
+    ],
+    "fabric-datagen": [
+      "com.ordana.would.fabric.data.WouldDataGenerator"
     ]
   },
   "mixins": [

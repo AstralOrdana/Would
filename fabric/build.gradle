@@ -7,6 +7,10 @@ architectury {
     fabric()
 }
 
+fabricApi {
+    configureDataGeneration()
+}
+
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
 }

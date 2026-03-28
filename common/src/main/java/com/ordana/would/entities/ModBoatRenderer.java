@@ -110,8 +110,7 @@ public class ModBoatRenderer extends BoatRenderer {
         listModel.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
         if (!entity.isUnderWater()) {
             VertexConsumer vertexConsumer2 = buffer.getBuffer(RenderType.waterMask());
-            if (listModel instanceof WaterPatchModel) {
-                WaterPatchModel waterPatchModel = (WaterPatchModel) listModel;
+            if (listModel instanceof WaterPatchModel waterPatchModel) {
                 waterPatchModel.waterPatch().render(poseStack, vertexConsumer2, packedLight, OverlayTexture.NO_OVERLAY);
             }
         }

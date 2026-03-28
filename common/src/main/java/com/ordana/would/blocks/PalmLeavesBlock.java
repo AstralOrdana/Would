@@ -52,7 +52,7 @@ public class PalmLeavesBlock extends LeavesBlock implements BonemealableBlock {
     }
 
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        level.setBlock(pos, updateDistance(state, level, pos), 3);
+        level.setBlockAndUpdate(pos, updateDistance(state, level, pos));
     }
 
     private static BlockState updateDistance(BlockState state, LevelAccessor level, BlockPos pos) {
@@ -87,10 +87,7 @@ public class PalmLeavesBlock extends LeavesBlock implements BonemealableBlock {
 
         if (states.isEmpty()) {
             BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
-            Direction[] dir2 = Direction.values();
-            int limit2 = dir2.length;
-            for (int k = 0; k < limit2; ++k) {
-                Direction direction = dir2[k];
+            for (Direction direction : Direction.values()) {
                 mutableBlockPos.setWithOffset(pos, direction);
                 i = Math.min(i, getDistanceAt(level.getBlockState(mutableBlockPos)) + 1);
                 if (i == 1) {
@@ -99,7 +96,7 @@ public class PalmLeavesBlock extends LeavesBlock implements BonemealableBlock {
             }
         }
 
-        return state.setValue(DISTANCE, Math.min(i + 1, 7));
+        return state.setValue(DISTANCE, Math.min(i + 1, DECAY_DISTANCE));
     }
 
     private static int getDistanceAt(BlockState neighbor) {
@@ -108,7 +105,7 @@ public class PalmLeavesBlock extends LeavesBlock implements BonemealableBlock {
 
     @Override
     public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
-        return level.getBlockState(pos.below()).isAir();
+        return level.isEmptyBlock(pos.below());
     }
 
     public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
@@ -116,6 +113,7 @@ public class PalmLeavesBlock extends LeavesBlock implements BonemealableBlock {
     }
 
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-        level.setBlock(pos.below(), ModBlocks.COCONUT.get().defaultBlockState().setValue(CoconutBlock.HANGING, true).setValue(CoconutBlock.ENABLED, true), 2);
+        level.setBlock(pos.below(), ModBlocks.HANGING_COCONUT.get().defaultBlockState(), UPDATE_CLIENTS);
     }
+
 }

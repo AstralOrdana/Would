@@ -1,707 +1,370 @@
 package com.ordana.would.reg;
 
-import com.ordana.would.Would;
 import com.ordana.would.blocks.*;
-import net.mehvahdjukaar.moonlight.api.block.ModStairBlock;
-import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.flag.FeatureFlag;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
 import java.util.function.Supplier;
 
-public class ModBlocks {
+import static com.ordana.would.reg.BlockFactories.*;
 
-    public static void init() {
+public interface ModBlocks {
+
+    static void init() {
     }
 
-    private static boolean always(BlockState state, BlockGetter blockGetter, BlockPos pos) {
-        return true;
-    }
+    Supplier<Block> PALE_HANGING_MOSS = register(
+        "pale_hanging_moss",
+        () -> new HangingMossBlock(BlockBehaviour.Properties.of()
+            .ignitedByLava()
+            .mapColor(MapColor.COLOR_LIGHT_GRAY)
+            .noCollission()
+            .sound(SoundType.MOSS_CARPET)
+            .pushReaction(PushReaction.DESTROY)
+        ),
+        true
+    );
 
-    private static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos) {
-        return false;
-    }
-    private static boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {return false;}
+    Supplier<Block> HANGING_WILLOW_LEAVES = register(
+        "hanging_willow_leaves",
+        () -> new HangingWillowLeavesBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.PLANT)
+            .noCollission()
+            .randomTicks()
+            .strength(0.2F)
+            .sound(SoundType.VINE)
+            .ignitedByLava()
+            .pushReaction(PushReaction.DESTROY)
+        ),
+        true
+    );
 
-    private static Boolean ocelotOrParrot(BlockState state, BlockGetter blockGetter, BlockPos pos, EntityType<?> entity) {
-        return entity == EntityType.OCELOT || entity == EntityType.PARROT;
-    }
-
-    public static <T extends Block> Supplier<T> regBlock(String name, Supplier<T> block) {
-        return RegHelper.registerBlock(Would.res(name), block);
-    }
-
-    public static void regBlockItem(String name, Supplier<? extends Block> blockSup, Item.Properties properties) {
-        RegHelper.registerItem(Would.res(name), () -> new BlockItem(blockSup.get(), properties));
-    }
-
-    public static <T extends Block> Supplier<T> regWithItem(String name, Supplier<T> blockFactory) {
-        Supplier<T> block = regBlock(name, blockFactory);
-        regBlockItem(name, block, new Item.Properties());
-        return block;
-    }
-
-
-    private static Block log(MapColor topMapColor, MapColor sideMapColor, SoundType soundType) {
-        return new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? topMapColor : sideMapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(soundType).ignitedByLava());
-    }
-
-    private static Block wood(MapColor mapColor, SoundType soundType) {
-        return new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(soundType).ignitedByLava());
-    }
-    
-    private static Block leaves(SoundType type) {
-        return new LeavesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).strength(0.2F).randomTicks().sound(type).noOcclusion().isValidSpawn(ModBlocks::ocelotOrParrot).isSuffocating(ModBlocks::never).isViewBlocking(ModBlocks::never).ignitedByLava().pushReaction(PushReaction.DESTROY).isRedstoneConductor(ModBlocks::never));
-    }
-
-    private static Block leaves(MapColor mapColor, SoundType type) {
-        return new LeavesBlock(BlockBehaviour.Properties.of().mapColor(mapColor).strength(0.2F).randomTicks().sound(type).noOcclusion().isValidSpawn(ModBlocks::ocelotOrParrot).isSuffocating(ModBlocks::never).isViewBlocking(ModBlocks::never).ignitedByLava().pushReaction(PushReaction.DESTROY).isRedstoneConductor(ModBlocks::never));
-    }
-
-    private static Block sapling(TreeGrower treeGrower) {
-        return new ModSaplingBlock(treeGrower, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
-    }
-
-    private static FlowerPotBlock pottedSapling(Block content, FeatureFlag... requiredFeatures) {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY);
-        if (requiredFeatures.length > 0) {
-            properties = properties.requiredFeatures(requiredFeatures);
-        }
-
-        return new FlowerPotBlock(content, properties);
-    }
-
-    private static Block planks(MapColor mapColor, SoundType soundType) {
-        return new Block(BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(soundType).ignitedByLava());
-    }
-
-    private static Block slab(MapColor mapColor, SoundType soundType) {
-        return new SlabBlock(BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(soundType).ignitedByLava());
-    }
-
-    private static Block stairs(Supplier<Block> state, BlockBehaviour.Properties properties) {
-        return new ModStairBlock(state, properties);
-    }
-
-    private static Block fence(MapColor mapColor, SoundType soundType) {
-        return new FenceBlock(BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).ignitedByLava().sound(soundType));
-    }
-
-    private static Block fenceGate(MapColor mapColor, SoundType soundType, WoodType woodType) {
-        return new FenceGateBlock(woodType, BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).ignitedByLava().sound(soundType));
-    }
-
-    private static Block pressurePlate(MapColor mapColor) {
-        return new ModPressurePlateBlock(BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(0.5F).ignitedByLava().pushReaction(PushReaction.DESTROY), BlockSetType.ACACIA);
-    }
-
-    private static Block button(FeatureFlag... requiredFeatures) {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY);
-        if (requiredFeatures.length > 0) {
-            properties = properties.requiredFeatures(requiredFeatures);
-        }
-
-        return new ModButtonBlock(properties, BlockSetType.ACACIA, 30, true);
-    }
-
-    private static Block standingSign(MapColor mapColor, WoodType woodType) {
-        return new StandingSignBlock(woodType, BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
-    }
-
-
-    private static Block wallSign(MapColor mapColor, Block block, WoodType woodType) {
-        return new WallSignBlock(woodType, BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).dropsLike(block).ignitedByLava());
-    }
-
-    private static Block hangingSign(MapColor mapColor, WoodType woodType) {
-        return new CeilingHangingSignBlock(woodType, BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
-    }
-
-    private static Block wallHangingSign(MapColor mapColor, Block block, WoodType woodType) {
-        return new WallHangingSignBlock(woodType, BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava().dropsLike(block));
-    }
-
-    private static Block door(MapColor mapColor) {
-        return new DoorBlock(BlockSetType.ACACIA, BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().ignitedByLava().pushReaction(PushReaction.DESTROY));
-    }
-
-    private static Block trapdoor(MapColor mapColor) {
-        return new TrapDoorBlock(BlockSetType.ACACIA, BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().isValidSpawn(ModBlocks::never).ignitedByLava());
-    }
-
-    public static final Supplier<Block> PALE_HANGING_MOSS = regWithItem("pale_hanging_moss",
-            () -> new HangingMossBlock(BlockBehaviour.Properties.of().ignitedByLava().mapColor(MapColor.COLOR_LIGHT_GRAY).noCollission().sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.DESTROY)));
+    //planks
+    Supplier<Block> ASPEN_PLANKS = planks("aspen_planks");
+    Supplier<Block> AZALEA_PLANKS = planks("azalea_planks", MapColor.TERRACOTTA_GREEN);
+    Supplier<Block> BAOBAB_PLANKS = planks("baobab_planks");
+    Supplier<Block> BLUE_SPRUCE_PLANKS = planks("blue_spruce_planks", MapColor.LAPIS);
+    Supplier<Block> CEDAR_PLANKS = planks("cedar_planks", MapColor.TERRACOTTA_YELLOW);
+    Supplier<Block> EBONY_PLANKS = planks("ebony_planks", MapColor.TERRACOTTA_BLACK);
+    Supplier<Block> FIR_PLANKS = planks("fir_planks");
+    Supplier<Block> MAHOGANY_PLANKS = planks("mahogany_planks", MapColor.TERRACOTTA_RED);
+    Supplier<Block> MAPLE_PLANKS = planks("maple_planks");
+    Supplier<Block> PALM_PLANKS = planks("palm_planks", MapColor.NETHER);
+    Supplier<Block> PINE_PLANKS = planks("pine_planks", MapColor.PODZOL);
+    Supplier<Block> WALNUT_PLANKS = planks("walnut_planks", MapColor.COLOR_BROWN);
+    Supplier<Block> WILLOW_PLANKS = planks("willow_planks", MapColor.WARPED_NYLIUM);
 
 
     
     
     //logs
-    public static final Supplier<Block> WILLOW_LOG = regWithItem("willow_log",
-            () -> log(MapColor.WARPED_NYLIUM, MapColor.PODZOL, SoundType.WOOD));
-    public static final Supplier<Block> BAOBAB_LOG = regWithItem("baobab_log",
-            () -> log(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> EBONY_LOG = regWithItem("ebony_log",
-            () -> log(MapColor.TERRACOTTA_BLACK, MapColor.PODZOL, SoundType.WOOD));
-    public static final Supplier<Block> FIR_LOG = regWithItem("fir_log",
-            () -> log(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> PINE_LOG = regWithItem("pine_log",
-            () -> log(MapColor.PODZOL, MapColor.PODZOL, SoundType.WOOD));
-    public static final Supplier<Block> CEDAR_LOG = regWithItem("cedar_log",
-            () -> log(MapColor.TERRACOTTA_YELLOW, MapColor.TERRACOTTA_YELLOW, SoundType.WOOD));
-    public static final Supplier<Block> MAHOGANY_LOG = regWithItem("mahogany_log",
-            () -> log(MapColor.TERRACOTTA_RED, MapColor.TERRACOTTA_RED, SoundType.WOOD));
-    public static final Supplier<Block> AZALEA_LOG = regWithItem("azalea_log",
-            () -> log(MapColor.TERRACOTTA_GREEN, MapColor.PODZOL, SoundType.WOOD));
-    public static final Supplier<Block> PALM_LOG = regWithItem("palm_log",
-            () -> log(MapColor.NETHER, MapColor.TERRACOTTA_LIGHT_GRAY, SoundType.WOOD));
-    public static final Supplier<Block> MAPLE_LOG = regWithItem("maple_log",
-            () -> log(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> MAPLE_LOG_SAPPY = regWithItem("maple_log_sappy",
-            () -> log(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> ASPEN_LOG = regWithItem("aspen_log",
-            () -> log(MapColor.WOOD, MapColor.TERRACOTTA_WHITE, SoundType.WOOD));
-    public static final Supplier<Block> ASPEN_LOG_GAZING = regWithItem("aspen_log_gazing",
-            () -> log(MapColor.WOOD, MapColor.TERRACOTTA_WHITE, SoundType.WOOD));
-    public static final Supplier<Block> WALNUT_LOG = regWithItem("walnut_log",
-            () -> log(MapColor.COLOR_BROWN, MapColor.COLOR_BROWN, SoundType.WOOD));
-    public static final Supplier<Block> BLUE_SPRUCE_LOG = regWithItem("blue_spruce_log",
-            () -> log(MapColor.LAPIS, MapColor.TERRACOTTA_LIGHT_BLUE, SoundType.WOOD));
-    
+    Supplier<Block> ASPEN_LOG = log("aspen_log", MapColor.WOOD, MapColor.TERRACOTTA_WHITE);
+    Supplier<Block> ASPEN_LOG_GAZING = log("aspen_log_gazing", MapColor.WOOD, MapColor.TERRACOTTA_WHITE);
+    Supplier<Block> AZALEA_LOG = log("azalea_log", MapColor.TERRACOTTA_GREEN, MapColor.PODZOL);
+    Supplier<Block> BAOBAB_LOG = log("baobab_log");
+    Supplier<Block> BLUE_SPRUCE_LOG = log("blue_spruce_log", MapColor.LAPIS, MapColor.TERRACOTTA_LIGHT_BLUE);
+    Supplier<Block> CEDAR_LOG = log("cedar_log", MapColor.TERRACOTTA_YELLOW, MapColor.TERRACOTTA_YELLOW);
+    Supplier<Block> EBONY_LOG = log("ebony_log", MapColor.TERRACOTTA_BLACK, MapColor.PODZOL);
+    Supplier<Block> FIR_LOG = log("fir_log");
+    Supplier<Block> MAHOGANY_LOG = log("mahogany_log", MapColor.TERRACOTTA_RED, MapColor.TERRACOTTA_RED);
+    Supplier<Block> MAPLE_LOG = log("maple_log");
+    Supplier<Block> MAPLE_LOG_SAPPY = log("maple_log_sappy");
+    Supplier<Block> PALM_LOG = log("palm_log", MapColor.NETHER, MapColor.TERRACOTTA_LIGHT_GRAY);
+    Supplier<Block> PINE_LOG = log("pine_log", MapColor.PODZOL, MapColor.PODZOL);
+    Supplier<Block> WALNUT_LOG = log("walnut_log", MapColor.COLOR_BROWN);
+    Supplier<Block> WILLOW_LOG = log("willow_log", MapColor.WARPED_NYLIUM, MapColor.PODZOL);
+
     //wood
-    public static final Supplier<Block> WILLOW_WOOD = regWithItem("willow_wood",
-            () -> wood(MapColor.PODZOL, SoundType.WOOD));
-    public static final Supplier<Block> BAOBAB_WOOD = regWithItem("baobab_wood",
-            () -> wood(MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> EBONY_WOOD = regWithItem("ebony_wood",
-            () -> wood(MapColor.PODZOL, SoundType.WOOD));
-    public static final Supplier<Block> FIR_WOOD = regWithItem("fir_wood",
-            () -> wood(MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> PINE_WOOD = regWithItem("pine_wood",
-            () -> wood(MapColor.PODZOL, SoundType.WOOD));
-    public static final Supplier<Block> CEDAR_WOOD = regWithItem("cedar_wood",
-            () -> wood(MapColor.TERRACOTTA_YELLOW, SoundType.WOOD));
-    public static final Supplier<Block> MAHOGANY_WOOD = regWithItem("mahogany_wood",
-            () -> wood(MapColor.TERRACOTTA_RED, SoundType.WOOD));
-    public static final Supplier<Block> AZALEA_WOOD = regWithItem("azalea_wood",
-            () -> wood(MapColor.PODZOL, SoundType.WOOD));
-    public static final Supplier<Block> PALM_WOOD = regWithItem("palm_wood",
-            () -> wood(MapColor.TERRACOTTA_LIGHT_GRAY, SoundType.WOOD));
-    public static final Supplier<Block> MAPLE_WOOD = regWithItem("maple_wood",
-            () -> wood(MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> ASPEN_WOOD = regWithItem("aspen_wood",
-            () -> wood(MapColor.TERRACOTTA_WHITE, SoundType.WOOD));
-    public static final Supplier<Block> ASPEN_WOOD_GAZING = regWithItem("aspen_wood_gazing",
-            () -> wood(MapColor.TERRACOTTA_WHITE, SoundType.WOOD));
-    public static final Supplier<Block> WALNUT_WOOD = regWithItem("walnut_wood",
-            () -> wood(MapColor.COLOR_BROWN, SoundType.WOOD));
-    public static final Supplier<Block> BLUE_SPRUCE_WOOD = regWithItem("blue_spruce_wood",
-            () -> wood(MapColor.TERRACOTTA_LIGHT_BLUE, SoundType.WOOD));
+    Supplier<Block> ASPEN_WOOD = wood("aspen_wood", ASPEN_LOG, MapColor.TERRACOTTA_WHITE);
+    Supplier<Block> ASPEN_WOOD_GAZING = wood("aspen_wood_gazing", ASPEN_LOG_GAZING, MapColor.TERRACOTTA_WHITE);
+    Supplier<Block> AZALEA_WOOD = wood("azalea_wood", AZALEA_LOG, MapColor.PODZOL);
+    Supplier<Block> BAOBAB_WOOD = wood("baobab_wood", BAOBAB_LOG);
+    Supplier<Block> BLUE_SPRUCE_WOOD = wood("blue_spruce_wood", BLUE_SPRUCE_LOG, MapColor.TERRACOTTA_LIGHT_BLUE);
+    Supplier<Block> CEDAR_WOOD = wood("cedar_wood", CEDAR_LOG, MapColor.TERRACOTTA_YELLOW);
+    Supplier<Block> EBONY_WOOD = wood("ebony_wood", EBONY_LOG, MapColor.PODZOL);
+    Supplier<Block> FIR_WOOD = wood("fir_wood", FIR_LOG);
+    Supplier<Block> MAHOGANY_WOOD = wood("mahogany_wood", MAHOGANY_LOG, MapColor.TERRACOTTA_RED);
+    Supplier<Block> MAPLE_WOOD = wood("maple_wood", MAPLE_LOG);
+    Supplier<Block> MAPLE_WOOD_SAPPY = wood("maple_wood_sappy", MAPLE_LOG_SAPPY);
+    Supplier<Block> PALM_WOOD = wood("palm_wood", PALM_LOG, MapColor.TERRACOTTA_LIGHT_GRAY);
+    Supplier<Block> PINE_WOOD = wood("pine_wood", PINE_LOG, MapColor.PODZOL);
+    Supplier<Block> WALNUT_WOOD = wood("walnut_wood", WALNUT_LOG, MapColor.COLOR_BROWN);
+    Supplier<Block> WILLOW_WOOD = wood("willow_wood", WILLOW_LOG, MapColor.PODZOL);
 
     //stripped logs
-    public static final Supplier<Block> STRIPPED_WILLOW_LOG = regWithItem("stripped_willow_log",
-            () -> log(MapColor.WARPED_NYLIUM, MapColor.WARPED_NYLIUM, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_BAOBAB_LOG = regWithItem("stripped_baobab_log",
-            () -> log(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_EBONY_LOG = regWithItem("stripped_ebony_log",
-            () -> log(MapColor.TERRACOTTA_BLACK, MapColor.TERRACOTTA_BLACK, SoundType.WOOD));
-    public static final Supplier<Block> EBONY_HEARTWOOD_LOG = regWithItem("ebony_heartwood_log",
-            () -> wood(MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_FIR_LOG = regWithItem("stripped_fir_log",
-            () -> log(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_PINE_LOG = regWithItem("stripped_pine_log",
-            () -> log(MapColor.PODZOL, MapColor.PODZOL, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_CEDAR_LOG = regWithItem("stripped_cedar_log",
-            () -> log(MapColor.TERRACOTTA_YELLOW, MapColor.TERRACOTTA_YELLOW, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_MAHOGANY_LOG = regWithItem("stripped_mahogany_log",
-            () -> log(MapColor.TERRACOTTA_RED, MapColor.TERRACOTTA_RED, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_AZALEA_LOG = regWithItem("stripped_azalea_log",
-            () -> log(MapColor.TERRACOTTA_GREEN, MapColor.TERRACOTTA_GREEN, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_PALM_LOG = regWithItem("stripped_palm_log",
-            () -> log(MapColor.NETHER, MapColor.NETHER, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_MAPLE_LOG = regWithItem("stripped_maple_log",
-            () -> log(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_ASPEN_LOG = regWithItem("stripped_aspen_log",
-            () -> log(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_ASPEN_LOG_GAZING = regWithItem("stripped_aspen_log_gazing",
-            () -> log(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_WALNUT_LOG = regWithItem("stripped_walnut_log",
-            () -> log(MapColor.COLOR_BROWN, MapColor.COLOR_BROWN, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_BLUE_SPRUCE_LOG = regWithItem("stripped_blue_spruce_log",
-            () -> log(MapColor.LAPIS, MapColor.LAPIS, SoundType.WOOD));
+    Supplier<Block> STRIPPED_ASPEN_LOG = log("stripped_aspen_log");
+    Supplier<Block> STRIPPED_ASPEN_LOG_GAZING = log("stripped_aspen_log_gazing");
+    Supplier<Block> STRIPPED_AZALEA_LOG = log("stripped_azalea_log", MapColor.TERRACOTTA_GREEN);
+    Supplier<Block> STRIPPED_BAOBAB_LOG = log("stripped_baobab_log");
+    Supplier<Block> STRIPPED_BLUE_SPRUCE_LOG = log("stripped_blue_spruce_log", MapColor.LAPIS);
+    Supplier<Block> STRIPPED_CEDAR_LOG = log("stripped_cedar_log", MapColor.TERRACOTTA_YELLOW);
+    Supplier<Block> STRIPPED_EBONY_LOG = log("stripped_ebony_log", MapColor.TERRACOTTA_BLACK);
+    Supplier<Block> EBONY_HEARTWOOD_LOG = log("ebony_heartwood_log");
+    Supplier<Block> STRIPPED_FIR_LOG = log("stripped_fir_log");
+    Supplier<Block> STRIPPED_MAHOGANY_LOG = log("stripped_mahogany_log", MapColor.TERRACOTTA_RED);
+    Supplier<Block> STRIPPED_MAPLE_LOG = log("stripped_maple_log");
+    Supplier<Block> STRIPPED_PALM_LOG = log("stripped_palm_log", MapColor.NETHER);
+    Supplier<Block> STRIPPED_PINE_LOG = log("stripped_pine_log", MapColor.PODZOL);
+    Supplier<Block> STRIPPED_WALNUT_LOG = log("stripped_walnut_log", MapColor.COLOR_BROWN);
+    Supplier<Block> STRIPPED_WILLOW_LOG = log("stripped_willow_log", MapColor.WARPED_NYLIUM);
 
     //stripped wood
-    public static final Supplier<Block> STRIPPED_WILLOW_WOOD = regWithItem("stripped_willow_wood",
-            () -> wood(MapColor.WARPED_NYLIUM, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_BAOBAB_WOOD = regWithItem("stripped_baobab_wood",
-            () -> wood(MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_EBONY_WOOD = regWithItem("stripped_ebony_wood",
-            () -> wood(MapColor.PODZOL, SoundType.WOOD));
-    public static final Supplier<Block> EBONY_HEARTWOOD = regWithItem("ebony_heartwood",
-            () -> wood(MapColor.TERRACOTTA_BLACK, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_FIR_WOOD = regWithItem("stripped_fir_wood",
-            () -> wood(MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_PINE_WOOD = regWithItem("stripped_pine_wood",
-            () -> wood(MapColor.PODZOL, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_CEDAR_WOOD = regWithItem("stripped_cedar_wood",
-            () -> wood(MapColor.TERRACOTTA_YELLOW, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_MAHOGANY_WOOD = regWithItem("stripped_mahogany_wood",
-            () -> wood(MapColor.TERRACOTTA_RED, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_AZALEA_WOOD = regWithItem("stripped_azalea_wood",
-            () -> wood(MapColor.TERRACOTTA_GREEN, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_PALM_WOOD = regWithItem("stripped_palm_wood",
-            () -> wood(MapColor.NETHER, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_MAPLE_WOOD = regWithItem("stripped_maple_wood",
-            () -> wood(MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_ASPEN_WOOD = regWithItem("stripped_aspen_wood",
-            () -> wood(MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_ASPEN_WOOD_GAZING = regWithItem("stripped_aspen_wood_gazing",
-            () -> wood(MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_WALNUT_WOOD = regWithItem("stripped_walnut_wood",
-            () -> wood(MapColor.COLOR_BROWN, SoundType.WOOD));
-    public static final Supplier<Block> STRIPPED_BLUE_SPRUCE_WOOD = regWithItem("stripped_blue_spruce_wood",
-            () -> wood(MapColor.LAPIS, SoundType.WOOD));
-    
-    //leaves
-    public static final Supplier<Block> WILLOW_LEAVES = regWithItem("willow_leaves",
-            () -> leaves(SoundType.AZALEA_LEAVES));
-    public static final Supplier<Block> BAOBAB_LEAVES = regWithItem("baobab_leaves",
-            () -> leaves(SoundType.AZALEA_LEAVES));
-    public static final Supplier<Block> EBONY_LEAVES = regWithItem("ebony_leaves",
-            () -> leaves(SoundType.AZALEA_LEAVES));
-    public static final Supplier<Block> EBONY_LEAVES_FRUITING = regWithItem("ebony_leaves_fruiting",
-            () -> leaves(MapColor.GOLD, SoundType.AZALEA_LEAVES));
-    public static final Supplier<Block> FIR_LEAVES = regWithItem("fir_leaves",
-            () -> leaves(SoundType.AZALEA_LEAVES));
-    public static final Supplier<Block> PINE_LEAVES = regWithItem("pine_leaves",
-            () -> leaves(SoundType.AZALEA_LEAVES));
-    public static final Supplier<Block> CEDAR_LEAVES = regWithItem("cedar_leaves",
-            () -> leaves(SoundType.AZALEA_LEAVES));
-    public static final Supplier<Block> MAHOGANY_LEAVES = regWithItem("mahogany_leaves",
-            () -> leaves(SoundType.AZALEA_LEAVES));
-    public static final Supplier<Block> PALM_LEAVES = regWithItem("palm_leaves",
-            () -> new PalmLeavesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).strength(0.2F).randomTicks().sound(SoundType.AZALEA_LEAVES).noOcclusion().isValidSpawn(ModBlocks::ocelotOrParrot).isSuffocating(ModBlocks::never).isViewBlocking(ModBlocks::never).ignitedByLava().pushReaction(PushReaction.DESTROY).isRedstoneConductor(ModBlocks::never)));
-    public static final Supplier<Block> MAPLE_LEAVES = regWithItem("maple_leaves",
-            () -> leaves(MapColor.CRIMSON_STEM, SoundType.AZALEA_LEAVES));
-    public static final Supplier<Block> ASPEN_LEAVES = regWithItem("aspen_leaves",
-            () -> leaves(SoundType.AZALEA_LEAVES));
-    public static final Supplier<Block> WALNUT_LEAVES = regWithItem("walnut_leaves",
-            () -> leaves(SoundType.AZALEA_LEAVES));
-    public static final Supplier<Block> BLUE_SPRUCE_LEAVES = regWithItem("blue_spruce_leaves",
-            () -> leaves(MapColor.ICE, SoundType.AZALEA_LEAVES));
+    Supplier<Block> STRIPPED_ASPEN_WOOD = wood("stripped_aspen_wood", STRIPPED_ASPEN_LOG);
+    Supplier<Block> STRIPPED_ASPEN_WOOD_GAZING = wood("stripped_aspen_wood_gazing", STRIPPED_ASPEN_LOG_GAZING);
+    Supplier<Block> STRIPPED_AZALEA_WOOD = wood("stripped_azalea_wood", STRIPPED_AZALEA_LOG, MapColor.TERRACOTTA_GREEN);
+    Supplier<Block> STRIPPED_BAOBAB_WOOD = wood("stripped_baobab_wood", STRIPPED_BAOBAB_LOG);
+    Supplier<Block> STRIPPED_BLUE_SPRUCE_WOOD = wood("stripped_blue_spruce_wood", STRIPPED_BLUE_SPRUCE_LOG, MapColor.LAPIS);
+    Supplier<Block> STRIPPED_CEDAR_WOOD = wood("stripped_cedar_wood", STRIPPED_CEDAR_LOG, MapColor.TERRACOTTA_YELLOW);
+    Supplier<Block> STRIPPED_EBONY_WOOD = wood("stripped_ebony_wood", STRIPPED_EBONY_LOG, MapColor.TERRACOTTA_BLACK);
+    Supplier<Block> EBONY_HEARTWOOD = wood("ebony_heartwood", EBONY_HEARTWOOD_LOG);
+    Supplier<Block> STRIPPED_FIR_WOOD = wood("stripped_fir_wood", STRIPPED_FIR_LOG);
+    Supplier<Block> STRIPPED_MAHOGANY_WOOD = wood("stripped_mahogany_wood", STRIPPED_MAHOGANY_LOG, MapColor.TERRACOTTA_RED);
+    Supplier<Block> STRIPPED_MAPLE_WOOD = wood("stripped_maple_wood", STRIPPED_MAPLE_LOG);
+    Supplier<Block> STRIPPED_PALM_WOOD = wood("stripped_palm_wood", STRIPPED_PALM_LOG, MapColor.NETHER);
+    Supplier<Block> STRIPPED_PINE_WOOD = wood("stripped_pine_wood", STRIPPED_PINE_LOG, MapColor.PODZOL);
+    Supplier<Block> STRIPPED_WALNUT_WOOD = wood("stripped_walnut_wood", STRIPPED_WALNUT_LOG, MapColor.COLOR_BROWN);
+    Supplier<Block> STRIPPED_WILLOW_WOOD = wood("stripped_willow_wood", STRIPPED_WILLOW_LOG, MapColor.WARPED_NYLIUM);
 
     //saplings
-    public static final Supplier<Block> WILLOW_SAPLING = regWithItem("willow_sapling",
-            () -> sapling(ModTreeGrowers.WILLOW));
-    public static final Supplier<Block> BAOBAB_SAPLING = regWithItem("baobab_sapling",
-            () -> sapling(ModTreeGrowers.BAOBAB));
-    public static final Supplier<Block> EBONY_SAPLING = regWithItem("ebony_sapling",
-            () -> sapling(ModTreeGrowers.EBONY));
-    public static final Supplier<Block> FIR_SAPLING = regWithItem("fir_sapling",
-            () -> sapling(ModTreeGrowers.FIR));
-    public static final Supplier<Block> PINE_SAPLING = regWithItem("pine_sapling",
-            () -> sapling(ModTreeGrowers.PINE));
-    public static final Supplier<Block> CEDAR_SAPLING = regWithItem("cedar_sapling",
-            () -> sapling(ModTreeGrowers.CEDAR));
-    public static final Supplier<Block> MAHOGANY_SAPLING = regWithItem("mahogany_sapling",
-            () -> sapling(ModTreeGrowers.MAHOGANY));
-    public static final Supplier<Block> COCONUT = regBlock("coconut",
-            () -> new CoconutBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
-    public static final Supplier<Block> MAPLE_SAPLING = regWithItem("maple_sapling",
-            () -> sapling(ModTreeGrowers.MAPLE));
-    public static final Supplier<Block> ASPEN_SAPLING = regWithItem("aspen_sapling",
-            () -> sapling(ModTreeGrowers.ASPEN));
-    public static final Supplier<Block> WALNUT_SAPLING = regWithItem("walnut_sapling",
-            () -> sapling(ModTreeGrowers.WALNUT));
-    public static final Supplier<Block> BLUE_SPRUCE_SAPLING = regWithItem("blue_spruce_sapling",
-            () -> sapling(ModTreeGrowers.BLUE_SPRUCE));
+    Supplier<Block> ASPEN_SAPLING = sapling("aspen_sapling", ModTreeGrowers.ASPEN);
+    Supplier<Block> BAOBAB_SAPLING = sapling("baobab_sapling", ModTreeGrowers.BAOBAB);
+    Supplier<Block> BLUE_SPRUCE_SAPLING = sapling("blue_spruce_sapling", ModTreeGrowers.BLUE_SPRUCE);
+    Supplier<Block> CEDAR_SAPLING = sapling("cedar_sapling", ModTreeGrowers.CEDAR);
+    Supplier<Block> EBONY_SAPLING = sapling("ebony_sapling", ModTreeGrowers.EBONY);
+    Supplier<Block> FIR_SAPLING = sapling("fir_sapling", ModTreeGrowers.FIR);
+    Supplier<Block> MAHOGANY_SAPLING = sapling("mahogany_sapling", ModTreeGrowers.MAHOGANY);
+    Supplier<Block> MAPLE_SAPLING = sapling("maple_sapling", ModTreeGrowers.MAPLE);
+    Supplier<Block> PINE_SAPLING = sapling("pine_sapling", ModTreeGrowers.PINE);
+    Supplier<Block> WALNUT_SAPLING = sapling("walnut_sapling", ModTreeGrowers.WALNUT);
+    Supplier<Block> WILLOW_SAPLING = sapling("willow_sapling", ModTreeGrowers.WILLOW);
 
-    public static final Supplier<Block> POTTED_WILLOW_SAPLING = regBlock("potted_willow_sapling",
-            () -> pottedSapling(WILLOW_SAPLING.get()));
-    public static final Supplier<Block> POTTED_BAOBAB_SAPLING = regBlock("potted_baobab_sapling",
-            () -> pottedSapling(BAOBAB_SAPLING.get()));
-    public static final Supplier<Block> POTTED_EBONY_SAPLING = regBlock("potted_ebony_sapling",
-            () -> pottedSapling(EBONY_SAPLING.get()));
-    public static final Supplier<Block> POTTED_FIR_SAPLING = regBlock("potted_fir_sapling",
-            () -> pottedSapling(FIR_SAPLING.get()));
-    public static final Supplier<Block> POTTED_PINE_SAPLING = regBlock("potted_pine_sapling",
-            () -> pottedSapling(PINE_SAPLING.get()));
-    public static final Supplier<Block> POTTED_CEDAR_SAPLING = regBlock("potted_cedar_sapling",
-            () -> pottedSapling(CEDAR_SAPLING.get()));
-    public static final Supplier<Block> POTTED_MAHOGANY_SAPLING = regBlock("potted_mahogany_sapling",
-            () -> pottedSapling(MAHOGANY_SAPLING.get()));
-    public static final Supplier<Block> POTTED_COCONUT = regBlock("potted_coconut",
-            () -> pottedSapling(COCONUT.get()));
-    public static final Supplier<Block> POTTED_MAPLE_SAPLING = regBlock("potted_maple_sapling",
-            () -> pottedSapling(MAPLE_SAPLING.get()));
-    public static final Supplier<Block> POTTED_ASPEN_SAPLING = regBlock("potted_aspen_sapling",
-            () -> pottedSapling(ASPEN_SAPLING.get()));
-    public static final Supplier<Block> POTTED_WALNUT_SAPLING = regBlock("potted_walnut_sapling",
-            () -> pottedSapling(WALNUT_SAPLING.get()));
-    public static final Supplier<Block> POTTED_BLUE_SPRUCE_SAPLING = regBlock("potted_blue_spruce_sapling",
-            () -> pottedSapling(BLUE_SPRUCE_SAPLING.get()));
-    
-    //planks
-    public static final Supplier<Block> WILLOW_PLANKS = regWithItem("willow_planks",
-            () -> planks(MapColor.WARPED_NYLIUM, SoundType.WOOD));
-    public static final Supplier<Block> BAOBAB_PLANKS = regWithItem("baobab_planks",
-            () -> planks(MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> EBONY_PLANKS = regWithItem("ebony_planks",
-            () -> planks(MapColor.TERRACOTTA_BLACK, SoundType.WOOD));
-    public static final Supplier<Block> FIR_PLANKS = regWithItem("fir_planks",
-            () -> planks(MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> PINE_PLANKS = regWithItem("pine_planks",
-            () -> planks(MapColor.PODZOL, SoundType.WOOD));
-    public static final Supplier<Block> CEDAR_PLANKS = regWithItem("cedar_planks",
-            () -> planks(MapColor.TERRACOTTA_YELLOW, SoundType.WOOD));
-    public static final Supplier<Block> MAHOGANY_PLANKS = regWithItem("mahogany_planks",
-            () -> planks(MapColor.TERRACOTTA_RED, SoundType.WOOD));
-    public static final Supplier<Block> AZALEA_PLANKS = regWithItem("azalea_planks",
-            () -> planks(MapColor.TERRACOTTA_GREEN, SoundType.WOOD));
-    public static final Supplier<Block> PALM_PLANKS = regWithItem("palm_planks",
-            () -> planks(MapColor.NETHER, SoundType.WOOD));
-    public static final Supplier<Block> MAPLE_PLANKS = regWithItem("maple_planks",
-            () -> planks(MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> ASPEN_PLANKS = regWithItem("aspen_planks",
-            () -> planks(MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> WALNUT_PLANKS = regWithItem("walnut_planks",
-            () -> planks(MapColor.TERRACOTTA_BROWN, SoundType.WOOD));
-    public static final Supplier<Block> BLUE_SPRUCE_PLANKS = regWithItem("blue_spruce_planks",
-            () -> planks(MapColor.LAPIS, SoundType.WOOD));
+    Supplier<Block> COCONUT = register(
+        "coconut",
+        () -> new CoconutBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.WOOD)
+            .randomTicks()
+            .instabreak()
+            .sound(SoundType.CHERRY_WOOD)
+            .pushReaction(PushReaction.DESTROY)
+        ),
+        true
+    );
+
+    Supplier<Block> HANGING_COCONUT = register(
+        "hanging_coconut",
+        () -> new HangingCoconutBlock(BlockBehaviour.Properties.ofFullCopy(COCONUT.get())
+            .mapColor(MapColor.PLANT)
+            .dropsLike(COCONUT.get())
+        ),
+        false
+    );
+
+    Supplier<Block> POTTED_ASPEN_SAPLING = pottedSapling("potted_aspen_sapling", ASPEN_SAPLING);
+    Supplier<Block> POTTED_BAOBAB_SAPLING = pottedSapling("potted_baobab_sapling", BAOBAB_SAPLING);
+    Supplier<Block> POTTED_BLUE_SPRUCE_SAPLING = pottedSapling("potted_blue_spruce_sapling", BLUE_SPRUCE_SAPLING);
+    Supplier<Block> POTTED_CEDAR_SAPLING = pottedSapling("potted_cedar_sapling", CEDAR_SAPLING);
+    Supplier<Block> POTTED_COCONUT = pottedSapling("potted_coconut", COCONUT);
+    Supplier<Block> POTTED_EBONY_SAPLING = pottedSapling("potted_ebony_sapling", EBONY_SAPLING);
+    Supplier<Block> POTTED_FIR_SAPLING = pottedSapling("potted_fir_sapling", FIR_SAPLING);
+    Supplier<Block> POTTED_MAHOGANY_SAPLING = pottedSapling("potted_mahogany_sapling", MAHOGANY_SAPLING);
+    Supplier<Block> POTTED_MAPLE_SAPLING = pottedSapling("potted_maple_sapling", MAPLE_SAPLING);
+    Supplier<Block> POTTED_PINE_SAPLING = pottedSapling("potted_pine_sapling", PINE_SAPLING);
+    Supplier<Block> POTTED_WALNUT_SAPLING = pottedSapling("potted_walnut_sapling", WALNUT_SAPLING);
+    Supplier<Block> POTTED_WILLOW_SAPLING = pottedSapling("potted_willow_sapling", WILLOW_SAPLING);
+
+    //leaves
+    Supplier<Block> ASPEN_LEAVES = leaves("aspen_leaves", ASPEN_SAPLING);
+    Supplier<Block> BAOBAB_LEAVES = leaves("baobab_leaves", BAOBAB_SAPLING);
+    Supplier<Block> BLUE_SPRUCE_LEAVES = leaves("blue_spruce_leaves", BLUE_SPRUCE_SAPLING);
+    Supplier<Block> CEDAR_LEAVES = leaves("cedar_leaves", CEDAR_SAPLING);
+    Supplier<Block> EBONY_LEAVES = leaves("ebony_leaves", EBONY_SAPLING);
+    Supplier<Block> EBONY_LEAVES_FRUITING = leaves("ebony_leaves_fruiting", EBONY_SAPLING, MapColor.GOLD);
+    Supplier<Block> FIR_LEAVES = leaves("fir_leaves", FIR_SAPLING);
+    Supplier<Block> MAHOGANY_LEAVES = leaves("mahogany_leaves", MAHOGANY_SAPLING);
+    Supplier<Block> MAPLE_LEAVES = leaves("maple_leaves", MAPLE_SAPLING, MapColor.CRIMSON_STEM);
+    Supplier<Block> PALM_LEAVES = leaves("palm_leaves", COCONUT, PalmLeavesBlock::new, MapColor.PLANT);
+    Supplier<Block> PINE_LEAVES = leaves("pine_leaves", PINE_SAPLING);
+    Supplier<Block> WALNUT_LEAVES = leaves("walnut_leaves", WALNUT_SAPLING);
+    Supplier<Block> WILLOW_LEAVES = leaves("willow_leaves", WILLOW_SAPLING);
     
     //slabs
-    public static final Supplier<Block> WILLOW_SLAB = regWithItem("willow_slab",
-            () -> slab(MapColor.WARPED_NYLIUM, SoundType.WOOD));
-    public static final Supplier<Block> BAOBAB_SLAB = regWithItem("baobab_slab",
-            () -> slab(MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> EBONY_SLAB = regWithItem("ebony_slab",
-            () -> slab(MapColor.TERRACOTTA_BLACK, SoundType.WOOD));
-    public static final Supplier<Block> FIR_SLAB = regWithItem("fir_slab",
-            () -> slab(MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> PINE_SLAB = regWithItem("pine_slab",
-            () -> slab(MapColor.PODZOL, SoundType.WOOD));
-    public static final Supplier<Block> CEDAR_SLAB = regWithItem("cedar_slab",
-            () -> slab(MapColor.TERRACOTTA_YELLOW, SoundType.WOOD));
-    public static final Supplier<Block> MAHOGANY_SLAB = regWithItem("mahogany_slab",
-            () -> slab(MapColor.TERRACOTTA_RED, SoundType.WOOD));
-    public static final Supplier<Block> AZALEA_SLAB = regWithItem("azalea_slab",
-            () -> slab(MapColor.TERRACOTTA_GREEN, SoundType.WOOD));
-    public static final Supplier<Block> PALM_SLAB = regWithItem("palm_slab",
-            () -> slab(MapColor.NETHER, SoundType.WOOD));
-    public static final Supplier<Block> MAPLE_SLAB = regWithItem("maple_slab",
-            () -> slab(MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> ASPEN_SLAB = regWithItem("aspen_slab",
-            () -> slab(MapColor.WOOD, SoundType.WOOD));
-    public static final Supplier<Block> WALNUT_SLAB = regWithItem("walnut_slab",
-            () -> slab(MapColor.TERRACOTTA_BROWN, SoundType.WOOD));
-    public static final Supplier<Block> BLUE_SPRUCE_SLAB = regWithItem("blue_spruce_slab",
-            () -> slab(MapColor.LAPIS, SoundType.WOOD));
+    Supplier<Block> ASPEN_SLAB = slab("aspen_slab", ASPEN_PLANKS);
+    Supplier<Block> AZALEA_SLAB = slab("azalea_slab", AZALEA_PLANKS);
+    Supplier<Block> BAOBAB_SLAB = slab("baobab_slab", BAOBAB_PLANKS);
+    Supplier<Block> BLUE_SPRUCE_SLAB = slab("blue_spruce_slab", BLUE_SPRUCE_PLANKS);
+    Supplier<Block> CEDAR_SLAB = slab("cedar_slab", CEDAR_PLANKS);
+    Supplier<Block> EBONY_SLAB = slab("ebony_slab", EBONY_PLANKS);
+    Supplier<Block> FIR_SLAB = slab("fir_slab", FIR_PLANKS);
+    Supplier<Block> MAHOGANY_SLAB = slab("mahogany_slab", MAHOGANY_PLANKS);
+    Supplier<Block> MAPLE_SLAB = slab("maple_slab", MAPLE_PLANKS);
+    Supplier<Block> PALM_SLAB = slab("palm_slab", PALM_PLANKS);
+    Supplier<Block> PINE_SLAB = slab("pine_slab", PINE_PLANKS);
+    Supplier<Block> WALNUT_SLAB = slab("walnut_slab", WALNUT_PLANKS);
+    Supplier<Block> WILLOW_SLAB = slab("willow_slab", WILLOW_PLANKS);
     
     //planks
-    public static final Supplier<Block> WILLOW_STAIRS = regWithItem("willow_stairs",
-            () -> stairs(WILLOW_PLANKS, BlockBehaviour.Properties.ofFullCopy(WILLOW_PLANKS.get())));
-    public static final Supplier<Block> BAOBAB_STAIRS = regWithItem("baobab_stairs",
-            () -> stairs(BAOBAB_PLANKS, BlockBehaviour.Properties.ofFullCopy(BAOBAB_PLANKS.get())));
-    public static final Supplier<Block> EBONY_STAIRS = regWithItem("ebony_stairs",
-            () -> stairs(EBONY_PLANKS, BlockBehaviour.Properties.ofFullCopy(EBONY_PLANKS.get())));
-    public static final Supplier<Block> FIR_STAIRS = regWithItem("fir_stairs",
-            () -> stairs(FIR_PLANKS, BlockBehaviour.Properties.ofFullCopy(FIR_PLANKS.get())));
-    public static final Supplier<Block> PINE_STAIRS = regWithItem("pine_stairs",
-            () -> stairs(PINE_PLANKS, BlockBehaviour.Properties.ofFullCopy(PINE_PLANKS.get())));
-    public static final Supplier<Block> CEDAR_STAIRS = regWithItem("cedar_stairs",
-            () -> stairs(CEDAR_PLANKS, BlockBehaviour.Properties.ofFullCopy(CEDAR_PLANKS.get())));
-    public static final Supplier<Block> MAHOGANY_STAIRS = regWithItem("mahogany_stairs",
-            () -> stairs(MAHOGANY_PLANKS, BlockBehaviour.Properties.ofFullCopy(MAHOGANY_PLANKS.get())));
-    public static final Supplier<Block> AZALEA_STAIRS = regWithItem("azalea_stairs",
-            () -> stairs(AZALEA_PLANKS, BlockBehaviour.Properties.ofFullCopy(AZALEA_PLANKS.get())));
-    public static final Supplier<Block> PALM_STAIRS = regWithItem("palm_stairs",
-            () -> stairs(PALM_PLANKS, BlockBehaviour.Properties.ofFullCopy(PALM_PLANKS.get())));
-    public static final Supplier<Block> MAPLE_STAIRS = regWithItem("maple_stairs",
-            () -> stairs(MAPLE_PLANKS, BlockBehaviour.Properties.ofFullCopy(MAPLE_PLANKS.get())));
-    public static final Supplier<Block> ASPEN_STAIRS = regWithItem("aspen_stairs",
-            () -> stairs(ASPEN_PLANKS, BlockBehaviour.Properties.ofFullCopy(ASPEN_PLANKS.get())));
-    public static final Supplier<Block> WALNUT_STAIRS = regWithItem("walnut_stairs",
-            () -> stairs(WALNUT_PLANKS, BlockBehaviour.Properties.ofFullCopy(WALNUT_PLANKS.get())));
-    public static final Supplier<Block> BLUE_SPRUCE_STAIRS = regWithItem("blue_spruce_stairs",
-            () -> stairs(BLUE_SPRUCE_PLANKS, BlockBehaviour.Properties.ofFullCopy(BLUE_SPRUCE_PLANKS.get())));
+    Supplier<Block> ASPEN_STAIRS = stairs("aspen_stairs", ASPEN_PLANKS);
+    Supplier<Block> AZALEA_STAIRS = stairs("azalea_stairs", AZALEA_PLANKS);
+    Supplier<Block> BAOBAB_STAIRS = stairs("baobab_stairs", BAOBAB_PLANKS);
+    Supplier<Block> BLUE_SPRUCE_STAIRS = stairs("blue_spruce_stairs", BLUE_SPRUCE_PLANKS);
+    Supplier<Block> CEDAR_STAIRS = stairs("cedar_stairs", CEDAR_PLANKS);
+    Supplier<Block> EBONY_STAIRS = stairs("ebony_stairs", EBONY_PLANKS);
+    Supplier<Block> FIR_STAIRS = stairs("fir_stairs", FIR_PLANKS);
+    Supplier<Block> MAHOGANY_STAIRS = stairs("mahogany_stairs", MAHOGANY_PLANKS);
+    Supplier<Block> MAPLE_STAIRS = stairs("maple_stairs", MAPLE_PLANKS);
+    Supplier<Block> PALM_STAIRS = stairs("palm_stairs", PALM_PLANKS);
+    Supplier<Block> PINE_STAIRS = stairs("pine_stairs", PINE_PLANKS);
+    Supplier<Block> WALNUT_STAIRS = stairs("walnut_stairs", WALNUT_PLANKS);
+    Supplier<Block> WILLOW_STAIRS = stairs("willow_stairs", WILLOW_PLANKS);
 
     //fences
-    public static final Supplier<Block> WILLOW_FENCE = regWithItem("willow_fence",
-            () -> fence(WILLOW_PLANKS.get().defaultMapColor(), SoundType.WOOD));
-    public static final Supplier<Block> BAOBAB_FENCE = regWithItem("baobab_fence",
-            () -> fence(BAOBAB_PLANKS.get().defaultMapColor(), SoundType.WOOD));
-    public static final Supplier<Block> EBONY_FENCE = regWithItem("ebony_fence",
-            () -> fence(EBONY_PLANKS.get().defaultMapColor(), SoundType.WOOD));
-    public static final Supplier<Block> FIR_FENCE = regWithItem("fir_fence",
-            () -> fence(FIR_PLANKS.get().defaultMapColor(), SoundType.WOOD));
-    public static final Supplier<Block> PINE_FENCE = regWithItem("pine_fence",
-            () -> fence(PINE_PLANKS.get().defaultMapColor(), SoundType.WOOD));
-    public static final Supplier<Block> CEDAR_FENCE = regWithItem("cedar_fence",
-            () -> fence(CEDAR_PLANKS.get().defaultMapColor(), SoundType.WOOD));
-    public static final Supplier<Block> MAHOGANY_FENCE = regWithItem("mahogany_fence",
-            () -> fence(MAHOGANY_PLANKS.get().defaultMapColor(), SoundType.WOOD));
-    public static final Supplier<Block> AZALEA_FENCE = regWithItem("azalea_fence",
-            () -> fence(AZALEA_PLANKS.get().defaultMapColor(), SoundType.WOOD));
-    public static final Supplier<Block> PALM_FENCE = regWithItem("palm_fence",
-            () -> fence(PALM_PLANKS.get().defaultMapColor(), SoundType.WOOD));
-    public static final Supplier<Block> MAPLE_FENCE = regWithItem("maple_fence",
-            () -> fence(MAPLE_PLANKS.get().defaultMapColor(), SoundType.WOOD));
-    public static final Supplier<Block> ASPEN_FENCE = regWithItem("aspen_fence",
-            () -> fence(ASPEN_PLANKS.get().defaultMapColor(), SoundType.WOOD));
-    public static final Supplier<Block> WALNUT_FENCE = regWithItem("walnut_fence",
-            () -> fence(WALNUT_PLANKS.get().defaultMapColor(), SoundType.WOOD));
-    public static final Supplier<Block> BLUE_SPRUCE_FENCE = regWithItem("blue_spruce_fence",
-            () -> fence(BLUE_SPRUCE_PLANKS.get().defaultMapColor(), SoundType.WOOD));
+    Supplier<Block> ASPEN_FENCE = fence("aspen_fence", ASPEN_PLANKS);
+    Supplier<Block> AZALEA_FENCE = fence("azalea_fence", AZALEA_PLANKS);
+    Supplier<Block> BAOBAB_FENCE = fence("baobab_fence", BAOBAB_PLANKS);
+    Supplier<Block> BLUE_SPRUCE_FENCE = fence("blue_spruce_fence", BLUE_SPRUCE_PLANKS);
+    Supplier<Block> CEDAR_FENCE = fence("cedar_fence", CEDAR_PLANKS);
+    Supplier<Block> EBONY_FENCE = fence("ebony_fence", EBONY_PLANKS);
+    Supplier<Block> FIR_FENCE = fence("fir_fence", FIR_PLANKS);
+    Supplier<Block> MAHOGANY_FENCE = fence("mahogany_fence", MAHOGANY_PLANKS);
+    Supplier<Block> MAPLE_FENCE = fence("maple_fence", MAPLE_PLANKS);
+    Supplier<Block> PALM_FENCE = fence("palm_fence", PALM_PLANKS);
+    Supplier<Block> PINE_FENCE = fence("pine_fence", PINE_PLANKS);
+    Supplier<Block> WALNUT_FENCE = fence("walnut_fence", WALNUT_PLANKS);
+    Supplier<Block> WILLOW_FENCE = fence("willow_fence", WILLOW_PLANKS);
 
     //fence gates
-    public static final Supplier<Block> WILLOW_FENCE_GATE = regWithItem("willow_fence_gate",
-            () -> fenceGate(WILLOW_PLANKS.get().defaultMapColor(), SoundType.WOOD, ModWoodSetup.WILLOW));
-    public static final Supplier<Block> BAOBAB_FENCE_GATE = regWithItem("baobab_fence_gate",
-            () -> fenceGate(BAOBAB_PLANKS.get().defaultMapColor(), SoundType.WOOD, ModWoodSetup.BAOBAB));
-    public static final Supplier<Block> EBONY_FENCE_GATE = regWithItem("ebony_fence_gate",
-            () -> fenceGate(EBONY_PLANKS.get().defaultMapColor(), SoundType.WOOD, ModWoodSetup.EBONY));
-    public static final Supplier<Block> FIR_FENCE_GATE = regWithItem("fir_fence_gate",
-            () -> fenceGate(FIR_PLANKS.get().defaultMapColor(), SoundType.WOOD, ModWoodSetup.FIR));
-    public static final Supplier<Block> PINE_FENCE_GATE = regWithItem("pine_fence_gate",
-            () -> fenceGate(PINE_PLANKS.get().defaultMapColor(), SoundType.WOOD, ModWoodSetup.PINE));
-    public static final Supplier<Block> CEDAR_FENCE_GATE = regWithItem("cedar_fence_gate",
-            () -> fenceGate(CEDAR_PLANKS.get().defaultMapColor(), SoundType.WOOD, ModWoodSetup.CEDAR));
-    public static final Supplier<Block> MAHOGANY_FENCE_GATE = regWithItem("mahogany_fence_gate",
-            () -> fenceGate(MAHOGANY_PLANKS.get().defaultMapColor(), SoundType.WOOD, ModWoodSetup.MAHOGANY));
-    public static final Supplier<Block> AZALEA_FENCE_GATE = regWithItem("azalea_fence_gate",
-            () -> fenceGate(AZALEA_PLANKS.get().defaultMapColor(), SoundType.WOOD, ModWoodSetup.AZALEA));
-    public static final Supplier<Block> PALM_FENCE_GATE = regWithItem("palm_fence_gate",
-            () -> fenceGate(PALM_PLANKS.get().defaultMapColor(), SoundType.WOOD, ModWoodSetup.PALM));
-    public static final Supplier<Block> MAPLE_FENCE_GATE = regWithItem("maple_fence_gate",
-            () -> fenceGate(MAPLE_PLANKS.get().defaultMapColor(), SoundType.WOOD, ModWoodSetup.MAPLE));
-    public static final Supplier<Block> ASPEN_FENCE_GATE = regWithItem("aspen_fence_gate",
-            () -> fenceGate(ASPEN_PLANKS.get().defaultMapColor(), SoundType.WOOD, ModWoodSetup.ASPEN));
-    public static final Supplier<Block> WALNUT_FENCE_GATE = regWithItem("walnut_fence_gate",
-            () -> fenceGate(WALNUT_PLANKS.get().defaultMapColor(), SoundType.WOOD, ModWoodSetup.WALNUT));
-    public static final Supplier<Block> BLUE_SPRUCE_FENCE_GATE = regWithItem("blue_spruce_fence_gate",
-            () -> fenceGate(BLUE_SPRUCE_PLANKS.get().defaultMapColor(), SoundType.WOOD, ModWoodSetup.BLUE_SPRUCE));
+    Supplier<Block> ASPEN_FENCE_GATE = fenceGate("aspen_fence_gate", ASPEN_PLANKS, ModWoodTypes.ASPEN);
+    Supplier<Block> AZALEA_FENCE_GATE = fenceGate("azalea_fence_gate", AZALEA_PLANKS, ModWoodTypes.AZALEA);
+    Supplier<Block> BAOBAB_FENCE_GATE = fenceGate("baobab_fence_gate", BAOBAB_PLANKS, ModWoodTypes.BAOBAB);
+    Supplier<Block> BLUE_SPRUCE_FENCE_GATE = fenceGate("blue_spruce_fence_gate", BLUE_SPRUCE_PLANKS, ModWoodTypes.BLUE_SPRUCE);
+    Supplier<Block> CEDAR_FENCE_GATE = fenceGate("cedar_fence_gate", CEDAR_PLANKS, ModWoodTypes.CEDAR);
+    Supplier<Block> EBONY_FENCE_GATE = fenceGate("ebony_fence_gate", EBONY_PLANKS, ModWoodTypes.EBONY);
+    Supplier<Block> FIR_FENCE_GATE = fenceGate("fir_fence_gate", FIR_PLANKS, ModWoodTypes.FIR);
+    Supplier<Block> MAHOGANY_FENCE_GATE = fenceGate("mahogany_fence_gate", MAHOGANY_PLANKS, ModWoodTypes.MAHOGANY);
+    Supplier<Block> MAPLE_FENCE_GATE = fenceGate("maple_fence_gate", MAPLE_PLANKS, ModWoodTypes.MAPLE);
+    Supplier<Block> PALM_FENCE_GATE = fenceGate("palm_fence_gate", PALM_PLANKS, ModWoodTypes.PALM);
+    Supplier<Block> PINE_FENCE_GATE = fenceGate("pine_fence_gate", PINE_PLANKS, ModWoodTypes.PINE);
+    Supplier<Block> WALNUT_FENCE_GATE = fenceGate("walnut_fence_gate", WALNUT_PLANKS, ModWoodTypes.WALNUT);
+    Supplier<Block> WILLOW_FENCE_GATE = fenceGate("willow_fence_gate", WILLOW_PLANKS, ModWoodTypes.WILLOW);
 
     //buttons
-    public static final Supplier<Block> WILLOW_BUTTON = regWithItem("willow_button", ModBlocks::button);
-    public static final Supplier<Block> BAOBAB_BUTTON = regWithItem("baobab_button", ModBlocks::button);
-    public static final Supplier<Block> EBONY_BUTTON = regWithItem("ebony_button", ModBlocks::button);
-    public static final Supplier<Block> FIR_BUTTON = regWithItem("fir_button", ModBlocks::button);
-    public static final Supplier<Block> PINE_BUTTON = regWithItem("pine_button", ModBlocks::button);
-    public static final Supplier<Block> CEDAR_BUTTON = regWithItem("cedar_button", ModBlocks::button);
-    public static final Supplier<Block> MAHOGANY_BUTTON = regWithItem("mahogany_button", ModBlocks::button);
-    public static final Supplier<Block> AZALEA_BUTTON = regWithItem("azalea_button", ModBlocks::button);
-    public static final Supplier<Block> PALM_BUTTON = regWithItem("palm_button", ModBlocks::button);
-    public static final Supplier<Block> MAPLE_BUTTON = regWithItem("maple_button", ModBlocks::button);
-    public static final Supplier<Block> ASPEN_BUTTON = regWithItem("aspen_button", ModBlocks::button);
-    public static final Supplier<Block> WALNUT_BUTTON = regWithItem("walnut_button", ModBlocks::button);
-    public static final Supplier<Block> BLUE_SPRUCE_BUTTON = regWithItem("blue_spruce_button", ModBlocks::button);
+    Supplier<Block> ASPEN_BUTTON = button("aspen_button", ModBlockSetTypes.ASPEN);
+    Supplier<Block> AZALEA_BUTTON = button("azalea_button", ModBlockSetTypes.AZALEA);
+    Supplier<Block> BAOBAB_BUTTON = button("baobab_button", ModBlockSetTypes.BAOBAB);
+    Supplier<Block> BLUE_SPRUCE_BUTTON = button("blue_spruce_button", ModBlockSetTypes.BLUE_SPRUCE);
+    Supplier<Block> CEDAR_BUTTON = button("cedar_button", ModBlockSetTypes.CEDAR);
+    Supplier<Block> EBONY_BUTTON = button("ebony_button", ModBlockSetTypes.EBONY);
+    Supplier<Block> FIR_BUTTON = button("fir_button", ModBlockSetTypes.FIR);
+    Supplier<Block> MAHOGANY_BUTTON = button("mahogany_button", ModBlockSetTypes.MAHOGANY);
+    Supplier<Block> MAPLE_BUTTON = button("maple_button", ModBlockSetTypes.MAPLE);
+    Supplier<Block> PALM_BUTTON = button("palm_button", ModBlockSetTypes.PALM);
+    Supplier<Block> PINE_BUTTON = button("pine_button", ModBlockSetTypes.PINE);
+    Supplier<Block> WALNUT_BUTTON = button("walnut_button", ModBlockSetTypes.WALNUT);
+    Supplier<Block> WILLOW_BUTTON = button("willow_button", ModBlockSetTypes.WILLOW);
 
     //pressure plates
-    public static final Supplier<Block> WILLOW_PRESSURE_PLATE = regWithItem("willow_pressure_plate",
-            () -> pressurePlate(WILLOW_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> BAOBAB_PRESSURE_PLATE = regWithItem("baobab_pressure_plate",
-            () -> pressurePlate(BAOBAB_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> EBONY_PRESSURE_PLATE = regWithItem("ebony_pressure_plate",
-            () -> pressurePlate(EBONY_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> FIR_PRESSURE_PLATE = regWithItem("fir_pressure_plate",
-            () -> pressurePlate(FIR_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> PINE_PRESSURE_PLATE = regWithItem("pine_pressure_plate",
-            () -> pressurePlate(PINE_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> CEDAR_PRESSURE_PLATE = regWithItem("cedar_pressure_plate",
-            () -> pressurePlate(CEDAR_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> MAHOGANY_PRESSURE_PLATE = regWithItem("mahogany_pressure_plate",
-            () -> pressurePlate(MAHOGANY_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> AZALEA_PRESSURE_PLATE = regWithItem("azalea_pressure_plate",
-            () -> pressurePlate(AZALEA_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> PALM_PRESSURE_PLATE = regWithItem("palm_pressure_plate",
-            () -> pressurePlate(PALM_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> MAPLE_PRESSURE_PLATE = regWithItem("maple_pressure_plate",
-            () -> pressurePlate(MAPLE_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> ASPEN_PRESSURE_PLATE = regWithItem("aspen_pressure_plate",
-            () -> pressurePlate(ASPEN_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> WALNUT_PRESSURE_PLATE = regWithItem("walnut_pressure_plate",
-            () -> pressurePlate(WALNUT_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> BLUE_SPRUCE_PRESSURE_PLATE = regWithItem("blue_spruce_pressure_plate",
-            () -> pressurePlate(BLUE_SPRUCE_PLANKS.get().defaultMapColor()));
+    Supplier<Block> ASPEN_PRESSURE_PLATE = pressurePlate("aspen_pressure_plate", ASPEN_PLANKS, ModBlockSetTypes.ASPEN);
+    Supplier<Block> AZALEA_PRESSURE_PLATE = pressurePlate("azalea_pressure_plate", AZALEA_PLANKS, ModBlockSetTypes.AZALEA);
+    Supplier<Block> BAOBAB_PRESSURE_PLATE = pressurePlate("baobab_pressure_plate", BAOBAB_PLANKS, ModBlockSetTypes.BAOBAB);
+    Supplier<Block> BLUE_SPRUCE_PRESSURE_PLATE = pressurePlate("blue_spruce_pressure_plate", BLUE_SPRUCE_PLANKS, ModBlockSetTypes.BLUE_SPRUCE);
+    Supplier<Block> CEDAR_PRESSURE_PLATE = pressurePlate("cedar_pressure_plate", CEDAR_PLANKS, ModBlockSetTypes.CEDAR);
+    Supplier<Block> EBONY_PRESSURE_PLATE = pressurePlate("ebony_pressure_plate", EBONY_PLANKS, ModBlockSetTypes.EBONY);
+    Supplier<Block> FIR_PRESSURE_PLATE = pressurePlate("fir_pressure_plate", FIR_PLANKS, ModBlockSetTypes.FIR);
+    Supplier<Block> MAHOGANY_PRESSURE_PLATE = pressurePlate("mahogany_pressure_plate", MAHOGANY_PLANKS, ModBlockSetTypes.MAHOGANY);
+    Supplier<Block> MAPLE_PRESSURE_PLATE = pressurePlate("maple_pressure_plate", MAPLE_PLANKS, ModBlockSetTypes.MAPLE);
+    Supplier<Block> PALM_PRESSURE_PLATE = pressurePlate("palm_pressure_plate", PALM_PLANKS, ModBlockSetTypes.PALM);
+    Supplier<Block> PINE_PRESSURE_PLATE = pressurePlate("pine_pressure_plate", PINE_PLANKS, ModBlockSetTypes.PINE);
+    Supplier<Block> WALNUT_PRESSURE_PLATE = pressurePlate("walnut_pressure_plate", WALNUT_PLANKS, ModBlockSetTypes.WALNUT);
+    Supplier<Block> WILLOW_PRESSURE_PLATE = pressurePlate("willow_pressure_plate", WILLOW_PLANKS, ModBlockSetTypes.WILLOW);
 
     //signs
-    public static final Supplier<Block> WILLOW_SIGN = regBlock("willow_sign",
-            () -> standingSign(WILLOW_PLANKS.get().defaultMapColor(), ModWoodSetup.WILLOW));
-    public static final Supplier<Block> BAOBAB_SIGN = regBlock("baobab_sign",
-            () -> standingSign(BAOBAB_PLANKS.get().defaultMapColor(), ModWoodSetup.BAOBAB));
-    public static final Supplier<Block> EBONY_SIGN = regBlock("ebony_sign",
-            () -> standingSign(EBONY_PLANKS.get().defaultMapColor(), ModWoodSetup.EBONY));
-    public static final Supplier<Block> FIR_SIGN = regBlock("fir_sign",
-            () -> standingSign(FIR_PLANKS.get().defaultMapColor(), ModWoodSetup.FIR));
-    public static final Supplier<Block> PINE_SIGN = regBlock("pine_sign",
-            () -> standingSign(PINE_PLANKS.get().defaultMapColor(), ModWoodSetup.PINE));
-    public static final Supplier<Block> CEDAR_SIGN = regBlock("cedar_sign",
-            () -> standingSign(CEDAR_PLANKS.get().defaultMapColor(), ModWoodSetup.CEDAR));
-    public static final Supplier<Block> MAHOGANY_SIGN = regBlock("mahogany_sign",
-            () -> standingSign(MAHOGANY_PLANKS.get().defaultMapColor(), ModWoodSetup.MAHOGANY));
-    public static final Supplier<Block> AZALEA_SIGN = regBlock("azalea_sign",
-            () -> standingSign(AZALEA_PLANKS.get().defaultMapColor(), ModWoodSetup.AZALEA));
-    public static final Supplier<Block> PALM_SIGN = regBlock("palm_sign",
-            () -> standingSign(PALM_PLANKS.get().defaultMapColor(), ModWoodSetup.PALM));
-    public static final Supplier<Block> MAPLE_SIGN = regBlock("maple_sign",
-            () -> standingSign(MAPLE_PLANKS.get().defaultMapColor(), ModWoodSetup.MAPLE));
-    public static final Supplier<Block> ASPEN_SIGN = regBlock("aspen_sign",
-            () -> standingSign(ASPEN_PLANKS.get().defaultMapColor(), ModWoodSetup.ASPEN));
-    public static final Supplier<Block> WALNUT_SIGN = regBlock("walnut_sign",
-            () -> standingSign(WALNUT_PLANKS.get().defaultMapColor(), ModWoodSetup.WALNUT));
-    public static final Supplier<Block> BLUE_SPRUCE_SIGN = regBlock("blue_spruce_sign",
-            () -> standingSign(BLUE_SPRUCE_PLANKS.get().defaultMapColor(), ModWoodSetup.BLUE_SPRUCE));
+    Supplier<Block> ASPEN_SIGN = standingSign("aspen_sign", ASPEN_PLANKS, ModWoodTypes.ASPEN);
+    Supplier<Block> AZALEA_SIGN = standingSign("azalea_sign", AZALEA_PLANKS, ModWoodTypes.AZALEA);
+    Supplier<Block> BAOBAB_SIGN = standingSign("baobab_sign", BAOBAB_PLANKS, ModWoodTypes.BAOBAB);
+    Supplier<Block> BLUE_SPRUCE_SIGN = standingSign("blue_spruce_sign", BLUE_SPRUCE_PLANKS, ModWoodTypes.BLUE_SPRUCE);
+    Supplier<Block> CEDAR_SIGN = standingSign("cedar_sign", CEDAR_PLANKS, ModWoodTypes.CEDAR);
+    Supplier<Block> EBONY_SIGN = standingSign("ebony_sign", EBONY_PLANKS, ModWoodTypes.EBONY);
+    Supplier<Block> FIR_SIGN = standingSign("fir_sign", FIR_PLANKS, ModWoodTypes.FIR);
+    Supplier<Block> MAHOGANY_SIGN = standingSign("mahogany_sign", MAHOGANY_PLANKS, ModWoodTypes.MAHOGANY);
+    Supplier<Block> MAPLE_SIGN = standingSign("maple_sign", MAPLE_PLANKS, ModWoodTypes.MAPLE);
+    Supplier<Block> PALM_SIGN = standingSign("palm_sign", PALM_PLANKS, ModWoodTypes.PALM);
+    Supplier<Block> PINE_SIGN = standingSign("pine_sign", PINE_PLANKS, ModWoodTypes.PINE);
+    Supplier<Block> WALNUT_SIGN = standingSign("walnut_sign", WALNUT_PLANKS, ModWoodTypes.WALNUT);
+    Supplier<Block> WILLOW_SIGN = standingSign("willow_sign", WILLOW_PLANKS, ModWoodTypes.WILLOW);
 
-    public static final Supplier<Block> WILLOW_WALL_SIGN = regBlock("willow_wall_sign",
-            () -> wallSign(WILLOW_PLANKS.get().defaultMapColor(), ModBlocks.WILLOW_SIGN.get(), ModWoodSetup.WILLOW));
-    public static final Supplier<Block> BAOBAB_WALL_SIGN = regBlock("baobab_wall_sign",
-            () -> wallSign(BAOBAB_PLANKS.get().defaultMapColor(), ModBlocks.BAOBAB_SIGN.get(), ModWoodSetup.BAOBAB));
-    public static final Supplier<Block> EBONY_WALL_SIGN = regBlock("ebony_wall_sign",
-            () -> wallSign(EBONY_PLANKS.get().defaultMapColor(), ModBlocks.EBONY_SIGN.get(), ModWoodSetup.EBONY));
-    public static final Supplier<Block> FIR_WALL_SIGN = regBlock("fir_wall_sign",
-            () -> wallSign(FIR_PLANKS.get().defaultMapColor(), ModBlocks.FIR_SIGN.get(), ModWoodSetup.FIR));
-    public static final Supplier<Block> PINE_WALL_SIGN = regBlock("pine_wall_sign",
-            () -> wallSign(PINE_PLANKS.get().defaultMapColor(), ModBlocks.PINE_SIGN.get(), ModWoodSetup.PINE));
-    public static final Supplier<Block> CEDAR_WALL_SIGN = regBlock("cedar_wall_sign",
-            () -> wallSign(CEDAR_PLANKS.get().defaultMapColor(), ModBlocks.CEDAR_SIGN.get(), ModWoodSetup.CEDAR));
-    public static final Supplier<Block> MAHOGANY_WALL_SIGN = regBlock("mahogany_wall_sign",
-            () -> wallSign(MAHOGANY_PLANKS.get().defaultMapColor(), ModBlocks.MAHOGANY_SIGN.get(), ModWoodSetup.MAHOGANY));
-    public static final Supplier<Block> AZALEA_WALL_SIGN = regBlock("azalea_wall_sign",
-            () -> wallSign(AZALEA_PLANKS.get().defaultMapColor(), ModBlocks.AZALEA_SIGN.get(), ModWoodSetup.AZALEA));
-    public static final Supplier<Block> PALM_WALL_SIGN = regBlock("palm_wall_sign",
-            () -> wallSign(PALM_PLANKS.get().defaultMapColor(), ModBlocks.PALM_SIGN.get(), ModWoodSetup.PALM));
-    public static final Supplier<Block> MAPLE_WALL_SIGN = regBlock("maple_wall_sign",
-            () -> wallSign(MAPLE_PLANKS.get().defaultMapColor(), ModBlocks.MAPLE_SIGN.get(), ModWoodSetup.MAPLE));
-    public static final Supplier<Block> ASPEN_WALL_SIGN = regBlock("aspen_wall_sign",
-            () -> wallSign(ASPEN_PLANKS.get().defaultMapColor(), ModBlocks.ASPEN_SIGN.get(), ModWoodSetup.ASPEN));
-    public static final Supplier<Block> WALNUT_WALL_SIGN = regBlock("walnut_wall_sign",
-            () -> wallSign(WALNUT_PLANKS.get().defaultMapColor(), ModBlocks.WALNUT_SIGN.get(), ModWoodSetup.WALNUT));
-    public static final Supplier<Block> BLUE_SPRUCE_WALL_SIGN = regBlock("blue_spruce_wall_sign",
-            () -> wallSign(BLUE_SPRUCE_PLANKS.get().defaultMapColor(), ModBlocks.BLUE_SPRUCE_SIGN.get(), ModWoodSetup.BLUE_SPRUCE));
+    Supplier<Block> ASPEN_WALL_SIGN = wallSign("aspen_wall_sign", ASPEN_SIGN, ModWoodTypes.ASPEN);
+    Supplier<Block> AZALEA_WALL_SIGN = wallSign("azalea_wall_sign", AZALEA_SIGN, ModWoodTypes.AZALEA);
+    Supplier<Block> BAOBAB_WALL_SIGN = wallSign("baobab_wall_sign", BAOBAB_SIGN, ModWoodTypes.BAOBAB);
+    Supplier<Block> BLUE_SPRUCE_WALL_SIGN = wallSign("blue_spruce_wall_sign", BLUE_SPRUCE_SIGN, ModWoodTypes.BLUE_SPRUCE);
+    Supplier<Block> CEDAR_WALL_SIGN = wallSign("cedar_wall_sign", CEDAR_SIGN, ModWoodTypes.CEDAR);
+    Supplier<Block> EBONY_WALL_SIGN = wallSign("ebony_wall_sign", EBONY_SIGN, ModWoodTypes.EBONY);
+    Supplier<Block> FIR_WALL_SIGN = wallSign("fir_wall_sign", FIR_SIGN, ModWoodTypes.FIR);
+    Supplier<Block> MAHOGANY_WALL_SIGN = wallSign("mahogany_wall_sign", MAHOGANY_SIGN, ModWoodTypes.MAHOGANY);
+    Supplier<Block> MAPLE_WALL_SIGN = wallSign("maple_wall_sign", MAPLE_SIGN, ModWoodTypes.MAPLE);
+    Supplier<Block> PALM_WALL_SIGN = wallSign("palm_wall_sign", PALM_SIGN, ModWoodTypes.PALM);
+    Supplier<Block> PINE_WALL_SIGN = wallSign("pine_wall_sign", PINE_SIGN, ModWoodTypes.PINE);
+    Supplier<Block> WALNUT_WALL_SIGN = wallSign("walnut_wall_sign", WALNUT_SIGN, ModWoodTypes.WALNUT);
+    Supplier<Block> WILLOW_WALL_SIGN = wallSign("willow_wall_sign", WILLOW_SIGN, ModWoodTypes.WILLOW);
     
     //hanging signs
-    public static final Supplier<Block> WILLOW_HANGING_SIGN = regBlock("willow_hanging_sign",
-            () -> hangingSign(WILLOW_PLANKS.get().defaultMapColor(), ModWoodSetup.WILLOW));
-    public static final Supplier<Block> BAOBAB_HANGING_SIGN = regBlock("baobab_hanging_sign",
-            () -> hangingSign(BAOBAB_PLANKS.get().defaultMapColor(), ModWoodSetup.BAOBAB));
-    public static final Supplier<Block> EBONY_HANGING_SIGN = regBlock("ebony_hanging_sign",
-            () -> hangingSign(EBONY_PLANKS.get().defaultMapColor(), ModWoodSetup.EBONY));
-    public static final Supplier<Block> FIR_HANGING_SIGN = regBlock("fir_hanging_sign",
-            () -> hangingSign(FIR_PLANKS.get().defaultMapColor(), ModWoodSetup.FIR));
-    public static final Supplier<Block> PINE_HANGING_SIGN = regBlock("pine_hanging_sign",
-            () -> hangingSign(PINE_PLANKS.get().defaultMapColor(), ModWoodSetup.PINE));
-    public static final Supplier<Block> CEDAR_HANGING_SIGN = regBlock("cedar_hanging_sign",
-            () -> hangingSign(CEDAR_PLANKS.get().defaultMapColor(), ModWoodSetup.CEDAR));
-    public static final Supplier<Block> MAHOGANY_HANGING_SIGN = regBlock("mahogany_hanging_sign",
-            () -> hangingSign(MAHOGANY_PLANKS.get().defaultMapColor(), ModWoodSetup.MAHOGANY));
-    public static final Supplier<Block> AZALEA_HANGING_SIGN = regBlock("azalea_hanging_sign",
-            () -> hangingSign(AZALEA_PLANKS.get().defaultMapColor(), ModWoodSetup.AZALEA));
-    public static final Supplier<Block> PALM_HANGING_SIGN = regBlock("palm_hanging_sign",
-            () -> hangingSign(PALM_PLANKS.get().defaultMapColor(), ModWoodSetup.PALM));
-    public static final Supplier<Block> MAPLE_HANGING_SIGN = regBlock("maple_hanging_sign",
-            () -> hangingSign(MAPLE_PLANKS.get().defaultMapColor(), ModWoodSetup.MAPLE));
-    public static final Supplier<Block> ASPEN_HANGING_SIGN = regBlock("aspen_hanging_sign",
-            () -> hangingSign(ASPEN_PLANKS.get().defaultMapColor(), ModWoodSetup.ASPEN));
-    public static final Supplier<Block> WALNUT_HANGING_SIGN = regBlock("walnut_hanging_sign",
-            () -> hangingSign(WALNUT_PLANKS.get().defaultMapColor(), ModWoodSetup.WALNUT));
-    public static final Supplier<Block> BLUE_SPRUCE_HANGING_SIGN = regBlock("blue_spruce_hanging_sign",
-            () -> hangingSign(BLUE_SPRUCE_PLANKS.get().defaultMapColor(), ModWoodSetup.BLUE_SPRUCE));
+    Supplier<Block> ASPEN_HANGING_SIGN = ceilingHangingSign("aspen_hanging_sign", STRIPPED_ASPEN_LOG, ModWoodTypes.ASPEN);
+    Supplier<Block> AZALEA_HANGING_SIGN = ceilingHangingSign("azalea_hanging_sign", STRIPPED_AZALEA_LOG, ModWoodTypes.AZALEA);
+    Supplier<Block> BAOBAB_HANGING_SIGN = ceilingHangingSign("baobab_hanging_sign", STRIPPED_BAOBAB_LOG, ModWoodTypes.BAOBAB);
+    Supplier<Block> BLUE_SPRUCE_HANGING_SIGN = ceilingHangingSign("blue_spruce_hanging_sign", STRIPPED_BLUE_SPRUCE_LOG, ModWoodTypes.BLUE_SPRUCE);
+    Supplier<Block> CEDAR_HANGING_SIGN = ceilingHangingSign("cedar_hanging_sign", STRIPPED_CEDAR_LOG, ModWoodTypes.CEDAR);
+    Supplier<Block> EBONY_HANGING_SIGN = ceilingHangingSign("ebony_hanging_sign", EBONY_HEARTWOOD_LOG, ModWoodTypes.EBONY);
+    Supplier<Block> FIR_HANGING_SIGN = ceilingHangingSign("fir_hanging_sign", STRIPPED_FIR_LOG, ModWoodTypes.FIR);
+    Supplier<Block> MAHOGANY_HANGING_SIGN = ceilingHangingSign("mahogany_hanging_sign", STRIPPED_MAHOGANY_LOG, ModWoodTypes.MAHOGANY);
+    Supplier<Block> MAPLE_HANGING_SIGN = ceilingHangingSign("maple_hanging_sign", STRIPPED_MAPLE_LOG, ModWoodTypes.MAPLE);
+    Supplier<Block> PALM_HANGING_SIGN = ceilingHangingSign("palm_hanging_sign", STRIPPED_PALM_LOG, ModWoodTypes.PALM);
+    Supplier<Block> PINE_HANGING_SIGN = ceilingHangingSign("pine_hanging_sign", STRIPPED_PINE_LOG, ModWoodTypes.PINE);
+    Supplier<Block> WALNUT_HANGING_SIGN = ceilingHangingSign("walnut_hanging_sign", STRIPPED_WALNUT_LOG, ModWoodTypes.WALNUT);
+    Supplier<Block> WILLOW_HANGING_SIGN = ceilingHangingSign("willow_hanging_sign", STRIPPED_WILLOW_LOG, ModWoodTypes.WILLOW);
 
-    public static final Supplier<Block> WILLOW_WALL_HANGING_SIGN = regBlock("willow_wall_hanging_sign",
-            () -> wallHangingSign(WILLOW_SIGN.get().defaultMapColor(), WILLOW_SIGN.get(), ModWoodSetup.WILLOW));
-    public static final Supplier<Block> BAOBAB_WALL_HANGING_SIGN = regBlock("baobab_wall_hanging_sign",
-            () -> wallHangingSign(BAOBAB_SIGN.get().defaultMapColor(), BAOBAB_SIGN.get(), ModWoodSetup.BAOBAB));
-    public static final Supplier<Block> EBONY_WALL_HANGING_SIGN = regBlock("ebony_wall_hanging_sign",
-            () -> wallHangingSign(EBONY_SIGN.get().defaultMapColor(), EBONY_SIGN.get(), ModWoodSetup.EBONY));
-    public static final Supplier<Block> FIR_WALL_HANGING_SIGN = regBlock("fir_wall_hanging_sign",
-            () -> wallHangingSign(FIR_SIGN.get().defaultMapColor(), FIR_SIGN.get(), ModWoodSetup.FIR));
-    public static final Supplier<Block> PINE_WALL_HANGING_SIGN = regBlock("pine_wall_hanging_sign",
-            () -> wallHangingSign(PINE_SIGN.get().defaultMapColor(), PINE_SIGN.get(), ModWoodSetup.PINE));
-    public static final Supplier<Block> CEDAR_WALL_HANGING_SIGN = regBlock("cedar_wall_hanging_sign",
-            () -> wallHangingSign(CEDAR_SIGN.get().defaultMapColor(), CEDAR_SIGN.get(), ModWoodSetup.CEDAR));
-    public static final Supplier<Block> MAHOGANY_WALL_HANGING_SIGN = regBlock("mahogany_wall_hanging_sign",
-            () -> wallHangingSign(MAHOGANY_SIGN.get().defaultMapColor(), MAHOGANY_SIGN.get(), ModWoodSetup.MAHOGANY));
-    public static final Supplier<Block> AZALEA_WALL_HANGING_SIGN = regBlock("azalea_wall_hanging_sign",
-            () -> wallHangingSign(PALM_SIGN.get().defaultMapColor(), PALM_SIGN.get(), ModWoodSetup.AZALEA));
-    public static final Supplier<Block> PALM_WALL_HANGING_SIGN = regBlock("palm_wall_hanging_sign",
-            () -> wallHangingSign(PALM_SIGN.get().defaultMapColor(), PALM_SIGN.get(), ModWoodSetup.PALM));
-    public static final Supplier<Block> MAPLE_WALL_HANGING_SIGN = regBlock("maple_wall_hanging_sign",
-            () -> wallHangingSign(MAPLE_SIGN.get().defaultMapColor(), MAPLE_SIGN.get(), ModWoodSetup.MAPLE));
-    public static final Supplier<Block> ASPEN_WALL_HANGING_SIGN = regBlock("aspen_wall_hanging_sign",
-            () -> wallHangingSign(ASPEN_SIGN.get().defaultMapColor(), ASPEN_SIGN.get(), ModWoodSetup.ASPEN));
-    public static final Supplier<Block> WALNUT_WALL_HANGING_SIGN = regBlock("walnut_wall_hanging_sign",
-            () -> wallHangingSign(WALNUT_SIGN.get().defaultMapColor(), WALNUT_SIGN.get(), ModWoodSetup.WALNUT));
-    public static final Supplier<Block> BLUE_SPRUCE_WALL_HANGING_SIGN = regBlock("blue_spruce_wall_hanging_sign",
-            () -> wallHangingSign(BLUE_SPRUCE_SIGN.get().defaultMapColor(), BLUE_SPRUCE_SIGN.get(), ModWoodSetup.BLUE_SPRUCE));
+    Supplier<Block> ASPEN_WALL_HANGING_SIGN = wallHangingSign("aspen_wall_hanging_sign", STRIPPED_ASPEN_LOG, ASPEN_SIGN, ModWoodTypes.ASPEN);
+    Supplier<Block> AZALEA_WALL_HANGING_SIGN = wallHangingSign("azalea_wall_hanging_sign", STRIPPED_AZALEA_LOG, AZALEA_SIGN, ModWoodTypes.AZALEA);
+    Supplier<Block> BAOBAB_WALL_HANGING_SIGN = wallHangingSign("baobab_wall_hanging_sign", STRIPPED_BAOBAB_LOG, BAOBAB_SIGN, ModWoodTypes.BAOBAB);
+    Supplier<Block> BLUE_SPRUCE_WALL_HANGING_SIGN = wallHangingSign("blue_spruce_wall_hanging_sign", STRIPPED_BLUE_SPRUCE_LOG, BLUE_SPRUCE_SIGN, ModWoodTypes.BLUE_SPRUCE);
+    Supplier<Block> CEDAR_WALL_HANGING_SIGN = wallHangingSign("cedar_wall_hanging_sign", STRIPPED_CEDAR_LOG, CEDAR_SIGN, ModWoodTypes.CEDAR);
+    Supplier<Block> EBONY_WALL_HANGING_SIGN = wallHangingSign("ebony_wall_hanging_sign", EBONY_HEARTWOOD_LOG, EBONY_SIGN, ModWoodTypes.EBONY);
+    Supplier<Block> FIR_WALL_HANGING_SIGN = wallHangingSign("fir_wall_hanging_sign", STRIPPED_FIR_LOG, FIR_SIGN, ModWoodTypes.FIR);
+    Supplier<Block> MAHOGANY_WALL_HANGING_SIGN = wallHangingSign("mahogany_wall_hanging_sign", STRIPPED_MAHOGANY_LOG, MAHOGANY_SIGN, ModWoodTypes.MAHOGANY);
+    Supplier<Block> MAPLE_WALL_HANGING_SIGN = wallHangingSign("maple_wall_hanging_sign", STRIPPED_MAPLE_LOG, MAPLE_SIGN, ModWoodTypes.MAPLE);
+    Supplier<Block> PALM_WALL_HANGING_SIGN = wallHangingSign("palm_wall_hanging_sign", STRIPPED_PALM_LOG, PALM_SIGN, ModWoodTypes.PALM);
+    Supplier<Block> PINE_WALL_HANGING_SIGN = wallHangingSign("pine_wall_hanging_sign", STRIPPED_PINE_LOG, PINE_SIGN, ModWoodTypes.PINE);
+    Supplier<Block> WALNUT_WALL_HANGING_SIGN = wallHangingSign("walnut_wall_hanging_sign", STRIPPED_WALNUT_LOG, WALNUT_SIGN, ModWoodTypes.WALNUT);
+    Supplier<Block> WILLOW_WALL_HANGING_SIGN = wallHangingSign("willow_wall_hanging_sign", STRIPPED_WILLOW_LOG, WILLOW_SIGN, ModWoodTypes.WILLOW);
     
     //doors
-    public static final Supplier<Block> WILLOW_DOOR = regWithItem("willow_door",
-            () -> door(WILLOW_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> BAOBAB_DOOR = regWithItem("baobab_door",
-            () -> door(BAOBAB_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> EBONY_DOOR = regWithItem("ebony_door",
-            () -> door(EBONY_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> FIR_DOOR = regWithItem("fir_door",
-            () -> door(FIR_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> PINE_DOOR = regWithItem("pine_door",
-            () -> door(PINE_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> CEDAR_DOOR = regWithItem("cedar_door",
-            () -> door(CEDAR_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> MAHOGANY_DOOR = regWithItem("mahogany_door",
-            () -> door(MAHOGANY_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> AZALEA_DOOR = regWithItem("azalea_door",
-            () -> door(AZALEA_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> PALM_DOOR = regWithItem("palm_door",
-            () -> door(PALM_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> MAPLE_DOOR = regWithItem("maple_door",
-            () -> door(MAPLE_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> ASPEN_DOOR = regWithItem("aspen_door",
-            () -> door(ASPEN_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> WALNUT_DOOR = regWithItem("walnut_door",
-            () -> door(WALNUT_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> BLUE_SPRUCE_DOOR = regWithItem("blue_spruce_door",
-            () -> door(BLUE_SPRUCE_PLANKS.get().defaultMapColor()));
+    Supplier<Block> ASPEN_DOOR = door("aspen_door", ASPEN_PLANKS, ModBlockSetTypes.ASPEN);
+    Supplier<Block> AZALEA_DOOR = door("azalea_door", AZALEA_PLANKS, ModBlockSetTypes.AZALEA);
+    Supplier<Block> BAOBAB_DOOR = door("baobab_door", BAOBAB_PLANKS, ModBlockSetTypes.BAOBAB);
+    Supplier<Block> BLUE_SPRUCE_DOOR = door("blue_spruce_door", BLUE_SPRUCE_PLANKS, ModBlockSetTypes.BLUE_SPRUCE);
+    Supplier<Block> CEDAR_DOOR = door("cedar_door", CEDAR_PLANKS, ModBlockSetTypes.CEDAR);
+    Supplier<Block> EBONY_DOOR = door("ebony_door", EBONY_PLANKS, ModBlockSetTypes.EBONY);
+    Supplier<Block> FIR_DOOR = door("fir_door", FIR_PLANKS, ModBlockSetTypes.FIR);
+    Supplier<Block> MAHOGANY_DOOR = door("mahogany_door", MAHOGANY_PLANKS, ModBlockSetTypes.MAHOGANY);
+    Supplier<Block> MAPLE_DOOR = door("maple_door", MAPLE_PLANKS, ModBlockSetTypes.MAPLE);
+    Supplier<Block> PALM_DOOR = door("palm_door", PALM_PLANKS, ModBlockSetTypes.PALM);
+    Supplier<Block> PINE_DOOR = door("pine_door", PINE_PLANKS, ModBlockSetTypes.PINE);
+    Supplier<Block> WALNUT_DOOR = door("walnut_door", WALNUT_PLANKS, ModBlockSetTypes.WALNUT);
+    Supplier<Block> WILLOW_DOOR = door("willow_door", WILLOW_PLANKS, ModBlockSetTypes.WILLOW);
 
     //trapdoors
-    public static final Supplier<Block> WILLOW_TRAPDOOR = regWithItem("willow_trapdoor",
-            () -> trapdoor(WILLOW_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> BAOBAB_TRAPDOOR = regWithItem("baobab_trapdoor",
-            () -> trapdoor(WILLOW_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> EBONY_TRAPDOOR = regWithItem("ebony_trapdoor",
-            () -> trapdoor(WILLOW_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> FIR_TRAPDOOR = regWithItem("fir_trapdoor",
-            () -> trapdoor(WILLOW_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> PINE_TRAPDOOR = regWithItem("pine_trapdoor",
-            () -> trapdoor(WILLOW_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> CEDAR_TRAPDOOR = regWithItem("cedar_trapdoor",
-            () -> trapdoor(WILLOW_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> MAHOGANY_TRAPDOOR = regWithItem("mahogany_trapdoor",
-            () -> trapdoor(WILLOW_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> AZALEA_TRAPDOOR = regWithItem("azalea_trapdoor",
-            () -> trapdoor(WILLOW_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> PALM_TRAPDOOR = regWithItem("palm_trapdoor",
-            () -> trapdoor(WILLOW_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> MAPLE_TRAPDOOR = regWithItem("maple_trapdoor",
-            () -> trapdoor(WILLOW_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> ASPEN_TRAPDOOR = regWithItem("aspen_trapdoor",
-            () -> trapdoor(WILLOW_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> WALNUT_TRAPDOOR = regWithItem("walnut_trapdoor",
-            () -> trapdoor(WILLOW_PLANKS.get().defaultMapColor()));
-    public static final Supplier<Block> BLUE_SPRUCE_TRAPDOOR = regWithItem("blue_spruce_trapdoor",
-            () -> trapdoor(BLUE_SPRUCE_PLANKS.get().defaultMapColor()));
-
+    Supplier<Block> ASPEN_TRAPDOOR = trapdoor("aspen_trapdoor", ASPEN_PLANKS, ModBlockSetTypes.ASPEN);
+    Supplier<Block> AZALEA_TRAPDOOR = trapdoor("azalea_trapdoor", AZALEA_PLANKS, ModBlockSetTypes.AZALEA);
+    Supplier<Block> BAOBAB_TRAPDOOR = trapdoor("baobab_trapdoor", BAOBAB_PLANKS, ModBlockSetTypes.BAOBAB);
+    Supplier<Block> BLUE_SPRUCE_TRAPDOOR = trapdoor("blue_spruce_trapdoor", BLUE_SPRUCE_PLANKS, ModBlockSetTypes.BLUE_SPRUCE);
+    Supplier<Block> CEDAR_TRAPDOOR = trapdoor("cedar_trapdoor", CEDAR_PLANKS, ModBlockSetTypes.CEDAR);
+    Supplier<Block> EBONY_TRAPDOOR = trapdoor("ebony_trapdoor", EBONY_PLANKS, ModBlockSetTypes.EBONY);
+    Supplier<Block> FIR_TRAPDOOR = trapdoor("fir_trapdoor", FIR_PLANKS, ModBlockSetTypes.FIR);
+    Supplier<Block> MAHOGANY_TRAPDOOR = trapdoor("mahogany_trapdoor", MAHOGANY_PLANKS, ModBlockSetTypes.MAHOGANY);
+    Supplier<Block> MAPLE_TRAPDOOR = trapdoor("maple_trapdoor", MAPLE_PLANKS, ModBlockSetTypes.MAPLE);
+    Supplier<Block> PALM_TRAPDOOR = trapdoor("palm_trapdoor", PALM_PLANKS, ModBlockSetTypes.PALM);
+    Supplier<Block> PINE_TRAPDOOR = trapdoor("pine_trapdoor", PINE_PLANKS, ModBlockSetTypes.PINE);
+    Supplier<Block> WALNUT_TRAPDOOR = trapdoor("walnut_trapdoor", WALNUT_PLANKS, ModBlockSetTypes.WALNUT);
+    Supplier<Block> WILLOW_TRAPDOOR = trapdoor("willow_trapdoor", WILLOW_PLANKS, ModBlockSetTypes.WILLOW);
 
 }

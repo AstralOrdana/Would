@@ -1,58 +1,17 @@
 package com.ordana.would.reg;
 
-import com.google.common.collect.ImmutableMap;
-import com.ordana.would.Would;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
-import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.block.state.properties.WoodType;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
-public class ModWoodSetup {
-
-    public static final WoodType ASPEN = new WoodType("aspen", BlockSetType.ACACIA);
-    public static final WoodType AZALEA = new WoodType("azalea", BlockSetType.ACACIA);
-    public static final WoodType BAOBAB = new WoodType("baobab", BlockSetType.ACACIA);
-    public static final WoodType CEDAR = new WoodType("cedar", BlockSetType.ACACIA);
-    public static final WoodType EBONY = new WoodType("ebony", BlockSetType.ACACIA);
-    public static final WoodType FIR = new WoodType("fir", BlockSetType.ACACIA);
-    public static final WoodType MAHOGANY = new WoodType("mahogany", BlockSetType.ACACIA);
-    public static final WoodType MAPLE = new WoodType("maple", BlockSetType.ACACIA);
-    public static final WoodType PALM = new WoodType("palm", BlockSetType.ACACIA);
-    public static final WoodType PINE = new WoodType("pine", BlockSetType.ACACIA);
-    public static final WoodType WALNUT = new WoodType("walnut", BlockSetType.ACACIA);
-    public static final WoodType WILLOW = new WoodType("willow", BlockSetType.ACACIA);
-    public static final WoodType BLUE_SPRUCE = new WoodType("blue_spruce", BlockSetType.ACACIA);
-
-    private static void register(WoodType woodType) {
-        WoodType.register(woodType);
-        if (PlatHelper.getPhysicalSide().isClient()) {
-            Sheets.SIGN_MATERIALS.put(woodType, new Material(Sheets.SIGN_SHEET, Would.res("entity/signs/" + woodType.name())));
-            Sheets.HANGING_SIGN_MATERIALS.put(woodType, new Material(Sheets.SIGN_SHEET, Would.res("entity/signs/hanging/" + woodType.name())));
-        }
-   }
+public interface ModWoodSetup {
     
-    public static void init() {
-
-        register(ASPEN);
-        register(AZALEA);
-        register(BAOBAB);
-        register(CEDAR);
-        register(EBONY);
-        register(FIR);
-        register(MAHOGANY);
-        register(MAPLE);
-        register(PALM);
-        register(PINE);
-        register(WALNUT);
-        register(WILLOW);
-        register(BLUE_SPRUCE);
-
-        var validHangingSigns = new HashSet(BlockEntityType.HANGING_SIGN.validBlocks);
+    static void init() {
+        HashSet<Block> validHangingSigns = new HashSet<>(BlockEntityType.HANGING_SIGN.validBlocks);
         validHangingSigns.add(ModBlocks.ASPEN_HANGING_SIGN.get());
         validHangingSigns.add(ModBlocks.AZALEA_HANGING_SIGN.get());
         validHangingSigns.add(ModBlocks.BAOBAB_HANGING_SIGN.get());
@@ -81,7 +40,7 @@ public class ModWoodSetup {
         validHangingSigns.add(ModBlocks.BLUE_SPRUCE_WALL_HANGING_SIGN.get());
         BlockEntityType.HANGING_SIGN.validBlocks = validHangingSigns;
 
-        var validSigns = new HashSet(BlockEntityType.SIGN.validBlocks);
+        HashSet<Block> validSigns = new HashSet<>(BlockEntityType.SIGN.validBlocks);
         validSigns.add(ModBlocks.ASPEN_SIGN.get());
         validSigns.add(ModBlocks.AZALEA_SIGN.get());
         validSigns.add(ModBlocks.BAOBAB_SIGN.get());
@@ -110,7 +69,8 @@ public class ModWoodSetup {
         validSigns.add(ModBlocks.BLUE_SPRUCE_WALL_SIGN.get());
         BlockEntityType.SIGN.validBlocks = validSigns;
 
-        var strippables = new ImmutableMap.Builder().putAll(AxeItem.STRIPPABLES);
+        Map<Block, Block> strippables = new HashMap<>(AxeItem.STRIPPABLES);
+
         strippables.put(ModBlocks.ASPEN_LOG.get(), ModBlocks.STRIPPED_ASPEN_LOG.get());
         strippables.put(ModBlocks.ASPEN_LOG_GAZING.get(), ModBlocks.STRIPPED_ASPEN_LOG_GAZING.get());
         strippables.put(ModBlocks.AZALEA_LOG.get(), ModBlocks.STRIPPED_AZALEA_LOG.get());
@@ -141,6 +101,8 @@ public class ModWoodSetup {
         strippables.put(ModBlocks.WALNUT_WOOD.get(), ModBlocks.STRIPPED_WALNUT_WOOD.get());
         strippables.put(ModBlocks.WILLOW_WOOD.get(), ModBlocks.STRIPPED_WILLOW_WOOD.get());
         strippables.put(ModBlocks.BLUE_SPRUCE_WOOD.get(), ModBlocks.STRIPPED_BLUE_SPRUCE_WOOD.get());
-        AxeItem.STRIPPABLES = strippables.build();
+
+        AxeItem.STRIPPABLES = strippables;
+        ModBlockFamilies.init();
     }
 }

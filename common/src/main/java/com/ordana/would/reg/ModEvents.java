@@ -47,8 +47,8 @@ public class ModEvents {
         Item i = stack.getItem();
         BlockPos pos = hitResult.getBlockPos();
         BlockState state = level.getBlockState(pos);
-        for (var event : EVENTS) {
-            var result = event.run(i, stack, pos, state, player, level, hand, hitResult);
+        for (InteractionEvent event : EVENTS) {
+            InteractionResult result = event.run(i, stack, pos, state, player, level, hand, hitResult);
             if (result != InteractionResult.PASS) return result;
         }
         return InteractionResult.PASS;

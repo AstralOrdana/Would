@@ -29,6 +29,7 @@ public class ModCompostable {
         CompostingChanceRegistry.INSTANCE.add(ModBlocks.MAHOGANY_SAPLING.get().asItem(), 0.3f);
         CompostingChanceRegistry.INSTANCE.add(ModBlocks.MAPLE_SAPLING.get().asItem(), 0.3f);
         CompostingChanceRegistry.INSTANCE.add(ModBlocks.WILLOW_SAPLING.get().asItem(), 0.3f);
+        CompostingChanceRegistry.INSTANCE.add(ModBlocks.HANGING_WILLOW_LEAVES.get(), 0.3f);
         CompostingChanceRegistry.INSTANCE.add(ModBlocks.WALNUT_SAPLING.get().asItem(), 0.3f);
         CompostingChanceRegistry.INSTANCE.add(ModBlocks.BLUE_SPRUCE_SAPLING.get().asItem(), 0.3f);
     }

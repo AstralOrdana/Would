@@ -1,6 +1,7 @@
 package com.ordana.would.items;
 
 import com.ordana.would.entities.ThrownWalnutEntity;
+import com.ordana.would.reg.ModSoundEvents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -10,15 +11,18 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 public class WalnutItem extends Item {
     public WalnutItem(Properties properties) {
         super(properties);
     }
 
+    @Override
+    @NotNull
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         ItemStack itemStack = player.getItemInHand(usedHand);
-        level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.SNOWBALL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
+        level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSoundEvents.WALNUT_THROW.get(), SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
         if (!level.isClientSide) {
             ThrownWalnutEntity walnut = new ThrownWalnutEntity(level, player, player.getItemInHand(usedHand));
             walnut.setItem(itemStack);

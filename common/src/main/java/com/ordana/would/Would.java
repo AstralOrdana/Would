@@ -2,14 +2,9 @@ package com.ordana.would;
 
 import com.ordana.would.reg.*;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Optional;
 
 public class Would {
 
@@ -28,18 +23,21 @@ public class Would {
             WouldClient.init();
         }
 
-        ModItems.init();
         ModBlocks.init();
+        ModItems.init();
         ModTrees.init();
-        ModWorldgenFeatures.init();
+        ModSoundEvents.init();
+        ModBlockSetTypes.init();
+        ModTags.init();
+        ModTreeGrowers.init();
+        ModWoodTypes.init();
         ModEntities.init();
+        ModWorldgenFeatures.init();
         PlatHelper.addCommonSetup(Would::setup);
     }
 
     public static void setup() {
         ModWoodSetup.init();
     }
-    public static Optional<ResourceKey<ConfiguredFeature<?, ?>>> createKey(String name) {
-        return Optional.of(ResourceKey.create(Registries.CONFIGURED_FEATURE, Would.res(name)));
-    }
+
 }

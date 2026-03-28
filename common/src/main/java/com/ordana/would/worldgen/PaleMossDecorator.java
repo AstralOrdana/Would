@@ -13,6 +13,7 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import org.apache.commons.lang3.mutable.Mutable;
 import org.apache.commons.lang3.mutable.MutableObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class PaleMossDecorator extends TreeDecorator {
                     paleMossDecorator.leavesProbability)).apply(instance, PaleMossDecorator::new));
     private final float leavesProbability;
 
-    protected TreeDecoratorType<?> type() {
+    protected @NotNull TreeDecoratorType<?> type() {
         return ModTrees.PALE_MOSS_DECORATOR.get();
     }
 
@@ -34,7 +35,7 @@ public class PaleMossDecorator extends TreeDecorator {
         RandomSource randomSource = context.random();
         List<BlockPos> list = Util.shuffledCopy(context.logs(), randomSource);
         if (!list.isEmpty()) {
-            Mutable<BlockPos> mutable = new MutableObject(list.getFirst());
+            Mutable<BlockPos> mutable = new MutableObject<>(list.getFirst());
             list.forEach((blockPosx) -> {
                 if (blockPosx.getY() < mutable.getValue().getY()) {
                     mutable.setValue(blockPosx);

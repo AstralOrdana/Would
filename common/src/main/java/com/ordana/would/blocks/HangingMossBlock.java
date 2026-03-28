@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 public class HangingMossBlock extends Block implements BonemealableBlock {
     public static final MapCodec<HangingMossBlock> CODEC = simpleCodec(HangingMossBlock::new);
@@ -26,6 +27,8 @@ public class HangingMossBlock extends Block implements BonemealableBlock {
     private static final VoxelShape SHAPE_TIP = column(14, 14.0, 2.0, 16.0);
     public static final BooleanProperty TIP = BooleanProperty.create("tip");
 
+    @Override
+    @NotNull
     public MapCodec<HangingMossBlock> codec() {
         return CODEC;
     }
@@ -35,14 +38,18 @@ public class HangingMossBlock extends Block implements BonemealableBlock {
         this.registerDefaultState(this.stateDefinition.any().setValue(TIP, true));
     }
 
+    @Override
+    @NotNull
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return state.getValue(TIP) ? SHAPE_TIP : SHAPE_BASE;
     }
 
-    protected boolean propagatesSkylightDown(BlockState blockState) {
+    @Override
+    protected boolean propagatesSkylightDown(BlockState state, BlockGetter level, BlockPos pos) {
         return true;
     }
 
+    @Override
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         return this.canStayAtPosition(level, pos);
     }
@@ -53,6 +60,8 @@ public class HangingMossBlock extends Block implements BonemealableBlock {
         return MultifaceBlock.canAttachTo(blockGetter, Direction.UP, blockPos2, blockState) || blockState.is(ModBlocks.PALE_HANGING_MOSS.get());
     }
 
+    @Override
+    @NotNull
     protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         if (!this.canStayAtPosition(level, pos)) {
             level.scheduleTick(pos, this, 1);
@@ -61,6 +70,7 @@ public class HangingMossBlock extends Block implements BonemealableBlock {
         return state.setValue(TIP, !level.getBlockState(pos.below()).is(this));
     }
 
+    @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!this.canStayAtPosition(level, pos)) {
             level.destroyBlock(pos, true);
@@ -68,10 +78,12 @@ public class HangingMossBlock extends Block implements BonemealableBlock {
 
     }
 
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(TIP);
     }
 
+    @Override
     public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
         return this.canGrowInto(level.getBlockState(this.getTip(level, pos).below()));
     }
@@ -92,10 +104,12 @@ public class HangingMossBlock extends Block implements BonemealableBlock {
         return mutableBlockPos.relative(Direction.UP).immutable();
     }
 
+    @Override
     public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
         return true;
     }
 
+    @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
         BlockPos blockPos = this.getTip(level, pos).below();
         if (this.canGrowInto(level.getBlockState(blockPos))) {

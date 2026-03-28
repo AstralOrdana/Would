@@ -2,6 +2,7 @@ package com.ordana.would.blocks;
 
 import com.ordana.would.entities.FallingCoconutEntity;
 import com.ordana.would.reg.ModBlocks;
+import com.ordana.would.reg.ModItems;
 import com.ordana.would.reg.ModTreeGrowers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -9,123 +10,105 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.item.FallingBlockEntity;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.Fallable;
-import net.minecraft.world.level.block.SaplingBlock;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 public class CoconutBlock extends SaplingBlock implements Fallable, BonemealableBlock {
-    protected static final VoxelShape GREEN_SHAPE;
-    protected static final VoxelShape BROWN_SHAPE;
-    public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
-    public static final BooleanProperty ENABLED = BlockStateProperties.ENABLED;
+
+    private static final float BONEMEAL_SUCCESS_CHANCE = 0.45F;
+
+    protected static final VoxelShape SHAPE = Block.box(4.0, 0.0, 4.0, 12.0, 8.0, 12.0);
+
+    public static final BooleanProperty PERSISTENT = BlockStateProperties.PERSISTENT;
 
     public CoconutBlock(Properties properties) {
         super(ModTreeGrowers.COCONUT, properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(HANGING, false).setValue(ENABLED, true));
+        this.registerDefaultState(this.stateDefinition.any().setValue(PERSISTENT, false));
     }
 
-    protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
-        return state.is(BlockTags.DIRT) || state.is(BlockTags.SAND);
+    private static boolean mayGrowOn(BlockState blockState) {
+        return blockState.is(BlockTags.DIRT) || blockState.is(BlockTags.SAND);
     }
 
+    @Override
+    @NotNull
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return state.getValue(HANGING) ? GREEN_SHAPE : BROWN_SHAPE;
+        return SHAPE;
     }
 
+    @Override
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        if (mayGrowOn(level.getBlockState(pos.below())) && !state.getValue(PERSISTENT))
+            level.levelEvent(LevelEvent.PARTICLES_EGG_CRACK, pos, 0);
+    }
+
+    @Override
+    protected void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
+        BlockPos blockPos = hit.getBlockPos();
+
+        if (!level.isClientSide() && projectile.mayInteract(level, blockPos) && level.getGameRules().getBoolean(GameRules.RULE_PROJECTILESCANBREAKBLOCKS)) {
+            level.removeBlock(blockPos, false);
+            // popResource(level, blockPos, ModItems.COCONUT.get().getDefaultInstance()); // accounting for loot table disparity
+        }
+    }
+
+    @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (!state.getValue(HANGING)) {
-            if (state.getValue(ENABLED) && level.getMaxLocalRawBrightness(pos.above()) >= 9) {
-                this.advanceTree(level, pos, state, random);
-            }
-        }
-
-        else if (random.nextInt(10) == 7) {
-            state.setValue(HANGING, false);
-            level.scheduleTick(pos, this, this.getFallDelay());
-        }
-    }
-
-    public void advanceTree(ServerLevel level, BlockPos pos, BlockState state, RandomSource random) {
-        if (state.getValue(STAGE) == 0) {
-            level.setBlock(pos, state.cycle(STAGE), 4);
-        } else {
-            ModTreeGrowers.COCONUT.growTree(level, level.getChunkSource().getGenerator(), pos, state, random);
-        }
-
-    }
-
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-        if (context.getLevel().getBlockState(context.getClickedPos().above()).is(ModBlocks.PALM_LEAVES.get())) return this.defaultBlockState().setValue(HANGING, true);
-        return this.defaultBlockState();
+        if (mayGrowOn(level.getBlockState(pos.below())) && !state.getValue(PERSISTENT))
+            super.randomTick(state, level, pos, random);
     }
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        return state.getValue(HANGING) ? (level.getBlockState(pos.above()).is(ModBlocks.PALM_LEAVES.get()) ||
-                this.mayPlaceOn(level.getBlockState(pos.below()), level, pos)) : super.canSurvive(state, level, pos);
-    }
-
-    public void onLand(Level level, BlockPos pos, BlockState state, BlockState replaceableState, FallingBlockEntity fallingBlock) {
-        level.setBlockAndUpdate(pos, state.setValue(HANGING, false).setValue(ENABLED, false));
+        return Block.canSupportCenter(level, pos.below(), Direction.UP);
     }
 
     @Override
+    @NotNull
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
-        if (!state.getValue(HANGING)) level.scheduleTick(pos, this, this.getFallDelay());
-        else if (!state.canSurvive(level, pos)) level.destroyBlock(pos, false);
-
+        level.scheduleTick(pos, this, this.getFallDelay());
         return state;
     }
 
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (canFallThrough(level.getBlockState(pos.below())) && pos.getY() >= level.getMinBuildHeight()) {
-            FallingBlockEntity entity = FallingCoconutEntity.fall(level, pos, state.setValue(HANGING, false));
-            this.configureFallingBlockEntity(entity);
+        if (FallingBlock.isFree(level.getBlockState(pos.below())) && pos.getY() >= level.getMinBuildHeight()) {
+            FallingBlockEntity entity = FallingCoconutEntity.fall(level, pos, state);
+            entity.setHurtsEntities(1.0F, 6);
         }
-    }
-
-    protected void configureFallingBlockEntity(FallingBlockEntity entity) {
     }
 
     protected int getFallDelay() {
         return 2;
     }
 
-    public static boolean canFallThrough(BlockState state) {
-        return state.isAir() || state.is(BlockTags.FIRE) || state.canBeReplaced();
-    }
-
+    @Override
     public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
-        return (!state.getValue(HANGING));
+        return mayGrowOn(level.getBlockState(pos.below()));
     }
 
+    @Override
     public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
-        return (double)level.random.nextFloat() < 0.45;
+        return random.nextFloat() < BONEMEAL_SUCCESS_CHANCE;
     }
 
+    @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
         this.advanceTree(level, pos, state, random);
     }
 
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(STAGE, HANGING, ENABLED);
+        builder.add(STAGE, PERSISTENT);
     }
 
-    static {
-        BROWN_SHAPE = Block.box(4.0, 0.0, 4.0, 12.0, 8.0, 12.0);
-        GREEN_SHAPE = Block.box(2.0, 4.0, 2.0, 14.0, 16.0, 14.0);
-    }
 }
