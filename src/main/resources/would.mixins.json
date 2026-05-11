@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.ordana.would.mixins",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+  ],
+  "mixins": [
+    "SpruceTreeGrowerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
