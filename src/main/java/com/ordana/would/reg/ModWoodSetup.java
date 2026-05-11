@@ -12,64 +12,15 @@ public interface ModWoodSetup {
     
     static void init() {
         HashSet<Block> validHangingSigns = new HashSet<>(BlockEntityType.HANGING_SIGN.validBlocks);
-        validHangingSigns.add(ModBlocks.ASPEN_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.AZALEA_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.BAOBAB_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.CEDAR_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.EBONY_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.FIR_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.MAHOGANY_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.MAPLE_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.PALM_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.PINE_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.WALNUT_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.WILLOW_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.BLUE_SPRUCE_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.ASPEN_WALL_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.AZALEA_WALL_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.BAOBAB_WALL_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.CEDAR_WALL_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.EBONY_WALL_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.FIR_WALL_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.MAHOGANY_WALL_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.MAPLE_WALL_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.PALM_WALL_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.PINE_WALL_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.WALNUT_WALL_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.WILLOW_WALL_HANGING_SIGN);
-        validHangingSigns.add(ModBlocks.BLUE_SPRUCE_WALL_HANGING_SIGN);
-        BlockEntityType.HANGING_SIGN.validBlocks = validHangingSigns;
-
         HashSet<Block> validSigns = new HashSet<>(BlockEntityType.SIGN.validBlocks);
-        validSigns.add(ModBlocks.ASPEN_SIGN);
-        validSigns.add(ModBlocks.AZALEA_SIGN);
-        validSigns.add(ModBlocks.BAOBAB_SIGN);
-        validSigns.add(ModBlocks.CEDAR_SIGN);
-        validSigns.add(ModBlocks.EBONY_SIGN);
-        validSigns.add(ModBlocks.FIR_SIGN);
-        validSigns.add(ModBlocks.MAHOGANY_SIGN);
-        validSigns.add(ModBlocks.MAPLE_SIGN);
-        validSigns.add(ModBlocks.PALM_SIGN);
-        validSigns.add(ModBlocks.PINE_SIGN);
-        validSigns.add(ModBlocks.WALNUT_SIGN);
-        validSigns.add(ModBlocks.WILLOW_SIGN);
-        validSigns.add(ModBlocks.BLUE_SPRUCE_SIGN);
-        validSigns.add(ModBlocks.ASPEN_WALL_SIGN);
-        validSigns.add(ModBlocks.AZALEA_WALL_SIGN);
-        validSigns.add(ModBlocks.BAOBAB_WALL_SIGN);
-        validSigns.add(ModBlocks.CEDAR_WALL_SIGN);
-        validSigns.add(ModBlocks.EBONY_WALL_SIGN);
-        validSigns.add(ModBlocks.FIR_WALL_SIGN);
-        validSigns.add(ModBlocks.MAHOGANY_WALL_SIGN);
-        validSigns.add(ModBlocks.MAPLE_WALL_SIGN);
-        validSigns.add(ModBlocks.PALM_WALL_SIGN);
-        validSigns.add(ModBlocks.PINE_WALL_SIGN);
-        validSigns.add(ModBlocks.WALNUT_WALL_SIGN);
-        validSigns.add(ModBlocks.WILLOW_WALL_SIGN);
-        validSigns.add(ModBlocks.BLUE_SPRUCE_WALL_SIGN);
-        BlockEntityType.SIGN.validBlocks = validSigns;
-
         Map<Block, Block> strippables = new HashMap<>(AxeItem.STRIPPABLES);
+
+        ModWoodTypes.ALL.forEach(wouldType -> {
+            validHangingSigns.add(wouldType.hangingSignBlock());
+            validHangingSigns.add(wouldType.wallHangingSignBlock());
+            validSigns.add(wouldType.wallSignBlock());
+            validSigns.add(wouldType.standingSignBlock());
+        });
 
         strippables.put(ModBlocks.ASPEN_LOG, ModBlocks.STRIPPED_ASPEN_LOG);
         strippables.put(ModBlocks.ASPEN_LOG_GAZING, ModBlocks.STRIPPED_ASPEN_LOG_GAZING);
@@ -102,6 +53,8 @@ public interface ModWoodSetup {
         strippables.put(ModBlocks.WILLOW_WOOD, ModBlocks.STRIPPED_WILLOW_WOOD);
         strippables.put(ModBlocks.BLUE_SPRUCE_WOOD, ModBlocks.STRIPPED_BLUE_SPRUCE_WOOD);
 
+        BlockEntityType.SIGN.validBlocks = validSigns;
+        BlockEntityType.HANGING_SIGN.validBlocks = validHangingSigns;
         AxeItem.STRIPPABLES = strippables;
         ModBlockFamilies.init();
     }

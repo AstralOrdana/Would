@@ -23,30 +23,42 @@ public class RecipeProvider extends FabricRecipeProvider {
     }
 
     @Override
-    public void buildRecipes(RecipeOutput exporter) {
-        // generateRecipes(exporter, ModBlockFamilies.ASPEN_PLANKS, FeatureFlags.DEFAULT_FLAGS);
-        // ModBlockFamilies.MAP.values().forEach(blockFamily -> generateRecipes(exporter, blockFamily, FeatureFlags.DEFAULT_FLAGS));
-        ModItems.ALL_BOATS.forEach(item -> woodenBoat(exporter, item, item.type.getPlanks()));
-        ModItems.ALL_CHEST_BOATS.forEach(item -> chestBoat(exporter, item, item.type.getPlanks()));
-        BlockFactories.ALL_HANGING_SIGNS.forEach(compound -> hangingSign(exporter, compound.ceiling().asItem(), compound.strippedLog()));
-        BlockFactories.ALL_LOGS.forEach(compound -> woodFromLogs(exporter, compound.wood(), compound.log()));
+    protected net.minecraft.data.recipes.RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput exporter) {
+        return new net.minecraft.data.recipes.RecipeProvider(registries, exporter) {
 
-        planksFromLogs(exporter, ModBlocks.ASPEN_PLANKS, ModTags.Items.ASPEN_LOGS);
-        planksFromLogs(exporter, ModBlocks.AZALEA_PLANKS, ModTags.Items.AZALEA_LOGS);
-        planksFromLogs(exporter, ModBlocks.BAOBAB_PLANKS, ModTags.Items.BAOBAB_LOGS);
-        planksFromLogs(exporter, ModBlocks.CEDAR_PLANKS, ModTags.Items.CEDAR_LOGS);
-        planksFromLogs(exporter, ModBlocks.EBONY_PLANKS, ModTags.Items.EBONY_LOGS);
-        planksFromLogs(exporter, ModBlocks.FIR_PLANKS, ModTags.Items.FIR_LOGS);
-        planksFromLogs(exporter, ModBlocks.MAHOGANY_PLANKS, ModTags.Items.MAHOGANY_LOGS);
-        planksFromLogs(exporter, ModBlocks.MAPLE_PLANKS, ModTags.Items.MAPLE_LOGS);
-        planksFromLogs(exporter, ModBlocks.PALM_PLANKS, ModTags.Items.PALM_LOGS);
-        planksFromLogs(exporter, ModBlocks.PINE_PLANKS, ModTags.Items.PINE_LOGS);
-        planksFromLogs(exporter, ModBlocks.WALNUT_PLANKS, ModTags.Items.WALNUT_LOGS);
-        planksFromLogs(exporter, ModBlocks.WILLOW_PLANKS, ModTags.Items.WILLOW_LOGS);
+            @Override
+            public void buildRecipes() {
+                // generateRecipes(exporter, ModBlockFamilies.ASPEN_PLANKS, FeatureFlags.DEFAULT_FLAGS);
+                // ModBlockFamilies.MAP.values().forEach(blockFamily -> generateRecipes(exporter, blockFamily, FeatureFlags.DEFAULT_FLAGS));
+                ModItems.ALL_BOATS.forEach(item -> woodenBoat(exporter, item, item.type.getPlanks()));
+                ModItems.ALL_CHEST_BOATS.forEach(item -> chestBoat(exporter, item, item.type.getPlanks()));
+                BlockFactories.ALL_HANGING_SIGNS.forEach(compound -> hangingSign(exporter, compound.ceiling().asItem(), compound.strippedLog()));
+                BlockFactories.ALL_LOGS.forEach(compound -> woodFromLogs(exporter, compound.wood(), compound.log()));
+
+                planksFromLogs(exporter, ModBlocks.ASPEN_PLANKS, ModTags.Items.ASPEN_LOGS);
+                planksFromLogs(exporter, ModBlocks.AZALEA_PLANKS, ModTags.Items.AZALEA_LOGS);
+                planksFromLogs(exporter, ModBlocks.BAOBAB_PLANKS, ModTags.Items.BAOBAB_LOGS);
+                planksFromLogs(exporter, ModBlocks.CEDAR_PLANKS, ModTags.Items.CEDAR_LOGS);
+                planksFromLogs(exporter, ModBlocks.EBONY_PLANKS, ModTags.Items.EBONY_LOGS);
+                planksFromLogs(exporter, ModBlocks.FIR_PLANKS, ModTags.Items.FIR_LOGS);
+                planksFromLogs(exporter, ModBlocks.MAHOGANY_PLANKS, ModTags.Items.MAHOGANY_LOGS);
+                planksFromLogs(exporter, ModBlocks.MAPLE_PLANKS, ModTags.Items.MAPLE_LOGS);
+                planksFromLogs(exporter, ModBlocks.PALM_PLANKS, ModTags.Items.PALM_LOGS);
+                planksFromLogs(exporter, ModBlocks.PINE_PLANKS, ModTags.Items.PINE_LOGS);
+                planksFromLogs(exporter, ModBlocks.WALNUT_PLANKS, ModTags.Items.WALNUT_LOGS);
+                planksFromLogs(exporter, ModBlocks.WILLOW_PLANKS, ModTags.Items.WILLOW_LOGS);
+            }
+        };
     }
+
+
 
     private static void planksFromLogs(RecipeOutput exporter, Supplier<Block> planksSupplier, TagKey<Item> logTag) {
         planksFromLogs(exporter, planksSupplier.get(), logTag, 4);
     }
 
+    @Override
+    public String getName() {
+        return "";
+    }
 }

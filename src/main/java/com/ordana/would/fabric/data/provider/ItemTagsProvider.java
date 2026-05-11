@@ -25,15 +25,15 @@ public class ItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        FabricTagBuilder planksTag = this.getOrCreateTagBuilder(ItemTags.PLANKS);
-        FabricTagBuilder fenceGatesTag = this.getOrCreateTagBuilder(ItemTags.FENCE_GATES);
-        FabricTagBuilder woodenButtonsTag = this.getOrCreateTagBuilder(ItemTags.WOODEN_BUTTONS);
-        FabricTagBuilder woodenDoorsTag = this.getOrCreateTagBuilder(ItemTags.WOODEN_DOORS);
-        FabricTagBuilder woodenFencesTag = this.getOrCreateTagBuilder(ItemTags.WOODEN_FENCES);
-        FabricTagBuilder woodenPressurePlatesTag = this.getOrCreateTagBuilder(ItemTags.WOODEN_PRESSURE_PLATES);
-        FabricTagBuilder woodenSlabsTag = this.getOrCreateTagBuilder(ItemTags.WOODEN_SLABS);
-        FabricTagBuilder woodenStairsTag = this.getOrCreateTagBuilder(ItemTags.WOODEN_STAIRS);
-        FabricTagBuilder woodenTrapdoorsTag = this.getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS);
+        var planksTag = this.valueLookupBuilder(ItemTags.PLANKS);
+        var fenceGatesTag = this.valueLookupBuilder(ItemTags.FENCE_GATES);
+        var woodenButtonsTag = this.valueLookupBuilder(ItemTags.WOODEN_BUTTONS);
+        var woodenDoorsTag = this.valueLookupBuilder(ItemTags.WOODEN_DOORS);
+        var woodenFencesTag = this.valueLookupBuilder(ItemTags.WOODEN_FENCES);
+        var woodenPressurePlatesTag = this.valueLookupBuilder(ItemTags.WOODEN_PRESSURE_PLATES);
+        var woodenSlabsTag = this.valueLookupBuilder(ItemTags.WOODEN_SLABS);
+        var woodenStairsTag = this.valueLookupBuilder(ItemTags.WOODEN_STAIRS);
+        var woodenTrapdoorsTag = this.valueLookupBuilder(ItemTags.WOODEN_TRAPDOORS);
 
         ModBlockFamilies.MAP.forEach((block, blockFamily) -> {
             planksTag.add(block.asItem());
@@ -61,7 +61,7 @@ public class ItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
         this.addBlocksToItemTag(ModTags.Items.WALNUT_LOGS, ModBlocks.WALNUT_LOG, ModBlocks.STRIPPED_WALNUT_LOG, ModBlocks.WALNUT_WOOD, ModBlocks.STRIPPED_WALNUT_WOOD);
         this.addBlocksToItemTag(ModTags.Items.WILLOW_LOGS, ModBlocks.WILLOW_LOG, ModBlocks.STRIPPED_WILLOW_LOG, ModBlocks.WILLOW_WOOD, ModBlocks.STRIPPED_WILLOW_WOOD);
 
-        this.getOrCreateTagBuilder(ItemTags.LOGS_THAT_BURN)
+        this.valueLookupBuilder(ItemTags.LOGS_THAT_BURN)
             .addTag(ModTags.Items.ASPEN_LOGS)
             .addTag(ModTags.Items.AZALEA_LOGS)
             .addTag(ModTags.Items.BAOBAB_LOGS)
@@ -76,12 +76,12 @@ public class ItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
             .addTag(ModTags.Items.WALNUT_LOGS)
             .addTag(ModTags.Items.WILLOW_LOGS);
 
-        this.getOrCreateTagBuilder(ItemTags.HANGING_SIGNS).add(toArray(ModItems.ALL_HANGING_SIGNS));
-        this.getOrCreateTagBuilder(ItemTags.SIGNS).add(toArray(ModItems.ALL_SIGNS));
-        this.getOrCreateTagBuilder(ItemTags.BOATS).add(toArray(ModItems.ALL_BOATS));
-        this.getOrCreateTagBuilder(ItemTags.CHEST_BOATS).add(toArray(ModItems.ALL_CHEST_BOATS));
-        this.getOrCreateTagBuilder(ItemTags.LEAVES).add(toArray(BlockFactories.LEAVES_TO_SAPLING_MAP.keySet()));
-        this.getOrCreateTagBuilder(ItemTags.SAPLINGS).add(toArray(BlockFactories.SaplingCompound.getSaplings()));
+        this.valueLookupBuilder(ItemTags.HANGING_SIGNS).add(toArray(ModItems.ALL_HANGING_SIGNS));
+        this.valueLookupBuilder(ItemTags.SIGNS).add(toArray(ModItems.ALL_SIGNS));
+        this.valueLookupBuilder(ItemTags.BOATS).add(toArray(ModItems.ALL_BOATS));
+        this.valueLookupBuilder(ItemTags.CHEST_BOATS).add(toArray(ModItems.ALL_CHEST_BOATS));
+        this.valueLookupBuilder(ItemTags.LEAVES).add(toArray(BlockFactories.LEAVES_TO_SAPLING_MAP.keySet()));
+        this.valueLookupBuilder(ItemTags.SAPLINGS).add(toArray(BlockFactories.SaplingCompound.getSaplings()));
     }
 
     private static Item[] toArray(Collection<? extends ItemLike> blocks) {
@@ -90,7 +90,7 @@ public class ItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
 
     @SafeVarargs
     private void addBlocksToItemTag(TagKey<Item> tagKey, Supplier<Block>... blocks) {
-        this.getOrCreateTagBuilder(tagKey).add(Stream.of(blocks).map(blockSupplier -> blockSupplier.get().asItem()).toArray(Item[]::new));
+        this.valueLookupBuilder(tagKey).add(Stream.of(blocks).map(blockSupplier -> blockSupplier.get().asItem()).toArray(Item[]::new));
     }
 
 }

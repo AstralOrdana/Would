@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -54,7 +55,7 @@ public class HangingMossBlock extends Block implements BonemealableBlock {
     private boolean canStayAtPosition(BlockGetter blockGetter, BlockPos blockPos) {
         BlockPos blockPos2 = blockPos.relative(Direction.UP);
         BlockState blockState = blockGetter.getBlockState(blockPos2);
-        return MultifaceBlock.canAttachTo(blockGetter, Direction.UP, blockPos2, blockState) || blockState.is(ModBlocks.PALE_HANGING_MOSS);
+        return MultifaceBlock.canAttachTo(blockGetter, Direction.UP, blockPos2, blockState) || blockState.is(Blocks.PALE_HANGING_MOSS);
     }
 
     @Override

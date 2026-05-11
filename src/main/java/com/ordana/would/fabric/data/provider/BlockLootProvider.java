@@ -1,5 +1,6 @@
 package com.ordana.would.fabric.data.provider;
 
+import com.ordana.would.reg.BlockFactories;
 import com.ordana.would.reg.ModBlockFamilies;
 import com.ordana.would.reg.ModBlocks;
 import com.ordana.would.reg.ModItems;

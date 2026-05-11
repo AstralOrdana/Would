@@ -74,9 +74,8 @@ public class CoconutBlock extends SaplingBlock implements Fallable, Bonemealable
     }
 
     @Override
-    @NotNull
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
-        level.scheduleTick(pos, this, this.getFallDelay());
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos, Direction directionToNeighbour, BlockPos neighbourPos, BlockState neighbourState, RandomSource random) {
+        ticks.scheduleTick(pos, this, this.getFallDelay());
         return state;
     }
 

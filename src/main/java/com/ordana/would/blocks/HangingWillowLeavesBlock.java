@@ -137,7 +137,7 @@ public class HangingWillowLeavesBlock extends Block {
 
         VoxelShape shape = state.getShape(level, pos).getFaceShape(Direction.DOWN);
 
-        return Shapes.blockOccudes(shape, aboveState.getShape(level, above), Direction.UP);
+        return Shapes.blockOccludes(shape, aboveState.getShape(level, above), Direction.UP);
     }
 
     private static BlockState revalidateFaces(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
@@ -148,7 +148,7 @@ public class HangingWillowLeavesBlock extends Block {
 
         for (Direction direction : getPresentFaces(blockState)) {
             VoxelShape voxelShape = SHAPE_BY_DIRECTION.get(direction);
-            boolean shapeCoveredFromAbove = Shapes.blockOccudes(voxelShape, aboveShape, Direction.UP);
+            boolean shapeCoveredFromAbove = Shapes.blockOccludes(voxelShape, aboveShape, Direction.UP);
 
             blockState = blockState.setValue(PROPERTY_BY_DIRECTION.get(direction), shapeCoveredFromAbove);
         }

@@ -58,16 +58,14 @@ public class SyrupBottleItem extends Item {
         return ItemUseAnimation.DRINK;
     }
 
-    @Override
     @NotNull
     public SoundEvent getDrinkingSound() {
-        return ModSoundEvents.SYRUP_DRINK.get();
+        return ModSoundEvents.SYRUP_DRINK;
     }
 
-    @Override
     @NotNull
     public SoundEvent getEatingSound() {
-        return ModSoundEvents.SYRUP_DRINK.get();
+        return ModSoundEvents.SYRUP_DRINK;
     }
 
     @Override
