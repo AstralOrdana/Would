@@ -1,7 +1,5 @@
 package com.ordana.would.fabric.data.provider;
 
-import com.ordana.would.reg.BlockFactories;
-import com.ordana.would.reg.ModBlockFamilies;
 import com.ordana.would.reg.ModBlocks;
 import com.ordana.would.reg.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -9,7 +7,6 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.model.ModelTemplates;
-import net.minecraft.world.level.block.Block;
 
 public class ModelProvider extends FabricModelProvider {
 

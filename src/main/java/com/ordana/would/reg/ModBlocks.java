@@ -6,6 +6,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlag;
 import net.minecraft.world.item.BlockItem;
@@ -20,6 +23,8 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+
+import java.util.function.Function;
 
 public interface ModBlocks {
 
@@ -45,18 +50,50 @@ public interface ModBlocks {
         return entity == EntityType.OCELOT || entity == EntityType.PARROT;
     }
 
-    public static <T extends Block> T regBlock(String name, T block) {
+    private static <T extends Block> T regBlock(String name, T block) {
         return Registry.register(BuiltInRegistries.BLOCK, Would.res(name), block);
     }
 
-    public static void regBlockItem(String name, Block blockSup, Item.Properties properties) {
+    private static void regBlockItem(String name, Block blockSup, Item.Properties properties) {
         Registry.register(BuiltInRegistries.ITEM, Would.res(name), new BlockItem(blockSup, properties));
     }
 
-    public static <T extends Block> T regWithItem(String name, T blockFactory) {
+    private static <T extends Block> T regWithItem(String name, T blockFactory) {
         T block = regBlock(name, blockFactory);
         regBlockItem(name, block, new Item.Properties());
         return block;
+    }
+
+    public static <T extends Block> T regWithItem(String name, Function<BlockBehaviour.Properties, T> blockFactory, BlockBehaviour.Properties settings, boolean shouldRegisterItem) {
+        // Create a registry key for the block
+        ResourceKey<Block> blockKey = keyOfBlock(name);
+        // Create the block instance
+        T block = blockFactory.apply(settings.setId(blockKey));
+
+        // Sometimes, you may not want to register an item for the block.
+        // Eg: if it's a technical block like `minecraft:moving_piston` or `minecraft:end_gateway`
+        if (shouldRegisterItem) {
+            // Items need to be registered with a different type of registry key, but the ID
+            // can be the same.
+            ResourceKey<Item> itemKey = keyOfItem(name);
+
+            BlockItem blockItem = new BlockItem(block, new Item.Properties().setId(itemKey).useBlockDescriptionPrefix());
+            Registry.register(BuiltInRegistries.ITEM, itemKey, blockItem);
+        }
+
+        return Registry.register(BuiltInRegistries.BLOCK, blockKey, block);
+    }
+
+    static <T extends Block> T regWithItem(String name, Function<BlockBehaviour.Properties, T> blockFactory, BlockBehaviour.Properties settings) {
+        return regWithItem(name, blockFactory, settings, true);
+    }
+
+    private static ResourceKey<Block> keyOfBlock(String name) {
+        return ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Would.MOD_ID, name));
+    }
+
+    private static ResourceKey<Item> keyOfItem(String name) {
+        return ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(Would.MOD_ID, name));
     }
 
 
@@ -93,28 +130,24 @@ public interface ModBlocks {
         return new FlowerPotBlock(content, properties);
     }
 
-    private static Block planks(MapColor mapColor, SoundType soundType) {
-        return new Block(BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(soundType).ignitedByLava());
+    static BlockBehaviour.Properties plankProperties(MapColor mapColor, SoundType soundType) {
+        return BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(soundType).ignitedByLava();
     }
 
-    private static Block slab(MapColor mapColor, SoundType soundType) {
-        return new SlabBlock(BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(soundType).ignitedByLava());
+    static BlockBehaviour.Properties slab(MapColor mapColor, SoundType soundType) {
+        return BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(soundType).ignitedByLava();
     }
 
-    private static Block stairs(Block state, BlockBehaviour.Properties properties) {
-        return new ModStairBlock(state, properties);
+    static BlockBehaviour.Properties fence(MapColor mapColor, SoundType soundType) {
+        return BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).ignitedByLava().sound(soundType);
     }
 
-    private static Block fence(MapColor mapColor, SoundType soundType) {
-        return new FenceBlock(BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).ignitedByLava().sound(soundType));
+    static BlockBehaviour.Properties fenceGate(MapColor mapColor, SoundType soundType, WoodType woodType) {
+        return BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).ignitedByLava().sound(soundType);
     }
 
-    private static Block fenceGate(MapColor mapColor, SoundType soundType, WoodType woodType) {
-        return new FenceGateBlock(woodType, BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).ignitedByLava().sound(soundType));
-    }
-
-    private static Block pressurePlate(MapColor mapColor) {
-        return new ModPressurePlateBlock(BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(0.5F).ignitedByLava().pushReaction(PushReaction.DESTROY), BlockSetType.ACACIA);
+    private static BlockBehaviour.Properties pressurePlate(MapColor mapColor) {
+        return BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(0.5F).ignitedByLava().pushReaction(PushReaction.DESTROY);
     }
 
     private static Block button(FeatureFlag... requiredFeatures) {
@@ -154,12 +187,6 @@ public interface ModBlocks {
     static boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
         return false;
     }
-
-    Block PALE_HANGING_MOSS = regWithItem("pale_hanging_moss",
-            new HangingMossBlock(BlockBehaviour.Properties.of().ignitedByLava().mapColor(MapColor.COLOR_LIGHT_GRAY).noCollision().sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.DESTROY)));
-
-
-    
     
     //logs
     Block WILLOW_LOG = regWithItem("willow_log",
@@ -365,146 +392,6 @@ public interface ModBlocks {
             pottedSapling(WALNUT_SAPLING));
     Block POTTED_BLUE_SPRUCE_SAPLING = regBlock("potted_blue_spruce_sapling",
             pottedSapling(BLUE_SPRUCE_SAPLING));
-    
-    //planks
-    Block WILLOW_PLANKS = regWithItem("willow_planks",
-            planks(MapColor.WARPED_NYLIUM, SoundType.WOOD));
-    Block BAOBAB_PLANKS = regWithItem("baobab_planks",
-            planks(MapColor.WOOD, SoundType.WOOD));
-    Block EBONY_PLANKS = regWithItem("ebony_planks",
-            planks(MapColor.TERRACOTTA_BLACK, SoundType.WOOD));
-    Block FIR_PLANKS = regWithItem("fir_planks",
-            planks(MapColor.WOOD, SoundType.WOOD));
-    Block PINE_PLANKS = regWithItem("pine_planks",
-            planks(MapColor.PODZOL, SoundType.WOOD));
-    Block CEDAR_PLANKS = regWithItem("cedar_planks",
-            planks(MapColor.TERRACOTTA_YELLOW, SoundType.WOOD));
-    Block MAHOGANY_PLANKS = regWithItem("mahogany_planks",
-            planks(MapColor.TERRACOTTA_RED, SoundType.WOOD));
-    Block AZALEA_PLANKS = regWithItem("azalea_planks",
-            planks(MapColor.TERRACOTTA_GREEN, SoundType.WOOD));
-    Block PALM_PLANKS = regWithItem("palm_planks",
-            planks(MapColor.NETHER, SoundType.WOOD));
-    Block MAPLE_PLANKS = regWithItem("maple_planks",
-            planks(MapColor.WOOD, SoundType.WOOD));
-    Block ASPEN_PLANKS = regWithItem("aspen_planks",
-            planks(MapColor.WOOD, SoundType.WOOD));
-    Block WALNUT_PLANKS = regWithItem("walnut_planks",
-            planks(MapColor.TERRACOTTA_BROWN, SoundType.WOOD));
-    Block BLUE_SPRUCE_PLANKS = regWithItem("blue_spruce_planks",
-            planks(MapColor.LAPIS, SoundType.WOOD));
-    
-    //slabs
-    Block WILLOW_SLAB = regWithItem("willow_slab",
-            slab(MapColor.WARPED_NYLIUM, SoundType.WOOD));
-    Block BAOBAB_SLAB = regWithItem("baobab_slab",
-            slab(MapColor.WOOD, SoundType.WOOD));
-    Block EBONY_SLAB = regWithItem("ebony_slab",
-            slab(MapColor.TERRACOTTA_BLACK, SoundType.WOOD));
-    Block FIR_SLAB = regWithItem("fir_slab",
-            slab(MapColor.WOOD, SoundType.WOOD));
-    Block PINE_SLAB = regWithItem("pine_slab",
-            slab(MapColor.PODZOL, SoundType.WOOD));
-    Block CEDAR_SLAB = regWithItem("cedar_slab",
-            slab(MapColor.TERRACOTTA_YELLOW, SoundType.WOOD));
-    Block MAHOGANY_SLAB = regWithItem("mahogany_slab",
-            slab(MapColor.TERRACOTTA_RED, SoundType.WOOD));
-    Block AZALEA_SLAB = regWithItem("azalea_slab",
-            slab(MapColor.TERRACOTTA_GREEN, SoundType.WOOD));
-    Block PALM_SLAB = regWithItem("palm_slab",
-            slab(MapColor.NETHER, SoundType.WOOD));
-    Block MAPLE_SLAB = regWithItem("maple_slab",
-            slab(MapColor.WOOD, SoundType.WOOD));
-    Block ASPEN_SLAB = regWithItem("aspen_slab",
-            slab(MapColor.WOOD, SoundType.WOOD));
-    Block WALNUT_SLAB = regWithItem("walnut_slab",
-            slab(MapColor.TERRACOTTA_BROWN, SoundType.WOOD));
-    Block BLUE_SPRUCE_SLAB = regWithItem("blue_spruce_slab",
-            slab(MapColor.LAPIS, SoundType.WOOD));
-    
-    //planks
-    Block WILLOW_STAIRS = regWithItem("willow_stairs",
-            stairs(WILLOW_PLANKS, BlockBehaviour.Properties.ofFullCopy(WILLOW_PLANKS)));
-    Block BAOBAB_STAIRS = regWithItem("baobab_stairs",
-            stairs(BAOBAB_PLANKS, BlockBehaviour.Properties.ofFullCopy(BAOBAB_PLANKS)));
-    Block EBONY_STAIRS = regWithItem("ebony_stairs",
-            stairs(EBONY_PLANKS, BlockBehaviour.Properties.ofFullCopy(EBONY_PLANKS)));
-    Block FIR_STAIRS = regWithItem("fir_stairs",
-            stairs(FIR_PLANKS, BlockBehaviour.Properties.ofFullCopy(FIR_PLANKS)));
-    Block PINE_STAIRS = regWithItem("pine_stairs",
-            stairs(PINE_PLANKS, BlockBehaviour.Properties.ofFullCopy(PINE_PLANKS)));
-    Block CEDAR_STAIRS = regWithItem("cedar_stairs",
-            stairs(CEDAR_PLANKS, BlockBehaviour.Properties.ofFullCopy(CEDAR_PLANKS)));
-    Block MAHOGANY_STAIRS = regWithItem("mahogany_stairs",
-            stairs(MAHOGANY_PLANKS, BlockBehaviour.Properties.ofFullCopy(MAHOGANY_PLANKS)));
-    Block AZALEA_STAIRS = regWithItem("azalea_stairs",
-            stairs(AZALEA_PLANKS, BlockBehaviour.Properties.ofFullCopy(AZALEA_PLANKS)));
-    Block PALM_STAIRS = regWithItem("palm_stairs",
-            stairs(PALM_PLANKS, BlockBehaviour.Properties.ofFullCopy(PALM_PLANKS)));
-    Block MAPLE_STAIRS = regWithItem("maple_stairs",
-            stairs(MAPLE_PLANKS, BlockBehaviour.Properties.ofFullCopy(MAPLE_PLANKS)));
-    Block ASPEN_STAIRS = regWithItem("aspen_stairs",
-            stairs(ASPEN_PLANKS, BlockBehaviour.Properties.ofFullCopy(ASPEN_PLANKS)));
-    Block WALNUT_STAIRS = regWithItem("walnut_stairs",
-            stairs(WALNUT_PLANKS, BlockBehaviour.Properties.ofFullCopy(WALNUT_PLANKS)));
-    Block BLUE_SPRUCE_STAIRS = regWithItem("blue_spruce_stairs",
-            stairs(BLUE_SPRUCE_PLANKS, BlockBehaviour.Properties.ofFullCopy(BLUE_SPRUCE_PLANKS)));
-
-    //fences
-    Block WILLOW_FENCE = regWithItem("willow_fence",
-            fence(WILLOW_PLANKS.defaultMapColor(), SoundType.WOOD));
-    Block BAOBAB_FENCE = regWithItem("baobab_fence",
-            fence(BAOBAB_PLANKS.defaultMapColor(), SoundType.WOOD));
-    Block EBONY_FENCE = regWithItem("ebony_fence",
-            fence(EBONY_PLANKS.defaultMapColor(), SoundType.WOOD));
-    Block FIR_FENCE = regWithItem("fir_fence",
-            fence(FIR_PLANKS.defaultMapColor(), SoundType.WOOD));
-    Block PINE_FENCE = regWithItem("pine_fence",
-            fence(PINE_PLANKS.defaultMapColor(), SoundType.WOOD));
-    Block CEDAR_FENCE = regWithItem("cedar_fence",
-            fence(CEDAR_PLANKS.defaultMapColor(), SoundType.WOOD));
-    Block MAHOGANY_FENCE = regWithItem("mahogany_fence",
-            fence(MAHOGANY_PLANKS.defaultMapColor(), SoundType.WOOD));
-    Block AZALEA_FENCE = regWithItem("azalea_fence",
-            fence(AZALEA_PLANKS.defaultMapColor(), SoundType.WOOD));
-    Block PALM_FENCE = regWithItem("palm_fence",
-            fence(PALM_PLANKS.defaultMapColor(), SoundType.WOOD));
-    Block MAPLE_FENCE = regWithItem("maple_fence",
-            fence(MAPLE_PLANKS.defaultMapColor(), SoundType.WOOD));
-    Block ASPEN_FENCE = regWithItem("aspen_fence",
-            fence(ASPEN_PLANKS.defaultMapColor(), SoundType.WOOD));
-    Block WALNUT_FENCE = regWithItem("walnut_fence",
-            fence(WALNUT_PLANKS.defaultMapColor(), SoundType.WOOD));
-    Block BLUE_SPRUCE_FENCE = regWithItem("blue_spruce_fence",
-            fence(BLUE_SPRUCE_PLANKS.defaultMapColor(), SoundType.WOOD));
-
-    //fence gates
-    Block WILLOW_FENCE_GATE = regWithItem("willow_fence_gate",
-            fenceGate(WILLOW_PLANKS.defaultMapColor(), SoundType.WOOD, ModWoodSetup.WILLOW));
-    Block BAOBAB_FENCE_GATE = regWithItem("baobab_fence_gate",
-            fenceGate(BAOBAB_PLANKS.defaultMapColor(), SoundType.WOOD, ModWoodSetup.BAOBAB));
-    Block EBONY_FENCE_GATE = regWithItem("ebony_fence_gate",
-            fenceGate(EBONY_PLANKS.defaultMapColor(), SoundType.WOOD, ModWoodSetup.EBONY));
-    Block FIR_FENCE_GATE = regWithItem("fir_fence_gate",
-            fenceGate(FIR_PLANKS.defaultMapColor(), SoundType.WOOD, ModWoodSetup.FIR));
-    Block PINE_FENCE_GATE = regWithItem("pine_fence_gate",
-            fenceGate(PINE_PLANKS.defaultMapColor(), SoundType.WOOD, ModWoodSetup.PINE));
-    Block CEDAR_FENCE_GATE = regWithItem("cedar_fence_gate",
-            fenceGate(CEDAR_PLANKS.defaultMapColor(), SoundType.WOOD, ModWoodSetup.CEDAR));
-    Block MAHOGANY_FENCE_GATE = regWithItem("mahogany_fence_gate",
-            fenceGate(MAHOGANY_PLANKS.defaultMapColor(), SoundType.WOOD, ModWoodSetup.MAHOGANY));
-    Block AZALEA_FENCE_GATE = regWithItem("azalea_fence_gate",
-            fenceGate(AZALEA_PLANKS.defaultMapColor(), SoundType.WOOD, ModWoodSetup.AZALEA));
-    Block PALM_FENCE_GATE = regWithItem("palm_fence_gate",
-            fenceGate(PALM_PLANKS.defaultMapColor(), SoundType.WOOD, ModWoodSetup.PALM));
-    Block MAPLE_FENCE_GATE = regWithItem("maple_fence_gate",
-            fenceGate(MAPLE_PLANKS.defaultMapColor(), SoundType.WOOD, ModWoodSetup.MAPLE));
-    Block ASPEN_FENCE_GATE = regWithItem("aspen_fence_gate",
-            fenceGate(ASPEN_PLANKS.defaultMapColor(), SoundType.WOOD, ModWoodSetup.ASPEN));
-    Block WALNUT_FENCE_GATE = regWithItem("walnut_fence_gate",
-            fenceGate(WALNUT_PLANKS.defaultMapColor(), SoundType.WOOD, ModWoodSetup.WALNUT));
-    Block BLUE_SPRUCE_FENCE_GATE = regWithItem("blue_spruce_fence_gate",
-            fenceGate(BLUE_SPRUCE_PLANKS.defaultMapColor(), SoundType.WOOD, ModWoodSetup.BLUE_SPRUCE));
 
     //buttons
     Block WILLOW_BUTTON = regWithItem("willow_button", ModBlocks.button());
