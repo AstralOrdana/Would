@@ -8,13 +8,13 @@
       },
       {
         "chance": 0.1,
-        "feature": "minecraft:fancy_oak_bees_0002"
+        "feature": "minecraft:fancy_oak_bees_002"
       },
       {
         "chance": 0.005,
         "feature": "would:maple"
       }
     ],
-    "default": "minecraft:oak_bees_0002"
+    "default": "minecraft:oak_bees_002"
   }
 }
