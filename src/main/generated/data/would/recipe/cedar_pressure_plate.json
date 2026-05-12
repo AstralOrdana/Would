@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "wooden_pressure_plate",
+  "key": {
+    "#": "would:cedar_planks"
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "id": "would:cedar_pressure_plate"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "wooden_pressure_plate",
+  "key": {
+    "#": "would:blue_spruce_planks"
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "id": "would:blue_spruce_pressure_plate"
+  }
+}

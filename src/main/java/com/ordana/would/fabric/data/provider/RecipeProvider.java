@@ -29,14 +29,14 @@ public class RecipeProvider extends FabricRecipeProvider {
             @Override
             public void buildRecipes() {
 
-                // generateRecipes(exporter, ModBlockFamilies.ASPEN_PLANKS, FeatureFlags.DEFAULT_FLAGS);
-                // ModBlockFamilies.MAP.values().forEach(blockFamily -> generateRecipes(exporter, blockFamily, FeatureFlags.DEFAULT_FLAGS));
-                ModWoodTypes.ALL.forEach(compound -> {
-                    woodenBoat(compound.boatItem(), compound.planks());
-                    woodenBoat(compound.chestBoatItem(), compound.planks());
-                    hangingSign(compound.hangingSignItem(), compound.strippedLog());
-                    woodFromLogs(compound.wood(), compound.log());
-                    planksFromLogs(compound.planks(), compound.logItemTagKey(), 4);
+                ModWoodTypes.ALL.forEach(type -> {
+                    generateRecipes(type.family(), FeatureFlags.DEFAULT_FLAGS);
+                    woodenBoat(type.boatItem(), type.planks());
+                    woodenBoat(type.chestBoatItem(), type.planks());
+                    hangingSign(type.hangingSignItem(), type.strippedLog());
+                    woodFromLogs(type.wood(), type.log());
+                    planksFromLogs(type.planks(), type.logItemTagKey(), 4);
+                    shelf(type.shelfBlock(), type.strippedLog());
                 });
             }
         };

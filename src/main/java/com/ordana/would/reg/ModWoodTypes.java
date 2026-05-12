@@ -111,7 +111,7 @@ public interface ModWoodTypes {
         ModItems.ALL_CHEST_BOATS.add(chestBoatItem);
 
         // create holder
-        BlockFamily family = new BlockFamily.Builder(planks).button(button).pressurePlate(pressurePlate).slab(slab).stairs(stairs).fence(fence).fenceGate(fenceGate).door(door).recipeUnlockedBy("has_planks").recipeGroupPrefix("wooden").getFamily();
+        BlockFamily family = new BlockFamily.Builder(planks).button(button).pressurePlate(pressurePlate).slab(slab).stairs(stairs).trapdoor(trapDoorBlock).fence(fence).fenceGate(fenceGate).door(door).recipeUnlockedBy("has_planks").recipeGroupPrefix("wooden").getFamily();
         var wouldType = new WouldType(woodType, planks, slab, stairs, fence, fenceGate, door, trapDoorBlock, signBlock, wallSignBlock, pressurePlate, button, hangingSignBlock, wallHangingSignBlock, boatItem, chestBoatItem, signItem, hangingSignItem, log, strippedLog, sapling, leaves, logItemTagKey, wood, family, shelfBlock, strippedWood);
 
         // client

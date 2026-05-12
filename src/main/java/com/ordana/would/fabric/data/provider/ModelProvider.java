@@ -40,7 +40,6 @@ public class ModelProvider extends FabricModelProvider {
             generators.woodProvider(wouldType.log()).logWithHorizontal(wouldType.log()).wood(wouldType.wood());
             generators.woodProvider(wouldType.strippedLog()).logWithHorizontal(wouldType.strippedLog()).wood(wouldType.strippedWood());
             generators.createHangingSign(wouldType.planks(), wouldType.hangingSignBlock(), wouldType.wallHangingSignBlock());
-            generators.createTrapdoor(wouldType.trapDoorBlock());
             generators.createShelf(wouldType.shelfBlock(), wouldType.planks());
             generators.family(wouldType.planks()).generateFor(wouldType.family());
         });
@@ -65,6 +64,7 @@ public class ModelProvider extends FabricModelProvider {
     public void generateItemModels(ItemModelGenerators generators) {
         ModItems.ALL_BOATS.forEach(item -> generators.generateFlatItem(item, ModelTemplates.FLAT_ITEM));
         ModItems.ALL_CHEST_BOATS.forEach(item -> generators.generateFlatItem(item, ModelTemplates.FLAT_ITEM));
+        generators.generateFlatItem(ModItems.COCONUT, ModelTemplates.FLAT_ITEM);
     }
 
 }
