@@ -35,16 +35,16 @@ public class ItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
         var woodenStairsTag = this.valueLookupBuilder(ItemTags.WOODEN_STAIRS);
         var woodenTrapdoorsTag = this.valueLookupBuilder(ItemTags.WOODEN_TRAPDOORS);
 
-        ModBlockFamilies.MAP.forEach((block, blockFamily) -> {
-            planksTag.add(block.asItem());
-            fenceGatesTag.add(blockFamily.get(Variant.FENCE_GATE).asItem());
-            woodenButtonsTag.add(blockFamily.get(Variant.BUTTON).asItem());
-            woodenDoorsTag.add(blockFamily.get(Variant.DOOR).asItem());
-            woodenFencesTag.add(blockFamily.get(Variant.FENCE).asItem());
-            woodenPressurePlatesTag.add(blockFamily.get(Variant.PRESSURE_PLATE).asItem());
-            woodenSlabsTag.add(blockFamily.get(Variant.SLAB).asItem());
-            woodenStairsTag.add(blockFamily.get(Variant.STAIRS).asItem());
-            woodenTrapdoorsTag.add(blockFamily.get(Variant.TRAPDOOR).asItem());
+        ModWoodTypes.ALL.forEach((block) -> {
+            planksTag.add(block.planks().asItem());
+            fenceGatesTag.add(block.fenceGateBlock().asItem());
+            woodenButtonsTag.add(block.button().asItem());
+            woodenDoorsTag.add(block.door().asItem());
+            woodenFencesTag.add(block.fenceBlock().asItem());
+            woodenPressurePlatesTag.add(block.pressurePlate().asItem());
+            woodenSlabsTag.add(block.slabBlock().asItem());
+            woodenStairsTag.add(block.stairs().asItem());
+            woodenTrapdoorsTag.add(block.trapDoorBlock().asItem());
         });
 
         this.addBlocksToItemTag(ModTags.Items.ASPEN_LOGS, ModBlocks.ASPEN_LOG, ModBlocks.ASPEN_LOG_GAZING, ModBlocks.STRIPPED_ASPEN_LOG, ModBlocks.STRIPPED_ASPEN_LOG_GAZING, ModBlocks.ASPEN_WOOD, ModBlocks.ASPEN_WOOD_GAZING, ModBlocks.STRIPPED_ASPEN_WOOD, ModBlocks.STRIPPED_ASPEN_WOOD_GAZING);
@@ -80,8 +80,10 @@ public class ItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
         this.valueLookupBuilder(ItemTags.SIGNS).add(toArray(ModItems.ALL_SIGNS));
         this.valueLookupBuilder(ItemTags.BOATS).add(toArray(ModItems.ALL_BOATS));
         this.valueLookupBuilder(ItemTags.CHEST_BOATS).add(toArray(ModItems.ALL_CHEST_BOATS));
+        /*FIXME
         this.valueLookupBuilder(ItemTags.LEAVES).add(toArray(BlockFactories.LEAVES_TO_SAPLING_MAP.keySet()));
         this.valueLookupBuilder(ItemTags.SAPLINGS).add(toArray(BlockFactories.SaplingCompound.getSaplings()));
+         */
     }
 
     private static Item[] toArray(Collection<? extends ItemLike> blocks) {
@@ -89,8 +91,8 @@ public class ItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
     }
 
     @SafeVarargs
-    private void addBlocksToItemTag(TagKey<Item> tagKey, Supplier<Block>... blocks) {
-        this.valueLookupBuilder(tagKey).add(Stream.of(blocks).map(blockSupplier -> blockSupplier.get().asItem()).toArray(Item[]::new));
+    private void addBlocksToItemTag(TagKey<Item> tagKey, Block... blocks) {
+        this.valueLookupBuilder(tagKey).add(Stream.of(blocks).map(Block::asItem).toArray(Item[]::new));
     }
 
 }

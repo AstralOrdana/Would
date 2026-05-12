@@ -15,6 +15,7 @@ public class ModCreativeTab {
 
     public static final CreativeModeTab MOD_TAB =
             WouldPlatform.INSTANCE.registerCreativeModeTab(Would.res("would"), Component.translatable("itemGroup.would.would"), ()-> ModBlocks.EBONY_LOG.asItem().getDefaultInstance(), (itemDisplayParameters, output)->{
+                /*FIXME
                 ItemLike[] items = {
                         ModBlocks.WILLOW_LOG, ModBlocks.WILLOW_WOOD, ModBlocks.STRIPPED_WILLOW_LOG, ModBlocks.STRIPPED_WILLOW_WOOD, ModBlocks.WILLOW_PLANKS, ModBlocks.WILLOW_STAIRS, ModBlocks.WILLOW_SLAB, ModBlocks.WILLOW_FENCE, ModBlocks.WILLOW_FENCE_GATE, ModBlocks.WILLOW_DOOR, ModBlocks.WILLOW_TRAPDOOR, ModBlocks.WILLOW_PRESSURE_PLATE, ModBlocks.WILLOW_BUTTON, ModBlocks.WILLOW_LEAVES, ModBlocks.WILLOW_SAPLING, ModBlocks.WILLOW_SIGN, ModBlocks.WILLOW_HANGING_SIGN, ModItems.WILLOW_BOAT, ModItems.WILLOW_CHEST_BOAT,
                         ModBlocks.BAOBAB_LOG, ModBlocks.BAOBAB_WOOD, ModBlocks.STRIPPED_BAOBAB_LOG, ModBlocks.STRIPPED_BAOBAB_WOOD, ModBlocks.BAOBAB_PLANKS, ModBlocks.BAOBAB_STAIRS, ModBlocks.BAOBAB_SLAB, ModBlocks.BAOBAB_FENCE, ModBlocks.BAOBAB_FENCE_GATE, ModBlocks.BAOBAB_DOOR, ModBlocks.BAOBAB_TRAPDOOR, ModBlocks.BAOBAB_PRESSURE_PLATE, ModBlocks.BAOBAB_BUTTON, ModBlocks.BAOBAB_LEAVES, ModBlocks.BAOBAB_SAPLING, ModBlocks.BAOBAB_SIGN, ModBlocks.BAOBAB_HANGING_SIGN, ModItems.BAOBAB_BOAT, ModItems.BAOBAB_CHEST_BOAT,
@@ -32,6 +33,8 @@ public class ModCreativeTab {
                 };
 
                 Arrays.asList(items).forEach(output::accept);
+
+                 */
             });
 
 

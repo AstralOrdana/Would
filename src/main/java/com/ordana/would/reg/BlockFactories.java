@@ -3,7 +3,6 @@ package com.ordana.would.reg;
 import com.ordana.would.blocks.ModSaplingBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.flag.FeatureFlag;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.TreeGrower;
@@ -16,37 +15,32 @@ import net.minecraft.world.level.material.PushReaction;
 
 public class BlockFactories {
 
-    static Block log(MapColor topMapColor, MapColor sideMapColor, SoundType soundType) {
-        return new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? topMapColor : sideMapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(soundType).ignitedByLava());
+    static BlockBehaviour.Properties logProperties(MapColor topMapColor, MapColor sideMapColor, SoundType soundType) {
+        return (BlockBehaviour.Properties.of().mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? topMapColor : sideMapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(soundType).ignitedByLava());
     }
 
-    static Block wood(MapColor mapColor, SoundType soundType) {
-        return new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(soundType).ignitedByLava());
-    }
-
-    static Block leaves(SoundType type) {
-        return new TintedParticleLeavesBlock(0.01f, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).strength(0.2F).randomTicks().sound(type).noOcclusion().isValidSpawn(ModBlocks::ocelotOrParrot).isSuffocating(ModBlocks::never).isViewBlocking(ModBlocks::never).ignitedByLava().pushReaction(PushReaction.DESTROY).isRedstoneConductor(ModBlocks::never));
+    static BlockBehaviour.Properties woodProperties(MapColor mapColor, SoundType soundType) {
+        return BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(soundType).ignitedByLava();
     }
 
     static boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return false;
     }
 
-    static Block leaves(MapColor mapColor, SoundType type) {
-        return new TintedParticleLeavesBlock(0.01f, BlockBehaviour.Properties.of().mapColor(mapColor).strength(0.2F).randomTicks().sound(type).noOcclusion().isValidSpawn(ModBlocks::ocelotOrParrot).isSuffocating(ModBlocks::never).isViewBlocking(ModBlocks::never).ignitedByLava().pushReaction(PushReaction.DESTROY).isRedstoneConductor(ModBlocks::never));
+    static Block regLeaves(String id, MapColor mapColor, SoundType type) {
+        return ModBlocks.regBlock(id, (p)->new TintedParticleLeavesBlock(0.01f, p), BlockBehaviour.Properties.of().mapColor(mapColor).strength(0.2F).randomTicks().sound(type).noOcclusion().isValidSpawn(ModBlocks::ocelotOrParrot).isSuffocating(BlockFactories::never).isViewBlocking(BlockFactories::never).ignitedByLava().pushReaction(PushReaction.DESTROY).isRedstoneConductor(BlockFactories::never));
     }
 
-    static Block sapling(TreeGrower treeGrower) {
-        return new ModSaplingBlock(treeGrower, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollision().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
+    static Block regLeaves(String id, SoundType type) {
+        return regLeaves(id, MapColor.PLANT, type);
     }
 
-    static FlowerPotBlock pottedSapling(Block content, FeatureFlag... requiredFeatures) {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY);
-        if (requiredFeatures.length > 0) {
-            properties = properties.requiredFeatures(requiredFeatures);
-        }
+    static Block sapling(String id, TreeGrower treeGrower) {
+        return ModBlocks.regBlock(id, p-> new ModSaplingBlock(treeGrower, p), BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollision().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
+    }
 
-        return new FlowerPotBlock(content, properties);
+    static FlowerPotBlock pottedSapling(Block content) {
+        return ModBlocks.regBlock("potted_"+ content.properties().blockIdOrThrow().identifier().getPath(), (BlockBehaviour.Properties potted) -> new FlowerPotBlock(content, potted), BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY));
     }
 
     static BlockBehaviour.Properties plankProperties(MapColor mapColor, SoundType soundType) {

@@ -16,7 +16,7 @@ public class ModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators generators) {
-        generators.createPlant(ModBlocks.ASPEN_SAPLING, ModBlocks.POTTED_ASPEN_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
+        generators.createPlant(ModBlocks.ASPEN_SAPLING, ModBlocks.POTTED_ASPEN_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
         // ModBlockFamilies.MAP.forEach((block, blockFamily) -> generators.family(block).generateFor(blockFamily));
 /*        BlockFactories.ALL_HANGING_SIGNS.forEach(compound -> generators.createHangingSign(compound.strippedLog(), compound.ceiling(), compound.wall()));
         BlockFactories.ALL_SAPLINGS.forEach(compound -> generators.createPlant(compound.sapling(), compound.pottedSapling(), BlockModelGenerators.TintState.NOT_TINTED));

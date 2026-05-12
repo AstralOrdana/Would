@@ -1,8 +1,7 @@
 package com.ordana.would;
 
 import com.ordana.would.fabric.WouldPlatformImpl;
-import net.minecraft.client.color.block.BlockColor;
-import net.minecraft.client.color.item.ItemColor;
+import net.minecraft.client.color.block.BlockTintSource;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -21,6 +20,7 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import org.jetbrains.annotations.Contract;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public interface WouldPlatform {
@@ -35,13 +35,9 @@ public interface WouldPlatform {
 
     @FunctionalInterface
 	public interface BlockColorEvent {
-		void register(BlockColor var1, Block... var2);
+		void register(List<BlockTintSource> var1, Block... var2);
 	}
 
-	@FunctionalInterface
-	public interface ItemColorEvent {
-		void register(ItemColor var1, ItemLike... var2);
-	}
 
 	@FunctionalInterface
 	public interface EntityRendererEvent {

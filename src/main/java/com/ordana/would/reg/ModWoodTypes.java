@@ -5,6 +5,11 @@ import com.ordana.would.WouldPlatform;
 import com.ordana.would.blocks.ModWoodenButtonBlock;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.resources.model.sprite.SpriteId;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.BoatItem;
+import net.minecraft.world.item.HangingSignItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SignItem;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -44,48 +49,60 @@ public interface ModWoodTypes {
         BlockBehaviour.Properties settings = plankProperties(mapColor, SoundType.WOOD);
 
         // blocks
-        Block planks = ModBlocks.regWithItem(name+"_planks", Block::new,
+        Block planks = ModBlocks.regBlock(name+"_planks", Block::new,
                 settings, true);
 
-        SlabBlock slab = ModBlocks.regWithItem(name+"_slab", SlabBlock::new,
+        SlabBlock slab = ModBlocks.regBlock(name+"_slab", SlabBlock::new,
                 slab(mapColor, SoundType.WOOD));
 
-        StairBlock stairs = ModBlocks.regWithItem(name+"_stairs", properties -> new StairBlock(planks.defaultBlockState(), properties),
+        StairBlock stairs = ModBlocks.regBlock(name+"_stairs", properties -> new StairBlock(planks.defaultBlockState(), properties),
                 settings);
 
-        FenceBlock fence = ModBlocks.regWithItem( name+"_fence", FenceBlock::new,
+        FenceBlock fence = ModBlocks.regBlock( name+"_fence", FenceBlock::new,
                 fence(mapColor, soundType));
 
-        FenceGateBlock fenceGate = ModBlocks.regWithItem( name+"_fence_gate", properties -> new FenceGateBlock(woodType, properties),
+        FenceGateBlock fenceGate = ModBlocks.regBlock( name+"_fence_gate", properties -> new FenceGateBlock(woodType, properties),
                 fenceGate(mapColor, soundType, woodType));
 
-        DoorBlock door = ModBlocks.regWithItem( name+"_door", properties -> new DoorBlock(blockSetType, properties),
+        DoorBlock door = ModBlocks.regBlock( name+"_door", properties -> new DoorBlock(blockSetType, properties),
                 BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().ignitedByLava().pushReaction(PushReaction.DESTROY));
 
-        TrapDoorBlock trapDoorBlock = ModBlocks.regWithItem( name+"_trapdoor", properties -> new TrapDoorBlock(blockSetType, properties),
+        TrapDoorBlock trapDoorBlock = ModBlocks.regBlock( name+"_trapdoor", properties -> new TrapDoorBlock(blockSetType, properties),
                 BlockBehaviour.Properties.of().mapColor(mapColor).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().isValidSpawn(ModBlocks::never).ignitedByLava());
 
-        StandingSignBlock signBlock = ModBlocks.regWithItem( name+"_sign", properties -> new StandingSignBlock(woodType, properties),
-                BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1.0F).ignitedByLava());
+        StandingSignBlock signBlock = ModBlocks.regBlock( name+"_sign", properties -> new StandingSignBlock(woodType, properties),
+                BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1.0F).ignitedByLava(), false);
 
-        WallSignBlock wallSignBlock = ModBlocks.regWithItem( name+"_wall_sign", (p) -> new WallSignBlock(WoodType.WARPED, p), wallVariant(signBlock, true).mapColor(mapColor).instrument(NoteBlockInstrument.BASS).forceSolidOn().noCollision().strength(1.0F));
+        WallSignBlock wallSignBlock = ModBlocks.regBlock( name+"_wall_sign", (p) -> new WallSignBlock(WoodType.WARPED, p), wallVariant(signBlock, true).mapColor(mapColor).instrument(NoteBlockInstrument.BASS).forceSolidOn().noCollision().strength(1.0F), false);
 
-        var pressurePlate = regWithItem(name+"_pressure_plate", (p) -> new PressurePlateBlock(blockSetType, p), BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(0.5F).ignitedByLava().pushReaction(PushReaction.DESTROY));
-        var button = regWithItem(name+"_button", (p) -> new ModWoodenButtonBlock(blockSetType, p), BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(0.5F).ignitedByLava().pushReaction(PushReaction.DESTROY));
+        PressurePlateBlock pressurePlate = regBlock(name+"_pressure_plate", (p) -> new PressurePlateBlock(blockSetType, p), BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(0.5F).ignitedByLava().pushReaction(PushReaction.DESTROY));
+        ModWoodenButtonBlock button = regBlock(name+"_button", (p) -> new ModWoodenButtonBlock(blockSetType, p), BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(0.5F).ignitedByLava().pushReaction(PushReaction.DESTROY));
 
-        CeilingHangingSignBlock hangingSignBlock = ModBlocks.regWithItem( name+"_hanging_sign", properties -> new CeilingHangingSignBlock(woodType, properties),
-                BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1.0F).ignitedByLava());
+        CeilingHangingSignBlock hangingSignBlock = ModBlocks.regBlock(name+"_hanging_sign", properties -> new CeilingHangingSignBlock(woodType, properties),
+                BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1.0F).ignitedByLava(), false);
 
-        WallHangingSignBlock wallHangingSignBlock = ModBlocks.regWithItem( name+"_hanging_wall_sign", (p) -> new WallHangingSignBlock(WoodType.WARPED, p), wallVariant(signBlock, true).mapColor(mapColor).instrument(NoteBlockInstrument.BASS).forceSolidOn().noCollision().strength(1.0F));
+        WallHangingSignBlock wallHangingSignBlock = ModBlocks.regBlock( name+"_hanging_wall_sign", (p) -> new WallHangingSignBlock(WoodType.WARPED, p), wallVariant(signBlock, true).mapColor(mapColor).instrument(NoteBlockInstrument.BASS).forceSolidOn().noCollision().strength(1.0F), false);
 
+        // items
+        var boatItem = ModItems.regItem(name+"_boat", (p) -> new BoatItem(EntityType.PALE_OAK_BOAT, p), (new Item.Properties()).stacksTo(1));
+        var chestBoatItem = ModItems.regItem(name+"_chest_boat", (p) -> new BoatItem(EntityType.CHERRY_CHEST_BOAT, p), (new Item.Properties()).stacksTo(1));
+        var signItem = ModItems.regItem(name+"_sign", (p) -> new SignItem(signBlock, wallSignBlock, p), (new Item.Properties()).stacksTo(16));
+        var hangingSignItem = ModItems.regItem(name+"_hanging_sign", (p) -> new HangingSignItem(hangingSignBlock, wallHangingSignBlock, p), (new Item.Properties()).stacksTo(16));
+
+        ModBlocks.ALL_SIGNS.add(signBlock);
+        ModBlocks.ALL_HANGING_SIGNS.add(hangingSignBlock);
+        ModItems.ALL_SIGNS.add(signItem);
+        ModItems.ALL_HANGING_SIGNS.add(hangingSignItem);
+        ModItems.ALL_BOATS.add(boatItem);
+        ModItems.ALL_CHEST_BOATS.add(chestBoatItem);
 
         // create holder
-        var wouldType = new WouldType(woodType, planks, slab, stairs, fence, fenceGate, door, trapDoorBlock, signBlock, wallSignBlock, pressurePlate, button, hangingSignBlock, wallHangingSignBlock);
+        var wouldType = new WouldType(woodType, planks, slab, stairs, fence, fenceGate, door, trapDoorBlock, signBlock, wallSignBlock, pressurePlate, button, hangingSignBlock, wallHangingSignBlock, boatItem, chestBoatItem, signItem, hangingSignItem);
 
         // client
         if (WouldPlatform.INSTANCE.isClient()) {
-            Sheets.SIGN_SPRITES.put(wouldType.woodType(), new SpriteId(Sheets.SIGN_SHEET, Would.res("entity/signs/" + wouldType.name())));
-            Sheets.HANGING_SIGN_SPRITES.put(wouldType.woodType(), new SpriteId(Sheets.SIGN_SHEET, Would.res("entity/signs/hanging/" + wouldType.name())));
+            Sheets.SIGN_SPRITES.put(wouldType.woodType(), new SpriteId(Sheets.SIGN_SHEET, Would.res("entity/signs/" + name)));
+            Sheets.HANGING_SIGN_SPRITES.put(wouldType.woodType(), new SpriteId(Sheets.SIGN_SHEET, Would.res("entity/signs/hanging/" + name)));
         }
 
         // return

@@ -7,7 +7,7 @@ import com.ordana.would.reg.ModTrees;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
@@ -32,11 +32,11 @@ public class PineTrunkPlacer extends TrunkPlacer {
 
     @Override
     protected TrunkPlacerType<?> type() {
-        return ModTrees.PINE_TRUNK_PLACER.get();
+        return ModTrees.PINE_TRUNK_PLACER;
     }
 
     @Override
-    public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, int freeTreeHeight, BlockPos blockPos, TreeConfiguration config) {
+    public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, int freeTreeHeight, BlockPos blockPos, TreeConfiguration config) {
         Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
         Direction clockDir = direction.getClockWise();
         if (random.nextBoolean()) clockDir = clockDir.getOpposite();
@@ -110,12 +110,12 @@ public class PineTrunkPlacer extends TrunkPlacer {
     }
 
 
-    protected void forceLog(BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, BlockPos pos, TreeConfiguration config) {
-        this.forceLog(blockSetter, random, pos, config, Function.identity());
+    protected void forceLog(BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, BlockPos pos, TreeConfiguration config, WorldGenLevel level) {
+        this.forceLog(blockSetter, random, pos, config, Function.identity(), level);
     }
 
-    protected void forceLog(BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, BlockPos pos, TreeConfiguration config, Function<BlockState, BlockState> propertySetter) {
-        blockSetter.accept(pos, propertySetter.apply(config.trunkProvider.getState(random, pos)));
+    protected void forceLog(BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, BlockPos pos, TreeConfiguration config, Function<BlockState, BlockState> propertySetter, WorldGenLevel level) {
+        blockSetter.accept(pos, propertySetter.apply(config.trunkProvider.getState(level, random, pos)));
     }
 
     private Direction.Axis getLogAxis(BlockPos pos, BlockPos otherPos) {

@@ -10,8 +10,8 @@ public class WouldFabricClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		WouldClient.registerBlockColors(BlockColorRegistry::register);
-		WouldClient.registerItemColors(ColorProviderRegistry.ITEM::register);
-		WouldClient.registerLayers((modelLayerLocation, layerDefinitionSupplier)-> ModelLayerRegistry.registerModelLayer(modelLayerLocation, layerDefinitionSupplier::get));
+		//FIXME
+//		WouldClient.registerLayers((modelLayerLocation, layerDefinitionSupplier)-> ModelLayerRegistry.registerModelLayer(modelLayerLocation, layerDefinitionSupplier::get));
 		WouldClient.registerEntityRenderers(EntityRenderers::register);
 	}
 }

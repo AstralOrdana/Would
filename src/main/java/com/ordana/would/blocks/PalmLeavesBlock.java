@@ -28,25 +28,25 @@ public class PalmLeavesBlock extends TintedParticleLeavesBlock implements Boneme
         for (Direction dir : Direction.Plane.HORIZONTAL.shuffledCopy(level.getRandom())) {
             mutableBlockPos.move(dir);
             mutableBlockPos.move(dir.getClockWise());
-            if(level.getBlockState(mutableBlockPos).is(this)) level.neighborShapeChanged(dir.getClockWise().getOpposite(), level.getBlockState(mutableBlockPos), mutableBlockPos, pos, flags, recursionLeft);
+            if(level.getBlockState(mutableBlockPos).is(this)) level.neighborShapeChanged(dir.getClockWise().getOpposite(), pos, mutableBlockPos, level.getBlockState(mutableBlockPos), flags, recursionLeft);
             mutableBlockPos.set(pos.relative(dir));
 
             mutableBlockPos.move(dir.getClockWise());
             mutableBlockPos.move(Direction.DOWN);
-            if(level.getBlockState(mutableBlockPos).is(this)) level.neighborShapeChanged(Direction.UP, level.getBlockState(mutableBlockPos), mutableBlockPos, pos, flags, recursionLeft);
+            if(level.getBlockState(mutableBlockPos).is(this)) level.neighborShapeChanged(Direction.UP, pos, mutableBlockPos, level.getBlockState(mutableBlockPos), flags, recursionLeft);
             mutableBlockPos.set(pos.relative(dir));
 
             mutableBlockPos.move(dir.getClockWise());
             mutableBlockPos.move(Direction.UP);
-            if(level.getBlockState(mutableBlockPos).is(this)) level.neighborShapeChanged(Direction.DOWN, level.getBlockState(mutableBlockPos), mutableBlockPos, pos, flags, recursionLeft);
+            if(level.getBlockState(mutableBlockPos).is(this)) level.neighborShapeChanged(Direction.DOWN, pos, mutableBlockPos, level.getBlockState(mutableBlockPos), flags, recursionLeft);
             mutableBlockPos.set(pos.relative(dir));
 
             mutableBlockPos.move(Direction.DOWN);
-            if(level.getBlockState(mutableBlockPos).is(this)) level.neighborShapeChanged(Direction.UP, level.getBlockState(mutableBlockPos), mutableBlockPos, pos, flags, recursionLeft);
+            if(level.getBlockState(mutableBlockPos).is(this)) level.neighborShapeChanged(Direction.UP, pos, mutableBlockPos, level.getBlockState(mutableBlockPos), flags, recursionLeft);
             mutableBlockPos.set(pos.relative(dir));
 
             mutableBlockPos.move(Direction.UP);
-            if(level.getBlockState(mutableBlockPos).is(this)) level.neighborShapeChanged(Direction.DOWN, level.getBlockState(mutableBlockPos), mutableBlockPos, pos, flags, recursionLeft);
+            if(level.getBlockState(mutableBlockPos).is(this)) level.neighborShapeChanged(Direction.DOWN, pos, mutableBlockPos, level.getBlockState(mutableBlockPos), flags, recursionLeft);
             mutableBlockPos.set(pos);
 
         }
@@ -114,7 +114,7 @@ public class PalmLeavesBlock extends TintedParticleLeavesBlock implements Boneme
     }
 
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-        level.setBlock(pos.below(), ModBlocks.HANGING_COCONUT.get().defaultBlockState(), UPDATE_CLIENTS);
+        level.setBlock(pos.below(), ModBlocks.HANGING_COCONUT.defaultBlockState(), UPDATE_CLIENTS);
     }
 
 }

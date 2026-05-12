@@ -31,6 +31,8 @@ public interface ModTrees {
     TrunkPlacerType<MapleTrunkPlacer> MAPLE_TRUNK_PLACER = registerTrunk("maple", MapleTrunkPlacer.CODEC);
     TrunkPlacerType<WalnutTrunkPlacer> WALNUT_TRUNK_PLACER = registerTrunk("walnut", WalnutTrunkPlacer.CODEC);
     TrunkPlacerType<AzaleaTrunkPlacer> AZALEA_TRUNK_PLACER = registerTrunk("azalea", AzaleaTrunkPlacer.CODEC);
+    TrunkPlacerType<PineTrunkPlacer> PINE_TRUNK_PLACER = registerTrunk("pine", PineTrunkPlacer.CODEC);
+    TrunkPlacerType<MegaPineTrunkPlacer> MEGA_PINE_TRUNK_PLACER = registerTrunk("mega_pine", MegaPineTrunkPlacer.CODEC);
     TrunkPlacerType<BaldCypressTrunkPlacer> BALD_CYPRESS_TRUNK_PLACER = registerTrunk("bald_cypress", BaldCypressTrunkPlacer.CODEC);
 
     TreeDecoratorType<PaleMossDecorator> PALE_MOSS_DECORATOR = registerDecorator("pale_moss", PaleMossDecorator.CODEC);

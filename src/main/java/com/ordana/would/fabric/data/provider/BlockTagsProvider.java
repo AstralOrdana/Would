@@ -1,8 +1,6 @@
 package com.ordana.would.fabric.data.provider;
 
-import com.ordana.would.reg.ModBlockFamilies;
-import com.ordana.would.reg.ModBlocks;
-import com.ordana.would.reg.ModTags;
+import com.ordana.would.reg.*;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
@@ -25,47 +23,47 @@ public class BlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        FabricTagBuilder planksTag = this.getOrCreateTagBuilder(BlockTags.PLANKS);
-        FabricTagBuilder fenceGatesTag = this.getOrCreateTagBuilder(BlockTags.FENCE_GATES);
-        FabricTagBuilder standingSignsTag = this.getOrCreateTagBuilder(BlockTags.STANDING_SIGNS);
-        FabricTagBuilder wallSignsTag = this.getOrCreateTagBuilder(BlockTags.WALL_SIGNS);
-        FabricTagBuilder woodenButtonsTag = this.getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS);
-        FabricTagBuilder woodenDoorsTag = this.getOrCreateTagBuilder(BlockTags.WOODEN_DOORS);
-        FabricTagBuilder woodenFencesTag = this.getOrCreateTagBuilder(BlockTags.WOODEN_FENCES);
-        FabricTagBuilder woodenPressurePlatesTag = this.getOrCreateTagBuilder(BlockTags.WOODEN_PRESSURE_PLATES);
-        FabricTagBuilder woodenSlabsTag = this.getOrCreateTagBuilder(BlockTags.WOODEN_SLABS);
-        FabricTagBuilder woodenStairsTag = this.getOrCreateTagBuilder(BlockTags.WOODEN_STAIRS);
-        FabricTagBuilder woodenTrapdoorsTag = this.getOrCreateTagBuilder(BlockTags.WOODEN_TRAPDOORS);
+        var planksTag = this.valueLookupBuilder(BlockTags.PLANKS);
+        var fenceGatesTag = this.valueLookupBuilder(BlockTags.FENCE_GATES);
+        var standingSignsTag = this.valueLookupBuilder(BlockTags.STANDING_SIGNS);
+        var wallSignsTag = this.valueLookupBuilder(BlockTags.WALL_SIGNS);
+        var woodenButtonsTag = this.valueLookupBuilder(BlockTags.WOODEN_BUTTONS);
+        var woodenDoorsTag = this.valueLookupBuilder(BlockTags.WOODEN_DOORS);
+        var woodenFencesTag = this.valueLookupBuilder(BlockTags.WOODEN_FENCES);
+        var woodenPressurePlatesTag = this.valueLookupBuilder(BlockTags.WOODEN_PRESSURE_PLATES);
+        var woodenSlabsTag = this.valueLookupBuilder(BlockTags.WOODEN_SLABS);
+        var woodenStairsTag = this.valueLookupBuilder(BlockTags.WOODEN_STAIRS);
+        var woodenTrapdoorsTag = this.valueLookupBuilder(BlockTags.WOODEN_TRAPDOORS);
 
-        ModBlockFamilies.MAP.forEach((block, blockFamily) -> {
-            planksTag.add(block);
-            fenceGatesTag.add(blockFamily.get(Variant.FENCE_GATE));
-            woodenButtonsTag.add(blockFamily.get(Variant.BUTTON));
-            woodenDoorsTag.add(blockFamily.get(Variant.DOOR));
-            woodenFencesTag.add(blockFamily.get(Variant.FENCE));
-            woodenPressurePlatesTag.add(blockFamily.get(Variant.PRESSURE_PLATE));
-            woodenSlabsTag.add(blockFamily.get(Variant.SLAB));
-            woodenStairsTag.add(blockFamily.get(Variant.STAIRS));
-            woodenTrapdoorsTag.add(blockFamily.get(Variant.TRAPDOOR));
-            standingSignsTag.add(blockFamily.get(Variant.SIGN));
-            wallSignsTag.add(blockFamily.get(Variant.WALL_SIGN));
+        ModWoodTypes.ALL.forEach((block) -> {
+            planksTag.add(block.planks());
+            fenceGatesTag.add(block.fenceGateBlock());
+            woodenButtonsTag.add(block.button());
+            woodenDoorsTag.add(block.door());
+            woodenFencesTag.add(block.fenceBlock());
+            woodenPressurePlatesTag.add(block.pressurePlate());
+            woodenSlabsTag.add(block.slabBlock());
+            woodenStairsTag.add(block.stairs());
+            woodenTrapdoorsTag.add(block.trapDoorBlock());
+            standingSignsTag.add(block.standingSignBlock());
+            wallSignsTag.add(block.wallSignBlock());
         });
+//FIXME
+//        this.valueLookupBuilder(BlockTags.MINEABLE_WITH_HOE).add(toArray(BlockFactories.LEAVES_TO_SAPLING_MAP.keySet()));
 
-        this.getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_HOE).add(toArray(BlockFactories.LEAVES_TO_SAPLING_MAP.keySet()));
-
-        this.getOrCreateTagBuilder(BlockTags.OVERWORLD_NATURAL_LOGS).add(
-            ModBlocks.ASPEN_LOG.get(),
-            ModBlocks.AZALEA_LOG.get(),
-            ModBlocks.BAOBAB_LOG.get(),
-            ModBlocks.BLUE_SPRUCE_LOG.get(),
-            ModBlocks.CEDAR_LOG.get(),
-            ModBlocks.EBONY_LOG.get(),
-            ModBlocks.FIR_LOG.get(),
-            ModBlocks.MAHOGANY_LOG.get(),
-            ModBlocks.MAPLE_LOG.get(),
-            ModBlocks.PALM_LOG.get(),
-            ModBlocks.PINE_LOG.get(),
-            ModBlocks.WALNUT_LOG.get()
+        this.valueLookupBuilder(BlockTags.OVERWORLD_NATURAL_LOGS).add(
+            ModBlocks.ASPEN_LOG,
+            ModBlocks.AZALEA_LOG,
+            ModBlocks.BAOBAB_LOG,
+            ModBlocks.BLUE_SPRUCE_LOG,
+            ModBlocks.CEDAR_LOG,
+            ModBlocks.EBONY_LOG,
+            ModBlocks.FIR_LOG,
+            ModBlocks.MAHOGANY_LOG,
+            ModBlocks.MAPLE_LOG,
+            ModBlocks.PALM_LOG,
+            ModBlocks.PINE_LOG,
+            ModBlocks.WALNUT_LOG
         );
 
         this.addBlocksToTag(ModTags.Blocks.ASPEN_LOGS, ModBlocks.ASPEN_LOG, ModBlocks.ASPEN_LOG_GAZING, ModBlocks.STRIPPED_ASPEN_LOG, ModBlocks.STRIPPED_ASPEN_LOG_GAZING, ModBlocks.ASPEN_WOOD, ModBlocks.ASPEN_WOOD_GAZING, ModBlocks.STRIPPED_ASPEN_WOOD, ModBlocks.STRIPPED_ASPEN_WOOD_GAZING);
@@ -82,7 +80,7 @@ public class BlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
         this.addBlocksToTag(ModTags.Blocks.WALNUT_LOGS, ModBlocks.WALNUT_LOG, ModBlocks.STRIPPED_WALNUT_LOG, ModBlocks.WALNUT_WOOD, ModBlocks.STRIPPED_WALNUT_WOOD);
         this.addBlocksToTag(ModTags.Blocks.WILLOW_LOGS, ModBlocks.WILLOW_LOG, ModBlocks.STRIPPED_WILLOW_LOG, ModBlocks.WILLOW_WOOD, ModBlocks.STRIPPED_WILLOW_WOOD);
 
-        this.getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
+        this.valueLookupBuilder(BlockTags.LOGS_THAT_BURN)
             .addTag(ModTags.Blocks.ASPEN_LOGS)
             .addTag(ModTags.Blocks.AZALEA_LOGS)
             .addTag(ModTags.Blocks.BAOBAB_LOGS)
@@ -97,11 +95,14 @@ public class BlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
             .addTag(ModTags.Blocks.WALNUT_LOGS)
             .addTag(ModTags.Blocks.WILLOW_LOGS);
 
-        this.getOrCreateTagBuilder(BlockTags.CEILING_HANGING_SIGNS).add(toArray(BlockFactories.HangingSignCompound.getCeilings()));
-        this.getOrCreateTagBuilder(BlockTags.WALL_HANGING_SIGNS).add(toArray(BlockFactories.HangingSignCompound.getWalls()));
-        this.getOrCreateTagBuilder(BlockTags.SAPLINGS).add(toArray(BlockFactories.SaplingCompound.getSaplings()));
-        this.getOrCreateTagBuilder(BlockTags.FLOWER_POTS).add(toArray(BlockFactories.SaplingCompound.getPottedSaplings()));
-        this.getOrCreateTagBuilder(BlockTags.LEAVES).add(toArray(BlockFactories.LEAVES_TO_SAPLING_MAP.keySet()));
+        /*FIXME
+        this.valueLookupBuilder(BlockTags.CEILING_HANGING_SIGNS).add(toArray(BlockFactories.HangingSignCompound.getCeilings()));
+        this.valueLookupBuilder(BlockTags.WALL_HANGING_SIGNS).add(toArray(BlockFactories.HangingSignCompound.getWalls()));
+        this.valueLookupBuilder(BlockTags.SAPLINGS).add(toArray(BlockFactories.SaplingCompound.getSaplings()));
+        this.valueLookupBuilder(BlockTags.FLOWER_POTS).add(toArray(BlockFactories.SaplingCompound.getPottedSaplings()));
+        this.valueLookupBuilder(BlockTags.LEAVES).add(toArray(BlockFactories.LEAVES_TO_SAPLING_MAP.keySet()));
+
+         */
     }
 
     private static Block[] toArray(Collection<Block> blocks) {
@@ -109,8 +110,8 @@ public class BlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
     }
 
     @SafeVarargs
-    private void addBlocksToTag(TagKey<Block> tagKey, Supplier<Block>... blocks) {
-        this.getOrCreateTagBuilder(tagKey).add(Stream.of(blocks).map(Supplier::get).toArray(Block[]::new));
+    private void addBlocksToTag(TagKey<Block> tagKey, Block... blocks) {
+        this.valueLookupBuilder(tagKey).add(Stream.of(blocks).toArray(Block[]::new));
     }
 
 }

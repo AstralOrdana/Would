@@ -10,7 +10,11 @@ import java.util.function.Supplier;
 import static com.ordana.would.reg.ModBlocks.*;
 
 public interface ModBlockFamilies {
+    static void init() {
 
+    }
+
+    /*FIXME
     Map<Block, BlockFamily> MAP = Maps.newHashMap();
 
     BlockFamily WILLOW_PLANKS = familyBuilder(ModBlocks.WILLOW_PLANKS)
@@ -204,6 +208,6 @@ public interface ModBlockFamilies {
         return builder;
     }
 
-    static void init() {}
+     */
 
 }

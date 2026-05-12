@@ -22,6 +22,7 @@ public class FallingCoconutEntity extends FallingBlockEntity {
         CompoundTag tag = new CompoundTag();
         tag.put("BlockState", NbtUtils.writeBlockState(state));
         tag.putInt("Time", this.time);
-        this.readAdditionalSaveData(tag);
+//        this.readAdditionalSaveData(tag);
+        //FIXME
     }
 }

@@ -2,6 +2,7 @@ package com.ordana.would.entities;
 
 import com.ordana.would.reg.ModEntities;
 import com.ordana.would.reg.ModItems;
+import com.ordana.would.reg.ModSoundEvents;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -29,12 +30,12 @@ public class ThrownWalnutEntity extends ThrowableItemProjectile {
     }
 
     public ThrownWalnutEntity(Level level, LivingEntity thrower, ItemStack item) {
-        super(ModEntities.THROWN_WALNUT, thrower, level);
+        super(ModEntities.THROWN_WALNUT, thrower, level, item);
         this.setItem(item);
     }
 
     public ThrownWalnutEntity(Level worldIn, double x, double y, double z) {
-        super(ModEntities.THROWN_WALNUT, x, y, z, worldIn);
+        super(ModEntities.THROWN_WALNUT, x, y, z, worldIn, ModItems.WALNUT.getDefaultInstance());
     }
 
 
@@ -48,7 +49,7 @@ public class ThrownWalnutEntity extends ThrowableItemProjectile {
         if (id == 3) {
 
             for(int i = 0; i < PARTICLE_COUNT; ++i) {
-                this.level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, this.getItem()), this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+                this.level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, this.getItem().getItem()), this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
 
@@ -75,9 +76,9 @@ public class ThrownWalnutEntity extends ThrowableItemProjectile {
     @Override
     protected void onHit(HitResult result) {
         super.onHit(result);
-        if (!this.level.isClientSide) {
+        if (!this.level.isClientSide()) {
             this.level.broadcastEntityEvent(this, (byte)3);
-            level.playSound(null, getX(), getY(), getZ(), ModSoundEvents.WALNUT_CRACK.get(), SoundSource.NEUTRAL, 0.75F, 2.5F + (random.nextFloat() / 2));
+            level.playSound(null, getX(), getY(), getZ(), ModSoundEvents.WALNUT_CRACK, SoundSource.NEUTRAL, 0.75F, 2.5F + (random.nextFloat() / 2));
             level.addFreshEntity(new ItemEntity(level, result.getLocation().x, result.getLocation().y + 0.5, result.getLocation().z, new ItemStack(getDefaultItem())));
             this.discard();
         }

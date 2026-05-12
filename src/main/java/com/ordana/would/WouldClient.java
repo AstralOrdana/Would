@@ -2,6 +2,7 @@ package com.ordana.would;
 
 import com.ordana.would.reg.ModBlocks;
 import com.ordana.would.reg.ModEntities;
+import net.minecraft.client.color.block.BlockTintSources;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.object.boat.BoatModel;
 import net.minecraft.client.renderer.BiomeColors;
@@ -10,6 +11,8 @@ import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.FallingBlockRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.level.FoliageColor;
+
+import java.util.List;
 
 import static com.ordana.would.reg.ModEntities.BOATS;
 import static com.ordana.would.reg.ModEntities.CHEST_BOATS;
@@ -26,34 +29,17 @@ public class WouldClient {
     }
 
     public static void registerBlockColors(WouldPlatform.BlockColorEvent event) {
-        event.register((blockState, level, blockPos, i) -> level != null && blockPos != null ? BiomeColors.getAverageFoliageColor(level, blockPos) : FoliageColor.getDefaultColor(),
+        event.register(List.of(BlockTintSources.foliage()),
                 ModBlocks.WILLOW_LEAVES,
                 ModBlocks.MAHOGANY_LEAVES,
                 ModBlocks.BAOBAB_LEAVES,
                 ModBlocks.WALNUT_LEAVES);
 
-        event.register((blockState, level, blockPos, i) -> FoliageColor.getBirchColor(),
+        event.register(List.of((blockState) -> FoliageColor.FOLIAGE_BIRCH),
                 ModBlocks.PALM_LEAVES,
                 ModBlocks.CEDAR_LEAVES);
 
-        event.register((blockState, level, blockPos, i) -> FoliageColor.getEvergreenColor(),
-                ModBlocks.PINE_LEAVES,
-                ModBlocks.FIR_LEAVES);
-    }
-
-
-    public static void registerItemColors(WouldPlatform.ItemColorEvent event) {
-        event.register((itemStack, i) -> FoliageColor.getDefaultColor(),
-                ModBlocks.WILLOW_LEAVES,
-                ModBlocks.MAHOGANY_LEAVES,
-                ModBlocks.BAOBAB_LEAVES,
-                ModBlocks.WALNUT_LEAVES);
-
-        event.register((itemStack, i) -> FoliageColor.getBirchColor(),
-                ModBlocks.PALM_LEAVES,
-                ModBlocks.CEDAR_LEAVES);
-
-        event.register((itemStack, i) -> FoliageColor.getEvergreenColor(),
+        event.register(List.of((blockState)->FoliageColor.FOLIAGE_EVERGREEN),
                 ModBlocks.PINE_LEAVES,
                 ModBlocks.FIR_LEAVES);
     }

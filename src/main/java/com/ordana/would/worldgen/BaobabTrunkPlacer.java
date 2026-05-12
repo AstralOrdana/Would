@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
@@ -33,7 +34,7 @@ public class BaobabTrunkPlacer extends TrunkPlacer {
     }
 
     @Override
-    public @NotNull List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, int freeTreeHeight, BlockPos pos, TreeConfiguration config) {
+    public @NotNull List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, int freeTreeHeight, BlockPos pos, TreeConfiguration config) {
         BlockPos blockPos = pos.below();
         BlockPos.MutableBlockPos mPos = new BlockPos.MutableBlockPos();
         List<FoliagePlacer.FoliageAttachment> list = Lists.newArrayList();
@@ -243,12 +244,12 @@ public class BaobabTrunkPlacer extends TrunkPlacer {
 
     }
 
-    private void placeLogIfFreeWithOffset(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, BlockPos.MutableBlockPos pos, TreeConfiguration config, BlockPos offsetPos, int offsetX, int offsetY, int offsetZ) {
+    private void placeLogIfFreeWithOffset(WorldGenLevel level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, BlockPos.MutableBlockPos pos, TreeConfiguration config, BlockPos offsetPos, int offsetX, int offsetY, int offsetZ) {
         pos.setWithOffset(offsetPos, offsetX, offsetY, offsetZ);
         this.placeLogIfFree(level, blockSetter, random, pos, config);
     }
 
-    private void buildBranch(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, BlockPos.MutableBlockPos mutableBlockPos, TreeConfiguration config, BlockPos pos, int x, int z, int x2, int z2, int x3, int z3, int j, int p, int q) {
+    private void buildBranch(WorldGenLevel level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, BlockPos.MutableBlockPos mutableBlockPos, TreeConfiguration config, BlockPos pos, int x, int z, int x2, int z2, int x3, int z3, int j, int p, int q) {
 
         placeLogIfFreeWithOffset(level, blockSetter, random, mutableBlockPos, config, pos, x, j, z);
         placeLogIfFreeWithOffset(level, blockSetter, random, mutableBlockPos, config, pos, x2, j + p, z2);

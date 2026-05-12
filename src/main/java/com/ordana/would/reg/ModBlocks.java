@@ -17,18 +17,24 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import org.apache.commons.compress.utils.Lists;
 
+import java.util.List;
 import java.util.function.Function;
 
 import static com.ordana.would.reg.BlockFactories.*;
 
 public interface ModBlocks {
 
+
+    List<Block> ALL_SIGNS = Lists.newArrayList();
+    List<Block> ALL_HANGING_SIGNS = Lists.newArrayList();
+
     static void init() {
     }
 
 
-    Block HANGING_WILLOW_LEAVES = regWithItem(
+    Block HANGING_WILLOW_LEAVES = regBlock(
         "hanging_willow_leaves",
         HangingWillowLeavesBlock::new, BlockBehaviour.Properties.of()
             .mapColor(MapColor.PLANT)
@@ -42,25 +48,11 @@ public interface ModBlocks {
         true
     );
 
-    private static Boolean ocelotOrParrot(BlockState state, BlockGetter blockGetter, BlockPos pos, EntityType<?> entity) {
+    static Boolean ocelotOrParrot(BlockState state, BlockGetter blockGetter, BlockPos pos, EntityType<?> entity) {
         return entity == EntityType.OCELOT || entity == EntityType.PARROT;
     }
 
-    private static <T extends Block> T regBlock(String name, T block) {
-        return Registry.register(BuiltInRegistries.BLOCK, Would.res(name), block);
-    }
-
-    private static void regBlockItem(String name, Block blockSup, Item.Properties properties) {
-        Registry.register(BuiltInRegistries.ITEM, Would.res(name), new BlockItem(blockSup, properties));
-    }
-
-    private static <T extends Block> T regWithItem(String name, T blockFactory) {
-        T block = regBlock(name, blockFactory);
-        regBlockItem(name, block, new Item.Properties());
-        return block;
-    }
-
-    public static <T extends Block> T regWithItem(String name, Function<BlockBehaviour.Properties, T> blockFactory, BlockBehaviour.Properties settings, boolean shouldRegisterItem) {
+    static <T extends Block> T regBlock(String name, Function<BlockBehaviour.Properties, T> blockFactory, BlockBehaviour.Properties settings, boolean shouldRegisterItem) {
         // Create a registry key for the block
         ResourceKey<Block> blockKey = keyOfBlock(name);
         // Create the block instance
@@ -80,8 +72,8 @@ public interface ModBlocks {
         return Registry.register(BuiltInRegistries.BLOCK, blockKey, block);
     }
 
-    static <T extends Block> T regWithItem(String name, Function<BlockBehaviour.Properties, T> blockFactory, BlockBehaviour.Properties settings) {
-        return regWithItem(name, blockFactory, settings, true);
+    static <T extends Block> T regBlock(String name, Function<BlockBehaviour.Properties, T> blockFactory, BlockBehaviour.Properties settings) {
+        return regBlock(name, blockFactory, settings, true);
     }
 
     private static ResourceKey<Block> keyOfBlock(String name) {
@@ -92,216 +84,191 @@ public interface ModBlocks {
         return ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(Would.MOD_ID, name));
     }
 
-
-
     static boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
         return false;
     }
     
     //logs
-    Block WILLOW_LOG = regWithItem("willow_log",
-            log(MapColor.WARPED_NYLIUM, MapColor.PODZOL, SoundType.WOOD));
-    Block BAOBAB_LOG = regWithItem("baobab_log",
-            log(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
-    Block EBONY_LOG = regWithItem("ebony_log",
-            log(MapColor.TERRACOTTA_BLACK, MapColor.PODZOL, SoundType.WOOD));
-    Block FIR_LOG = regWithItem("fir_log",
-            log(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
-    Block PINE_LOG = regWithItem("pine_log",
-            log(MapColor.PODZOL, MapColor.PODZOL, SoundType.WOOD));
-    Block CEDAR_LOG = regWithItem("cedar_log",
-            log(MapColor.TERRACOTTA_YELLOW, MapColor.TERRACOTTA_YELLOW, SoundType.WOOD));
-    Block MAHOGANY_LOG = regWithItem("mahogany_log",
-            log(MapColor.TERRACOTTA_RED, MapColor.TERRACOTTA_RED, SoundType.WOOD));
-    Block AZALEA_LOG = regWithItem("azalea_log",
-            log(MapColor.TERRACOTTA_GREEN, MapColor.PODZOL, SoundType.WOOD));
-    Block PALM_LOG = regWithItem("palm_log",
-            log(MapColor.NETHER, MapColor.TERRACOTTA_LIGHT_GRAY, SoundType.WOOD));
-    Block MAPLE_LOG = regWithItem("maple_log",
-            log(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
-    Block MAPLE_LOG_SAPPY = regWithItem("maple_log_sappy",
-            log(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
-    Block ASPEN_LOG = regWithItem("aspen_log",
-            log(MapColor.WOOD, MapColor.TERRACOTTA_WHITE, SoundType.WOOD));
-    Block ASPEN_LOG_GAZING = regWithItem("aspen_log_gazing",
-            log(MapColor.WOOD, MapColor.TERRACOTTA_WHITE, SoundType.WOOD));
-    Block WALNUT_LOG = regWithItem("walnut_log",
-            log(MapColor.COLOR_BROWN, MapColor.COLOR_BROWN, SoundType.WOOD));
-    Block BLUE_SPRUCE_LOG = regWithItem("blue_spruce_log",
-            log(MapColor.LAPIS, MapColor.TERRACOTTA_LIGHT_BLUE, SoundType.WOOD));
-    
+    Block WILLOW_LOG = regLog("willow_log",
+            logProperties(MapColor.WARPED_NYLIUM, MapColor.PODZOL, SoundType.WOOD));
+    Block BAOBAB_LOG = regLog("baobab_log",
+            logProperties(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
+    Block EBONY_LOG = regLog("ebony_log",
+            logProperties(MapColor.TERRACOTTA_BLACK, MapColor.PODZOL, SoundType.WOOD));
+    Block FIR_LOG = regLog("fir_log",
+            logProperties(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
+    Block PINE_LOG = regLog("pine_log",
+            logProperties(MapColor.PODZOL, MapColor.PODZOL, SoundType.WOOD));
+    Block CEDAR_LOG = regLog("cedar_log",
+            logProperties(MapColor.TERRACOTTA_YELLOW, MapColor.TERRACOTTA_YELLOW, SoundType.WOOD));
+    Block MAHOGANY_LOG = regLog("mahogany_log",
+            logProperties(MapColor.TERRACOTTA_RED, MapColor.TERRACOTTA_RED, SoundType.WOOD));
+    Block AZALEA_LOG = regLog("azalea_log",
+            logProperties(MapColor.TERRACOTTA_GREEN, MapColor.PODZOL, SoundType.WOOD));
+    Block PALM_LOG = regLog("palm_log",
+            logProperties(MapColor.NETHER, MapColor.TERRACOTTA_LIGHT_GRAY, SoundType.WOOD));
+    Block MAPLE_LOG = regLog("maple_log",
+            logProperties(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
+    Block MAPLE_LOG_SAPPY = regLog("maple_log_sappy",
+            logProperties(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
+    Block ASPEN_LOG = regLog("aspen_log",
+            logProperties(MapColor.WOOD, MapColor.TERRACOTTA_WHITE, SoundType.WOOD));
+    Block ASPEN_LOG_GAZING = regLog("aspen_log_gazing",
+            logProperties(MapColor.WOOD, MapColor.TERRACOTTA_WHITE, SoundType.WOOD));
+    Block WALNUT_LOG = regLog("walnut_log",
+            logProperties(MapColor.COLOR_BROWN, MapColor.COLOR_BROWN, SoundType.WOOD));
+    Block BLUE_SPRUCE_LOG = regLog("blue_spruce_log",
+            logProperties(MapColor.LAPIS, MapColor.TERRACOTTA_LIGHT_BLUE, SoundType.WOOD));
+
+    static Block regLog(String blueSpruceLog, BlockBehaviour.Properties Properties) {
+        return regBlock(blueSpruceLog, RotatedPillarBlock::new, Properties);
+    }
+
     //wood
-    Block WILLOW_WOOD = regWithItem("willow_wood",
-            wood(MapColor.PODZOL, SoundType.WOOD));
-    Block BAOBAB_WOOD = regWithItem("baobab_wood",
-            wood(MapColor.WOOD, SoundType.WOOD));
-    Block EBONY_WOOD = regWithItem("ebony_wood",
-            wood(MapColor.PODZOL, SoundType.WOOD));
-    Block FIR_WOOD = regWithItem("fir_wood",
-            wood(MapColor.WOOD, SoundType.WOOD));
-    Block PINE_WOOD = regWithItem("pine_wood",
-            wood(MapColor.PODZOL, SoundType.WOOD));
-    Block CEDAR_WOOD = regWithItem("cedar_wood",
-            wood(MapColor.TERRACOTTA_YELLOW, SoundType.WOOD));
-    Block MAHOGANY_WOOD = regWithItem("mahogany_wood",
-            wood(MapColor.TERRACOTTA_RED, SoundType.WOOD));
-    Block AZALEA_WOOD = regWithItem("azalea_wood",
-            wood(MapColor.PODZOL, SoundType.WOOD));
-    Block PALM_WOOD = regWithItem("palm_wood",
-            wood(MapColor.TERRACOTTA_LIGHT_GRAY, SoundType.WOOD));
-    Block MAPLE_WOOD = regWithItem("maple_wood",
-            wood(MapColor.WOOD, SoundType.WOOD));
-    Block ASPEN_WOOD = regWithItem("aspen_wood",
-            wood(MapColor.TERRACOTTA_WHITE, SoundType.WOOD));
-    Block ASPEN_WOOD_GAZING = regWithItem("aspen_wood_gazing",
-            wood(MapColor.TERRACOTTA_WHITE, SoundType.WOOD));
-    Block WALNUT_WOOD = regWithItem("walnut_wood",
-            wood(MapColor.COLOR_BROWN, SoundType.WOOD));
-    Block BLUE_SPRUCE_WOOD = regWithItem("blue_spruce_wood",
-            wood(MapColor.TERRACOTTA_LIGHT_BLUE, SoundType.WOOD));
+    Block WILLOW_WOOD = regLog("willow_wood",
+            woodProperties(MapColor.PODZOL, SoundType.WOOD));
+    Block BAOBAB_WOOD = regLog("baobab_wood",
+            woodProperties(MapColor.WOOD, SoundType.WOOD));
+    Block EBONY_WOOD = regLog("ebony_wood",
+            woodProperties(MapColor.PODZOL, SoundType.WOOD));
+    Block FIR_WOOD = regLog("fir_wood",
+            woodProperties(MapColor.WOOD, SoundType.WOOD));
+    Block PINE_WOOD = regLog("pine_wood",
+            woodProperties(MapColor.PODZOL, SoundType.WOOD));
+    Block CEDAR_WOOD = regLog("cedar_wood",
+            woodProperties(MapColor.TERRACOTTA_YELLOW, SoundType.WOOD));
+    Block MAHOGANY_WOOD = regLog("mahogany_wood",
+            woodProperties(MapColor.TERRACOTTA_RED, SoundType.WOOD));
+    Block AZALEA_WOOD = regLog("azalea_wood",
+            woodProperties(MapColor.PODZOL, SoundType.WOOD));
+    Block PALM_WOOD = regLog("palm_wood",
+            woodProperties(MapColor.TERRACOTTA_LIGHT_GRAY, SoundType.WOOD));
+    Block MAPLE_WOOD = regLog("maple_wood",
+            woodProperties(MapColor.WOOD, SoundType.WOOD));
+    Block MAPLE_WOOD_SAPPY = regLog("maple_wood_sappy",
+            woodProperties(MapColor.WOOD, SoundType.WOOD));
+    Block ASPEN_WOOD = regLog("aspen_wood",
+            woodProperties(MapColor.TERRACOTTA_WHITE, SoundType.WOOD));
+    Block ASPEN_WOOD_GAZING = regLog("aspen_wood_gazing",
+            woodProperties(MapColor.TERRACOTTA_WHITE, SoundType.WOOD));
+    Block WALNUT_WOOD = regLog("walnut_wood",
+            woodProperties(MapColor.COLOR_BROWN, SoundType.WOOD));
+    Block BLUE_SPRUCE_WOOD = regLog("blue_spruce_wood",
+            woodProperties(MapColor.TERRACOTTA_LIGHT_BLUE, SoundType.WOOD));
 
     //stripped logs
-    Block STRIPPED_WILLOW_LOG = regWithItem("stripped_willow_log",
-            log(MapColor.WARPED_NYLIUM, MapColor.WARPED_NYLIUM, SoundType.WOOD));
-    Block STRIPPED_BAOBAB_LOG = regWithItem("stripped_baobab_log",
-            log(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
-    Block STRIPPED_EBONY_LOG = regWithItem("stripped_ebony_log",
-            log(MapColor.TERRACOTTA_BLACK, MapColor.TERRACOTTA_BLACK, SoundType.WOOD));
-    Block EBONY_HEARTWOOD_LOG = regWithItem("ebony_heartwood_log",
-            wood(MapColor.WOOD, SoundType.WOOD));
-    Block STRIPPED_FIR_LOG = regWithItem("stripped_fir_log",
-            log(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
-    Block STRIPPED_PINE_LOG = regWithItem("stripped_pine_log",
-            log(MapColor.PODZOL, MapColor.PODZOL, SoundType.WOOD));
-    Block STRIPPED_CEDAR_LOG = regWithItem("stripped_cedar_log",
-            log(MapColor.TERRACOTTA_YELLOW, MapColor.TERRACOTTA_YELLOW, SoundType.WOOD));
-    Block STRIPPED_MAHOGANY_LOG = regWithItem("stripped_mahogany_log",
-            log(MapColor.TERRACOTTA_RED, MapColor.TERRACOTTA_RED, SoundType.WOOD));
-    Block STRIPPED_AZALEA_LOG = regWithItem("stripped_azalea_log",
-            log(MapColor.TERRACOTTA_GREEN, MapColor.TERRACOTTA_GREEN, SoundType.WOOD));
-    Block STRIPPED_PALM_LOG = regWithItem("stripped_palm_log",
-            log(MapColor.NETHER, MapColor.NETHER, SoundType.WOOD));
-    Block STRIPPED_MAPLE_LOG = regWithItem("stripped_maple_log",
-            log(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
-    Block STRIPPED_ASPEN_LOG = regWithItem("stripped_aspen_log",
-            log(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
-    Block STRIPPED_ASPEN_LOG_GAZING = regWithItem("stripped_aspen_log_gazing",
-            log(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
-    Block STRIPPED_WALNUT_LOG = regWithItem("stripped_walnut_log",
-            log(MapColor.COLOR_BROWN, MapColor.COLOR_BROWN, SoundType.WOOD));
-    Block STRIPPED_BLUE_SPRUCE_LOG = regWithItem("stripped_blue_spruce_log",
-            log(MapColor.LAPIS, MapColor.LAPIS, SoundType.WOOD));
+    Block STRIPPED_WILLOW_LOG = regLog("stripped_willow_log",
+            logProperties(MapColor.WARPED_NYLIUM, MapColor.WARPED_NYLIUM, SoundType.WOOD));
+    Block STRIPPED_BAOBAB_LOG = regLog("stripped_baobab_log",
+            logProperties(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
+    Block STRIPPED_EBONY_LOG = regLog("stripped_ebony_log",
+            logProperties(MapColor.TERRACOTTA_BLACK, MapColor.TERRACOTTA_BLACK, SoundType.WOOD));
+    Block EBONY_HEARTWOOD_LOG = regLog("ebony_heartwood_log",
+            woodProperties(MapColor.WOOD, SoundType.WOOD));
+    Block STRIPPED_FIR_LOG = regLog("stripped_fir_log",
+            logProperties(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
+    Block STRIPPED_PINE_LOG = regLog("stripped_pine_log",
+            logProperties(MapColor.PODZOL, MapColor.PODZOL, SoundType.WOOD));
+    Block STRIPPED_CEDAR_LOG = regLog("stripped_cedar_log",
+            logProperties(MapColor.TERRACOTTA_YELLOW, MapColor.TERRACOTTA_YELLOW, SoundType.WOOD));
+    Block STRIPPED_MAHOGANY_LOG = regLog("stripped_mahogany_log",
+            logProperties(MapColor.TERRACOTTA_RED, MapColor.TERRACOTTA_RED, SoundType.WOOD));
+    Block STRIPPED_AZALEA_LOG = regLog("stripped_azalea_log",
+            logProperties(MapColor.TERRACOTTA_GREEN, MapColor.TERRACOTTA_GREEN, SoundType.WOOD));
+    Block STRIPPED_PALM_LOG = regLog("stripped_palm_log",
+            logProperties(MapColor.NETHER, MapColor.NETHER, SoundType.WOOD));
+    Block STRIPPED_MAPLE_LOG = regLog("stripped_maple_log",
+            logProperties(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
+    Block STRIPPED_ASPEN_LOG = regLog("stripped_aspen_log",
+            logProperties(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
+    Block STRIPPED_ASPEN_LOG_GAZING = regLog("stripped_aspen_log_gazing",
+            logProperties(MapColor.WOOD, MapColor.WOOD, SoundType.WOOD));
+    Block STRIPPED_WALNUT_LOG = regLog("stripped_walnut_log",
+            logProperties(MapColor.COLOR_BROWN, MapColor.COLOR_BROWN, SoundType.WOOD));
+    Block STRIPPED_BLUE_SPRUCE_LOG = regLog("stripped_blue_spruce_log",
+            logProperties(MapColor.LAPIS, MapColor.LAPIS, SoundType.WOOD));
 
     //stripped wood
-    Block STRIPPED_WILLOW_WOOD = regWithItem("stripped_willow_wood",
-            wood(MapColor.WARPED_NYLIUM, SoundType.WOOD));
-    Block STRIPPED_BAOBAB_WOOD = regWithItem("stripped_baobab_wood",
-            wood(MapColor.WOOD, SoundType.WOOD));
-    Block STRIPPED_EBONY_WOOD = regWithItem("stripped_ebony_wood",
-            wood(MapColor.PODZOL, SoundType.WOOD));
-    Block EBONY_HEARTWOOD = regWithItem("ebony_heartwood",
-            wood(MapColor.TERRACOTTA_BLACK, SoundType.WOOD));
-    Block STRIPPED_FIR_WOOD = regWithItem("stripped_fir_wood",
-            wood(MapColor.WOOD, SoundType.WOOD));
-    Block STRIPPED_PINE_WOOD = regWithItem("stripped_pine_wood",
-            wood(MapColor.PODZOL, SoundType.WOOD));
-    Block STRIPPED_CEDAR_WOOD = regWithItem("stripped_cedar_wood",
-            wood(MapColor.TERRACOTTA_YELLOW, SoundType.WOOD));
-    Block STRIPPED_MAHOGANY_WOOD = regWithItem("stripped_mahogany_wood",
-            wood(MapColor.TERRACOTTA_RED, SoundType.WOOD));
-    Block STRIPPED_AZALEA_WOOD = regWithItem("stripped_azalea_wood",
-            wood(MapColor.TERRACOTTA_GREEN, SoundType.WOOD));
-    Block STRIPPED_PALM_WOOD = regWithItem("stripped_palm_wood",
-            wood(MapColor.NETHER, SoundType.WOOD));
-    Block STRIPPED_MAPLE_WOOD = regWithItem("stripped_maple_wood",
-            wood(MapColor.WOOD, SoundType.WOOD));
-    Block STRIPPED_ASPEN_WOOD = regWithItem("stripped_aspen_wood",
-            wood(MapColor.WOOD, SoundType.WOOD));
-    Block STRIPPED_ASPEN_WOOD_GAZING = regWithItem("stripped_aspen_wood_gazing",
-            wood(MapColor.WOOD, SoundType.WOOD));
-    Block STRIPPED_WALNUT_WOOD = regWithItem("stripped_walnut_wood",
-            wood(MapColor.COLOR_BROWN, SoundType.WOOD));
-    Block STRIPPED_BLUE_SPRUCE_WOOD = regWithItem("stripped_blue_spruce_wood",
-            wood(MapColor.LAPIS, SoundType.WOOD));
+    Block STRIPPED_WILLOW_WOOD = regLog("stripped_willow_wood",
+            woodProperties(MapColor.WARPED_NYLIUM, SoundType.WOOD));
+    Block STRIPPED_BAOBAB_WOOD = regLog("stripped_baobab_wood",
+            woodProperties(MapColor.WOOD, SoundType.WOOD));
+    Block STRIPPED_EBONY_WOOD = regLog("stripped_ebony_wood",
+            woodProperties(MapColor.PODZOL, SoundType.WOOD));
+    Block EBONY_HEARTWOOD = regLog("ebony_heartwood",
+            woodProperties(MapColor.TERRACOTTA_BLACK, SoundType.WOOD));
+    Block STRIPPED_FIR_WOOD = regLog("stripped_fir_wood",
+            woodProperties(MapColor.WOOD, SoundType.WOOD));
+    Block STRIPPED_PINE_WOOD = regLog("stripped_pine_wood",
+            woodProperties(MapColor.PODZOL, SoundType.WOOD));
+    Block STRIPPED_CEDAR_WOOD = regLog("stripped_cedar_wood",
+            woodProperties(MapColor.TERRACOTTA_YELLOW, SoundType.WOOD));
+    Block STRIPPED_MAHOGANY_WOOD = regLog("stripped_mahogany_wood",
+            woodProperties(MapColor.TERRACOTTA_RED, SoundType.WOOD));
+    Block STRIPPED_AZALEA_WOOD = regLog("stripped_azalea_wood",
+            woodProperties(MapColor.TERRACOTTA_GREEN, SoundType.WOOD));
+    Block STRIPPED_PALM_WOOD = regLog("stripped_palm_wood",
+            woodProperties(MapColor.NETHER, SoundType.WOOD));
+    Block STRIPPED_MAPLE_WOOD = regLog("stripped_maple_wood",
+            woodProperties(MapColor.WOOD, SoundType.WOOD));
+    Block STRIPPED_ASPEN_WOOD = regLog("stripped_aspen_wood",
+            woodProperties(MapColor.WOOD, SoundType.WOOD));
+    Block STRIPPED_ASPEN_WOOD_GAZING = regLog("stripped_aspen_wood_gazing",
+            woodProperties(MapColor.WOOD, SoundType.WOOD));
+    Block STRIPPED_WALNUT_WOOD = regLog("stripped_walnut_wood",
+            woodProperties(MapColor.COLOR_BROWN, SoundType.WOOD));
+    Block STRIPPED_BLUE_SPRUCE_WOOD = regLog("stripped_blue_spruce_wood",
+            woodProperties(MapColor.LAPIS, SoundType.WOOD));
     
     //leaves
-    Block WILLOW_LEAVES = regWithItem("willow_leaves",
-            leaves(SoundType.AZALEA_LEAVES));
-    Block BAOBAB_LEAVES = regWithItem("baobab_leaves",
-            leaves(SoundType.AZALEA_LEAVES));
-    Block EBONY_LEAVES = regWithItem("ebony_leaves",
-            leaves(SoundType.AZALEA_LEAVES));
-    Block EBONY_LEAVES_FRUITING = regWithItem("ebony_leaves_fruiting",
-            leaves(MapColor.GOLD, SoundType.AZALEA_LEAVES));
-    Block FIR_LEAVES = regWithItem("fir_leaves",
-            leaves(SoundType.AZALEA_LEAVES));
-    Block PINE_LEAVES = regWithItem("pine_leaves",
-            leaves(SoundType.AZALEA_LEAVES));
-    Block CEDAR_LEAVES = regWithItem("cedar_leaves",
-            leaves(SoundType.AZALEA_LEAVES));
-    Block MAHOGANY_LEAVES = regWithItem("mahogany_leaves",
-            leaves(SoundType.AZALEA_LEAVES));
-    Block PALM_LEAVES = regWithItem("palm_leaves",
-            new PalmLeavesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).strength(0.2F).randomTicks().sound(SoundType.AZALEA_LEAVES).noOcclusion().isValidSpawn(ModBlocks::ocelotOrParrot).isSuffocating(BlockFactories::never).isViewBlocking(BlockFactories::never).ignitedByLava().pushReaction(PushReaction.DESTROY).isRedstoneConductor(BlockFactories::never)));
-    Block MAPLE_LEAVES = regWithItem("maple_leaves",
-            leaves(MapColor.CRIMSON_STEM, SoundType.AZALEA_LEAVES));
-    Block ASPEN_LEAVES = regWithItem("aspen_leaves",
-            leaves(SoundType.AZALEA_LEAVES));
-    Block WALNUT_LEAVES = regWithItem("walnut_leaves",
-            leaves(SoundType.AZALEA_LEAVES));
-    Block BLUE_SPRUCE_LEAVES = regWithItem("blue_spruce_leaves",
-            leaves(MapColor.ICE, SoundType.AZALEA_LEAVES));
+    Block WILLOW_LEAVES = regLeaves("willow_leaves", SoundType.AZALEA_LEAVES);
+    Block BAOBAB_LEAVES = regLeaves("baobab_leaves", SoundType.AZALEA_LEAVES);
+    Block EBONY_LEAVES = regLeaves("ebony_leaves", SoundType.AZALEA_LEAVES);
+    Block EBONY_LEAVES_FRUITING = regLeaves("ebony_leaves_fruiting", MapColor.GOLD, SoundType.AZALEA_LEAVES);
+    Block FIR_LEAVES = regLeaves("fir_leaves", SoundType.AZALEA_LEAVES);
+    Block PINE_LEAVES = regLeaves("pine_leaves", SoundType.AZALEA_LEAVES);
+    Block CEDAR_LEAVES = regLeaves("cedar_leaves", SoundType.AZALEA_LEAVES);
+    Block MAHOGANY_LEAVES = regLeaves("mahogany_leaves", SoundType.AZALEA_LEAVES);
+    Block PALM_LEAVES = regBlock("palm_leaves", PalmLeavesBlock::new, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).strength(0.2F).randomTicks().sound(SoundType.AZALEA_LEAVES).noOcclusion().isValidSpawn(ModBlocks::ocelotOrParrot).isSuffocating(BlockFactories::never).isViewBlocking(BlockFactories::never).ignitedByLava().pushReaction(PushReaction.DESTROY).isRedstoneConductor(BlockFactories::never));
+    Block MAPLE_LEAVES = regLeaves("maple_leaves", MapColor.CRIMSON_STEM, SoundType.AZALEA_LEAVES);
+    Block ASPEN_LEAVES = regLeaves("aspen_leaves", SoundType.AZALEA_LEAVES);
+    Block WALNUT_LEAVES = regLeaves("walnut_leaves", SoundType.AZALEA_LEAVES);
+    Block BLUE_SPRUCE_LEAVES = regLeaves("blue_spruce_leaves", MapColor.ICE, SoundType.AZALEA_LEAVES);
 
     //saplings
-    Block WILLOW_SAPLING = regWithItem("willow_sapling",
-            sapling(ModTreeGrowers.WILLOW));
-    Block BAOBAB_SAPLING = regWithItem("baobab_sapling",
-            sapling(ModTreeGrowers.BAOBAB));
-    Block EBONY_SAPLING = regWithItem("ebony_sapling",
-            sapling(ModTreeGrowers.EBONY));
-    Block FIR_SAPLING = regWithItem("fir_sapling",
-            sapling(ModTreeGrowers.FIR));
-    Block PINE_SAPLING = regWithItem("pine_sapling",
-            sapling(ModTreeGrowers.PINE));
-    Block CEDAR_SAPLING = regWithItem("cedar_sapling",
-            sapling(ModTreeGrowers.CEDAR));
-    Block MAHOGANY_SAPLING = regWithItem("mahogany_sapling",
-            sapling(ModTreeGrowers.MAHOGANY));
-    Block COCONUT = regBlock("coconut",
-            new CoconutBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
-    Block MAPLE_SAPLING = regWithItem("maple_sapling",
-            sapling(ModTreeGrowers.MAPLE));
-    Block ASPEN_SAPLING = regWithItem("aspen_sapling",
-            sapling(ModTreeGrowers.ASPEN));
-    Block WALNUT_SAPLING = regWithItem("walnut_sapling",
-            sapling(ModTreeGrowers.WALNUT));
-    Block BLUE_SPRUCE_SAPLING = regWithItem("blue_spruce_sapling",
-            sapling(ModTreeGrowers.BLUE_SPRUCE));
+    Block WILLOW_SAPLING = sapling("willow_sapling", ModTreeGrowers.WILLOW);
+    Block BAOBAB_SAPLING = sapling("baobab_sapling", ModTreeGrowers.BAOBAB);
+    Block EBONY_SAPLING = sapling("ebony_sapling", ModTreeGrowers.EBONY);
+    Block FIR_SAPLING = sapling("fir_sapling", ModTreeGrowers.FIR);
+    Block PINE_SAPLING = sapling("pine_sapling", ModTreeGrowers.PINE);
+    Block CEDAR_SAPLING = sapling("cedar_sapling", ModTreeGrowers.CEDAR);
+    Block MAHOGANY_SAPLING = sapling("mahogany_sapling", ModTreeGrowers.MAHOGANY);
+    Block COCONUT = ModBlocks.regBlock("coconut", CoconutBlock::new, (BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)), false);
+    Block HANGING_COCONUT = ModBlocks.regBlock(
+            "hanging_coconut",
+            HangingCoconutBlock::new,
+            (BlockBehaviour.Properties.ofFullCopy(COCONUT)
+                    .mapColor(MapColor.PLANT).overrideLootTable(COCONUT.getLootTable())
+            ),
+            false
+    );
+    Block MAPLE_SAPLING = sapling("maple_sapling", ModTreeGrowers.MAPLE);
+    Block ASPEN_SAPLING = sapling("aspen_sapling", ModTreeGrowers.ASPEN);
+    Block WALNUT_SAPLING = sapling("walnut_sapling", ModTreeGrowers.WALNUT);
+    Block BLUE_SPRUCE_SAPLING = sapling("blue_spruce_sapling", ModTreeGrowers.BLUE_SPRUCE);
 
-    Block POTTED_WILLOW_SAPLING = regBlock("potted_willow_sapling",
-            pottedSapling(WILLOW_SAPLING));
-    Block POTTED_BAOBAB_SAPLING = regBlock("potted_baobab_sapling",
-            pottedSapling(BAOBAB_SAPLING));
-    Block POTTED_EBONY_SAPLING = regBlock("potted_ebony_sapling",
-            pottedSapling(EBONY_SAPLING));
-    Block POTTED_FIR_SAPLING = regBlock("potted_fir_sapling",
-            pottedSapling(FIR_SAPLING));
-    Block POTTED_PINE_SAPLING = regBlock("potted_pine_sapling",
-            pottedSapling(PINE_SAPLING));
-    Block POTTED_CEDAR_SAPLING = regBlock("potted_cedar_sapling",
-            pottedSapling(CEDAR_SAPLING));
-    Block POTTED_MAHOGANY_SAPLING = regBlock("potted_mahogany_sapling",
-            pottedSapling(MAHOGANY_SAPLING));
-    Block POTTED_COCONUT = regBlock("potted_coconut",
-            pottedSapling(COCONUT));
-    Block POTTED_MAPLE_SAPLING = regBlock("potted_maple_sapling",
-            pottedSapling(MAPLE_SAPLING));
-    Block POTTED_ASPEN_SAPLING = regBlock("potted_aspen_sapling",
-            pottedSapling(ASPEN_SAPLING));
-    Block POTTED_WALNUT_SAPLING = regBlock("potted_walnut_sapling",
-            pottedSapling(WALNUT_SAPLING));
-    Block POTTED_BLUE_SPRUCE_SAPLING = regBlock("potted_blue_spruce_sapling",
-            pottedSapling(BLUE_SPRUCE_SAPLING));
+    Block POTTED_WILLOW_SAPLING = pottedSapling(WILLOW_SAPLING);
+    Block POTTED_BAOBAB_SAPLING =  pottedSapling(BAOBAB_SAPLING);
+    Block POTTED_EBONY_SAPLING = pottedSapling(EBONY_SAPLING);
+    Block POTTED_FIR_SAPLING =  pottedSapling(FIR_SAPLING);
+    Block POTTED_PINE_SAPLING = pottedSapling(PINE_SAPLING);
+    Block POTTED_CEDAR_SAPLING = pottedSapling(CEDAR_SAPLING);
+    Block POTTED_MAHOGANY_SAPLING = pottedSapling(MAHOGANY_SAPLING);
+    Block POTTED_COCONUT = pottedSapling(COCONUT);
+    Block POTTED_MAPLE_SAPLING = pottedSapling(MAPLE_SAPLING);
+    Block POTTED_ASPEN_SAPLING = pottedSapling(ASPEN_SAPLING);
+    Block POTTED_WALNUT_SAPLING = pottedSapling(WALNUT_SAPLING);
+    Block POTTED_BLUE_SPRUCE_SAPLING = pottedSapling(BLUE_SPRUCE_SAPLING);
 
 
 }

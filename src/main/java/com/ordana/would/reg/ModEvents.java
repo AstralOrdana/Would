@@ -65,7 +65,7 @@ public class ModEvents {
                 level.setBlockAndUpdate(pos, ModBlocks.MAPLE_LOG.withPropertiesOf(state));
                 CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
             }
-            return InteractionResult.sidedSuccess(level.isClientSide);
+            return InteractionResult.SUCCESS_SERVER;
         }
         return InteractionResult.PASS;
     }

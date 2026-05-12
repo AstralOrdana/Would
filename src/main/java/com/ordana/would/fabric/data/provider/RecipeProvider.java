@@ -28,11 +28,14 @@ public class RecipeProvider extends FabricRecipeProvider {
 
             @Override
             public void buildRecipes() {
+                /*FIXME
                 // generateRecipes(exporter, ModBlockFamilies.ASPEN_PLANKS, FeatureFlags.DEFAULT_FLAGS);
                 // ModBlockFamilies.MAP.values().forEach(blockFamily -> generateRecipes(exporter, blockFamily, FeatureFlags.DEFAULT_FLAGS));
-                ModItems.ALL_BOATS.forEach(item -> woodenBoat(exporter, item, item.type.getPlanks()));
-                ModItems.ALL_CHEST_BOATS.forEach(item -> chestBoat(exporter, item, item.type.getPlanks()));
-                BlockFactories.ALL_HANGING_SIGNS.forEach(compound -> hangingSign(exporter, compound.ceiling().asItem(), compound.strippedLog()));
+                ModWoodTypes.ALL.forEach(compound -> {
+                    woodenBoat(compound.boatItem(), compound.planks());
+                    woodenBoat(compound.chestBoatItem(), compound.planks());
+                    hangingSign(exporter, compound.hangingSignItem(), compound.strippedLog());
+                });
                 BlockFactories.ALL_LOGS.forEach(compound -> woodFromLogs(exporter, compound.wood(), compound.log()));
 
                 planksFromLogs(exporter, ModBlocks.ASPEN_PLANKS, ModTags.Items.ASPEN_LOGS);
@@ -47,15 +50,20 @@ public class RecipeProvider extends FabricRecipeProvider {
                 planksFromLogs(exporter, ModBlocks.PINE_PLANKS, ModTags.Items.PINE_LOGS);
                 planksFromLogs(exporter, ModBlocks.WALNUT_PLANKS, ModTags.Items.WALNUT_LOGS);
                 planksFromLogs(exporter, ModBlocks.WILLOW_PLANKS, ModTags.Items.WILLOW_LOGS);
+
+                 */
             }
         };
     }
 
 
 
+    /*
     private static void planksFromLogs(RecipeOutput exporter, Supplier<Block> planksSupplier, TagKey<Item> logTag) {
         planksFromLogs(exporter, planksSupplier.get(), logTag, 4);
     }
+
+     */
 
     @Override
     public String getName() {

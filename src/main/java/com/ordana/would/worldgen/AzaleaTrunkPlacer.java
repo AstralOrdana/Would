@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
@@ -35,7 +36,7 @@ public class AzaleaTrunkPlacer extends TrunkPlacer {
     }
 
     @Override
-    public @NotNull List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, int freeTreeHeight, BlockPos blockPos, TreeConfiguration config) {
+    public @NotNull List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, int freeTreeHeight, BlockPos blockPos, TreeConfiguration config) {
 
         BlockPos.MutableBlockPos pos = blockPos.mutable();
         List<FoliagePlacer.FoliageAttachment> list = Lists.newArrayList();
@@ -73,7 +74,7 @@ public class AzaleaTrunkPlacer extends TrunkPlacer {
         return list;
     }
 
-    private void placeAxisLog(BlockPos.MutableBlockPos pos, Direction dir, LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, int freeTreeHeight, BlockPos blockPos, TreeConfiguration config) {
+    private void placeAxisLog(BlockPos.MutableBlockPos pos, Direction dir, WorldGenLevel level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, int freeTreeHeight, BlockPos blockPos, TreeConfiguration config) {
         if (TreeFeature.validTreePos(level, pos)) this.placeLog(level, blockSetter, random, pos, config, (blockState) ->
                 blockState.trySetValue(RotatedPillarBlock.AXIS, this.getLogAxis(blockPos.relative(dir.getOpposite()), pos)));
     }

@@ -9,6 +9,7 @@ import com.ordana.would.reg.ModTrees;
 import net.minecraft.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import org.apache.commons.lang3.mutable.Mutable;
@@ -56,10 +57,10 @@ public class PaleMossDecorator extends TreeDecorator {
 
     private static void addMossHanger(BlockPos blockPos, TreeDecorator.Context context) {
         while(context.isAir(blockPos.below()) && !((double)context.random().nextFloat() < 0.5)) {
-            context.setBlock(blockPos, ModBlocks.PALE_HANGING_MOSS.defaultBlockState().setValue(HangingMossBlock.TIP, false));
+            context.setBlock(blockPos, Blocks.PALE_HANGING_MOSS.defaultBlockState().setValue(HangingMossBlock.TIP, false));
             blockPos = blockPos.below();
         }
 
-        context.setBlock(blockPos, ModBlocks.PALE_HANGING_MOSS.defaultBlockState().setValue(HangingMossBlock.TIP, true));
+        context.setBlock(blockPos, Blocks.PALE_HANGING_MOSS.defaultBlockState().setValue(HangingMossBlock.TIP, true));
     }
 }

@@ -39,11 +39,12 @@ public class BlockLootProvider extends FabricBlockLootSubProvider {
 
     @Override
     public void generate() {
+        /*
         List<Block> selfDroppers = Lists.newArrayList();
 
         selfDroppers.addAll(BlockFactories.SaplingCompound.getSaplings());
         selfDroppers.addAll(BlockFactories.HangingSignCompound.getCeilings());
-        selfDroppers.add(ModBlocks.COCONUT.get());
+        selfDroppers.add(ModBlocks.COCONUT);
 
         selfDroppers.forEach(this::dropSelf);
 
@@ -58,6 +59,8 @@ public class BlockLootProvider extends FabricBlockLootSubProvider {
         BlockFactories.ALL_LOGS.forEach(this::createModLogDrops);
         BlockFactories.LEAVES_TO_SAPLING_MAP.keySet().forEach(block -> this.add(block, this.createModLeavesDrops(block)));
         BlockFactories.SaplingCompound.getPottedSaplings().forEach(this::dropPottedContents);
+
+         */
     }
 
     private LootTable.Builder createShearsOrSilkTouchDrops(Block block) {
@@ -81,12 +84,13 @@ public class BlockLootProvider extends FabricBlockLootSubProvider {
             );
     }
 
+    /*FIXME
     private LootTable.Builder createModLeavesDrops(Block block) {
-        if (block == ModBlocks.PALM_LEAVES.get())
+        if (block == ModBlocks.PALM_LEAVES)
             return this.createShearsOrSilkTouchDrops(block);
 
-        if (block == ModBlocks.EBONY_LEAVES_FRUITING.get()) {
-            return this.createLeavesDrops(block, ModBlocks.EBONY_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES)
+        if (block == ModBlocks.EBONY_LEAVES_FRUITING) {
+            return this.createLeavesDrops(block, ModBlocks.EBONY_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES)
                 .withPool(LootPool.lootPool()
                     .setRolls(ConstantValue.exactly(1.0F))
                     .when(this.doesNotHaveShearsOrSilkTouch())
@@ -94,8 +98,8 @@ public class BlockLootProvider extends FabricBlockLootSubProvider {
                 );
         }
 
-        if (block == ModBlocks.WALNUT_LEAVES.get())
-            return this.createFruitingLeavesDrops(block, ModBlocks.WALNUT_SAPLING.get(), ModItems.WALNUT.get());
+        if (block == ModBlocks.WALNUT_LEAVES)
+            return this.createFruitingLeavesDrops(block, ModBlocks.WALNUT_SAPLING, ModItems.WALNUT);
 
         return this.createLeavesDrops(block, BlockFactories.LEAVES_TO_SAPLING_MAP.get(block), NORMAL_LEAVES_SAPLING_CHANCES);
     }
@@ -104,14 +108,16 @@ public class BlockLootProvider extends FabricBlockLootSubProvider {
         Block log = compound.log();
         Block wood = compound.wood();
 
-        if (log == ModBlocks.MAPLE_LOG_SAPPY.get()) {
-            this.add(log, this.createSingleItemTableWithSilkTouch(log, ModBlocks.MAPLE_LOG.get()));
-            this.add(wood, this.createSingleItemTableWithSilkTouch(wood, ModBlocks.MAPLE_WOOD.get()));
+        if (log == ModBlocks.MAPLE_LOG_SAPPY) {
+            this.add(log, this.createSingleItemTableWithSilkTouch(log, ModBlocks.MAPLE_LOG));
+            this.add(wood, this.createSingleItemTableWithSilkTouch(wood, ModBlocks.MAPLE_WOOD));
         }
         else {
             this.dropSelf(log);
             this.dropSelf(wood);
         }
     }
+
+     */
 
 }
