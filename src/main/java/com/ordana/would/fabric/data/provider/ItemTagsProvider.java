@@ -4,6 +4,7 @@ import com.ordana.would.reg.*;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -12,15 +13,12 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Supplier;
 import java.util.stream.Stream;
-
-import static net.minecraft.data.BlockFamily.*;
 
 public class ItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
 
-    public ItemTagsProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
-        super(output, registriesFuture);
+    public ItemTagsProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture, com.ordana.would.fabric.data.provider.BlockTagsProvider blockTags) {
+        super(output, registriesFuture, blockTags);
     }
 
     @Override
@@ -61,29 +59,14 @@ public class ItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
         this.addBlocksToItemTag(ModTags.Items.WALNUT_LOGS, ModBlocks.WALNUT_LOG, ModBlocks.STRIPPED_WALNUT_LOG, ModBlocks.WALNUT_WOOD, ModBlocks.STRIPPED_WALNUT_WOOD);
         this.addBlocksToItemTag(ModTags.Items.WILLOW_LOGS, ModBlocks.WILLOW_LOG, ModBlocks.STRIPPED_WILLOW_LOG, ModBlocks.WILLOW_WOOD, ModBlocks.STRIPPED_WILLOW_WOOD);
 
-        this.valueLookupBuilder(ItemTags.LOGS_THAT_BURN)
-            .addTag(ModTags.Items.ASPEN_LOGS)
-            .addTag(ModTags.Items.AZALEA_LOGS)
-            .addTag(ModTags.Items.BAOBAB_LOGS)
-            .addTag(ModTags.Items.BLUE_SPRUCE_LOGS)
-            .addTag(ModTags.Items.CEDAR_LOGS)
-            .addTag(ModTags.Items.EBONY_LOGS)
-            .addTag(ModTags.Items.FIR_LOGS)
-            .addTag(ModTags.Items.MAHOGANY_LOGS)
-            .addTag(ModTags.Items.MAPLE_LOGS)
-            .addTag(ModTags.Items.PALM_LOGS)
-            .addTag(ModTags.Items.PINE_LOGS)
-            .addTag(ModTags.Items.WALNUT_LOGS)
-            .addTag(ModTags.Items.WILLOW_LOGS);
-
         this.valueLookupBuilder(ItemTags.HANGING_SIGNS).add(toArray(ModItems.ALL_HANGING_SIGNS));
         this.valueLookupBuilder(ItemTags.SIGNS).add(toArray(ModItems.ALL_SIGNS));
         this.valueLookupBuilder(ItemTags.BOATS).add(toArray(ModItems.ALL_BOATS));
         this.valueLookupBuilder(ItemTags.CHEST_BOATS).add(toArray(ModItems.ALL_CHEST_BOATS));
-        /*FIXME
-        this.valueLookupBuilder(ItemTags.LEAVES).add(toArray(BlockFactories.LEAVES_TO_SAPLING_MAP.keySet()));
-        this.valueLookupBuilder(ItemTags.SAPLINGS).add(toArray(BlockFactories.SaplingCompound.getSaplings()));
-         */
+        copy(BlockTags.LEAVES, ItemTags.LEAVES);
+        copy(BlockTags.SAPLINGS, ItemTags.SAPLINGS);
+        copy(BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN);
+
     }
 
     private static Item[] toArray(Collection<? extends ItemLike> blocks) {

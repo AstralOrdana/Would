@@ -44,7 +44,7 @@ public interface ModTags {
 
     }
 
-    private static TagKey<Item> item(String name) {
+    static TagKey<Item> item(String name) {
         return TagKey.create(Registries.ITEM, Would.res(name));
     }
 

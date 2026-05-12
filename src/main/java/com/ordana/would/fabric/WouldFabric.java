@@ -19,6 +19,7 @@ public class WouldFabric implements ModInitializer {
 
         ModItems.init();
         ModBlocks.init();
+        ModWoodTypes.init();
         ModTrees.init();
         ModWorldgenFeatures.init();
         ModEntities.init();

@@ -1,9 +1,6 @@
 package com.ordana.would.fabric.data.provider;
 
-import com.ordana.would.reg.BlockFactories;
-import com.ordana.would.reg.ModBlockFamilies;
-import com.ordana.would.reg.ModBlocks;
-import com.ordana.would.reg.ModItems;
+import com.ordana.would.reg.*;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
 import net.minecraft.core.HolderLookup;
@@ -13,14 +10,17 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import org.apache.commons.compress.utils.Lists;
+import org.jspecify.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class BlockLootProvider extends FabricBlockLootSubProvider {
@@ -39,28 +39,29 @@ public class BlockLootProvider extends FabricBlockLootSubProvider {
 
     @Override
     public void generate() {
-        /*
-        List<Block> selfDroppers = Lists.newArrayList();
 
-        selfDroppers.addAll(BlockFactories.SaplingCompound.getSaplings());
-        selfDroppers.addAll(BlockFactories.HangingSignCompound.getCeilings());
+        List<Block> selfDroppers = Lists.newArrayList();
         selfDroppers.add(ModBlocks.COCONUT);
 
         selfDroppers.forEach(this::dropSelf);
 
-        ModBlockFamilies.MAP.values().forEach(blockFamily -> blockFamily.getVariants().forEach((variant, variantBlock) -> {
-            switch (variant) {
-                case DOOR -> this.add(variantBlock, this.createDoorTable(variantBlock));
-                case SLAB -> this.add(variantBlock, this.createSlabItemTable(variantBlock));
-                default -> this.dropSelf(variantBlock);
-            }
-        }));
 
-        BlockFactories.ALL_LOGS.forEach(this::createModLogDrops);
-        BlockFactories.LEAVES_TO_SAPLING_MAP.keySet().forEach(block -> this.add(block, this.createModLeavesDrops(block)));
-        BlockFactories.SaplingCompound.getPottedSaplings().forEach(this::dropPottedContents);
+        ModWoodTypes.ALL.forEach(type->{
+            this.add(type.door(), this.createDoorTable(type.door()));
+            this.add(type.slabBlock(), this.createSlabItemTable(type.slabBlock()));
+            this.dropSelf(type.planks());
+            this.dropSelf(type.log());
+            this.dropSelf(type.wood());
+            if (type.sapling() != null)
+                this.dropSelf(type.sapling());
+            this.dropSelf(type.hangingSignBlock());
+            this.createModLeavesDrops(type.leaves(), type.sapling());
+        });
 
-         */
+
+        ModBlocks.ALL_POTTED_SAPLINGS.forEach(this::dropPottedContents);
+
+
     }
 
     private LootTable.Builder createShearsOrSilkTouchDrops(Block block) {
@@ -84,8 +85,7 @@ public class BlockLootProvider extends FabricBlockLootSubProvider {
             );
     }
 
-    /*FIXME
-    private LootTable.Builder createModLeavesDrops(Block block) {
+    private LootTable.Builder createModLeavesDrops(Block block, @Nullable Block sapling) {
         if (block == ModBlocks.PALM_LEAVES)
             return this.createShearsOrSilkTouchDrops(block);
 
@@ -101,10 +101,10 @@ public class BlockLootProvider extends FabricBlockLootSubProvider {
         if (block == ModBlocks.WALNUT_LEAVES)
             return this.createFruitingLeavesDrops(block, ModBlocks.WALNUT_SAPLING, ModItems.WALNUT);
 
-        return this.createLeavesDrops(block, BlockFactories.LEAVES_TO_SAPLING_MAP.get(block), NORMAL_LEAVES_SAPLING_CHANCES);
+        return this.createLeavesDrops(block, Optional.ofNullable(sapling).orElse(Blocks.AIR), NORMAL_LEAVES_SAPLING_CHANCES);
     }
 
-    private void createModLogDrops(BlockFactories.LogCompound compound) {
+    private void createModLogDrops(WouldType compound) {
         Block log = compound.log();
         Block wood = compound.wood();
 
@@ -117,7 +117,5 @@ public class BlockLootProvider extends FabricBlockLootSubProvider {
             this.dropSelf(wood);
         }
     }
-
-     */
 
 }

@@ -1,6 +1,5 @@
 package com.ordana.would;
 
-import com.ordana.would.fabric.WouldPlatformImpl;
 import net.minecraft.client.color.block.BlockTintSource;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
@@ -24,7 +23,8 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public interface WouldPlatform {
-	WouldPlatform INSTANCE = new WouldPlatformImpl();
+	//? fabric
+	WouldPlatform INSTANCE = new com.ordana.would.fabric.WouldPlatformImpl();
 
 	@Contract
     void addFeatureToBiome(GenerationStep.Decoration step, TagKey<Biome> tagKey, ResourceKey<PlacedFeature> feature);
@@ -34,18 +34,18 @@ public interface WouldPlatform {
     CreativeModeTab registerCreativeModeTab(Identifier name, MutableComponent title, Supplier<ItemStack> icon, CreativeModeTab.DisplayItemsGenerator generator);
 
     @FunctionalInterface
-	public interface BlockColorEvent {
+    interface BlockColorEvent {
 		void register(List<BlockTintSource> var1, Block... var2);
 	}
 
 
 	@FunctionalInterface
-	public interface EntityRendererEvent {
+    interface EntityRendererEvent {
 		<E extends Entity> void register(EntityType<? extends E> var1, EntityRendererProvider<E> var2);
 	}
 
 	@FunctionalInterface
-	public interface ModelLayerEvent {
+    interface ModelLayerEvent {
 		void register(ModelLayerLocation var1, Supplier<LayerDefinition> var2);
 	}
 }

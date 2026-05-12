@@ -141,7 +141,8 @@ dependencies {
     implementation("folk.sisby:kaleido-config:${property("deps.kaleido")}")
     include("folk.sisby:kaleido-config:${property("deps.kaleido")}")
     implementation("cc.cassian.rrv:reliable-recipe-viewer-fabric:${property("deps.rrv")}+${property("deps.minecraft")}")
-
+    compileOnly("maven.modrinth:modmenu:${property("deps.modmenu")}")
+    localRuntime("maven.modrinth:modmenu:${property("deps.modmenu")}")
 }
 
 configurations.all {

@@ -56,6 +56,5 @@ public interface ModWoodSetup {
         BlockEntityType.SIGN.validBlocks = validSigns;
         BlockEntityType.HANGING_SIGN.validBlocks = validHangingSigns;
         AxeItem.STRIPPABLES = strippables;
-        ModBlockFamilies.init();
     }
 }

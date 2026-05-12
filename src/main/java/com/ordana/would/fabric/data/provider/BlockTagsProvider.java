@@ -48,8 +48,8 @@ public class BlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
             standingSignsTag.add(block.standingSignBlock());
             wallSignsTag.add(block.wallSignBlock());
         });
-//FIXME
-//        this.valueLookupBuilder(BlockTags.MINEABLE_WITH_HOE).add(toArray(BlockFactories.LEAVES_TO_SAPLING_MAP.keySet()));
+
+        this.valueLookupBuilder(BlockTags.MINEABLE_WITH_HOE).add(toArray(ModBlocks.ALL_SAPLINGS));
 
         this.valueLookupBuilder(BlockTags.OVERWORLD_NATURAL_LOGS).add(
             ModBlocks.ASPEN_LOG,
@@ -95,14 +95,16 @@ public class BlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
             .addTag(ModTags.Blocks.WALNUT_LOGS)
             .addTag(ModTags.Blocks.WILLOW_LOGS);
 
-        /*FIXME
-        this.valueLookupBuilder(BlockTags.CEILING_HANGING_SIGNS).add(toArray(BlockFactories.HangingSignCompound.getCeilings()));
-        this.valueLookupBuilder(BlockTags.WALL_HANGING_SIGNS).add(toArray(BlockFactories.HangingSignCompound.getWalls()));
-        this.valueLookupBuilder(BlockTags.SAPLINGS).add(toArray(BlockFactories.SaplingCompound.getSaplings()));
-        this.valueLookupBuilder(BlockTags.FLOWER_POTS).add(toArray(BlockFactories.SaplingCompound.getPottedSaplings()));
-        this.valueLookupBuilder(BlockTags.LEAVES).add(toArray(BlockFactories.LEAVES_TO_SAPLING_MAP.keySet()));
+        ModWoodTypes.ALL.forEach(type -> {
+            this.valueLookupBuilder(BlockTags.CEILING_HANGING_SIGNS).add(type.hangingSignBlock());
+            this.valueLookupBuilder(BlockTags.WALL_HANGING_SIGNS).add(type.wallHangingSignBlock());
+            if (type.sapling() != null)
+                this.valueLookupBuilder(BlockTags.SAPLINGS).add(type.sapling());
+            if (type.leaves() != null)
+                this.valueLookupBuilder(BlockTags.LEAVES).add(type.leaves());
+        });
+        this.valueLookupBuilder(BlockTags.FLOWER_POTS).add(toArray(ModBlocks.ALL_POTTED_SAPLINGS));
 
-         */
     }
 
     private static Block[] toArray(Collection<Block> blocks) {

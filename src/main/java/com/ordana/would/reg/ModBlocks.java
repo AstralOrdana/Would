@@ -29,6 +29,8 @@ public interface ModBlocks {
 
     List<Block> ALL_SIGNS = Lists.newArrayList();
     List<Block> ALL_HANGING_SIGNS = Lists.newArrayList();
+    List<Block> ALL_SAPLINGS = Lists.newArrayList();
+    List<Block> ALL_POTTED_SAPLINGS = Lists.newArrayList();
 
     static void init() {
     }

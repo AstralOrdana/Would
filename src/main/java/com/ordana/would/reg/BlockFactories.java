@@ -40,7 +40,9 @@ public class BlockFactories {
     }
 
     static FlowerPotBlock pottedSapling(Block content) {
-        return ModBlocks.regBlock("potted_"+ content.properties().blockIdOrThrow().identifier().getPath(), (BlockBehaviour.Properties potted) -> new FlowerPotBlock(content, potted), BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY));
+        var block =  ModBlocks.regBlock("potted_"+ content.properties().blockIdOrThrow().identifier().getPath(), (BlockBehaviour.Properties potted) -> new FlowerPotBlock(content, potted), BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY));
+        ModBlocks.ALL_POTTED_SAPLINGS.add(block);
+        return block;
     }
 
     static BlockBehaviour.Properties plankProperties(MapColor mapColor, SoundType soundType) {
