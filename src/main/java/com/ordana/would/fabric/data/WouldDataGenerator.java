@@ -16,7 +16,7 @@ public class WouldDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider((output, registriesFuture) -> new ItemTagsProvider(output, registriesFuture, blockTags));
         pack.addProvider(ModelProvider::new);
         pack.addProvider(RecipeProvider::new);
-        pack.addProvider(BlockLootProvider::new);
+//        pack.addProvider(BlockLootProvider::new);
     }
 
 }

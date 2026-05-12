@@ -47,6 +47,7 @@ public class BlockLootProvider extends FabricBlockLootSubProvider {
 
 
         ModWoodTypes.ALL.forEach(type->{
+            if (type == null) return;
             this.add(type.door(), this.createDoorTable(type.door()));
             this.add(type.slabBlock(), this.createSlabItemTable(type.slabBlock()));
             this.dropSelf(type.planks());
