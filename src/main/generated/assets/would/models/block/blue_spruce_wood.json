@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "would:block/blue_spruce_log",
+    "side": "would:block/blue_spruce_log"
+  }
+}

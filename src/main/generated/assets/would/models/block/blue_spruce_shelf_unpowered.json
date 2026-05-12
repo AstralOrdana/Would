@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_shelf_unpowered",
+  "textures": {
+    "all": "would:block/blue_spruce_shelf",
+    "particle": "would:block/blue_spruce_planks"
+  }
+}

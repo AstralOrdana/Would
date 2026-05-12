@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "would:block/fir_slab"
+    },
+    "type=double": {
+      "model": "would:block/fir_planks"
+    },
+    "type=top": {
+      "model": "would:block/fir_slab_top"
+    }
+  }
+}

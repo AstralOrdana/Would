@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_shelf_center",
+  "textures": {
+    "all": "would:block/baobab_shelf",
+    "particle": "would:block/baobab_planks"
+  }
+}

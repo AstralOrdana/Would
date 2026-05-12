@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "would:block/fir_button_inventory"
+  }
+}

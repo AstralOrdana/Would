@@ -47,7 +47,7 @@ public interface ModItems {
             SyrupBottleItem::new, new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).food(Foods.HONEY_BOTTLE).stacksTo(16));
 
     CoconutItem COCONUT = regItem("coconut",
-            (p)-> new CoconutItem(ModBlocks.COCONUT, p), (new Item.Properties().food(CoconutItem.COCONUT, Consumable.builder().consumeSeconds(0.8f).build())));
+            (p)-> new CoconutItem(ModBlocks.COCONUT, p), (new Item.Properties().useBlockDescriptionPrefix().food(CoconutItem.COCONUT, Consumable.builder().consumeSeconds(0.8f).build())));
 
     Item WALNUT = regItem("walnut",
             WalnutItem::new, new Item.Properties());

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_shelf_body",
+  "textures": {
+    "all": "would:block/willow_shelf",
+    "particle": "would:block/willow_planks"
+  }
+}

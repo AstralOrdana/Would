@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_shelf_left",
+  "textures": {
+    "all": "would:block/mahogany_shelf",
+    "particle": "would:block/mahogany_planks"
+  }
+}

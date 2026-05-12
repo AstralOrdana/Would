@@ -15,7 +15,7 @@ public record WouldType(WoodType woodType,
                         SignItem signItem, HangingSignItem hangingSignItem,
                         Block log, Block strippedLog, @Nullable Block sapling, @Nullable Block leaves,
                         net.minecraft.tags.TagKey<Item> logItemTagKey, Block wood,
-                        net.minecraft.data.BlockFamily family) {
+                        net.minecraft.data.BlockFamily family, ShelfBlock shelfBlock, Block strippedWood) {
     public String name() {
         return woodType.name();
     }

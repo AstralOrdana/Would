@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_shelf_right",
+  "textures": {
+    "all": "would:block/pine_shelf",
+    "particle": "would:block/pine_planks"
+  }
+}
