@@ -18,6 +18,8 @@ public class ModCreativeTab {
                 for (WouldType wouldType : ModWoodTypes.ALL) {
                     acceptWoodType(wouldType, output);
                 }
+                output.accept(ModBlocks.EBONY_LEAVES_FRUITING);
+                output.accept(ModBlocks.EBONY_HEARTWOOD);
             });
 
     private static void acceptWoodType(WouldType wouldType, CreativeModeTab.Output output) {
@@ -36,6 +38,9 @@ public class ModCreativeTab {
         output.accept(wouldType.button());
         output.accept(wouldType.shelfBlock());
         output.accept(wouldType.boatItem());
+        output.accept(wouldType.chestBoatItem());
+        output.accept(wouldType.signItem());
+        output.accept(wouldType.hangingSignItem());
         if (wouldType.sapling() != null)
             output.accept(wouldType.sapling());
         if (wouldType.leaves() != null)

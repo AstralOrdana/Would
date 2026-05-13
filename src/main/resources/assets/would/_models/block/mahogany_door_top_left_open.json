@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_top_left_open",
-  "textures": {
-    "bottom": "would:block/mahogany_door_bottom",
-    "top": "would:block/mahogany_door_top"
-  }
-}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "would:block/stripped_aspen_wood_gazing"
+  }
+}

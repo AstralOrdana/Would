@@ -84,7 +84,7 @@ public interface ModWoodTypes {
         CeilingHangingSignBlock hangingSignBlock = ModBlocks.regBlock(name+"_hanging_sign", properties -> new CeilingHangingSignBlock(woodType, properties),
                 BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1.0F).ignitedByLava(), false);
 
-        WallHangingSignBlock wallHangingSignBlock = ModBlocks.regBlock( name+"_hanging_wall_sign", (p) -> new WallHangingSignBlock(woodType, p), wallVariant(signBlock, true).mapColor(mapColor).instrument(NoteBlockInstrument.BASS).forceSolidOn().noCollision().strength(1.0F), false);
+        WallHangingSignBlock wallHangingSignBlock = ModBlocks.regBlock( name+"_hanging_wall_sign", (p) -> new WallHangingSignBlock(woodType, p), wallVariant(hangingSignBlock, true).mapColor(mapColor).instrument(NoteBlockInstrument.BASS).forceSolidOn().noCollision().strength(1.0F), false);
 
         ShelfBlock shelfBlock = ModBlocks.regBlock( name+"_shelf", ShelfBlock::new,
                 BlockBehaviour.Properties.of()
@@ -98,8 +98,8 @@ public interface ModWoodTypes {
         // items
         var boatItem = ModItems.regItem(name+"_boat", (p) -> new BoatItem(EntityType.PALE_OAK_BOAT, p), (new Item.Properties()).stacksTo(1));
         var chestBoatItem = ModItems.regItem(name+"_chest_boat", (p) -> new BoatItem(EntityType.CHERRY_CHEST_BOAT, p), (new Item.Properties()).stacksTo(1));
-        var signItem = ModItems.regItem(name+"_sign", (p) -> new SignItem(signBlock, wallSignBlock, p), (new Item.Properties()).stacksTo(16));
-        var hangingSignItem = ModItems.regItem(name+"_hanging_sign", (p) -> new HangingSignItem(hangingSignBlock, wallHangingSignBlock, p), (new Item.Properties()).stacksTo(16));
+        var signItem = ModItems.regItem(name+"_sign", (p) -> new SignItem(signBlock, wallSignBlock, p), (new Item.Properties()).useBlockDescriptionPrefix().stacksTo(16));
+        var hangingSignItem = ModItems.regItem(name+"_hanging_sign", (p) -> new HangingSignItem(hangingSignBlock, wallHangingSignBlock, p), (new Item.Properties()).useBlockDescriptionPrefix().stacksTo(16));
 
         ModBlocks.ALL_SIGNS.add(signBlock);
         if (sapling != null)
@@ -111,7 +111,7 @@ public interface ModWoodTypes {
         ModItems.ALL_CHEST_BOATS.add(chestBoatItem);
 
         // create holder
-        BlockFamily family = new BlockFamily.Builder(planks).button(button).pressurePlate(pressurePlate).slab(slab).stairs(stairs).trapdoor(trapDoorBlock).fence(fence).fenceGate(fenceGate).door(door).recipeUnlockedBy("has_planks").recipeGroupPrefix("wooden").getFamily();
+        BlockFamily family = new BlockFamily.Builder(planks).button(button).pressurePlate(pressurePlate).slab(slab).stairs(stairs).trapdoor(trapDoorBlock).fence(fence).fenceGate(fenceGate).door(door).sign(signBlock, wallSignBlock).recipeUnlockedBy("has_planks").recipeGroupPrefix("wooden").getFamily();
         var wouldType = new WouldType(woodType, planks, slab, stairs, fence, fenceGate, door, trapDoorBlock, signBlock, wallSignBlock, pressurePlate, button, hangingSignBlock, wallHangingSignBlock, boatItem, chestBoatItem, signItem, hangingSignItem, log, strippedLog, sapling, leaves, logItemTagKey, wood, family, shelfBlock, strippedWood);
 
         // client

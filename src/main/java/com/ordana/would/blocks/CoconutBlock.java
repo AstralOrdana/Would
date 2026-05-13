@@ -30,10 +30,11 @@ public class CoconutBlock extends SaplingBlock implements Fallable, Bonemealable
     protected static final VoxelShape SHAPE = Block.box(4.0, 0.0, 4.0, 12.0, 8.0, 12.0);
 
     public static final BooleanProperty PERSISTENT = BlockStateProperties.PERSISTENT;
+    public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
 
     public CoconutBlock(Properties properties) {
         super(ModTreeGrowers.COCONUT, properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(PERSISTENT, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(PERSISTENT, false).setValue(HANGING, false));
     }
 
     private static boolean mayGrowOn(BlockState blockState) {
@@ -108,7 +109,7 @@ public class CoconutBlock extends SaplingBlock implements Fallable, Bonemealable
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(STAGE, PERSISTENT);
+        builder.add(STAGE, PERSISTENT, HANGING);
     }
 
 }

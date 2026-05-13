@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "would:block/aspen_sapling"
+    "model": "would:item/aspen_sapling"
   }
 }

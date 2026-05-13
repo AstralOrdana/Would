@@ -1,0 +1,11 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "ingredients": [
+  "would:coconut",
+  "minecraft:bucket"
+ ],
+ "result": {
+  "id": "minecraft:milk_bucket",
+  "count": 1
+ }
+}

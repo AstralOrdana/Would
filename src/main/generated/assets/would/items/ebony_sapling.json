@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "would:block/ebony_sapling"
+    "model": "would:item/ebony_sapling"
   }
 }

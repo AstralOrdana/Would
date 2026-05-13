@@ -1,0 +1,13 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "key": {
+  "#": "would:coconut"
+ },
+ "pattern": [
+  "#"
+ ],
+ "result": {
+  "id": "minecraft:bowl",
+  "count": 1
+ }
+}

@@ -24,17 +24,17 @@ public class ModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators generators) {
-        generators.createPlant(ModBlocks.ASPEN_SAPLING, ModBlocks.POTTED_ASPEN_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
-        generators.createPlant(ModBlocks.FIR_SAPLING, ModBlocks.POTTED_FIR_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
-        generators.createPlant(ModBlocks.MAPLE_SAPLING, ModBlocks.POTTED_MAPLE_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
-        generators.createPlant(ModBlocks.WILLOW_SAPLING, ModBlocks.POTTED_WILLOW_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
-        generators.createPlant(ModBlocks.WALNUT_SAPLING, ModBlocks.POTTED_WALNUT_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
-        generators.createPlant(ModBlocks.MAHOGANY_SAPLING, ModBlocks.POTTED_MAHOGANY_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
-        generators.createPlant(ModBlocks.PINE_SAPLING, ModBlocks.POTTED_PINE_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
-        generators.createPlant(ModBlocks.BAOBAB_SAPLING, ModBlocks.POTTED_BAOBAB_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
-        generators.createPlant(ModBlocks.CEDAR_SAPLING, ModBlocks.POTTED_CEDAR_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
-        generators.createPlant(ModBlocks.EBONY_SAPLING, ModBlocks.POTTED_EBONY_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
-        generators.createPlant(ModBlocks.BLUE_SPRUCE_SAPLING, ModBlocks.POTTED_BLUE_SPRUCE_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
+        generators.createPlantWithDefaultItem(ModBlocks.ASPEN_SAPLING, ModBlocks.POTTED_ASPEN_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
+        generators.createPlantWithDefaultItem(ModBlocks.FIR_SAPLING, ModBlocks.POTTED_FIR_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
+        generators.createPlantWithDefaultItem(ModBlocks.MAPLE_SAPLING, ModBlocks.POTTED_MAPLE_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
+        generators.createPlantWithDefaultItem(ModBlocks.WILLOW_SAPLING, ModBlocks.POTTED_WILLOW_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
+        generators.createPlantWithDefaultItem(ModBlocks.WALNUT_SAPLING, ModBlocks.POTTED_WALNUT_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
+        generators.createPlantWithDefaultItem(ModBlocks.MAHOGANY_SAPLING, ModBlocks.POTTED_MAHOGANY_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
+        generators.createPlantWithDefaultItem(ModBlocks.PINE_SAPLING, ModBlocks.POTTED_PINE_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
+        generators.createPlantWithDefaultItem(ModBlocks.BAOBAB_SAPLING, ModBlocks.POTTED_BAOBAB_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
+        generators.createPlantWithDefaultItem(ModBlocks.CEDAR_SAPLING, ModBlocks.POTTED_CEDAR_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
+        generators.createPlantWithDefaultItem(ModBlocks.EBONY_SAPLING, ModBlocks.POTTED_EBONY_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
+        generators.createPlantWithDefaultItem(ModBlocks.BLUE_SPRUCE_SAPLING, ModBlocks.POTTED_BLUE_SPRUCE_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
 
         ModWoodTypes.ALL.forEach(wouldType -> {
             generators.woodProvider(wouldType.log()).logWithHorizontal(wouldType.log()).wood(wouldType.wood());
@@ -58,6 +58,16 @@ public class ModelProvider extends FabricModelProvider {
         generators.createTrivialCube(ModBlocks.ASPEN_LEAVES);
         generators.createTrivialCube(ModBlocks.EBONY_LEAVES);
         generators.createTrivialCube(ModBlocks.MAPLE_LEAVES);
+        generators.createTrivialCube(ModBlocks.HANGING_WILLOW_LEAVES);
+        generators.createTrivialCube(ModBlocks.MAPLE_LOG_SAPPY);
+        generators.createTrivialCube(ModBlocks.MAPLE_WOOD_SAPPY);
+        generators.createTrivialCube(ModBlocks.ASPEN_LOG_GAZING);
+        generators.createTrivialCube(ModBlocks.ASPEN_WOOD_GAZING);
+        generators.createTrivialCube(ModBlocks.EBONY_HEARTWOOD);
+        generators.createTrivialCube(ModBlocks.EBONY_HEARTWOOD_LOG);
+        generators.createTrivialCube(ModBlocks.STRIPPED_ASPEN_LOG_GAZING);
+        generators.createTrivialCube(ModBlocks.STRIPPED_ASPEN_WOOD_GAZING);
+        generators.createTrivialCube(ModBlocks.EBONY_LEAVES_FRUITING);
     }
 
     @Override
@@ -65,6 +75,8 @@ public class ModelProvider extends FabricModelProvider {
         ModItems.ALL_BOATS.forEach(item -> generators.generateFlatItem(item, ModelTemplates.FLAT_ITEM));
         ModItems.ALL_CHEST_BOATS.forEach(item -> generators.generateFlatItem(item, ModelTemplates.FLAT_ITEM));
         generators.generateFlatItem(ModItems.COCONUT, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(ModItems.SYRUP_BOTTLE, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(ModItems.WALNUT, ModelTemplates.FLAT_ITEM);
     }
 
 }

@@ -1,0 +1,16 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "group": "bark",
+ "key": {
+  "#": "would:aspen_log_gazing"
+ },
+ "pattern": [
+  "##",
+  "##"
+ ],
+ "result": {
+  "id": "would:aspen_wood_gazing",
+  "count": 1
+ }
+}

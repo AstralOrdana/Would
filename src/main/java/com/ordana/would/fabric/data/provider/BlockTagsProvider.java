@@ -13,6 +13,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
+import static com.ordana.would.reg.ModBlocks.*;
 import static net.minecraft.data.BlockFamily.*;
 
 public class BlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
@@ -34,22 +35,33 @@ public class BlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
         var woodenSlabsTag = this.valueLookupBuilder(BlockTags.WOODEN_SLABS);
         var woodenStairsTag = this.valueLookupBuilder(BlockTags.WOODEN_STAIRS);
         var woodenTrapdoorsTag = this.valueLookupBuilder(BlockTags.WOODEN_TRAPDOORS);
+        var woodenShelvesTag = this.valueLookupBuilder(BlockTags.WOODEN_SHELVES);
 
-        ModWoodTypes.ALL.forEach((block) -> {
-            planksTag.add(block.planks());
-            fenceGatesTag.add(block.fenceGateBlock());
-            woodenButtonsTag.add(block.button());
-            woodenDoorsTag.add(block.door());
-            woodenFencesTag.add(block.fenceBlock());
-            woodenPressurePlatesTag.add(block.pressurePlate());
-            woodenSlabsTag.add(block.slabBlock());
-            woodenStairsTag.add(block.stairs());
-            woodenTrapdoorsTag.add(block.trapDoorBlock());
-            standingSignsTag.add(block.standingSignBlock());
-            wallSignsTag.add(block.wallSignBlock());
+        ModWoodTypes.ALL.forEach((type) -> {
+            planksTag.add(type.planks());
+            fenceGatesTag.add(type.fenceGateBlock());
+            woodenButtonsTag.add(type.button());
+            woodenDoorsTag.add(type.door());
+            woodenFencesTag.add(type.fenceBlock());
+            woodenPressurePlatesTag.add(type.pressurePlate());
+            woodenSlabsTag.add(type.slabBlock());
+            woodenStairsTag.add(type.stairs());
+            woodenTrapdoorsTag.add(type.trapDoorBlock());
+            standingSignsTag.add(type.standingSignBlock());
+            wallSignsTag.add(type.wallSignBlock());
+            woodenShelvesTag.add(type.shelfBlock());
+            this.valueLookupBuilder(BlockTags.CEILING_HANGING_SIGNS).add(type.hangingSignBlock());
+            this.valueLookupBuilder(BlockTags.WALL_HANGING_SIGNS).add(type.wallHangingSignBlock());
+            if (type.sapling() != null)
+                this.valueLookupBuilder(BlockTags.SAPLINGS).add(type.sapling());
+            if (type.leaves() != null)
+                this.valueLookupBuilder(BlockTags.LEAVES).add(type.leaves());
         });
+        this.valueLookupBuilder(BlockTags.LEAVES).add(EBONY_LEAVES_FRUITING);
+        this.valueLookupBuilder(BlockTags.MINEABLE_WITH_HOE).add(EBONY_LEAVES_FRUITING).add(toArray(ModBlocks.ALL_SAPLINGS));
 
-        this.valueLookupBuilder(BlockTags.MINEABLE_WITH_HOE).add(toArray(ModBlocks.ALL_SAPLINGS));
+        this.valueLookupBuilder(BlockTags.MINEABLE_WITH_AXE).add(EBONY_HEARTWOOD, EBONY_HEARTWOOD_LOG, ASPEN_WOOD_GAZING, STRIPPED_ASPEN_WOOD_GAZING, ASPEN_LOG_GAZING, STRIPPED_ASPEN_LOG_GAZING);
+
 
         this.valueLookupBuilder(BlockTags.OVERWORLD_NATURAL_LOGS).add(
             ModBlocks.ASPEN_LOG,
@@ -95,14 +107,6 @@ public class BlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
             .addTag(ModTags.Blocks.WALNUT_LOGS)
             .addTag(ModTags.Blocks.WILLOW_LOGS);
 
-        ModWoodTypes.ALL.forEach(type -> {
-            this.valueLookupBuilder(BlockTags.CEILING_HANGING_SIGNS).add(type.hangingSignBlock());
-            this.valueLookupBuilder(BlockTags.WALL_HANGING_SIGNS).add(type.wallHangingSignBlock());
-            if (type.sapling() != null)
-                this.valueLookupBuilder(BlockTags.SAPLINGS).add(type.sapling());
-            if (type.leaves() != null)
-                this.valueLookupBuilder(BlockTags.LEAVES).add(type.leaves());
-        });
         this.valueLookupBuilder(BlockTags.FLOWER_POTS).add(toArray(ModBlocks.ALL_POTTED_SAPLINGS));
 
     }

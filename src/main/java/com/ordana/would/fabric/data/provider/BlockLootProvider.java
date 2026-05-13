@@ -47,17 +47,40 @@ public class BlockLootProvider extends FabricBlockLootSubProvider {
 
 
         ModWoodTypes.ALL.forEach(type->{
-            if (type == null) return;
+            this.dropSelf(type.button());
             this.add(type.door(), this.createDoorTable(type.door()));
-            this.add(type.slabBlock(), this.createSlabItemTable(type.slabBlock()));
             this.dropSelf(type.planks());
-            this.dropSelf(type.log());
-            this.dropSelf(type.wood());
-            if (type.sapling() != null)
+            createModLogDrops(type);
+            this.dropSelf(type.strippedLog());
+            this.dropSelf(type.strippedWood());
+            this.dropSelf(type.stairs());
+            this.dropSelf(type.fenceGateBlock());
+            this.dropSelf(type.fenceBlock());
+            this.dropSelf(type.trapDoorBlock());
+            this.dropSelf(type.pressurePlate());
+            this.add(type.slabBlock(), this.createSlabItemTable(type.slabBlock()));
+            if (type.sapling() != null) {
                 this.dropSelf(type.sapling());
+                this.createModLeavesDrops(type.leaves(), type.sapling());
+            }
+            this.dropOther(type.standingSignBlock(), type.signItem());
+            this.dropOther(type.wallSignBlock(), type.signItem());
             this.dropSelf(type.hangingSignBlock());
-            this.createModLeavesDrops(type.leaves(), type.sapling());
+            this.dropSelf(type.shelfBlock());
         });
+
+        this.dropSelf(ModBlocks.COCONUT);
+        this.dropSelf(ModBlocks.MAPLE_LOG_SAPPY);
+        this.dropSelf(ModBlocks.EBONY_LEAVES_FRUITING);
+        this.dropSelf(ModBlocks.MAPLE_WOOD_SAPPY);
+        this.dropSelf(ModBlocks.ASPEN_LOG_GAZING);
+        this.dropSelf(ModBlocks.ASPEN_WOOD_GAZING);
+        this.dropSelf(ModBlocks.EBONY_HEARTWOOD);
+        this.dropSelf(ModBlocks.EBONY_HEARTWOOD_LOG);
+        this.dropSelf(ModBlocks.STRIPPED_ASPEN_LOG_GAZING);
+        this.dropSelf(ModBlocks.STRIPPED_ASPEN_WOOD_GAZING);
+        this.dropOther(ModBlocks.HANGING_COCONUT, ModBlocks.COCONUT);
+        this.dropPottedContents(ModBlocks.POTTED_COCONUT);
 
 
         ModBlocks.ALL_POTTED_SAPLINGS.forEach(this::dropPottedContents);

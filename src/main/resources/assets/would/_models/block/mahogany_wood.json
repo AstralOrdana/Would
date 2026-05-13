@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "would:block/mahogany_log",
-    "side": "would:block/mahogany_log"
-  }
-}
