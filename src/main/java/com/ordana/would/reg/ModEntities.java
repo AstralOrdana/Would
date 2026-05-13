@@ -23,8 +23,6 @@ public interface ModEntities {
     static void init() {
     }
 
-    //TODO register the boats
-
     EntityType<FallingCoconutEntity> FALLING_COCONUT = registerEntityType(
             Would.res("falling_coconut"),
             FallingCoconutEntity::new, MobCategory.MISC, 0.28F, 0.98F, 10, 20);

@@ -5,6 +5,7 @@ import com.ordana.would.WouldPlatform;
 import com.ordana.would.blocks.ModWoodenButtonBlock;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.resources.model.sprite.SpriteId;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BoatItem;
@@ -94,10 +95,13 @@ public interface ModWoodTypes {
                         .ignitedByLava()
                         .strength(2.0F, 3.0F), true);
 
+        // entities
+        var boat = ModEntities.registerBoat(name, ()-> BuiltInRegistries.ITEM.getValue(Would.res("%s_boat".formatted(name))));
+        var chestBoat = ModEntities.registerChestBoat(name, ()-> BuiltInRegistries.ITEM.getValue(Would.res("%s_chest_boat".formatted(name))));
 
         // items
-        var boatItem = ModItems.regItem(name+"_boat", (p) -> new BoatItem(EntityType.PALE_OAK_BOAT, p), (new Item.Properties()).stacksTo(1));
-        var chestBoatItem = ModItems.regItem(name+"_chest_boat", (p) -> new BoatItem(EntityType.CHERRY_CHEST_BOAT, p), (new Item.Properties()).stacksTo(1));
+        var boatItem = ModItems.regItem(name+"_boat", (p) -> new BoatItem(boat, p), (new Item.Properties()).stacksTo(1));
+        var chestBoatItem = ModItems.regItem(name+"_chest_boat", (p) -> new BoatItem(chestBoat, p), (new Item.Properties()).stacksTo(1));
         var signItem = ModItems.regItem(name+"_sign", (p) -> new SignItem(signBlock, wallSignBlock, p), (new Item.Properties()).useBlockDescriptionPrefix().stacksTo(16));
         var hangingSignItem = ModItems.regItem(name+"_hanging_sign", (p) -> new HangingSignItem(hangingSignBlock, wallHangingSignBlock, p), (new Item.Properties()).useBlockDescriptionPrefix().stacksTo(16));
 
