@@ -13,11 +13,11 @@ version = "${version}"
 
 displayName="Would" #mandatory
 
-logoFile="icon.gif" #optional
+logoFile="icon.png" #optional
 
 credits="Ordana" #optional
 
-authors="Ordana, Kayla_the_bee" #optional
+authors="Ordana, Kayla_the_bee, cassiancc" #optional
 
 itemIcon="would:template" #catalogue icon
 description='''
@@ -27,14 +27,14 @@ I Would, Would you?
 [[dependencies.would]]
     modId="neoforge"
     type = "required"
-    versionRange="[21.1.181,)"
+    versionRange="[26,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.would]]
     modId="minecraft"
     type = "required"
-    versionRange="[1.21.1,)"
+    versionRange="[26.1,26.2)"
     ordering="NONE"
     side="BOTH"
 

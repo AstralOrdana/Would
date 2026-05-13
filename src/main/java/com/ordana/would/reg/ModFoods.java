@@ -20,7 +20,7 @@ public interface ModFoods {
             .nutrition(2).saturationModifier(0.2F).alwaysEdible()
             .build();
     Consumable COCONUT_CONSUMABLE = Consumable.builder().consumeSeconds(0.8f).onConsume(ClearFireConsumeEffect.INSTANCE).build();
-    Consumable SYRUP_CONSUMABLE = Consumables.defaultDrink().onConsume(new RemoveStatusEffectsConsumeEffect(MobEffects.HUNGER)).sound(ModSoundEvents.SYRUP_DRINK).build();
+    Consumable SYRUP_CONSUMABLE = Consumables.defaultDrink().consumeSeconds(2.0F).onConsume(new RemoveStatusEffectsConsumeEffect(MobEffects.HUNGER)).sound(ModSoundEvents.SYRUP_DRINK).build();
 
     ConsumeEffect.Type<ClearFireConsumeEffect> CLEAR_FIRE_CONSUME_EFFECT = register("clear_fire", ClearFireConsumeEffect.CODEC, ClearFireConsumeEffect.STREAM_CODEC);
 
