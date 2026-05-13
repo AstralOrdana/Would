@@ -12,13 +12,25 @@
     "would:baobab_sapling": {
       "chance": 0.3
     },
+    "would:blue_spruce_leaves": {
+      "chance": 0.3
+    },
+    "would:blue_spruce_sapling": {
+      "chance": 0.3
+    },
     "would:cedar_leaves": {
       "chance": 0.3
     },
     "would:cedar_sapling": {
       "chance": 0.3
     },
+    "would:coconut": {
+      "chance": 0.3
+    },
     "would:ebony_leaves": {
+      "chance": 0.3
+    },
+    "would:ebony_leaves_fruiting": {
       "chance": 0.3
     },
     "would:ebony_sapling": {
@@ -28,15 +40,6 @@
       "chance": 0.3
     },
     "would:fir_sapling": {
-      "chance": 0.3
-    },
-    "would:palm_leaves": {
-      "chance": 0.3
-    },
-    "would:pine_leaves": {
-      "chance": 0.3
-    },
-    "would:pine_sapling": {
       "chance": 0.3
     },
     "would:mahogany_leaves": {
@@ -51,10 +54,13 @@
     "would:maple_sapling": {
       "chance": 0.3
     },
-    "would:willow_leaves": {
+    "would:palm_leaves": {
       "chance": 0.3
     },
-    "would:willow_sapling": {
+    "would:pine_leaves": {
+      "chance": 0.3
+    },
+    "would:pine_sapling": {
       "chance": 0.3
     },
     "would:walnut_leaves": {
@@ -63,16 +69,10 @@
     "would:walnut_sapling": {
       "chance": 0.3
     },
-    "would:blue_spruce_leaves": {
+    "would:willow_leaves": {
       "chance": 0.3
     },
-    "would:blue_spruce_sapling": {
-      "chance": 0.3
-    },
-    "would:coconut": {
-      "chance": 0.3
-    },
-    "would:ebony_leaves_fruiting": {
+    "would:willow_sapling": {
       "chance": 0.3
     }
   }

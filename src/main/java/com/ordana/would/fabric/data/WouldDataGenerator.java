@@ -18,6 +18,7 @@ public class WouldDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(ModelProvider::new);
         pack.addProvider(RecipeProvider::new);
         pack.addProvider(BlockLootProvider::new);
+        pack.addProvider(NeoForgeDataMapProvider::new);
     }
 
 }
