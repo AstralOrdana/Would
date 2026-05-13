@@ -17,6 +17,7 @@ public class WouldFabric implements ModInitializer {
     @Override
     public void onInitialize() {
 
+        ModFoods.init();
         ModItems.init();
         ModBlocks.init();
         ModWoodTypes.init();

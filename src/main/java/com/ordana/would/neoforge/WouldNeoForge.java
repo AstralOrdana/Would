@@ -49,6 +49,8 @@ public class WouldNeoForge {
             ModWorldgenFeatures.init();
         } else if (registryKey.equals(Registries.CREATIVE_MODE_TAB)) {
             ModCreativeTab.init();
+        } else if (registryKey.equals(Registries.CONSUME_EFFECT_TYPE)) {
+            ModFoods.init();
         }
     }
 

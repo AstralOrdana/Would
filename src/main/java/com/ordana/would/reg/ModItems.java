@@ -1,20 +1,16 @@
 package com.ordana.would.reg;
 
 import com.ordana.would.Would;
-import com.ordana.would.items.CoconutItem;
-import com.ordana.would.items.SyrupBottleItem;
 import com.ordana.would.items.WalnutItem;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.vehicle.boat.Boat;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.Consumable;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.component.UseRemainder;
 import org.apache.commons.compress.utils.Lists;
 
 import java.util.List;
@@ -44,10 +40,10 @@ public interface ModItems {
     }
 
     Item SYRUP_BOTTLE = regItem("syrup_bottle",
-            SyrupBottleItem::new, new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).food(Foods.HONEY_BOTTLE).stacksTo(16));
+            Item::new, new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).component(DataComponents.USE_REMAINDER, new UseRemainder(new ItemStackTemplate(Items.GLASS_BOTTLE))).food(Foods.HONEY_BOTTLE, ModFoods.SYRUP_CONSUMABLE).stacksTo(16));
 
-    CoconutItem COCONUT = regItem("coconut",
-            (p)-> new CoconutItem(ModBlocks.COCONUT, p), (new Item.Properties().useBlockDescriptionPrefix().food(CoconutItem.COCONUT, Consumable.builder().consumeSeconds(0.8f).build())));
+    BlockItem COCONUT = regItem("coconut",
+            (p)-> new BlockItem(ModBlocks.COCONUT, p), (new Item.Properties().component(DataComponents.USE_REMAINDER, new UseRemainder(new ItemStackTemplate(Items.BOWL, 2))).useBlockDescriptionPrefix().food(ModFoods.COCONUT_FOOD, ModFoods.COCONUT_CONSUMABLE)));
 
     Item WALNUT = regItem("walnut",
             WalnutItem::new, new Item.Properties());
