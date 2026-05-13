@@ -1,0 +1,88 @@
+{
+  "values": {
+    "would:aspen_log": {
+      "stripped_block": "would:stripped_aspen_log"
+    },
+    "would:aspen_log_gazing": {
+      "stripped_block": "would:stripped_aspen_log_gazing"
+    },
+    "would:aspen_wood": {
+      "stripped_block": "would:stripped_aspen_wood"
+    },
+    "would:azalea_log": {
+      "stripped_block": "would:stripped_azalea_log"
+    },
+    "would:azalea_wood": {
+      "stripped_block": "would:stripped_azalea_wood"
+    },
+    "would:baobab_log": {
+      "stripped_block": "would:stripped_baobab_log"
+    },
+    "would:baobab_wood": {
+      "stripped_block": "would:stripped_baobab_wood"
+    },
+    "would:blue_spruce_log": {
+      "stripped_block": "would:stripped_blue_spruce_log"
+    },
+    "would:blue_spruce_wood": {
+      "stripped_block": "would:stripped_blue_spruce_wood"
+    },
+    "would:cedar_log": {
+      "stripped_block": "would:stripped_cedar_log"
+    },
+    "would:cedar_wood": {
+      "stripped_block": "would:stripped_cedar_wood"
+    },
+    "would:ebony_log": {
+      "stripped_block": "would:stripped_ebony_log"
+    },
+    "would:ebony_wood": {
+      "stripped_block": "would:stripped_ebony_wood"
+    },
+    "would:fir_log": {
+      "stripped_block": "would:stripped_fir_log"
+    },
+    "would:fir_wood": {
+      "stripped_block": "would:stripped_fir_wood"
+    },
+    "would:mahogany_log": {
+      "stripped_block": "would:stripped_mahogany_log"
+    },
+    "would:mahogany_wood": {
+      "stripped_block": "would:stripped_mahogany_wood"
+    },
+    "would:maple_log": {
+      "stripped_block": "would:stripped_maple_log"
+    },
+    "would:maple_wood": {
+      "stripped_block": "would:stripped_maple_wood"
+    },
+    "would:palm_log": {
+      "stripped_block": "would:stripped_palm_log"
+    },
+    "would:palm_wood": {
+      "stripped_block": "would:stripped_palm_wood"
+    },
+    "would:pine_log": {
+      "stripped_block": "would:stripped_pine_log"
+    },
+    "would:pine_wood": {
+      "stripped_block": "would:stripped_pine_wood"
+    },
+    "would:stripped_ebony_log": {
+      "stripped_block": "would:ebony_heartwood_log"
+    },
+    "would:walnut_log": {
+      "stripped_block": "would:stripped_walnut_log"
+    },
+    "would:walnut_wood": {
+      "stripped_block": "would:stripped_walnut_wood"
+    },
+    "would:willow_log": {
+      "stripped_block": "would:stripped_willow_log"
+    },
+    "would:willow_wood": {
+      "stripped_block": "would:stripped_willow_wood"
+    }
+  }
+}

@@ -13,6 +13,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 
 import com.ordana.would.fabric.ModCompostable;
+import com.ordana.would.reg.ModWoodSetup;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
@@ -21,6 +22,7 @@ import net.minecraft.resources.Identifier;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.util.ExtraCodecs;
 
+/// There's something deeply funny about using Fabric's data generator for NeoForge data.
 public class NeoForgeDataMapProvider implements DataProvider {
     private final FabricPackOutput output;
 
@@ -29,22 +31,23 @@ public class NeoForgeDataMapProvider implements DataProvider {
     }
 
     private static final List<Consumer<BiConsumer<String, JsonElement>>> SUBMITTERS = List.of(
-            NeoForgeDataMapProvider::compostables
+            NeoForgeDataMapProvider::compostables,
+            NeoForgeDataMapProvider::strippables
     );
 
     private static void compostables(BiConsumer<String, JsonElement> consumer) {
         ModCompostable.register();
         Codec<Float> chance = ExtraCodecs.POSITIVE_FLOAT.fieldOf("chance").codec();
         Codec<Map<Identifier, Float>> mapCodec = Codec.unboundedMap(Identifier.CODEC, chance).fieldOf("values").codec();
-        consumer.accept("compostables", mapCodec.encodeStart(JsonOps.INSTANCE, ModCompostable.COMPOSTABLES).getOrThrow());
+        consumer.accept("item/compostables", mapCodec.encodeStart(JsonOps.INSTANCE, ModCompostable.COMPOSTABLES).getOrThrow());
     }
 
 
     private static void strippables(BiConsumer<String, JsonElement> consumer) {
-        ModCompostable.register();
-        Codec<Float> chance = ExtraCodecs.POSITIVE_FLOAT.fieldOf("chance").codec();
-        Codec<Map<Identifier, Float>> mapCodec = Codec.unboundedMap(Identifier.CODEC, chance).fieldOf("values").codec();
-        consumer.accept("compostables", mapCodec.encodeStart(JsonOps.INSTANCE, ModCompostable.COMPOSTABLES).getOrThrow());
+        ModWoodSetup.init();
+        Codec<Identifier> value = Identifier.CODEC.fieldOf("stripped_block").codec();
+        Codec<Map<Identifier, Identifier>> mapCodec = Codec.unboundedMap(Identifier.CODEC, value).fieldOf("values").codec();
+        consumer.accept("block/strippables", mapCodec.encodeStart(JsonOps.INSTANCE, ModWoodSetup.strippables).getOrThrow());
     }
 
     private static void collect(BiConsumer<String, JsonElement> consumer) {
@@ -63,7 +66,7 @@ public class NeoForgeDataMapProvider implements DataProvider {
             }
         });
 
-        final var paths = this.output.createPathProvider(PackOutput.Target.DATA_PACK, "data_maps/item");
+        final var paths = this.output.createPathProvider(PackOutput.Target.DATA_PACK, "data_maps");
 
         return CompletableFuture.allOf(
                 elements.entrySet().stream().map(x ->
