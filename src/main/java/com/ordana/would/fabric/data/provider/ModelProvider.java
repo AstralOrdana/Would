@@ -1,3 +1,4 @@
+//? fabric {
 package com.ordana.would.fabric.data.provider;
 
 import com.ordana.would.reg.ModBlocks;
@@ -80,3 +81,4 @@ public class ModelProvider extends FabricModelProvider {
     }
 
 }
+//?}

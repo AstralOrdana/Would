@@ -26,12 +26,8 @@ public class WouldFabric implements ModInitializer {
         ModCreativeTab.init();
 
         UseBlockCallback.EVENT.register(WouldFabric::onRightClickBlock);
-        WouldFabric.compostSetup();
-        Would.setup();
-    }
-
-    public static void compostSetup() {
         ModCompostable.register();
+        ModWoodSetup.init();
     }
 
     public static InteractionResult onRightClickBlock(Player player, Level level, InteractionHand hand, BlockHitResult hitResult) {

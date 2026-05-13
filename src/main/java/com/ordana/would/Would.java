@@ -16,8 +16,4 @@ public class Would {
         return Identifier.fromNamespaceAndPath(MOD_ID, name);
     }
 
-    public static void setup() {
-        ModWoodSetup.init();
-    }
-
 }

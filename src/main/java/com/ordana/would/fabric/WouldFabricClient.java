@@ -1,3 +1,4 @@
+//? fabric {
 package com.ordana.would.fabric;
 
 import com.ordana.would.WouldClient;
@@ -10,8 +11,9 @@ public class WouldFabricClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		WouldClient.registerBlockColors(BlockColorRegistry::register);
-		//FIXME
-//		WouldClient.registerLayers((modelLayerLocation, layerDefinitionSupplier)-> ModelLayerRegistry.registerModelLayer(modelLayerLocation, layerDefinitionSupplier::get));
+		WouldClient.registerLayers((modelLayerLocation, layerDefinitionSupplier)-> ModelLayerRegistry.registerModelLayer(modelLayerLocation, layerDefinitionSupplier::get));
 		WouldClient.registerEntityRenderers(EntityRenderers::register);
+		WouldClient.registerSprites();
 	}
 }
+//?}

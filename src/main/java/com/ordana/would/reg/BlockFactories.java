@@ -3,6 +3,7 @@ package com.ordana.would.reg;
 import com.ordana.would.blocks.ModSaplingBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.TreeGrower;
@@ -40,7 +41,7 @@ public class BlockFactories {
     }
 
     static FlowerPotBlock pottedSapling(Block content) {
-        var block =  ModBlocks.regBlock("potted_"+ content.properties().blockIdOrThrow().identifier().getPath(), (BlockBehaviour.Properties potted) -> new FlowerPotBlock(content, potted), BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY), false);
+        var block =  ModBlocks.regBlock("potted_"+ BuiltInRegistries.BLOCK.getKey(content).getPath(), (BlockBehaviour.Properties potted) -> new FlowerPotBlock(content, potted), BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY), false);
         ModBlocks.ALL_POTTED_SAPLINGS.add(block);
         return block;
     }

@@ -1,6 +1,7 @@
 //? neoforge {
 /*package com.ordana.would.neoforge;
 
+import com.ordana.would.WouldPlatform;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -20,19 +21,19 @@ import oshi.util.tuples.Pair;
 
 import java.util.function.Supplier;
 
-public class WouldPlatformImpl {
-    public static void addFeatureToBiome(GenerationStep.Decoration step, TagKey<Biome> tagKey, ResourceKey<PlacedFeature> feature) {
+public class WouldPlatformImpl implements WouldPlatform {
+    public void addFeatureToBiome(GenerationStep.Decoration step, TagKey<Biome> tagKey, ResourceKey<PlacedFeature> feature) {
     }
 
-    public static void registerStrippable(Block input, Block stripped) {
+    public void registerStrippable(Block input, Block stripped) {
 
     }
 
-    public static boolean isClient() {
-        return FMLEnvironment.dist == Dist.CLIENT;
+    public boolean isClient() {
+        return FMLEnvironment.getDist() == Dist.CLIENT;
     }
 
-    public static CreativeModeTab registerCreativeModeTab(Identifier name, MutableComponent title, Supplier<ItemStack> icon, CreativeModeTab.DisplayItemsGenerator generator) {
+    public CreativeModeTab registerCreativeModeTab(Identifier name, MutableComponent title, Supplier<ItemStack> icon, CreativeModeTab.DisplayItemsGenerator generator) {
         CreativeModeTab tab = CreativeModeTab.builder().title(title).icon(icon).displayItems(generator).build();
         Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, name, tab);
         return tab;

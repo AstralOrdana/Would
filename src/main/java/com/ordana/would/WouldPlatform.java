@@ -25,6 +25,8 @@ import java.util.function.Supplier;
 public interface WouldPlatform {
 	//? fabric
 	WouldPlatform INSTANCE = new com.ordana.would.fabric.WouldPlatformImpl();
+	//? neoforge
+	//WouldPlatform INSTANCE = new com.ordana.would.neoforge.WouldPlatformImpl();
 
 	@Contract
     void addFeatureToBiome(GenerationStep.Decoration step, TagKey<Biome> tagKey, ResourceKey<PlacedFeature> feature);

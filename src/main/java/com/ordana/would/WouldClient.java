@@ -2,21 +2,24 @@ package com.ordana.would;
 
 import com.ordana.would.reg.ModBlocks;
 import com.ordana.would.reg.ModEntities;
+import com.ordana.would.reg.ModWoodTypes;
+import com.ordana.would.reg.WouldType;
 import net.minecraft.client.color.block.BlockTintSources;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.object.boat.BoatModel;
-import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.FallingBlockRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.world.level.FoliageColor;
+import net.minecraft.world.level.block.state.properties.WoodType;
 
 import java.util.List;
 
 import static com.ordana.would.reg.ModEntities.BOATS;
 import static com.ordana.would.reg.ModEntities.CHEST_BOATS;
-import static net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry.registerModelLayer;
 
 public class WouldClient {
 
@@ -49,12 +52,10 @@ public class WouldClient {
         event.register(ModEntities.THROWN_WALNUT, context -> new ThrownItemRenderer<>(context, 1, false));
         BOATS.forEach((id, entityType) -> {
             var layer = new ModelLayerLocation(Would.res("boat/" + id), "main");
-            registerModelLayer(layer, BoatModel::createBoatModel);
             EntityRenderers.register(entityType, (context) -> new BoatRenderer(context, layer));
         });
         CHEST_BOATS.forEach((id, entityType) -> {
             var layer = new ModelLayerLocation(Would.res("chest_boat/" + id), "main");
-            registerModelLayer(layer, BoatModel::createChestBoatModel);
             EntityRenderers.register(entityType, (context) -> new BoatRenderer(context, layer));
         });
 
@@ -64,4 +65,21 @@ public class WouldClient {
         return new ModelLayerLocation(Would.res(name), "main");
     }
 
+    public static void registerLayers(WouldPlatform.ModelLayerEvent registerLayerDefinition) {
+        BOATS.forEach((id, entityType) -> {
+            var layer = new ModelLayerLocation(Would.res("boat/" + id), "main");
+            registerLayerDefinition.register(layer, BoatModel::createBoatModel);
+        });
+        CHEST_BOATS.forEach((id, entityType) -> {
+            var layer = new ModelLayerLocation(Would.res("chest_boat/" + id), "main");
+            registerLayerDefinition.register(layer, BoatModel::createChestBoatModel);
+        });
+    }
+
+    public static void registerSprites() {
+        for (WouldType wouldType : ModWoodTypes.ALL) {
+            Sheets.SIGN_SPRITES.put(wouldType.woodType(), new SpriteId(Sheets.SIGN_SHEET, Would.res("entity/signs/" + wouldType.name())));
+            Sheets.HANGING_SIGN_SPRITES.put(wouldType.woodType(), new SpriteId(Sheets.SIGN_SHEET, Would.res("entity/signs/hanging/" + wouldType.name())));
+        }
+    }
 }

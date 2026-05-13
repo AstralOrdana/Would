@@ -116,13 +116,7 @@ public interface ModWoodTypes {
 
         // create holder
         BlockFamily family = new BlockFamily.Builder(planks).button(button).pressurePlate(pressurePlate).slab(slab).stairs(stairs).trapdoor(trapDoorBlock).fence(fence).fenceGate(fenceGate).door(door).sign(signBlock, wallSignBlock).recipeUnlockedBy("has_planks").recipeGroupPrefix("wooden").getFamily();
-        var wouldType = new WouldType(woodType, planks, slab, stairs, fence, fenceGate, door, trapDoorBlock, signBlock, wallSignBlock, pressurePlate, button, hangingSignBlock, wallHangingSignBlock, boatItem, chestBoatItem, signItem, hangingSignItem, log, strippedLog, sapling, leaves, logItemTagKey, wood, family, shelfBlock, strippedWood);
-
-        // client
-        if (WouldPlatform.INSTANCE.isClient()) {
-            Sheets.SIGN_SPRITES.put(wouldType.woodType(), new SpriteId(Sheets.SIGN_SHEET, Would.res("entity/signs/" + name)));
-            Sheets.HANGING_SIGN_SPRITES.put(wouldType.woodType(), new SpriteId(Sheets.SIGN_SHEET, Would.res("entity/signs/hanging/" + name)));
-        }
+        var wouldType = new WouldType(woodType, planks, slab, stairs, fence, fenceGate, door, trapDoorBlock, signBlock, wallSignBlock, pressurePlate, button, hangingSignBlock, wallHangingSignBlock, boatItem, chestBoatItem, signItem, hangingSignItem, log, strippedLog, sapling, leaves, logItemTagKey, wood, family, shelfBlock, strippedWood, name);
 
         // return
         ModWoodTypes.ALL.add(wouldType);

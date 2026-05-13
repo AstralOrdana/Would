@@ -9,7 +9,7 @@ tasks.named<ProcessResources>("processResources") {
 
     val props = HashMap<String, String>().apply {
         this["version"] = prop("mod.version") + "+" + prop("deps.minecraft")
-        this["minecraft"] = prop("mod.mc_dep_forgelike")
+        this["minecraft"] = prop("mod.mc_dep_neo")
     }
 
     filesMatching(listOf("fabric.mod.json", "META-INF/neoforge.mods.toml", "META-INF/mods.toml")) {
@@ -143,16 +143,6 @@ neoForge {
 }
 
 dependencies {
-    // McQoy
-    implementation("folk.sisby:kaleido-config:${property("deps.kaleido")}")
-    jarJar("folk.sisby:kaleido-config:${property("deps.kaleido")}")
-    implementation("maven.modrinth:mcqoy:${property("deps.mcqoy")}")
-
-    // YACL  - required by McQoy
-    if (hasProperty("deps.yacl")) {
-        runtimeOnly("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-neoforge")
-    }
-
     implementation("cc.cassian.rrv:reliable-recipe-viewer-neoforge:${property("deps.rrv")}+${property("deps.minecraft")}")
 }
 

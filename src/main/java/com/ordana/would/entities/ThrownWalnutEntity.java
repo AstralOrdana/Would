@@ -49,7 +49,7 @@ public class ThrownWalnutEntity extends ThrowableItemProjectile {
         if (id == 3) {
 
             for(int i = 0; i < PARTICLE_COUNT; ++i) {
-                this.level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, this.getItem().getItem()), this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+                this.level().addParticle(new ItemParticleOption(ParticleTypes.ITEM, this.getItem().getItem()), this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
 
@@ -76,10 +76,10 @@ public class ThrownWalnutEntity extends ThrowableItemProjectile {
     @Override
     protected void onHit(HitResult result) {
         super.onHit(result);
-        if (!this.level.isClientSide()) {
-            this.level.broadcastEntityEvent(this, (byte)3);
-            level.playSound(null, getX(), getY(), getZ(), ModSoundEvents.WALNUT_CRACK, SoundSource.NEUTRAL, 0.75F, 2.5F + (random.nextFloat() / 2));
-            level.addFreshEntity(new ItemEntity(level, result.getLocation().x, result.getLocation().y + 0.5, result.getLocation().z, new ItemStack(getDefaultItem())));
+        if (!this.level().isClientSide()) {
+            this.level().broadcastEntityEvent(this, (byte)3);
+            level().playSound(null, getX(), getY(), getZ(), ModSoundEvents.WALNUT_CRACK, SoundSource.NEUTRAL, 0.75F, 2.5F + (random.nextFloat() / 2));
+            level().addFreshEntity(new ItemEntity(level(), result.getLocation().x, result.getLocation().y + 0.5, result.getLocation().z, new ItemStack(getDefaultItem())));
             this.discard();
         }
     }

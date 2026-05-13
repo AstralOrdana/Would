@@ -1,3 +1,4 @@
+//? fabric {
 package com.ordana.would.fabric.data.provider;
 
 import com.ordana.would.reg.*;
@@ -79,3 +80,4 @@ public class ItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
     }
 
 }
+//?}

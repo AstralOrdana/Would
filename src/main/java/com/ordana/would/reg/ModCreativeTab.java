@@ -20,6 +20,10 @@ public class ModCreativeTab {
                 }
                 output.accept(ModBlocks.EBONY_LEAVES_FRUITING);
                 output.accept(ModBlocks.EBONY_HEARTWOOD);
+                output.accept(ModBlocks.MAPLE_LOG_SAPPY);
+                output.accept(ModBlocks.MAPLE_WOOD_SAPPY);
+                output.accept(ModItems.WALNUT);
+                output.accept(ModItems.SYRUP_BOTTLE);
             });
 
     private static void acceptWoodType(WouldType wouldType, CreativeModeTab.Output output) {

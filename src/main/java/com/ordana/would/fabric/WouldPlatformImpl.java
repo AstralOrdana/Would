@@ -1,3 +1,4 @@
+//? fabric {
 package com.ordana.would.fabric;
 
 import com.ordana.would.WouldPlatform;
@@ -37,3 +38,4 @@ public class WouldPlatformImpl implements WouldPlatform {
         return tab;
     }
 }
+//?}

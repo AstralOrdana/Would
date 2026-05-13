@@ -1,3 +1,4 @@
+//? fabric {
 package com.ordana.would.fabric.data;
 
 import com.ordana.would.fabric.data.provider.*;
@@ -20,3 +21,4 @@ public class WouldDataGenerator implements DataGeneratorEntrypoint {
     }
 
 }
+//?}

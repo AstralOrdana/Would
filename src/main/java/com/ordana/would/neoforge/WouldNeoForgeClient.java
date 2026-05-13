@@ -2,7 +2,6 @@
 /*package com.ordana.would.neoforge;
 
 import com.ordana.would.WouldClient;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -13,13 +12,8 @@ import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 @EventBusSubscriber(value = Dist.CLIENT)
 public class WouldNeoForgeClient {
 	@SubscribeEvent
-	public static void blockColors(RegisterColorHandlersEvent.Block event) {
+	public static void blockColors(RegisterColorHandlersEvent.BlockTintSources event) {
 		WouldClient.registerBlockColors(event::register);
-	}
-
-	@SubscribeEvent
-	public static void itemColors(RegisterColorHandlersEvent.Item event) {
-		WouldClient.registerItemColors(event::register);
 	}
 
 	@SubscribeEvent
@@ -33,8 +27,8 @@ public class WouldNeoForgeClient {
 	}
 
 	@SubscribeEvent
-	public static void blockLayers(FMLClientSetupEvent event) {
-		event.enqueueWork(() -> WouldClient.setup(ItemBlockRenderTypes::setRenderLayer));
+	public static void clientSetup(FMLClientSetupEvent event) {
+		event.enqueueWork(WouldClient::registerSprites);
 	}
 }
 *///?}
