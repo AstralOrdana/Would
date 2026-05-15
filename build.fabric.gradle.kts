@@ -127,7 +127,7 @@ repositories {
             }
         }
         filter {
-            includeGroupAndSubgroups("com.ordana.would")
+            includeGroupAndSubgroups("cc.cassian")
         }
     }
 }
