@@ -1,5 +1,5 @@
 //? fabric {
-package com.ordana.would.fabric;
+/*package com.ordana.would.fabric;
 
 import com.ordana.would.WouldClient;
 import net.fabricmc.api.ClientModInitializer;
@@ -16,4 +16,4 @@ public class WouldFabricClient implements ClientModInitializer {
 		WouldClient.registerSprites();
 	}
 }
-//?}
+*///?}

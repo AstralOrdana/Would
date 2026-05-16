@@ -1,5 +1,5 @@
 //? neoforge {
-/*package com.ordana.would.neoforge;
+package com.ordana.would.neoforge;
 
 import com.ordana.would.WouldPlatform;
 import net.minecraft.core.Registry;
@@ -39,4 +39,4 @@ public class WouldPlatformImpl implements WouldPlatform {
         return tab;
     }
 }
-*///?}
+//?}

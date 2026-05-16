@@ -1,5 +1,5 @@
 //? fabric {
-package com.ordana.would.fabric.data;
+/*package com.ordana.would.fabric.data;
 
 import com.ordana.would.fabric.data.provider.*;
 import com.ordana.would.reg.ModWoodTypes;
@@ -22,4 +22,4 @@ public class WouldDataGenerator implements DataGeneratorEntrypoint {
     }
 
 }
-//?}
+*///?}

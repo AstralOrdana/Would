@@ -1,5 +1,5 @@
 //? fabric {
-package com.ordana.would.fabric;
+/*package com.ordana.would.fabric;
 
 import com.ordana.would.reg.ModBlocks;
 import com.ordana.would.reg.ModWoodTypes;
@@ -32,4 +32,4 @@ public class ModCompostable {
         CompostableRegistry.INSTANCE.add(itemLike, value);
     }
 }
-//?}
+*///?}

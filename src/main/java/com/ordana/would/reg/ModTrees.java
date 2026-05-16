@@ -2,7 +2,8 @@ package com.ordana.would.reg;
 
 import com.mojang.serialization.MapCodec;
 import com.ordana.would.Would;
-import com.ordana.would.worldgen.*;
+import com.ordana.would.worldgen.foliage_placers.*;
+import com.ordana.would.worldgen.trunk_placer.*;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
@@ -34,8 +35,6 @@ public interface ModTrees {
     TrunkPlacerType<PineTrunkPlacer> PINE_TRUNK_PLACER = registerTrunk("pine", PineTrunkPlacer.CODEC);
     TrunkPlacerType<MegaPineTrunkPlacer> MEGA_PINE_TRUNK_PLACER = registerTrunk("mega_pine", MegaPineTrunkPlacer.CODEC);
     TrunkPlacerType<BaldCypressTrunkPlacer> BALD_CYPRESS_TRUNK_PLACER = registerTrunk("bald_cypress", BaldCypressTrunkPlacer.CODEC);
-
-    TreeDecoratorType<PaleMossDecorator> PALE_MOSS_DECORATOR = registerDecorator("pale_moss", PaleMossDecorator.CODEC);
 
 
     public static <T extends FoliagePlacer> FoliagePlacerType<T> registerFoliage(String name, MapCodec<T> codec) {

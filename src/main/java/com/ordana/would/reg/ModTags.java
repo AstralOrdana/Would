@@ -23,6 +23,7 @@ public interface ModTags {
         TagKey<Item> PINE_LOGS = item("pine_logs");
         TagKey<Item> WALNUT_LOGS = item("walnut_logs");
         TagKey<Item> WILLOW_LOGS = item("willow_logs");
+        TagKey<Item> BALD_CYPRESS_LOGS = item("bald_cypress_logs");
 
     }
 
@@ -41,6 +42,7 @@ public interface ModTags {
         TagKey<Block> PINE_LOGS = block("pine_logs");
         TagKey<Block> WALNUT_LOGS = block("walnut_logs");
         TagKey<Block> WILLOW_LOGS = block("willow_logs");
+        TagKey<Block> BALD_CYPRESS_LOGS = block("bald_cypress_logs");
 
     }
 

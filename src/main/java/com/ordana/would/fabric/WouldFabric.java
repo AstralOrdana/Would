@@ -1,7 +1,6 @@
 //? fabric {
-package com.ordana.would.fabric;
+/*package com.ordana.would.fabric;
 
-import com.ordana.would.Would;
 import com.ordana.would.reg.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
@@ -35,4 +34,4 @@ public class WouldFabric implements ModInitializer {
         return ModEvents.onBlockCLicked(player.getItemInHand(hand), player, level, hand, hitResult);
     }
 }
-//?}
+*///?}

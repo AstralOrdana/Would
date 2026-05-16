@@ -1,7 +1,10 @@
 //? fabric {
-package com.ordana.would.fabric.data.provider;
+/*package com.ordana.would.fabric.data.provider;
 
-import com.ordana.would.reg.*;
+import com.ordana.would.reg.ModBlocks;
+import com.ordana.would.reg.ModItems;
+import com.ordana.would.reg.ModWoodTypes;
+import com.ordana.would.reg.WouldType;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
 import net.minecraft.core.HolderLookup;
@@ -144,4 +147,4 @@ public class BlockLootProvider extends FabricBlockLootSubProvider {
     }
 
 }
-//?}
+*///?}

@@ -1,7 +1,9 @@
 //? fabric {
-package com.ordana.would.fabric.data.provider;
+/*package com.ordana.would.fabric.data.provider;
 
-import com.ordana.would.reg.*;
+import com.ordana.would.reg.ModBlocks;
+import com.ordana.would.reg.ModTags;
+import com.ordana.would.reg.ModWoodTypes;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
@@ -11,11 +13,9 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import static com.ordana.would.reg.ModBlocks.*;
-import static net.minecraft.data.BlockFamily.*;
 
 public class BlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
 
@@ -76,7 +76,8 @@ public class BlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
             ModBlocks.MAPLE_LOG,
             ModBlocks.PALM_LOG,
             ModBlocks.PINE_LOG,
-            ModBlocks.WALNUT_LOG
+            ModBlocks.WALNUT_LOG,
+            ModBlocks.BALD_CYPRESS_LOG
         );
 
         this.addBlocksToTag(ModTags.Blocks.ASPEN_LOGS, ModBlocks.ASPEN_LOG, ModBlocks.ASPEN_LOG_GAZING, ModBlocks.STRIPPED_ASPEN_LOG, ModBlocks.STRIPPED_ASPEN_LOG_GAZING, ModBlocks.ASPEN_WOOD, ModBlocks.ASPEN_WOOD_GAZING, ModBlocks.STRIPPED_ASPEN_WOOD, ModBlocks.STRIPPED_ASPEN_WOOD_GAZING);
@@ -92,6 +93,7 @@ public class BlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
         this.addBlocksToTag(ModTags.Blocks.PINE_LOGS, ModBlocks.PINE_LOG, ModBlocks.STRIPPED_PINE_LOG, ModBlocks.PINE_WOOD, ModBlocks.STRIPPED_PINE_WOOD);
         this.addBlocksToTag(ModTags.Blocks.WALNUT_LOGS, ModBlocks.WALNUT_LOG, ModBlocks.STRIPPED_WALNUT_LOG, ModBlocks.WALNUT_WOOD, ModBlocks.STRIPPED_WALNUT_WOOD);
         this.addBlocksToTag(ModTags.Blocks.WILLOW_LOGS, ModBlocks.WILLOW_LOG, ModBlocks.STRIPPED_WILLOW_LOG, ModBlocks.WILLOW_WOOD, ModBlocks.STRIPPED_WILLOW_WOOD);
+        this.addBlocksToTag(ModTags.Blocks.BALD_CYPRESS_LOGS, BALD_CYPRESS_LOG, ModBlocks.STRIPPED_BALD_CYPRESS_LOG, ModBlocks.BALD_CYPRESS_WOOD, ModBlocks.STRIPPED_BALD_CYPRESS_WOOD);
 
         this.valueLookupBuilder(BlockTags.LOGS_THAT_BURN)
             .addTag(ModTags.Blocks.ASPEN_LOGS)
@@ -106,7 +108,8 @@ public class BlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
             .addTag(ModTags.Blocks.PALM_LOGS)
             .addTag(ModTags.Blocks.PINE_LOGS)
             .addTag(ModTags.Blocks.WALNUT_LOGS)
-            .addTag(ModTags.Blocks.WILLOW_LOGS);
+            .addTag(ModTags.Blocks.WILLOW_LOGS)
+            .addTag(ModTags.Blocks.BALD_CYPRESS_LOGS);
 
         this.valueLookupBuilder(BlockTags.FLOWER_POTS).add(toArray(ModBlocks.ALL_POTTED_SAPLINGS));
 
@@ -122,4 +125,4 @@ public class BlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
     }
 
 }
-//?}
+*///?}

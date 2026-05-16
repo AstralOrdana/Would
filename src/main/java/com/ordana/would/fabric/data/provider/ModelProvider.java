@@ -1,21 +1,16 @@
 //? fabric {
-package com.ordana.would.fabric.data.provider;
+/*package com.ordana.would.fabric.data.provider;
 
 import com.ordana.would.reg.ModBlocks;
 import com.ordana.would.reg.ModItems;
 import com.ordana.would.reg.ModWoodTypes;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
-import net.minecraft.client.color.block.BlockTintSources;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
-import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.world.level.FoliageColor;
-import net.minecraft.world.level.block.Blocks;
-
-import java.util.List;
 
 public class ModelProvider extends FabricModelProvider {
 
@@ -81,4 +76,4 @@ public class ModelProvider extends FabricModelProvider {
     }
 
 }
-//?}
+*///?}

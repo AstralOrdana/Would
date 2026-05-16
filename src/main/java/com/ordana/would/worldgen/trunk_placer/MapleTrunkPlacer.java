@@ -1,4 +1,4 @@
-package com.ordana.would.worldgen;
+package com.ordana.would.worldgen.trunk_placer;
 
 import com.google.common.collect.Lists;
 import com.mojang.serialization.MapCodec;
@@ -7,7 +7,6 @@ import com.ordana.would.reg.ModTrees;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;

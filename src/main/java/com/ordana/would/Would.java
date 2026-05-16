@@ -1,8 +1,5 @@
 package com.ordana.would;
 
-import com.ordana.would.reg.*;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

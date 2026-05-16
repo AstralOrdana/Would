@@ -1,5 +1,17 @@
 //? fabric {
-package com.ordana.would.fabric.data.provider;
+/*package com.ordana.would.fabric.data.provider;
+
+import com.google.gson.JsonElement;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.JsonOps;
+import com.ordana.would.fabric.ModCompostable;
+import com.ordana.would.reg.ModWoodSetup;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.minecraft.data.CachedOutput;
+import net.minecraft.data.DataProvider;
+import net.minecraft.data.PackOutput;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.ExtraCodecs;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,20 +19,6 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-
-import com.google.gson.JsonElement;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.JsonOps;
-
-import com.ordana.would.fabric.ModCompostable;
-import com.ordana.would.reg.ModWoodSetup;
-import net.minecraft.data.CachedOutput;
-import net.minecraft.data.DataProvider;
-import net.minecraft.data.PackOutput;
-import net.minecraft.resources.Identifier;
-
-import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
-import net.minecraft.util.ExtraCodecs;
 
 /// There's something deeply funny about using Fabric's data generator for NeoForge data.
 public class NeoForgeDataMapProvider implements DataProvider {
@@ -85,4 +83,4 @@ public class NeoForgeDataMapProvider implements DataProvider {
         return "Would Compostables";
     }
 }
-//?}
+*///?}

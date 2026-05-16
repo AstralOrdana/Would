@@ -18,6 +18,7 @@ public interface ModBlockSetTypes {
     BlockSetType WALNUT = register("walnut");
     BlockSetType WILLOW = register("willow");
     BlockSetType BLUE_SPRUCE = register("blue_spruce");
+    BlockSetType BALD_CYPRESS = register("bald_cypress");
     
     private static BlockSetType register(String name) {
         return BlockSetType.register(new BlockSetType(Would.res(name).toString()));

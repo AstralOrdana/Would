@@ -14,7 +14,6 @@ import net.minecraft.client.renderer.entity.FallingBlockRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.world.level.FoliageColor;
-import net.minecraft.world.level.block.state.properties.WoodType;
 
 import java.util.List;
 

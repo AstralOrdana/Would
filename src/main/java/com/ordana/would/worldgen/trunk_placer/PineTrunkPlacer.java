@@ -1,4 +1,4 @@
-package com.ordana.would.worldgen;
+package com.ordana.would.worldgen.trunk_placer;
 
 import com.google.common.collect.Lists;
 import com.mojang.serialization.MapCodec;

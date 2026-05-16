@@ -1,5 +1,5 @@
 //? neoforge {
-/*package com.ordana.would.neoforge;
+package com.ordana.would.neoforge;
 
 import com.ordana.would.Would;
 import com.ordana.would.reg.*;
@@ -67,4 +67,4 @@ public class WouldNeoForge {
     }
 
 }
-*///?}
+//?}

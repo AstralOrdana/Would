@@ -3,13 +3,7 @@ package com.ordana.would.reg;
 import com.ordana.would.Would;
 import com.ordana.would.WouldPlatform;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Blocks;
-import oshi.util.tuples.Pair;
-
-import java.util.Arrays;
 
 public class ModCreativeTab {
 

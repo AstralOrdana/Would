@@ -1,5 +1,5 @@
 //? neoforge {
-/*package com.ordana.would.neoforge;
+package com.ordana.would.neoforge;
 
 import com.ordana.would.WouldClient;
 import net.neoforged.api.distmarker.Dist;
@@ -31,4 +31,4 @@ public class WouldNeoForgeClient {
 		event.enqueueWork(WouldClient::registerSprites);
 	}
 }
-*///?}
+//?}

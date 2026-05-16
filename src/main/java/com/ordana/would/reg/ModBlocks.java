@@ -1,7 +1,10 @@
 package com.ordana.would.reg;
 
 import com.ordana.would.Would;
-import com.ordana.would.blocks.*;
+import com.ordana.would.blocks.CoconutBlock;
+import com.ordana.would.blocks.HangingCoconutBlock;
+import com.ordana.would.blocks.HangingWillowLeavesBlock;
+import com.ordana.would.blocks.PalmLeavesBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -12,7 +15,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
@@ -121,6 +126,8 @@ public interface ModBlocks {
             logProperties(MapColor.COLOR_BROWN, MapColor.COLOR_BROWN, SoundType.WOOD));
     Block BLUE_SPRUCE_LOG = regLog("blue_spruce_log",
             logProperties(MapColor.LAPIS, MapColor.TERRACOTTA_LIGHT_BLUE, SoundType.WOOD));
+    Block BALD_CYPRESS_LOG = regLog("bald_cypress_log",
+            logProperties(MapColor.COLOR_GRAY, MapColor.COLOR_GRAY, SoundType.WOOD));
 
     static Block regLog(String blueSpruceLog, BlockBehaviour.Properties Properties) {
         return regBlock(blueSpruceLog, RotatedPillarBlock::new, Properties);
@@ -157,6 +164,8 @@ public interface ModBlocks {
             woodProperties(MapColor.COLOR_BROWN, SoundType.WOOD));
     Block BLUE_SPRUCE_WOOD = regLog("blue_spruce_wood",
             woodProperties(MapColor.TERRACOTTA_LIGHT_BLUE, SoundType.WOOD));
+    Block BALD_CYPRESS_WOOD = regLog("bald_cypress_wood",
+            woodProperties(MapColor.COLOR_GRAY, SoundType.WOOD));
 
     //stripped logs
     Block STRIPPED_WILLOW_LOG = regLog("stripped_willow_log",
@@ -189,6 +198,8 @@ public interface ModBlocks {
             logProperties(MapColor.COLOR_BROWN, MapColor.COLOR_BROWN, SoundType.WOOD));
     Block STRIPPED_BLUE_SPRUCE_LOG = regLog("stripped_blue_spruce_log",
             logProperties(MapColor.LAPIS, MapColor.LAPIS, SoundType.WOOD));
+    Block STRIPPED_BALD_CYPRESS_LOG = regLog("stripped_bald_cyrpess_log",
+            logProperties(MapColor.COLOR_GRAY, MapColor.COLOR_GRAY, SoundType.WOOD));
 
     //stripped wood
     Block STRIPPED_WILLOW_WOOD = regLog("stripped_willow_wood",
@@ -221,6 +232,8 @@ public interface ModBlocks {
             woodProperties(MapColor.COLOR_BROWN, SoundType.WOOD));
     Block STRIPPED_BLUE_SPRUCE_WOOD = regLog("stripped_blue_spruce_wood",
             woodProperties(MapColor.LAPIS, SoundType.WOOD));
+    Block STRIPPED_BALD_CYPRESS_WOOD = regLog("stripped_bald_cypress_wood",
+            woodProperties(MapColor.COLOR_GRAY, SoundType.WOOD));
     
     //leaves
     Block WILLOW_LEAVES = regLeaves("willow_leaves", SoundType.AZALEA_LEAVES);
@@ -236,6 +249,7 @@ public interface ModBlocks {
     Block ASPEN_LEAVES = regLeaves("aspen_leaves", SoundType.AZALEA_LEAVES);
     Block WALNUT_LEAVES = regLeaves("walnut_leaves", SoundType.AZALEA_LEAVES);
     Block BLUE_SPRUCE_LEAVES = regLeaves("blue_spruce_leaves", MapColor.ICE, SoundType.AZALEA_LEAVES);
+    Block BALD_CYPRESS_LEAVES = regLeaves("bald_cypress_leaves", SoundType.AZALEA_LEAVES);
 
     //saplings
     Block WILLOW_SAPLING = sapling("willow_sapling", ModTreeGrowers.WILLOW);
@@ -258,6 +272,7 @@ public interface ModBlocks {
     Block ASPEN_SAPLING = sapling("aspen_sapling", ModTreeGrowers.ASPEN);
     Block WALNUT_SAPLING = sapling("walnut_sapling", ModTreeGrowers.WALNUT);
     Block BLUE_SPRUCE_SAPLING = sapling("blue_spruce_sapling", ModTreeGrowers.BLUE_SPRUCE);
+    Block BALD_CYPRESS_SAPLING = sapling("bald_cypress_sapling", ModTreeGrowers.BALD_CYPRESS);
 
     Block POTTED_WILLOW_SAPLING = pottedSapling(WILLOW_SAPLING);
     Block POTTED_BAOBAB_SAPLING =  pottedSapling(BAOBAB_SAPLING);
@@ -271,6 +286,7 @@ public interface ModBlocks {
     Block POTTED_ASPEN_SAPLING = pottedSapling(ASPEN_SAPLING);
     Block POTTED_WALNUT_SAPLING = pottedSapling(WALNUT_SAPLING);
     Block POTTED_BLUE_SPRUCE_SAPLING = pottedSapling(BLUE_SPRUCE_SAPLING);
+    Block POTTED_BALD_CYPRESS_SAPLING = pottedSapling(BALD_CYPRESS_SAPLING);
 
 
 }

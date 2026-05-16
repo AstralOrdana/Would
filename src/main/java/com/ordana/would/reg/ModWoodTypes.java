@@ -1,13 +1,9 @@
 package com.ordana.would.reg;
 
 import com.ordana.would.Would;
-import com.ordana.would.WouldPlatform;
 import com.ordana.would.blocks.ModWoodenButtonBlock;
-import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.BlockFamily;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BoatItem;
 import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.Item;
@@ -45,6 +41,7 @@ public interface ModWoodTypes {
     WouldType WALNUT = register("walnut", ModBlockSetTypes.WALNUT, MapColor.TERRACOTTA_BROWN, SoundType.WOOD, WALNUT_LOG, STRIPPED_WALNUT_LOG, WALNUT_SAPLING, WALNUT_LEAVES, WALNUT_WOOD, STRIPPED_WALNUT_WOOD);
     WouldType WILLOW = register("willow", ModBlockSetTypes.WILLOW, MapColor.WARPED_NYLIUM, SoundType.WOOD, WILLOW_LOG, STRIPPED_WILLOW_LOG, WILLOW_SAPLING, WILLOW_LEAVES, WILLOW_WOOD, STRIPPED_WILLOW_WOOD);
     WouldType BLUE_SPRUCE = register("blue_spruce", ModBlockSetTypes.BLUE_SPRUCE, MapColor.LAPIS, SoundType.WOOD, BLUE_SPRUCE_LOG, STRIPPED_BLUE_SPRUCE_LOG, BLUE_SPRUCE_SAPLING, BLUE_SPRUCE_LEAVES, BLUE_SPRUCE_WOOD, STRIPPED_BLUE_SPRUCE_WOOD);
+    WouldType BALD_CYPRESS = register("bald_cypress", ModBlockSetTypes.BALD_CYPRESS, MapColor.COLOR_GRAY, SoundType.WOOD, BALD_CYPRESS_LOG, STRIPPED_BALD_CYPRESS_LOG, BALD_CYPRESS_SAPLING, BALD_CYPRESS_LEAVES, BALD_CYPRESS_WOOD, STRIPPED_BALD_CYPRESS_WOOD);
 
     private static WouldType register(String name, BlockSetType blockSetType, MapColor mapColor, SoundType soundType, Block log, Block strippedLog, @Nullable Block sapling, @Nullable Block leaves, Block wood, Block strippedWood) {
         // basics

@@ -1,8 +1,8 @@
 package com.ordana.would.reg;
 
 //? fabric {
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
-//?}
+/*import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+*///?}
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
@@ -35,15 +35,15 @@ public interface ModWoodSetup {
         put(ModBlocks.STRIPPED_EBONY_LOG, ModBlocks.EBONY_HEARTWOOD_LOG);
 
         //? fabric {
-        validSigns.forEach(BlockEntityType.SIGN::addValidBlock);
+        /*validSigns.forEach(BlockEntityType.SIGN::addValidBlock);
         validHangingSigns.forEach(BlockEntityType.HANGING_SIGN::addValidBlock);
         validShelves.forEach(BlockEntityType.SHELF::addValidBlock);
-        //?}
+        *///?}
     }
 
     static void put(Block input, Block stripped) {
         //? fabric
-        StrippableBlockRegistry.register(input, stripped);
+        //StrippableBlockRegistry.register(input, stripped);
         strippables.put(BuiltInRegistries.BLOCK.getKey(input), BuiltInRegistries.BLOCK.getKey(stripped));
     }
 }

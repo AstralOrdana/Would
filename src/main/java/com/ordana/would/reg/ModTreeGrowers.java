@@ -22,6 +22,7 @@ public interface ModTreeGrowers {
     TreeGrower ASPEN = createSimple("aspen");
     TreeGrower WALNUT = createSimple("walnut");
     TreeGrower BLUE_SPRUCE = new TreeGrower("blue_spruce", createKey("mega_blue_spruce"), createKey("blue_spruce"), Optional.empty());
+    TreeGrower BALD_CYPRESS = createSimple("bald_cypress");
 
     private static TreeGrower createSimple(String name) {
         return new TreeGrower(name, Optional.empty(), createKey(name), Optional.empty());
