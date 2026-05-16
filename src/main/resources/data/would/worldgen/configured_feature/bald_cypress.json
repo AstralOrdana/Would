@@ -45,14 +45,14 @@
       "radius": 2,
       "offset": 1,
       "height": 1
-    }
-  },
-  "decorators": [
-    {
-      "type": "minecraft:pale_moss",
-      "ground_probability": 0.8,
-      "leaves_probability": 0.15,
-      "trunk_probability": 0.4
-    }
-  ]
+    },
+    "decorators": [
+      {
+        "type": "minecraft:pale_moss",
+        "ground_probability": 0.8,
+        "leaves_probability": 0.15,
+        "trunk_probability": 0.4
+      }
+    ]
+  }
 }

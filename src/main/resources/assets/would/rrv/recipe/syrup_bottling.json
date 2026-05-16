@@ -1,6 +1,6 @@
 {
   "type": "rrv:world_interaction",
   "left": "minecraft:glass_bottle",
-  "right": "would:maple_log_sappy",
+  "right": ["would:maple_log_sappy", "would:maple_wood_sappy"],
   "result": "would:syrup_bottle"
 }

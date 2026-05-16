@@ -146,6 +146,7 @@ dependencies {
     implementation("cc.cassian.rrv:reliable-recipe-viewer-fabric:${property("deps.rrv")}+${property("deps.minecraft")}")
     compileOnly("maven.modrinth:modmenu:${property("deps.modmenu")}")
     localRuntime("maven.modrinth:modmenu:${property("deps.modmenu")}")
+    localRuntime("maven.modrinth:datapack-error-viewer:1.0.0+mc26.1")
 }
 
 configurations.all {
