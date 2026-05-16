@@ -33,6 +33,9 @@ base.archivesName = property("mod.id") as String
 
 loom {
     accessWidenerPath = rootProject.file("src/main/resources/${property("mod.id")}.accesswidener")
+    runs.configureEach {
+        isIdeConfigGenerated = true
+    }
 }
 
 jsonlang {
@@ -177,10 +180,6 @@ tasks {
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
         dependsOn("build")
     }
-}
-
-loom.runs.named("server") {
-    isIdeConfigGenerated = false
 }
 
 java {
